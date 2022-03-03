@@ -5,7 +5,43 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:course_project"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Login" Background="White">
-    <Grid/>
+      d:DesignHeight="750" d:DesignWidth="1500"
+      Title="Login" Background="{DynamicResource MainBg}">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Name="Language" Source="/lang/en.xaml"/>
+                <ResourceDictionary Source="/theme/Light.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Margin="0,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="490*" />
+            <ColumnDefinition Width="520*" />
+            <ColumnDefinition Width="490*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200*" />
+            <RowDefinition Height="350*" />
+            <RowDefinition Height="200*" />
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Column="1" Grid.Row="1" x:Name="LoginForm" Fill="{DynamicResource CardBg}" StrokeThickness="0" MinHeight="300" MinWidth="400" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+            <Rectangle.Effect>
+                <DropShadowEffect Opacity="0.05" ShadowDepth="10" BlurRadius="10"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <TextBlock x:Name="LoginHeader" Grid.Column="1" Grid.Row="1" Text="{DynamicResource Login}" FontSize="26" FontFamily="Segoe UI" Margin="30,30,30,30" FontWeight="Normal"/>
+
+        <!-- email input -->
+        <TextBox Height="35" x:Name="EmailInput" Grid.Column="1" Margin="30,100,30,0" Grid.Row="1" TextWrapping="Wrap" FontSize="20" Panel.ZIndex="1" d:LayoutOverrides="HorizontalAlignment" Padding="0,5,0,5" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top"/>
+        <Label FontSize="20" Grid.Column="1" Margin="30,98,30,16" Grid.Row="1" Content="{DynamicResource Email}" IsEnabled="False" d:LayoutOverrides="HorizontalAlignment" Padding="0,5,0,5" FontFamily="Segoe UI Light"/>
+
+        <!-- password input -->
+        <TextBox Height="35" x:Name="PasswordInput" Grid.Column="1" Margin="30,150,30,0" Grid.Row="1" TextWrapping="Wrap" FontSize="20" Panel.ZIndex="1" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Padding="0,5,0,5" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top"/>
+        <Label FontSize="20" Grid.Column="1" Margin="30,148,30,0" Grid.Row="1" Content="{DynamicResource Password}" IsEnabled="False" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" VerticalAlignment="Top" Padding="0,5,0,5" FontFamily="Segoe UI Light"/>
+
+        <TextBlock Cursor="Hand" TextDecorations="Underline" FontSize="16" Grid.Column="1" Margin="30,195,30,0" Grid.Row="1" FontFamily="Segoe UI Light" Text="{DynamicResource HaveNoAccount}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button FontSize="16" Grid.Column="1" Margin="30,0,0,30" Grid.Row="1" Content="{DynamicResource Login}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Padding="35,8,35,10" BorderThickness="0,0,0,0" Foreground="White" Opacity="0.8" Background="{DynamicResource Primary}" Cursor="Hand" IsDefault="True"></Button>
+    </Grid>
 </Page>
