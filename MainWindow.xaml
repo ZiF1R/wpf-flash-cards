@@ -9,6 +9,6 @@
         Top="10"
         Title="MainWindow" Height="750" Width="1500" Icon="/logo.png">
     <Grid>
-        <Frame x:Name="MainFrame" Content="Frame"/>
+        <Frame x:Name="MainFrame" Content="Frame" Visibility="Hidden"/>
     </Grid>
 </Window>

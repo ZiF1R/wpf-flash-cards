@@ -2,7 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
     <v:String x:Key="Login">Login</v:String>
+    <v:String x:Key="Registration">Registration</v:String>
     <v:String x:Key="Email">Email</v:String>
     <v:String x:Key="Password">Password</v:String>
     <v:String x:Key="HaveNoAccount">Have no account? Sign Up!</v:String>
+    <v:String x:Key="HaveAlreadyAccount">Already have an account? Login!</v:String>
 </ResourceDictionary>

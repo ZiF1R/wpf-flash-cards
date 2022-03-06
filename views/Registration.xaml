@@ -1,4 +1,4 @@
-﻿<Page x:Class="course_project1.views.Login"
+﻿<Page x:Class="course_project1.views.Registration"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:course_project1.views"
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="1500"
-      Title="Login" Background="{DynamicResource MainBg}">
+      Background="{DynamicResource MainBg}"
+      Title="Registration">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -41,13 +42,13 @@
                 <DropShadowEffect Opacity="0.05" ShadowDepth="10" BlurRadius="10"/>
             </Rectangle.Effect>
         </Rectangle>
-        
+
         <TextBlock
             x:Name="LoginHeader"
             Grid.Column="1"
             Grid.Row="1"
             Foreground="{DynamicResource TextColor}"
-            Text="{DynamicResource Login}"
+            Text="{DynamicResource Registration}"
             FontSize="26"
             FontFamily="Segoe UI"
             Margin="30,30,30,30"
@@ -82,7 +83,7 @@
         ></TextBox>
 
         <TextBlock
-            x:Name="GoToRegistration"
+            x:Name="GoToLogin"
             Grid.Column="1"
             Grid.Row="1"
             FontSize="16"
@@ -91,10 +92,10 @@
             TextDecorations="Underline"
             Margin="30,195,30,0"
             Foreground="{DynamicResource TextColor}"
-            Text="{DynamicResource HaveNoAccount}"
+            Text="{DynamicResource HaveAlreadyAccount}"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            MouseUp="GoToRegistration_MouseUp"/>
+            MouseUp="GoToLogin_MouseUp"/>
 
         <Button
             Style="{StaticResource CustomButton}"

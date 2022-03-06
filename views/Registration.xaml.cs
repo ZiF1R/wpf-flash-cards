@@ -16,18 +16,18 @@ using System.Windows.Shapes;
 namespace course_project1.views
 {
     /// <summary>
-    /// Логика взаимодействия для Login.xaml
+    /// Логика взаимодействия для Registration.xaml
     /// </summary>
-    public partial class Login : Page
+    public partial class Registration : Page
     {
-        public Login()
+        public Registration()
         {
             InitializeComponent();
         }
 
-        private void GoToRegistration_MouseUp(object sender, MouseButtonEventArgs e)
+        private void GoToLogin_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new Registration());
+            NavigationService.Navigate(new Login());
         }
     }
 }
