@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace course_project
+namespace course_project1.views
 {
     /// <summary>
     /// Логика взаимодействия для Login.xaml

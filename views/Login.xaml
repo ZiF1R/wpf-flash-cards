@@ -1,9 +1,9 @@
-﻿<Page x:Class="course_project.Login"
+﻿<Page x:Class="course_project1.views.Login"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:course_project"
+      xmlns:local="clr-namespace:course_project1.views"
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="1500"
       Title="Login" Background="{DynamicResource MainBg}">
@@ -31,17 +31,57 @@
                 <DropShadowEffect Opacity="0.05" ShadowDepth="10" BlurRadius="10"/>
             </Rectangle.Effect>
         </Rectangle>
-        <TextBlock x:Name="LoginHeader" Grid.Column="1" Grid.Row="1" Text="{DynamicResource Login}" FontSize="26" FontFamily="Segoe UI" Margin="30,30,30,30" FontWeight="Normal"/>
+        <TextBlock x:Name="LoginHeader" Grid.Column="1" Grid.Row="1" Foreground="{DynamicResource TextColor}" Text="{DynamicResource Login}" FontSize="26" FontFamily="Segoe UI" Margin="30,30,30,30" FontWeight="Normal"/>
 
-        <!-- email input -->
-        <TextBox Height="35" x:Name="EmailInput" Grid.Column="1" Margin="30,100,30,0" Grid.Row="1" TextWrapping="Wrap" FontSize="20" Panel.ZIndex="1" d:LayoutOverrides="HorizontalAlignment" Padding="0,5,0,5" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top"/>
-        <Label FontSize="20" Grid.Column="1" Margin="30,98,30,16" Grid.Row="1" Content="{DynamicResource Email}" IsEnabled="False" d:LayoutOverrides="HorizontalAlignment" Padding="0,5,0,5" FontFamily="Segoe UI Light"/>
+        <!-- Email input -->
+        <TextBox
+            Style="{StaticResource CustomInput}"
+            Grid.Column="1"
+            Grid.Row="1"
+            Margin="30,100,30,0"
+            CaretBrush="{DynamicResource TextColor}"
+            Foreground="{DynamicResource TextColor}"
+            Text="{DynamicResource Email}"
+            Panel.ZIndex="1"
+            d:LayoutOverrides="HorizontalAlignment"
+            VerticalAlignment="Top"
+        ></TextBox>
 
-        <!-- password input -->
-        <TextBox Height="35" x:Name="PasswordInput" Grid.Column="1" Margin="30,150,30,0" Grid.Row="1" TextWrapping="Wrap" FontSize="20" Panel.ZIndex="1" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Padding="0,5,0,5" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top"/>
-        <Label FontSize="20" Grid.Column="1" Margin="30,148,30,0" Grid.Row="1" Content="{DynamicResource Password}" IsEnabled="False" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" VerticalAlignment="Top" Padding="0,5,0,5" FontFamily="Segoe UI Light"/>
+        <!-- Password input -->
+        <TextBox
+            Style="{StaticResource CustomInput}"
+            Grid.Column="1"
+            Grid.Row="1"
+            Margin="30,150,30,0"
+            CaretBrush="{DynamicResource TextColor}"
+            Foreground="{DynamicResource TextColor}"
+            Text="{DynamicResource Password}"
+            Panel.ZIndex="1"
+            d:LayoutOverrides="HorizontalAlignment"
+            VerticalAlignment="Top"
+        ></TextBox>
 
-        <TextBlock Cursor="Hand" TextDecorations="Underline" FontSize="16" Grid.Column="1" Margin="30,195,30,0" Grid.Row="1" FontFamily="Segoe UI Light" Text="{DynamicResource HaveNoAccount}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Button FontSize="16" Grid.Column="1" Margin="30,0,0,30" Grid.Row="1" Content="{DynamicResource Login}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Padding="35,8,35,10" BorderThickness="0,0,0,0" Foreground="White" Opacity="0.8" Background="{DynamicResource Primary}" Cursor="Hand" IsDefault="True"></Button>
+        <TextBlock
+            Grid.Column="1"
+            Grid.Row="1"
+            FontSize="16"
+            FontFamily="Segoe UI Light"
+            Cursor="Hand"
+            TextDecorations="Underline"
+            Margin="30,195,30,0"
+            Foreground="{DynamicResource TextColor}"
+            Text="{DynamicResource HaveNoAccount}"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"/>
+
+        <Button
+            Grid.Column="1"
+            Grid.Row="1"
+            Margin="30,0,0,30"
+            Content="{DynamicResource Login}"
+            Foreground="White"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Background="{DynamicResource Primary}"/>
     </Grid>
 </Page>
