@@ -23,9 +23,9 @@
             <ColumnDefinition Width="490*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="200*" />
-            <RowDefinition Height="350*" />
-            <RowDefinition Height="200*" />
+            <RowDefinition Height="100*" />
+            <RowDefinition Height="550*" />
+            <RowDefinition Height="100*" />
         </Grid.RowDefinitions>
 
         <Rectangle
@@ -54,12 +54,54 @@
             Margin="30,30,30,30"
             FontWeight="Normal"/>
 
-        <!-- Email input -->
+        <!-- Nickname input -->
         <TextBox
             Style="{StaticResource CustomInput}"
             Grid.Column="1"
             Grid.Row="1"
             Margin="30,100,30,0"
+            CaretBrush="{DynamicResource TextColor}"
+            Foreground="{DynamicResource TextColor}"
+            Text="{DynamicResource Nickname}"
+            Panel.ZIndex="1"
+            d:LayoutOverrides="HorizontalAlignment"
+            VerticalAlignment="Top"
+        ></TextBox>
+
+        <!-- Last name input -->
+        <TextBox
+            Style="{StaticResource CustomInput}"
+            Grid.Column="1"
+            Grid.Row="1"
+            Margin="30,155,30,0"
+            CaretBrush="{DynamicResource TextColor}"
+            Foreground="{DynamicResource TextColor}"
+            Text="{DynamicResource LastName}"
+            Panel.ZIndex="1"
+            d:LayoutOverrides="HorizontalAlignment"
+            VerticalAlignment="Top"
+        ></TextBox>
+
+        <!-- Name input -->
+        <TextBox
+            Style="{StaticResource CustomInput}"
+            Grid.Column="1"
+            Grid.Row="1"
+            Margin="30,210,30,0"
+            CaretBrush="{DynamicResource TextColor}"
+            Foreground="{DynamicResource TextColor}"
+            Text="{DynamicResource Name}"
+            Panel.ZIndex="1"
+            d:LayoutOverrides="HorizontalAlignment"
+            VerticalAlignment="Top"
+        ></TextBox>
+
+        <!-- Email input -->
+        <TextBox
+            Style="{StaticResource CustomInput}"
+            Grid.Column="1"
+            Grid.Row="1"
+            Margin="30,265,30,0"
             CaretBrush="{DynamicResource TextColor}"
             Foreground="{DynamicResource TextColor}"
             Text="{DynamicResource Email}"
@@ -73,10 +115,24 @@
             Style="{StaticResource CustomInput}"
             Grid.Column="1"
             Grid.Row="1"
-            Margin="30,150,30,0"
+            Margin="30,320,30,0"
             CaretBrush="{DynamicResource TextColor}"
             Foreground="{DynamicResource TextColor}"
             Text="{DynamicResource Password}"
+            Panel.ZIndex="1"
+            d:LayoutOverrides="HorizontalAlignment"
+            VerticalAlignment="Top"
+        ></TextBox>
+
+        <!-- Confirm password input -->
+        <TextBox
+            Style="{StaticResource CustomInput}"
+            Grid.Column="1"
+            Grid.Row="1"
+            Margin="30,375,30,0"
+            CaretBrush="{DynamicResource TextColor}"
+            Foreground="{DynamicResource TextColor}"
+            Text="{DynamicResource ConfirmPassword}"
             Panel.ZIndex="1"
             d:LayoutOverrides="HorizontalAlignment"
             VerticalAlignment="Top"
@@ -90,7 +146,7 @@
             FontFamily="Segoe UI Light"
             Cursor="Hand"
             TextDecorations="Underline"
-            Margin="30,195,30,0"
+            Margin="30,420,30,0"
             Foreground="{DynamicResource TextColor}"
             Text="{DynamicResource HaveAlreadyAccount}"
             HorizontalAlignment="Left"

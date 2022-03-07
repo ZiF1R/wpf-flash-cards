@@ -5,6 +5,10 @@
     <v:String x:Key="Registration">Registration</v:String>
     <v:String x:Key="Email">Email</v:String>
     <v:String x:Key="Password">Password</v:String>
+    <v:String x:Key="ConfirmPassword">Confirm password</v:String>
+    <v:String x:Key="Nickname">Nickname</v:String>
+    <v:String x:Key="Name">Name</v:String>
+    <v:String x:Key="LastName">Last name</v:String>
     <v:String x:Key="HaveNoAccount">Have no account? Sign Up!</v:String>
     <v:String x:Key="HaveAlreadyAccount">Already have an account? Login!</v:String>
 </ResourceDictionary>
