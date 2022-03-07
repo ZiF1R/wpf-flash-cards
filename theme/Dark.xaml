@@ -4,4 +4,5 @@
     <SolidColorBrush x:Key="MainBg">#2B2B2B</SolidColorBrush>
     <SolidColorBrush x:Key="CardBg">#333333</SolidColorBrush>
     <SolidColorBrush x:Key="TextColor">#ffffff</SolidColorBrush>
+    <SolidColorBrush x:Key="NavBg">#2D2D2D</SolidColorBrush>
 </ResourceDictionary>

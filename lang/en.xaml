@@ -11,4 +11,7 @@
     <v:String x:Key="LastName">Last name</v:String>
     <v:String x:Key="HaveNoAccount">Have no account? Sign Up!</v:String>
     <v:String x:Key="HaveAlreadyAccount">Already have an account? Login!</v:String>
+    <v:String x:Key="Profile">Profile</v:String>
+    <v:String x:Key="Folders">Folders</v:String>
+    <v:String x:Key="Settings">Settings</v:String>
 </ResourceDictionary>

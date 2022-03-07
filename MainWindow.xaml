@@ -8,5 +8,78 @@
         Left="10"
         Top="10"
         Title="MainWindow" Height="750" Width="1500" Icon="/logo.png">
-    <Frame x:Name="MainFrame" Content="Frame"/>
+    <!--<Frame x:Name="MainFrame" Content="Frame"/>-->
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Name="Language" Source="/lang/en.xaml"/>
+                <ResourceDictionary Source="/theme/Light.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300*" />
+            <ColumnDefinition Width="1100*" />
+            <ColumnDefinition Width="100*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="79*" />
+            <RowDefinition Height="655*" />
+        </Grid.RowDefinitions>
+
+        <Rectangle
+            Grid.Column="0"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            StrokeThickness="0"
+            Fill="{DynamicResource NavBg}">
+            <Rectangle.Effect>
+                <DropShadowEffect
+                    Opacity="0.1"
+                    ShadowDepth="5"
+                    BlurRadius="15"/>
+            </Rectangle.Effect>
+        </Rectangle>
+
+        <Image
+            Source="/logo.png"
+            Width="50"
+            Margin="35,28,0,0"
+            d:LayoutOverrides="Width, LeftMargin, RightMargin, TopMargin, BottomMargin"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+        <TextBlock
+            Foreground="{DynamicResource Primary}"
+            FontWeight="Black"
+            FontSize="20"
+            TextAlignment="Left"
+            Height="27"
+            Margin="90,44,0,0"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+            <TextBlock.Text>FLASH CARDS</TextBlock.Text>
+        </TextBlock>
+
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="0,50,0,0">
+
+            <RadioButton
+                Style="{StaticResource MenuButton}"
+                Content="{DynamicResource Profile}"
+                Foreground="{DynamicResource TextColor}"/>
+
+            <RadioButton
+                Style="{StaticResource MenuButton}"
+                Content="{DynamicResource Folders}"
+                Foreground="{DynamicResource TextColor}"/>
+
+            <RadioButton
+                Style="{StaticResource MenuButton}"
+                Content="{DynamicResource Settings}"
+                Foreground="{DynamicResource TextColor}"/>
+        </StackPanel>
+    </Grid>
 </Window>

@@ -24,7 +24,7 @@ namespace course_project1
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Content = new Login();
+            //MainFrame.Content = new Login();
         }
     }
 }
