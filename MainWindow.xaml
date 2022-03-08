@@ -11,6 +11,14 @@
     <!--<Frame x:Name="MainFrame" Content="Frame"/>-->
     <Window.Resources>
         <ResourceDictionary>
+            <!--<Style TargetType="{x:Type RadioButton}">
+                <Setter Property="BorderBrush" Value="{x:Null}" />
+                <Style.Triggers>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter Property="BorderBrush" Value="{DynamicResource Primary}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>-->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary x:Name="Language" Source="/lang/en.xaml"/>
                 <ResourceDictionary Source="/theme/Light.xaml"/>
@@ -24,7 +32,7 @@
             <ColumnDefinition Width="100*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="79*" />
+            <RowDefinition Height="80*" />
             <RowDefinition Height="655*" />
         </Grid.RowDefinitions>
 
@@ -33,7 +41,7 @@
             Grid.Row="0"
             Grid.RowSpan="2"
             StrokeThickness="0"
-            Fill="{DynamicResource NavBg}">
+            Fill="{DynamicResource NavBg}" MinWidth="300">
             <Rectangle.Effect>
                 <DropShadowEffect
                     Opacity="0.1"
@@ -67,19 +75,17 @@
             Margin="0,50,0,0">
 
             <RadioButton
+                VerticalAlignment="Center"
                 Style="{StaticResource MenuButton}"
-                Content="{DynamicResource Profile}"
-                Foreground="{DynamicResource TextColor}"/>
+                Content="{DynamicResource Profile}"/>
 
             <RadioButton
                 Style="{StaticResource MenuButton}"
-                Content="{DynamicResource Folders}"
-                Foreground="{DynamicResource TextColor}"/>
+                Content="{DynamicResource Folders}"/>
 
             <RadioButton
                 Style="{StaticResource MenuButton}"
-                Content="{DynamicResource Settings}"
-                Foreground="{DynamicResource TextColor}"/>
+                Content="{DynamicResource Settings}"/>
         </StackPanel>
     </Grid>
 </Window>

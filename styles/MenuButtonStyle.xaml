@@ -1,7 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
-           TargetType="{x:Type RadioButton}"
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/theme/Light.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <Style TargetType="{x:Type RadioButton}"
            x:Key="MenuButton">
         <Style.Setters>
             <Setter Property="Template">
@@ -12,10 +14,32 @@
                             HorizontalAlignment="Stretch"
                             Background="{x:Null}">
 
+                            <Border
+                                Name="MenuButtonBorder"
+                                BorderThickness="5,0,0,0">
+                                <Rectangle
+                                    VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Stretch"
+                                    Fill="{DynamicResource NavBg}"
+                                    Height="60"/>
+                                <!--<Border.Style>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="BorderBrush" Value="{x:Null}" />
+                                        <Style.Triggers>
+                                            <Trigger Property="">
+                                                <Setter Property="BorderBrush" Value="{DynamicResource Primary}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>-->
+                            </Border>
+
                             <TextBlock
-                                VerticalAlignment="Center"
+                                VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                HorizontalAlignment="Stretch"
                                 Text="{TemplateBinding Content}"
-                                Margin="50,0,0,0"
+                                Foreground="{TemplateBinding Foreground}"
+                                Padding="50,0,0,0"
                                 FontSize="20"
                                 Height="60"
                                 Cursor="Hand"/>
@@ -24,14 +48,13 @@
                 </Setter.Value>
             </Setter>
 
-            <Setter Property="Foreground" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="3,0,0,0" />
-            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
+            <Setter Property="FontWeight" Value="Normal" />
         </Style.Setters>
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Foreground" Value="#00a3ff" />
-                <Setter Property="BorderBrush" Value="#00a3ff" />
+                <Setter Property="Foreground" Value="{DynamicResource Primary}" />
+                <Setter Property="FontWeight" Value="Bold" />
             </Trigger>
         </Style.Triggers>
     </Style>
