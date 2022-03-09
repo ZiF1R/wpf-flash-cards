@@ -14,17 +14,35 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                             <Grid
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Stretch">
-                                <TextBlock
-                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                Height="60">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="230" />
+                                </Grid.ColumnDefinitions>
+                                <Rectangle
+                                    Grid.Column="1"
+                                    Width="20"
+                                    Height="20"
+                                    Fill="{TemplateBinding Background}"
                                     HorizontalAlignment="Stretch"
-                                    Text="{TemplateBinding Content}"
+                                    VerticalAlignment="Stretch"/>
+                                <TextBlock
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Stretch"
+                                    Text="{TemplateBinding Name}"
                                     Foreground="{TemplateBinding Foreground}"
-                                    Padding="50,0,0,0"
+                                    Padding="20,20,0,20"
                                     FontSize="20"
-                                    Height="60"
-                                    Cursor="Hand"/>
+                                    Cursor="Hand"
+                                    FontFamily="Segoe UI">
+                                    <TextBlock.Text>
+                                        
+                                    </TextBlock.Text>
+                                </TextBlock>
                             </Grid>
                         </Border>
                     </ControlTemplate>
@@ -32,16 +50,16 @@
             </Setter>
 
             <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
-            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="FontWeight" Value="Light" />
             <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="7,0,0,0" />
+            <Setter Property="BorderThickness" Value="6,0,0,0" />
         </Style.Setters>
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Foreground" Value="{DynamicResource Primary}" />
-                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="FontWeight" Value="SemiBold" />
                 <Setter Property="BorderBrush" Value="{DynamicResource Primary}" />
-                <Setter Property="BorderThickness" Value="7,0,0,0" />
+                <Setter Property="BorderThickness" Value="6,0,0,0" />
             </Trigger>
         </Style.Triggers>
     </Style>

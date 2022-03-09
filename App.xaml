@@ -2,6 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:course_project1"
+             xmlns:viewModel="clr-namespace:course_project1.MVVM.ViewModel"
+             xmlns:view="clr-namespace:course_project1.MVVM.View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -10,6 +12,10 @@
                 <ResourceDictionary Source="styles/MenuButtonStyle.xaml" />
                 <ResourceDictionary Source="styles/ButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:ProfileViewModel}" >
+                <view:ProfileView />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

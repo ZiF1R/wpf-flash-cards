@@ -37,7 +37,8 @@
                                 FontFamily="Segoe UI Light"
                                 Padding="0,5,0,5"
                                 BorderThickness="0,0,0,1"
-                                Background="{x:Null}"/>
+                                Background="{x:Null}"
+                                UndoLimit="100"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>

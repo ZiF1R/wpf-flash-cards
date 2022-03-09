@@ -1,5 +1,4 @@
-﻿using course_project1.views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace course_project1
+namespace course_project1.MVVM.View
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для ProfileView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ProfileView : UserControl
     {
-        public MainWindow()
+        public ProfileView()
         {
             InitializeComponent();
         }

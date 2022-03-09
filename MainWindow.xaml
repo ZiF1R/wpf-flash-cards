@@ -4,11 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:course_project1"
+        xmlns:viewModel="clr-namespace:course_project1.MVVM.ViewModel"
         mc:Ignorable="d"
         Left="10"
         Top="10"
         Title="MainWindow" Height="750" Width="1500" Icon="/logo.png">
-    <!--<Frame x:Name="MainFrame" Content="Frame"/>-->
+    
+    <Window.DataContext>
+        <viewModel:MainViewModel />
+    </Window.DataContext>
+    
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -68,31 +73,48 @@
             Margin="0,50,0,0">
 
             <RadioButton
-                VerticalAlignment="Center"
+                IsChecked="True"
+                Name="Profile"
                 Style="{StaticResource MenuButton}"
-                Content="{DynamicResource Profile}"/>
+                Content="{DynamicResource Profile}">
+                <RadioButton.Background>
+                    <ImageBrush ImageSource="/Profile.png"/>
+                </RadioButton.Background>
+            </RadioButton>
 
             <RadioButton
-                VerticalAlignment="Center"
+                Name="Folders"
                 Style="{StaticResource MenuButton}"
-                Content="{DynamicResource Folders}"/>
+                Content="{DynamicResource Folders}">
+                <RadioButton.Background>
+                    <ImageBrush ImageSource="/Folder.png"/>
+                </RadioButton.Background>
+            </RadioButton>
 
             <RadioButton
-                VerticalAlignment="Center"
+                Name="Settings"
                 Style="{StaticResource MenuButton}"
-                Content="{DynamicResource Settings}"/>
+                Content="{DynamicResource Settings}">
+                <RadioButton.Background>
+                    <ImageBrush ImageSource="/Settings.png"/>
+                </RadioButton.Background>
+            </RadioButton>
         </StackPanel>
 
         <ContentControl
             Grid.Column="1"
             Grid.Row="0"
             Grid.RowSpan="2"
-            Margin="20,20,0,20">
-        </ContentControl>
+            Margin="20,20,0,20"
+            Content="{Binding CurrentView}"/>
 
         <ComboBox
             Grid.Column="2"
-            Grid.Row="0">
+            Grid.Row="0"
+            Width="50"
+            Height="30"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center">
             <ComboBoxItem IsSelected="True">EN</ComboBoxItem>
             <ComboBoxItem>RU</ComboBoxItem>
             <ComboBoxItem>JP</ComboBoxItem>
