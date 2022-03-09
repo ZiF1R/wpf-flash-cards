@@ -4,57 +4,44 @@
         <ResourceDictionary Source="/theme/Light.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     <Style TargetType="{x:Type RadioButton}"
+           BasedOn="{StaticResource {x:Type ToggleButton}}"
            x:Key="MenuButton">
         <Style.Setters>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
-                        <Grid
-                            VerticalAlignment="Stretch"
-                            HorizontalAlignment="Stretch"
-                            Background="{x:Null}">
-
-                            <Border
-                                Name="MenuButtonBorder"
-                                BorderThickness="5,0,0,0">
-                                <Rectangle
-                                    VerticalAlignment="Stretch"
+                        <Border
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch">
+                                <TextBlock
+                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
                                     HorizontalAlignment="Stretch"
-                                    Fill="{DynamicResource NavBg}"
-                                    Height="60"/>
-                                <!--<Border.Style>
-                                    <Style TargetType="{x:Type Border}">
-                                        <Setter Property="BorderBrush" Value="{x:Null}" />
-                                        <Style.Triggers>
-                                            <Trigger Property="">
-                                                <Setter Property="BorderBrush" Value="{DynamicResource Primary}" />
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Border.Style>-->
-                            </Border>
-
-                            <TextBlock
-                                VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                HorizontalAlignment="Stretch"
-                                Text="{TemplateBinding Content}"
-                                Foreground="{TemplateBinding Foreground}"
-                                Padding="50,0,0,0"
-                                FontSize="20"
-                                Height="60"
-                                Cursor="Hand"/>
-                        </Grid>
+                                    Text="{TemplateBinding Content}"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    Padding="50,0,0,0"
+                                    FontSize="20"
+                                    Height="60"
+                                    Cursor="Hand"/>
+                            </Grid>
+                        </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
 
             <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
             <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="7,0,0,0" />
         </Style.Setters>
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Foreground" Value="{DynamicResource Primary}" />
                 <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="BorderBrush" Value="{DynamicResource Primary}" />
+                <Setter Property="BorderThickness" Value="7,0,0,0" />
             </Trigger>
         </Style.Triggers>
     </Style>

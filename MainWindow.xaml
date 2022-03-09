@@ -11,28 +11,20 @@
     <!--<Frame x:Name="MainFrame" Content="Frame"/>-->
     <Window.Resources>
         <ResourceDictionary>
-            <!--<Style TargetType="{x:Type RadioButton}">
-                <Setter Property="BorderBrush" Value="{x:Null}" />
-                <Style.Triggers>
-                    <Trigger Property="IsChecked" Value="True">
-                        <Setter Property="BorderBrush" Value="{DynamicResource Primary}" />
-                    </Trigger>
-                </Style.Triggers>
-            </Style>-->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary x:Name="Language" Source="/lang/en.xaml"/>
                 <ResourceDictionary Source="/theme/Light.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
+    <Grid Background="{DynamicResource MainBg}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300*" />
+            <ColumnDefinition Width="300" />
             <ColumnDefinition Width="1100*" />
-            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="100" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80*" />
+            <RowDefinition Height="80" />
             <RowDefinition Height="655*" />
         </Grid.RowDefinitions>
 
@@ -53,6 +45,7 @@
         <Image
             Source="/logo.png"
             Width="50"
+            Height="50"
             Margin="35,28,0,0"
             d:LayoutOverrides="Width, LeftMargin, RightMargin, TopMargin, BottomMargin"
             HorizontalAlignment="Left"
@@ -63,9 +56,9 @@
             FontSize="20"
             TextAlignment="Left"
             Height="27"
-            Margin="90,44,0,0"
+            Margin="92,44,0,0"
             VerticalAlignment="Top"
-            HorizontalAlignment="Left" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+            HorizontalAlignment="Left" d:LayoutOverrides="TopMargin, BottomMargin">
             <TextBlock.Text>FLASH CARDS</TextBlock.Text>
         </TextBlock>
 
@@ -80,12 +73,29 @@
                 Content="{DynamicResource Profile}"/>
 
             <RadioButton
+                VerticalAlignment="Center"
                 Style="{StaticResource MenuButton}"
                 Content="{DynamicResource Folders}"/>
 
             <RadioButton
+                VerticalAlignment="Center"
                 Style="{StaticResource MenuButton}"
                 Content="{DynamicResource Settings}"/>
         </StackPanel>
+
+        <ContentControl
+            Grid.Column="1"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Margin="20,20,0,20">
+        </ContentControl>
+
+        <ComboBox
+            Grid.Column="2"
+            Grid.Row="0">
+            <ComboBoxItem IsSelected="True">EN</ComboBoxItem>
+            <ComboBoxItem>RU</ComboBoxItem>
+            <ComboBoxItem>JP</ComboBoxItem>
+        </ComboBox>
     </Grid>
 </Window>
