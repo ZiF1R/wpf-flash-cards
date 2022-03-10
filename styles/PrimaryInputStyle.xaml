@@ -2,19 +2,20 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style BasedOn="{StaticResource {x:Type TextBox}}"
            TargetType="{x:Type TextBox}"
-           x:Key="CustomInput">
+           x:Key="PrimaryInput">
         <Style.Setters>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <Grid>
-                            <TextBlock IsHitTestVisible="False"
-                                       Text="{TemplateBinding Text}"
-                                       Foreground="{TemplateBinding Foreground}"
-                                       FontSize="20"
-                                       IsEnabled="False"
-                                       Padding="0,5,0,5"
-                                       FontFamily="Segoe UI Light">
+                            <TextBlock
+                                IsHitTestVisible="False"
+                                Text="{TemplateBinding Text}"
+                                Foreground="{TemplateBinding Foreground}"
+                                FontSize="20"
+                                IsEnabled="False"
+                                Padding="0,5,0,5"
+                                FontFamily="Segoe UI Light">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="Visibility" Value="Hidden" />

@@ -8,10 +8,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="styles/InputStyle.xaml"/>
+                <ResourceDictionary Source="styles/PrimaryInputStyle.xaml"/>
+                <ResourceDictionary Source="styles/SecondaryInputStyle.xaml"/>
                 <ResourceDictionary Source="styles/MenuButtonStyle.xaml"/>
                 <ResourceDictionary Source="styles/ButtonStyle.xaml"/>
-                <ResourceDictionary Source="styles/PasswordInputStyle.xaml"/>
+                <ResourceDictionary Source="/lang/en.xaml"/>
+                <ResourceDictionary Source="/theme/Light.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:ProfileViewModel}">

@@ -5,23 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:course_project1"
         xmlns:viewModel="clr-namespace:course_project1.MVVM.ViewModel"
+        xmlns:control="clr-namespace:course_project1.controls"
         mc:Ignorable="d"
         Left="10"
         Top="10"
         Title="MainWindow" Height="750" Width="1500" Icon="/logo.png">
-    
+
     <Window.DataContext>
         <viewModel:MainViewModel />
     </Window.DataContext>
-    
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary x:Name="Language" Source="/lang/en.xaml"/>
-                <ResourceDictionary Source="/theme/Light.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+
+    <!-- Лингвистическре приложение FlashCards -->
+
     <Grid Background="{DynamicResource MainBg}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" />

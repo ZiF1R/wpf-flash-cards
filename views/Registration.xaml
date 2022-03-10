@@ -4,18 +4,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:course_project1.views"
+      xmlns:control="clr-namespace:course_project1.controls"
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="1500"
       Background="{DynamicResource MainBg}"
       Title="Registration">
-    <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary x:Name="Language" Source="/lang/en.xaml"/>
-                <ResourceDictionary Source="/theme/Light.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Page.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="490*" />
@@ -56,7 +50,7 @@
 
         <!-- Nickname input -->
         <TextBox
-            Style="{StaticResource CustomInput}"
+            Style="{StaticResource PrimaryInput}"
             Grid.Column="1"
             Grid.Row="1"
             Margin="30,100,30,0"
@@ -70,7 +64,7 @@
 
         <!-- Last name input -->
         <TextBox
-            Style="{StaticResource CustomInput}"
+            Style="{StaticResource PrimaryInput}"
             Grid.Column="1"
             Grid.Row="1"
             Margin="30,155,30,0"
@@ -84,7 +78,7 @@
 
         <!-- Name input -->
         <TextBox
-            Style="{StaticResource CustomInput}"
+            Style="{StaticResource PrimaryInput}"
             Grid.Column="1"
             Grid.Row="1"
             Margin="30,210,30,0"
@@ -98,7 +92,7 @@
 
         <!-- Email input -->
         <TextBox
-            Style="{StaticResource CustomInput}"
+            Style="{StaticResource PrimaryInput}"
             Grid.Column="1"
             Grid.Row="1"
             Margin="30,265,30,0"
@@ -111,32 +105,22 @@
         ></TextBox>
 
         <!-- Password input -->
-        <TextBox
-            Style="{StaticResource CustomInput}"
+        <control:CustomPasswordBox
             Grid.Column="1"
             Grid.Row="1"
             Margin="30,320,30,0"
-            CaretBrush="{DynamicResource TextColor}"
-            Foreground="{DynamicResource TextColor}"
-            Text="{DynamicResource Password}"
-            Panel.ZIndex="1"
             d:LayoutOverrides="HorizontalAlignment"
             VerticalAlignment="Top"
-        ></TextBox>
+            HorizontalContentAlignment="Stretch"/>
 
         <!-- Confirm password input -->
-        <TextBox
-            Style="{StaticResource CustomInput}"
+        <control:CustomPasswordBox
             Grid.Column="1"
             Grid.Row="1"
             Margin="30,375,30,0"
-            CaretBrush="{DynamicResource TextColor}"
-            Foreground="{DynamicResource TextColor}"
-            Text="{DynamicResource ConfirmPassword}"
-            Panel.ZIndex="1"
             d:LayoutOverrides="HorizontalAlignment"
             VerticalAlignment="Top"
-        ></TextBox>
+            HorizontalContentAlignment="Stretch"/>
 
         <TextBlock
             x:Name="GoToLogin"

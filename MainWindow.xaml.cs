@@ -24,6 +24,8 @@ namespace course_project1
         public MainWindow()
         {
             InitializeComponent();
+            //App app = new App();
+            //app.Resources.MergedDictionaries
         }
     }
 }
