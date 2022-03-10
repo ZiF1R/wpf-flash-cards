@@ -76,7 +76,8 @@
                 IsChecked="True"
                 Name="Profile"
                 Style="{StaticResource MenuButton}"
-                Content="{DynamicResource Profile}">
+                Content="{DynamicResource Profile}"
+                Command="{Binding ProfileViewCommand}">
                 <RadioButton.Background>
                     <ImageBrush ImageSource="/Profile.png"/>
                 </RadioButton.Background>
@@ -85,7 +86,8 @@
             <RadioButton
                 Name="Folders"
                 Style="{StaticResource MenuButton}"
-                Content="{DynamicResource Folders}">
+                Content="{DynamicResource Folders}"
+                Command="{Binding FoldersViewCommand}">
                 <RadioButton.Background>
                     <ImageBrush ImageSource="/Folder.png"/>
                 </RadioButton.Background>
@@ -94,7 +96,8 @@
             <RadioButton
                 Name="Settings"
                 Style="{StaticResource MenuButton}"
-                Content="{DynamicResource Settings}">
+                Content="{DynamicResource Settings}"
+                Command="{Binding SettingsViewCommand}">
                 <RadioButton.Background>
                     <ImageBrush ImageSource="/Settings.png"/>
                 </RadioButton.Background>
@@ -105,7 +108,7 @@
             Grid.Column="1"
             Grid.Row="0"
             Grid.RowSpan="2"
-            Margin="20,20,0,20"
+            Margin="110,50,0,20"
             Content="{Binding CurrentView}"/>
 
         <ComboBox
