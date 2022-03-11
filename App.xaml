@@ -15,6 +15,9 @@
                 <ResourceDictionary Source="/theme/Light.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
+                <view:LoginView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:ProfileViewModel}">
                 <view:ProfileView />
             </DataTemplate>

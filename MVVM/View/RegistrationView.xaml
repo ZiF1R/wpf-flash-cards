@@ -1,15 +1,14 @@
-﻿<Page x:Class="course_project1.views.Registration"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:course_project1.views"
-      xmlns:control="clr-namespace:course_project1.controls"
-      mc:Ignorable="d" 
-      d:DesignHeight="750" d:DesignWidth="1500"
-      Background="{DynamicResource MainBg}"
-      Title="Registration">
-    
+﻿<UserControl x:Class="course_project1.MVVM.View.RegistrationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:course_project1.MVVM.View"
+             xmlns:control="clr-namespace:course_project1.controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="1500"
+             Background="{DynamicResource MainBg}">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="490*" />
@@ -128,12 +127,11 @@
             FontFamily="Segoe UI Light"
             Cursor="Hand"
             TextDecorations="Underline"
-            Margin="30,420,30,0"
+            Margin="30,425,30,0"
             Foreground="{DynamicResource TextColor}"
             Text="{DynamicResource HaveAlreadyAccount}"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            MouseUp="GoToLogin_MouseUp"/>
+            VerticalAlignment="Top"/>
 
         <Button
             Style="{StaticResource CustomButton}"
@@ -147,4 +145,4 @@
             Background="{DynamicResource Primary}"
             OverridesDefaultStyle="True"/>
     </Grid>
-</Page>
+</UserControl>

@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace course_project1.views
+namespace course_project1.MVVM.View
 {
     /// <summary>
-    /// Логика взаимодействия для Registration.xaml
+    /// Логика взаимодействия для LoginView.xaml
     /// </summary>
-    public partial class Registration : Page
+    public partial class LoginView : UserControl
     {
-        public Registration()
+        public LoginView()
         {
             InitializeComponent();
-        }
-
-        private void GoToLogin_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            NavigationService.Navigate(new Login());
         }
     }
 }

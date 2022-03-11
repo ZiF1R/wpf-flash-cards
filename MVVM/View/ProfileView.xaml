@@ -93,5 +93,7 @@
             HorizontalContentAlignment="Stretch"
             Margin="0,0,0,0"
             d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+        
+        
     </Grid>
 </UserControl>
