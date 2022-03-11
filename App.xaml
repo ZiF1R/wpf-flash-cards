@@ -4,12 +4,11 @@
              xmlns:local="clr-namespace:course_project1"
              xmlns:viewModel="clr-namespace:course_project1.MVVM.ViewModel"
              xmlns:view="clr-namespace:course_project1.MVVM.View"
+             xmlns:controls="clr-namespace:course_project1.controls"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="styles/PrimaryInputStyle.xaml"/>
-                <ResourceDictionary Source="styles/SecondaryInputStyle.xaml"/>
                 <ResourceDictionary Source="styles/MenuButtonStyle.xaml"/>
                 <ResourceDictionary Source="styles/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="/lang/en.xaml"/>

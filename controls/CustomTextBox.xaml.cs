@@ -16,34 +16,22 @@ using System.Windows.Shapes;
 namespace course_project1.controls
 {
     /// <summary>
-    /// Логика взаимодействия для CustomPasswordBox.xaml
+    /// Логика взаимодействия для CustomTextBox.xaml
     /// </summary>
-    public partial class CustomPasswordBox : UserControl
+    public partial class CustomTextBox : UserControl
     {
-        public CustomPasswordBox()
+        public CustomTextBox()
         {
             InitializeComponent();
-        }
-
-        private void PasswordInput_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if (PasswordInput.Password.Length == 0)
-            {
-                PasswordInputLabel.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                PasswordInputLabel.Visibility = Visibility.Hidden;
-            }
         }
 
         public static readonly DependencyProperty PlaceholderProperty =
             DependencyProperty.Register(
                name: "Placeholder",
                propertyType: typeof(string),
-               ownerType: typeof(CustomPasswordBox),
+               ownerType: typeof(CustomTextBox),
                typeMetadata: new FrameworkPropertyMetadata(
-                   defaultValue: "Enter password",
+                   defaultValue: "Input",
                    flags: FrameworkPropertyMetadataOptions.AffectsMeasure),
                validateValueCallback: new ValidateValueCallback(IsValidReading));
 

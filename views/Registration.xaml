@@ -49,75 +49,73 @@
             FontWeight="Normal"/>
 
         <!-- Nickname input -->
-        <TextBox
-            Style="{StaticResource PrimaryInput}"
+        <control:CustomTextBox
+            Placeholder="{DynamicResource Nickname}"
             Grid.Column="1"
             Grid.Row="1"
             Margin="30,100,30,0"
-            CaretBrush="{DynamicResource TextColor}"
-            Foreground="{DynamicResource TextColor}"
-            Text="{DynamicResource Nickname}"
-            Panel.ZIndex="1"
+            Padding="0,5,0,5"
+            BorderThickness="0,0,0,1"
             d:LayoutOverrides="HorizontalAlignment"
             VerticalAlignment="Top"
-        ></TextBox>
+            HorizontalContentAlignment="Stretch"/>
 
         <!-- Last name input -->
-        <TextBox
-            Style="{StaticResource PrimaryInput}"
+        <control:CustomTextBox
+            Placeholder="{DynamicResource LastName}"
             Grid.Column="1"
             Grid.Row="1"
             Margin="30,155,30,0"
-            CaretBrush="{DynamicResource TextColor}"
-            Foreground="{DynamicResource TextColor}"
-            Text="{DynamicResource LastName}"
-            Panel.ZIndex="1"
+            Padding="0,5,0,5"
+            BorderThickness="0,0,0,1"
             d:LayoutOverrides="HorizontalAlignment"
             VerticalAlignment="Top"
-        ></TextBox>
+            HorizontalContentAlignment="Stretch"/>
 
         <!-- Name input -->
-        <TextBox
-            Style="{StaticResource PrimaryInput}"
+        <control:CustomTextBox
+            Placeholder="{DynamicResource Name}"
             Grid.Column="1"
             Grid.Row="1"
             Margin="30,210,30,0"
-            CaretBrush="{DynamicResource TextColor}"
-            Foreground="{DynamicResource TextColor}"
-            Text="{DynamicResource Name}"
-            Panel.ZIndex="1"
+            Padding="0,5,0,5"
+            BorderThickness="0,0,0,1"
             d:LayoutOverrides="HorizontalAlignment"
             VerticalAlignment="Top"
-        ></TextBox>
+            HorizontalContentAlignment="Stretch"/>
 
         <!-- Email input -->
-        <TextBox
-            Style="{StaticResource PrimaryInput}"
+        <control:CustomTextBox
+            Placeholder="{DynamicResource Email}"
             Grid.Column="1"
             Grid.Row="1"
             Margin="30,265,30,0"
-            CaretBrush="{DynamicResource TextColor}"
-            Foreground="{DynamicResource TextColor}"
-            Text="{DynamicResource Email}"
-            Panel.ZIndex="1"
+            Padding="0,5,0,5"
+            BorderThickness="0,0,0,1"
             d:LayoutOverrides="HorizontalAlignment"
             VerticalAlignment="Top"
-        ></TextBox>
+            HorizontalContentAlignment="Stretch"/>
 
         <!-- Password input -->
         <control:CustomPasswordBox
+            Placeholder="{DynamicResource Password}"
             Grid.Column="1"
             Grid.Row="1"
             Margin="30,320,30,0"
+            Padding="0,5,0,5"
+            BorderThickness="0,0,0,1"
             d:LayoutOverrides="HorizontalAlignment"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Stretch"/>
 
         <!-- Confirm password input -->
         <control:CustomPasswordBox
+            Placeholder="{DynamicResource ConfirmPassword}"
             Grid.Column="1"
             Grid.Row="1"
             Margin="30,375,30,0"
+            Padding="0,5,0,5"
+            BorderThickness="0,0,0,1"
             d:LayoutOverrides="HorizontalAlignment"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Stretch"/>

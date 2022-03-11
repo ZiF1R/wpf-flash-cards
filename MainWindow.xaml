@@ -15,7 +15,8 @@
         <viewModel:MainViewModel />
     </Window.DataContext>
 
-    <!-- Лингвистическре приложение FlashCards -->
+    <!-- Лингвистическое приложение FlashCards -->
+    <!-- FlashCards - карточки для запоминания -->
 
     <Grid Background="{DynamicResource MainBg}">
         <Grid.ColumnDefinitions>
