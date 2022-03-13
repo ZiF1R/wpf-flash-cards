@@ -18,4 +18,7 @@
     <v:String x:Key="Settings">Settings</v:String>
     <v:String x:Key="Save">Save</v:String>
     <v:String x:Key="LogOut">Log out</v:String>
+    <v:String x:Key="ContactWithUs">Contact with us</v:String>
+    <v:String x:Key="PrivacyPolicy">Privacy Policy</v:String>
+    <v:String x:Key="TermsConditions">Terms and Conditions</v:String>
 </ResourceDictionary>

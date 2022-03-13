@@ -17,6 +17,11 @@
                                 Padding="35,8,35,10"
                                 BorderThickness="0,0,0,0"
                                 FontFamily="Segoe UI Light">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="5"/>
+                                    </Style>
+                                </Button.Resources>
                             </Button>
                         </Grid>
                     </ControlTemplate>

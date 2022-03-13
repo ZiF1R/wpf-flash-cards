@@ -7,4 +7,5 @@
     <SolidColorBrush x:Key="TextColor">#ffffff</SolidColorBrush>
     <SolidColorBrush x:Key="NavBg">#2D2D2D</SolidColorBrush>
     <SolidColorBrush x:Key="HoverBg">#393939</SolidColorBrush>
+    <SolidColorBrush x:Key="TextColorOpacity">#aaaaaa</SolidColorBrush>
 </ResourceDictionary>
