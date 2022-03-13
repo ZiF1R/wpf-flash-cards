@@ -116,7 +116,7 @@
                 Margin="50,0,0,0">
                 
                 <Hyperlink
-                    NavigateUri="https://github.com/ZiF1R/flash-cards-new/blob/master/LICENSE.md"
+                    NavigateUri="https://github.com/ZiF1R/wpf-flash-cards/blob/master/LICENSE.md"
                     RequestNavigate="Hyperlink_RequestNavigate">
                     <TextBlock Text="{DynamicResource PrivacyPolicy}"/>
                 </Hyperlink>
@@ -125,7 +125,7 @@
                 
                 
                 <Hyperlink
-                    NavigateUri="https://github.com/ZiF1R/flash-cards-new/blob/master/LICENSE.md"
+                    NavigateUri="https://github.com/ZiF1R/wpf-flash-cards/blob/master/LICENSE.md"
                     RequestNavigate="Hyperlink_RequestNavigate">
                     <TextBlock Text="{DynamicResource TermsConditions}"/>
                 </Hyperlink>
