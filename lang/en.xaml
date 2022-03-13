@@ -16,4 +16,6 @@
     <v:String x:Key="Profile">Profile</v:String>
     <v:String x:Key="Folders">Folders</v:String>
     <v:String x:Key="Settings">Settings</v:String>
+    <v:String x:Key="Save">Save</v:String>
+    <v:String x:Key="LogOut">Log out</v:String>
 </ResourceDictionary>

@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <SolidColorBrush x:Key="Primary">#00a3ff</SolidColorBrush>
+    <SolidColorBrush x:Key="Danger">#CE1010</SolidColorBrush>
     <SolidColorBrush x:Key="MainBg">#f8f8f8</SolidColorBrush>
     <SolidColorBrush x:Key="CardBg">#ffffff</SolidColorBrush>
     <SolidColorBrush x:Key="TextColor">#171717</SolidColorBrush>
