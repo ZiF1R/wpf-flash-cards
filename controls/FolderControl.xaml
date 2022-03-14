@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="course_project1.controls.FolderControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:course_project1.controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="140" d:DesignWidth="280">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="45"/>
+        </Grid.RowDefinitions>
+        
+        <Rectangle
+            Grid.RowSpan="5"
+            Grid.Row="0"
+            x:Name="AddButtonBg"
+            Height="140"
+            Width="280"
+            Fill="{DynamicResource CardBg}">
+            <Rectangle.Effect>
+                <DropShadowEffect
+                    Opacity="0.1"
+                    ShadowDepth="3"
+                    BlurRadius="5"/>
+            </Rectangle.Effect>
+        </Rectangle>
+
+        <TextBlock
+            x:Name="FolderName"
+            Text="FolderName"
+            Panel.ZIndex="1"
+            Grid.Row="1"
+            IsEnabled="False"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            FontSize="14"
+            FontFamily="Segoe UI Semibold"
+            Margin="20,0,0,0"
+            Foreground="{DynamicResource TextColor}"/>
+
+        <TextBlock
+            Panel.ZIndex="1"
+            Grid.Row="2"
+            IsEnabled="False"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            FontSize="14"
+            FontFamily="Segoe UI Light"
+            Margin="20,0,0,0"
+            Foreground="{DynamicResource TextColor}">
+            <TextBlock
+                Text="{DynamicResource Category}"/>: 
+            <TextBlock
+                x:Name="Category"
+                Text="test category"/>
+        </TextBlock>
+
+        <TextBlock
+            Panel.ZIndex="1"
+            Grid.Row="3"
+            IsEnabled="False"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            FontSize="14"
+            FontFamily="Segoe UI Light"
+            Margin="20,0,0,0"
+            Foreground="{DynamicResource TextColor}">
+            <TextBlock
+                x:Name="Memorized"
+                Text="0/7"/>
+            <TextBlock
+                Text="{DynamicResource Memorized}"/>
+        </TextBlock>
+
+        <TextBlock
+            Panel.ZIndex="1"
+            Grid.Row="4"
+            IsEnabled="False"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Right"
+            FontSize="10"
+            FontFamily="Segoe UI Light"
+            Margin="0,0,10,10"
+            Foreground="{DynamicResource TextColorOpacity}">
+            <TextBlock
+                Text="{DynamicResource Added}"/>
+            <TextBlock
+                x:Name="AddedDate"
+                Text="21.03.21 19:21AM"/>
+        </TextBlock>
+
+        <!--<Image
+            IsEnabled="False"
+            Source="/controls/plus.png"
+            Width="45"
+            Height="45"
+            Margin="0,0,0,10"/>-->
+    </Grid>
+</UserControl>
