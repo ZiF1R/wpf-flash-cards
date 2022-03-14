@@ -21,4 +21,8 @@
     <v:String x:Key="ContactWithUs">Contact with us</v:String>
     <v:String x:Key="PrivacyPolicy">Privacy Policy</v:String>
     <v:String x:Key="TermsConditions">Terms and Conditions</v:String>
+    <v:String x:Key="AddFolder">Add new folder</v:String>
+    <v:String x:Key="Category">Category</v:String>
+    <v:String x:Key="Memorized">memorized</v:String>
+    <v:String x:Key="Added">Added</v:String>
 </ResourceDictionary>

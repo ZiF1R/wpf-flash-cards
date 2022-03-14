@@ -81,11 +81,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="controls\AddFolderButton.xaml.cs">
+      <DependentUpon>AddFolderButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="controls\CustomPasswordBox.xaml.cs">
       <DependentUpon>CustomPasswordBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="controls\CustomTextBox.xaml.cs">
       <DependentUpon>CustomTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="controls\FolderControl.xaml.cs">
+      <DependentUpon>FolderControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="controls\SecondaryTextInput.xaml.cs">
       <DependentUpon>SecondaryTextInput.xaml</DependentUpon>
@@ -111,11 +117,19 @@
     <Compile Include="MVVM\View\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
+    <Page Include="controls\AddFolderButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="controls\CustomPasswordBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="controls\CustomTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\FolderControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -238,6 +252,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="MVVM\View\Settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="controls\plus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
