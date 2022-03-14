@@ -98,10 +98,15 @@
                     <ImageBrush ImageSource="/Settings.png"/>
                 </RadioButton.Background>
             </RadioButton>
+        </StackPanel>
 
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            VerticalAlignment="Bottom"
+            Margin="0,0,0,30">
             <Button
                 Width="200"
-                Margin="0,150,0,20"
                 Content="{DynamicResource ContactWithUs}"
                 Style="{StaticResource CustomButton}"
                 Background="{DynamicResource Primary}"
@@ -113,7 +118,7 @@
                 FontSize="14"
                 FontFamily="Segoe UI Light"
                 Foreground="{DynamicResource TextColor}"
-                Margin="50,0,0,0">
+                Margin="50,15,0,0">
                 
                 <Hyperlink
                     NavigateUri="https://github.com/ZiF1R/wpf-flash-cards/blob/master/LICENSE.md"
@@ -134,7 +139,7 @@
                 
                 <TextBlock
                     Foreground="{DynamicResource TextColorOpacity}"
-                    Margin="0,20,0,0"
+                    Margin="0,25,0,0"
                     Text="Copyright © 2022, created by Z1FiR"/>
             </TextBlock>
         </StackPanel>
