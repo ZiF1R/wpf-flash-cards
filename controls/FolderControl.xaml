@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:course_project1.controls"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             Name="FolderControlElement"
              d:DesignHeight="140" d:DesignWidth="280">
     <Grid>
         <Grid.RowDefinitions>
@@ -18,7 +19,6 @@
         <Rectangle
             Grid.RowSpan="5"
             Grid.Row="0"
-            x:Name="AddButtonBg"
             Height="140"
             Width="280"
             Fill="{DynamicResource CardBg}">
@@ -31,8 +31,7 @@
         </Rectangle>
 
         <TextBlock
-            x:Name="FolderName"
-            Text="FolderName"
+            Text="{Binding FolderName, ElementName=FolderControlElement}"
             Panel.ZIndex="1"
             Grid.Row="1"
             IsEnabled="False"
@@ -57,7 +56,7 @@
                 Text="{DynamicResource Category}"/>: 
             <TextBlock
                 x:Name="Category"
-                Text="test category"/>
+                Text="{Binding FolderCategory, ElementName=FolderControlElement}"/>
         </TextBlock>
 
         <TextBlock
@@ -71,8 +70,8 @@
             Margin="20,0,0,0"
             Foreground="{DynamicResource TextColor}">
             <TextBlock
-                x:Name="Memorized"
-                Text="0/7"/>
+                Text="{Binding FolderMemorizedCardsCount, ElementName=FolderControlElement}"/>/<TextBlock
+                Text="{Binding FolderCardsCount, ElementName=FolderControlElement}"/>
             <TextBlock
                 Text="{DynamicResource Memorized}"/>
         </TextBlock>
