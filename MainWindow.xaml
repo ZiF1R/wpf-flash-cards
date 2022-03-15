@@ -121,6 +121,7 @@
                 Margin="50,15,0,0">
                 
                 <Hyperlink
+                    Foreground="{DynamicResource TextColor}"
                     NavigateUri="https://github.com/ZiF1R/wpf-flash-cards/blob/master/LICENSE.md"
                     RequestNavigate="Hyperlink_RequestNavigate">
                     <TextBlock Text="{DynamicResource PrivacyPolicy}"/>
@@ -130,6 +131,7 @@
                 
                 
                 <Hyperlink
+                    Foreground="{DynamicResource TextColor}"
                     NavigateUri="https://github.com/ZiF1R/wpf-flash-cards/blob/master/LICENSE.md"
                     RequestNavigate="Hyperlink_RequestNavigate">
                     <TextBlock Text="{DynamicResource TermsConditions}"/>
