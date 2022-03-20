@@ -21,7 +21,7 @@
     <Grid Background="{DynamicResource MainBg}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" />
-            <ColumnDefinition Width="1100*" />
+            <ColumnDefinition Width="1100*" MinWidth="500" />
             <ColumnDefinition Width="100" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>

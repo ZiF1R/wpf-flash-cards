@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              Name="FolderControlElement"
              d:DesignHeight="140" d:DesignWidth="280">
-    <Grid>
+    <Grid Cursor="Hand">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="25"/>
@@ -34,7 +34,6 @@
             Text="{Binding FolderName, ElementName=FolderControlElement}"
             Panel.ZIndex="1"
             Grid.Row="1"
-            IsEnabled="False"
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
             FontSize="14"
@@ -45,7 +44,6 @@
         <TextBlock
             Panel.ZIndex="1"
             Grid.Row="2"
-            IsEnabled="False"
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
             FontSize="14"
@@ -62,7 +60,6 @@
         <TextBlock
             Panel.ZIndex="1"
             Grid.Row="3"
-            IsEnabled="False"
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
             FontSize="14"
@@ -79,7 +76,6 @@
         <TextBlock
             Panel.ZIndex="1"
             Grid.Row="4"
-            IsEnabled="False"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Right"
             FontSize="10"
@@ -94,7 +90,6 @@
         </TextBlock>
 
         <!--<Image
-            IsEnabled="False"
             Source="/controls/plus.png"
             Width="45"
             Height="45"
