@@ -7,13 +7,13 @@
              mc:Ignorable="d"
              Name="FolderControlElement"
              d:DesignHeight="140" d:DesignWidth="280">
-    <Grid Cursor="Hand">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="32"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="45"/>
+            <RowDefinition Height="38"/>
         </Grid.RowDefinitions>
         
         <Rectangle
@@ -30,13 +30,43 @@
             </Rectangle.Effect>
         </Rectangle>
 
+        <Image
+            Cursor="Hand"
+            Margin="20,0,20,0"
+            Grid.Row="0"
+            Source="/controls/Play.png"
+            Width="13"
+            Height="13"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"/>
+        
+        <Image
+            Cursor="Hand"
+            Margin="20,0,20,0"
+            Grid.Row="0"
+            Source="/controls/Settings.png"
+            Width="14"
+            Height="14"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"/>
+
+         <Rectangle
+            Opacity="0.1"
+            Fill="{DynamicResource TextColor}"
+            Grid.Row="1"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center"
+            Width="240"
+            Height="1"/>
+
         <TextBlock
+            Cursor="Hand"
             Text="{Binding FolderName, ElementName=FolderControlElement}"
             Panel.ZIndex="1"
             Grid.Row="1"
-            VerticalAlignment="Center"
+            VerticalAlignment="Bottom"
             HorizontalAlignment="Left"
-            FontSize="14"
+            FontSize="16"
             FontFamily="Segoe UI Semibold"
             Margin="20,0,0,0"
             Foreground="{DynamicResource TextColor}"/>
@@ -88,11 +118,5 @@
                 x:Name="AddedDate"
                 Text="21.03.21 19:21AM"/>
         </TextBlock>
-
-        <!--<Image
-            Source="/controls/plus.png"
-            Width="45"
-            Height="45"
-            Margin="0,0,0,10"/>-->
     </Grid>
 </UserControl>
