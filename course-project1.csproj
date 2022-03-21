@@ -256,5 +256,14 @@
   <ItemGroup>
     <Resource Include="controls\plus.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="controls\Settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="controls\Play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="controls\Folder Settings.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

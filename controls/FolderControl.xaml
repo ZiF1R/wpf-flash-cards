@@ -9,11 +9,11 @@
              d:DesignHeight="140" d:DesignWidth="280">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="33"/>
             <RowDefinition Height="32"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="38"/>
+            <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
         
         <Rectangle
@@ -44,9 +44,9 @@
             Cursor="Hand"
             Margin="20,0,20,0"
             Grid.Row="0"
-            Source="/controls/Settings.png"
-            Width="14"
-            Height="14"
+            Source="/controls/Folder Settings.png"
+            Width="15"
+            Height="15"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"/>
 

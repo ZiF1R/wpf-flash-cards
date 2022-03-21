@@ -6,15 +6,40 @@
              xmlns:local="clr-namespace:course_project1.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Image
-            Source="/MVVM/View/Settings.png"
-            Width="50"
-            Height="50"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"/>
-        <TextBlock>
-            Settings
-        </TextBlock>
-    </Grid>
+    <ScrollViewer
+        VerticalScrollBarVisibility="Hidden">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="550*" MinWidth="500" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45" />
+                <RowDefinition Height="55" />
+                <RowDefinition Height="600*"/>
+            </Grid.RowDefinitions>
+
+            <Image
+                Source="/MVVM/View/Settings.png"
+                Width="40"
+                Height="40"
+                HorizontalAlignment="Left"/>
+            <TextBlock
+                Grid.Column="0"
+                FontFamily="Segoe UI"
+                FontSize="26"
+                Padding="55,0,0,0"
+                Foreground="{DynamicResource TextColor}" Grid.ColumnSpan="2" Margin="0,5,0,5"
+                Text="{DynamicResource Settings}"/>
+
+            <Rectangle
+                Height="1"
+                Fill="{DynamicResource TextColor}"
+                Grid.Column="0"
+                Grid.Row="1"
+                Margin="0,20,0,0"
+                Width="350"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"/>
+        </Grid>
+    </ScrollViewer>
 </UserControl>
