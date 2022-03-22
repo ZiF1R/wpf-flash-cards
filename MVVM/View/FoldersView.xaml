@@ -48,38 +48,43 @@
                 Grid.Row="2"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Top">
+                
                 <control:AddFolderButton
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
-                    Margin="0,0,30,30"/>
+                    Margin="0,0,40,40"/>
+                
                 <control:FolderControl
                     FolderName="TestFolder"
                     FolderCardsCount="10"
                     FolderMemorizedCardsCount="4"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
-                    Margin="0,0,30,30"/>
+                    Margin="0,0,40,40"/>
+                
                 <control:FolderControl
                     FolderName="TestFolder1"
                     FolderCardsCount="14"
                     FolderMemorizedCardsCount="2"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
-                    Margin="0,0,30,30"/>
+                    Margin="0,0,40,40"/>
+                
                 <control:FolderControl
                     FolderName="TestFolder2"
                     FolderCardsCount="5"
                     FolderMemorizedCardsCount="3"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
-                    Margin="0,0,30,30"/>
+                    Margin="0,0,40,40"/>
+                
                 <control:FolderControl
                     FolderName="TestFolder3"
                     FolderCardsCount="23"
                     FolderMemorizedCardsCount="14"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
-                    Margin="0,0,30,30"/>
+                    Margin="0,0,40,40"/>
             </WrapPanel>
         </Grid>
     </ScrollViewer>

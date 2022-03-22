@@ -25,4 +25,19 @@
     <v:String x:Key="Category">Category</v:String>
     <v:String x:Key="Memorized">memorized</v:String>
     <v:String x:Key="Added">Added</v:String>
+    <v:String x:Key="General">General</v:String>
+    <v:String x:Key="AppTheme">App theme</v:String>
+    <v:String x:Key="AppThemeDescr">Switch the theme of the app</v:String>
+    <v:String x:Key="Review">Review</v:String>
+    <v:String x:Key="Other">Other</v:String>
+    <v:String x:Key="CardsNumber">Number of cards</v:String>
+    <v:String x:Key="CardsNumberDescr">Choose number of cards you want to train</v:String>
+    <v:String x:Key="ReversedReview">Reversed review</v:String>
+    <v:String x:Key="ReversedReviewDescr">Show the card definition first in review</v:String>
+    <v:String x:Key="TimeLimit">Time limit</v:String>
+    <v:String x:Key="TimeLimitDescr">Choose the amount of time that will be given to write an answer (in seconds; to remove the limit, select 0)</v:String>
+    <v:String x:Key="ExportCards">Export cards</v:String>
+    <v:String x:Key="ExportCardsDescr">Export cards from some folder to the file on your device</v:String>
+    <v:String x:Key="ImportCards">Import cards</v:String>
+    <v:String x:Key="ImportCardsDescr">Import cards from file on your device to the folder</v:String>
 </ResourceDictionary>
