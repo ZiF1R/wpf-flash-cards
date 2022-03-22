@@ -1,5 +1,43 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
-    
+    <v:String x:Key="Login">Авторизоваться</v:String>
+    <v:String x:Key="Registration">Регистрация</v:String>
+    <v:String x:Key="Email">Почта</v:String>
+    <v:String x:Key="Password">Пороль</v:String>
+    <v:String x:Key="ConfirmPassword">Подтвердите пороль</v:String>
+    <v:String x:Key="Nickname">Псевдоним</v:String>
+    <v:String x:Key="Name">Имя</v:String>
+    <v:String x:Key="LastName">Фамилия</v:String>
+    <v:String x:Key="HaveNoAccount">Нет аккаунта?</v:String>
+    <v:String x:Key="SignUp">Зарегестрируйся!</v:String>
+    <v:String x:Key="HaveAlreadyAccount">Уже есть аккаунт?</v:String>
+    <v:String x:Key="Login!">Авторизируйся!</v:String>
+    <v:String x:Key="Profile">Профиль</v:String>
+    <v:String x:Key="Folders">Папки</v:String>
+    <v:String x:Key="Settings">Настройки</v:String>
+    <v:String x:Key="Save">Сохранить</v:String>
+    <v:String x:Key="LogOut">Выйти</v:String>
+    <v:String x:Key="ContactWithUs">Свяжитесь с нами</v:String>
+    <v:String x:Key="PrivacyPolicy">Политика конфиденциальности</v:String>
+    <v:String x:Key="TermsConditions">Условия и Положения</v:String>
+    <v:String x:Key="AddFolder">Добавить новую папку</v:String>
+    <v:String x:Key="Category">Категория</v:String>
+    <v:String x:Key="Memorized">запомнено</v:String>
+    <v:String x:Key="Added">Добавлено</v:String>
+    <v:String x:Key="General">Общие</v:String>
+    <v:String x:Key="Review">Тренировка</v:String>
+    <v:String x:Key="Other">Другое</v:String>
+    <v:String x:Key="AppTheme">Тема приложения</v:String>
+    <v:String x:Key="AppThemeDescr">Смените тему приложения</v:String>
+    <v:String x:Key="CardsNumber">Количество карточек</v:String>
+    <v:String x:Key="CardsNumberDescr">Выберите количество карточек, которые вы хотите тренировать</v:String>
+    <v:String x:Key="ReversedReview">Перевернутая тренировка</v:String>
+    <v:String x:Key="ReversedReviewDescr">Показывать сначала определение карточки</v:String>
+    <v:String x:Key="TimeLimit">Ограничение времени</v:String>
+    <v:String x:Key="TimeLimitDescr">Выберите время, которое будет дано на написание ответа (в секундах; чтобы снять ограничение, выберите 0)</v:String>
+    <v:String x:Key="ExportCards">Экспортировать карточки</v:String>
+    <v:String x:Key="ExportCardsDescr">Экспортируйте карточки из какой-либо папки в файл на вашем устройстве</v:String>
+    <v:String x:Key="ImportCards">Импортировать карточки</v:String>
+    <v:String x:Key="ImportCardsDescr">Импортируйте карточки из файла на вашем устройстве в папку</v:String>
 </ResourceDictionary>
