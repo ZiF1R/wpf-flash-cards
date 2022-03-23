@@ -99,6 +99,10 @@
     <Compile Include="controls\SettingDescription.xaml.cs">
       <DependentUpon>SettingDescription.xaml</DependentUpon>
     </Compile>
+    <Compile Include="controls\SwitchBox.xaml.cs">
+      <DependentUpon>SwitchBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\ViewModel\AuthViewModel.cs" />
     <Compile Include="MVVM\ViewModel\FoldersViewModel.cs" />
     <Compile Include="MVVM\ViewModel\LoginViewModel.cs" />
     <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
@@ -141,6 +145,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="controls\SettingDescription.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\SwitchBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -237,7 +245,7 @@
     <Resource Include="icons\logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="MVVM\Model\" />
+    <Resource Include="MVVM\View\export.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logo.png" />
@@ -271,6 +279,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="controls\Folder Settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MVVM\View\import.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

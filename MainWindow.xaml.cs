@@ -24,6 +24,9 @@ namespace course_project1
         public MainWindow()
         {
             InitializeComponent();
+            var sri = Application.GetResourceStream(new Uri("pack://application:,,,/icons/cursor.cur", UriKind.RelativeOrAbsolute));
+            var customCursor = new Cursor(sri.Stream);
+            this.Cursor = customCursor;
             //App app = new App();
             //app.Resources.MergedDictionaries
         }

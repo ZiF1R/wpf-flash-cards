@@ -129,7 +129,6 @@
                 
                 <LineBreak />
                 
-                
                 <Hyperlink
                     Foreground="{DynamicResource TextColor}"
                     NavigateUri="https://github.com/ZiF1R/wpf-flash-cards/blob/master/LICENSE.md"
