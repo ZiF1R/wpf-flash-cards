@@ -18,8 +18,8 @@
                 <RowDefinition Height="55" />
                 <RowDefinition Height="80" />
                 <RowDefinition Height="240" />
-                <RowDefinition Height="160" />
-                <RowDefinition Height="160" />
+                <RowDefinition Height="190" />
+                <RowDefinition Height="130" />
             </Grid.RowDefinitions>
 
             <Image
@@ -55,16 +55,24 @@
                     Text="{DynamicResource General}"
                     HorizontalAlignment="Left"
                     Cursor="Hand"/>
-                
-                <control:SettingDescription
-                    Header="{DynamicResource AppTheme}"
-                    Description="{DynamicResource AppThemeDescr}"/>
+
+                <StackPanel Orientation="Horizontal">
+                    <control:SettingDescription
+                        Header="{DynamicResource AppTheme}"
+                        Description="{DynamicResource AppThemeDescr}"
+                        HorizontalAlignment="Left"/>
+                    
+                    <control:SwitchBox
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="70,15,0,0"/>
+                </StackPanel>
             </StackPanel>
 
             <!-- Review Settings  -->
             <StackPanel
                 Grid.Row="3"
-                Margin="25,25,0,0">
+                Margin="25,25,0,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
                 <TextBlock
                     FontSize="17"
                     FontFamily="Segoe UI"
@@ -72,24 +80,55 @@
                     Foreground="{DynamicResource Primary}"
                     Text="{DynamicResource Review}"
                     Cursor="Hand"/>
-                
-                <control:SettingDescription
-                    Header="{DynamicResource CardsNumber}"
-                    Description="{DynamicResource CardsNumberDescr}"/>
-                
-                <control:SettingDescription
-                    Header="{DynamicResource ReversedReview}"
-                    Description="{DynamicResource ReversedReviewDescr}"/>
-                
-                <control:SettingDescription
-                    Header="{DynamicResource TimeLimit}"
-                    Description="{DynamicResource TimeLimitDescr}"/>
+
+                <StackPanel Orientation="Horizontal">
+                    <control:SettingDescription
+                        Header="{DynamicResource CardsNumber}"
+                        Description="{DynamicResource CardsNumberDescr}"/>
+
+                    <ComboBox
+                        Name="CardsNumber"
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        Width="50"
+                        Height="30"
+                        Margin="70,15,0,0"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <control:SettingDescription
+                        Header="{DynamicResource ReversedReview}"
+                        Description="{DynamicResource ReversedReviewDescr}"/>
+
+                    <control:SwitchBox
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="70,15,0,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <control:SettingDescription
+                        Header="{DynamicResource TimeLimit}"
+                        Description="{DynamicResource TimeLimitDescr}"/>
+
+                    <ComboBox
+                        Name="TimeLimit"
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        Width="50"
+                        Height="30"
+                        Margin="70,15,0,0"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"/>
+                </StackPanel>
             </StackPanel>
 
             <!-- Other Settings  -->
             <StackPanel
                 Grid.Row="4"
-                Margin="25,25,0,0">
+                Margin="25,25,0,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
                 <TextBlock
                     FontSize="17"
                     FontFamily="Segoe UI"
@@ -97,14 +136,56 @@
                     Foreground="{DynamicResource Primary}"
                     Text="{DynamicResource Other}"
                     Cursor="Hand"/>
-                
-                <control:SettingDescription
-                    Header="{DynamicResource ExportCards}"
-                    Description="{DynamicResource ExportCardsDescr}"/>
 
-                <control:SettingDescription
-                    Header="{DynamicResource ImportCards}"
-                    Description="{DynamicResource ImportCardsDescr}"/>
+                <StackPanel Orientation="Horizontal">
+                    <control:SettingDescription
+                        Header="{DynamicResource ExportCards}"
+                        Description="{DynamicResource ExportCardsDescr}"/>
+
+                    <Button
+                        Margin="70,15,0,0"
+                        VerticalAlignment="Center"
+                        Background="{DynamicResource CardBg}"
+                        Width="35"
+                        Height="35"
+                        BorderBrush="Transparent"
+                        Padding="7">
+                        <Button.Content>
+                            <Image Source="/MVVM/View/export.png" />
+                        </Button.Content>
+                        <Button.Effect>
+                            <DropShadowEffect
+                                Opacity="0.1"
+                                ShadowDepth="3"
+                                BlurRadius="5"/>
+                        </Button.Effect>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <control:SettingDescription
+                        Header="{DynamicResource ImportCards}"
+                        Description="{DynamicResource ImportCardsDescr}"/>
+
+                    <Button
+                        Margin="70,15,0,0"
+                        VerticalAlignment="Center"
+                        Background="{DynamicResource CardBg}"
+                        Width="35"
+                        Height="35"
+                        BorderBrush="Transparent"
+                        Padding="7">
+                        <Button.Content>
+                            <Image Source="/MVVM/View/import.png" />
+                        </Button.Content>
+                        <Button.Effect>
+                            <DropShadowEffect
+                                Opacity="0.1"
+                                ShadowDepth="3"
+                                BlurRadius="5"/>
+                        </Button.Effect>
+                    </Button>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </ScrollViewer>
