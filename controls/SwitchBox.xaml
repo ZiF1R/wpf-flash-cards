@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="course_project1.controls.SwitchBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:course_project1.controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="20" d:DesignWidth="42">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Ellipse">
+                <Setter Property="Margin" Value="3,0,0,0" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsChecked, ElementName=SwitchControl}" Value="true">
+                        <Setter Property="Margin" Value="24,0,0,0" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="Border">
+                <Setter Property="Background" Value="#c1c1c1" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsChecked, ElementName=SwitchControl}" Value="true">
+                        <Setter Property="Background" Value="{DynamicResource Primary}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid Name="SwitchGrid" Cursor="Hand">
+        <CheckBox
+            Name="SwitchControl"
+            Opacity="0"
+            Panel.ZIndex="1"
+            Width="42"
+            Height="20"/>
+
+        <Border
+            Name="SwitchBg"
+            BorderBrush="Transparent"
+            BorderThickness="1"
+            CornerRadius="10"
+            Width="42"
+            Height="20"/>
+
+        <Ellipse
+            HorizontalAlignment="Left"
+            Fill="White"
+            Width="14"
+            Height="14"/>
+    </Grid>
+</UserControl>
