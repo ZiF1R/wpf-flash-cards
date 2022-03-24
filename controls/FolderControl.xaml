@@ -34,21 +34,105 @@
             Cursor="Hand"
             Margin="20,0,20,0"
             Grid.Row="0"
-            Source="/controls/Play.png"
+            Source="/icons/Play.png"
             Width="13"
             Height="13"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"/>
         
         <Image
-            Cursor="Hand"
             Margin="20,0,20,0"
             Grid.Row="0"
-            Source="/controls/Folder Settings.png"
+            Source="/icons/Folder Settings.png"
             Width="15"
             Height="15"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"/>
+
+        <StackPanel
+            Margin="20,0,20,0"
+            Grid.Row="0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Width="15"
+            Height="15">
+            <CheckBox
+                Name="FolderSettings"
+                Width="15"
+                Height="15"
+                Cursor="Hand"
+                Panel.ZIndex="1"
+                Opacity="0"/>
+
+            <Popup
+                IsOpen="{Binding IsChecked, ElementName=FolderSettings}"
+                Name="myPopup"
+                Placement="Bottom"
+                PlacementTarget="{Binding ElementName=FolderSettings}"
+                PopupAnimation="Slide">
+                <Border
+                    BorderBrush="Transparent"
+                    BorderThickness="1"
+                    CornerRadius="5"
+                    Padding="0,5,0,5"
+                    Background="{DynamicResource CardBg}">
+                    <Border.Effect>
+                        <DropShadowEffect
+                            Opacity="0.1"
+                            ShadowDepth="3"
+                            BlurRadius="5"/>
+                    </Border.Effect>
+                    <StackPanel Background="{DynamicResource CardBg}">
+                        <TextBlock
+                            Padding="15,7,17,7"
+                            Cursor="Hand">
+                            <Image
+                                Source="/icons/edit.png"
+                                Width="11"
+                                Height="11"
+                                Margin="0,0,5,0"/>
+
+                            <TextBlock Foreground="{DynamicResource TextColor}" Text="{DynamicResource Edit}"/>
+                            
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Background" Value="{DynamicResource CardBg}" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource HoverBg}" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                        <TextBlock
+                            Padding="15,7,17,7"
+                            Cursor="Hand">
+                            <Image
+                                Source="/icons/remove.png"
+                                Width="11"
+                                Height="11"
+                                Margin="0,0,5,0"/>
+
+                            <TextBlock Foreground="{DynamicResource TextColor}" Text="{DynamicResource Remove}"/>
+                            
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Background" Value="{DynamicResource CardBg}" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource HoverBg}" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </StackPanel>
+
 
          <Rectangle
             Opacity="0.1"

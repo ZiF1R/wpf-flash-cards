@@ -68,7 +68,7 @@
 
         <Image
             IsEnabled="False"
-            Source="/controls/plus.png"
+            Source="/icons/plus.png"
             Width="45"
             Height="45"
             Margin="0,0,0,10"/>

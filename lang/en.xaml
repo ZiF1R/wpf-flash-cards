@@ -40,4 +40,6 @@
     <v:String x:Key="ExportCardsDescr">Export cards from some folder to the file on your device</v:String>
     <v:String x:Key="ImportCards">Import cards</v:String>
     <v:String x:Key="ImportCardsDescr">Import cards from file on your device to the folder</v:String>
+    <v:String x:Key="Edit">Edit</v:String>
+    <v:String x:Key="Remove">Remove</v:String>
 </ResourceDictionary>

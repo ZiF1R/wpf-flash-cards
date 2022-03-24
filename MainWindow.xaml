@@ -75,7 +75,7 @@
                 Content="{DynamicResource Profile}"
                 Command="{Binding ProfileViewCommand}">
                 <RadioButton.Background>
-                    <ImageBrush ImageSource="/Profile.png"/>
+                    <ImageBrush ImageSource="/icons/Profile.png"/>
                 </RadioButton.Background>
             </RadioButton>
 
@@ -85,7 +85,7 @@
                 Content="{DynamicResource Folders}"
                 Command="{Binding FoldersViewCommand}">
                 <RadioButton.Background>
-                    <ImageBrush ImageSource="/Folder.png"/>
+                    <ImageBrush ImageSource="/icons/Folder.png"/>
                 </RadioButton.Background>
             </RadioButton>
 
@@ -95,7 +95,7 @@
                 Content="{DynamicResource Settings}"
                 Command="{Binding SettingsViewCommand}">
                 <RadioButton.Background>
-                    <ImageBrush ImageSource="/Settings.png"/>
+                    <ImageBrush ImageSource="/icons/Settings.png"/>
                 </RadioButton.Background>
             </RadioButton>
         </StackPanel>

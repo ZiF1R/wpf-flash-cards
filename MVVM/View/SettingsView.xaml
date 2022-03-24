@@ -23,7 +23,7 @@
             </Grid.RowDefinitions>
 
             <Image
-                Source="/MVVM/View/Settings.png"
+                Source="/icons/Pages icons/Settings.png"
                 Width="40"
                 HorizontalAlignment="Left" Margin="0,2,0,3"/>
             <TextBlock
@@ -151,7 +151,7 @@
                         BorderBrush="Transparent"
                         Padding="7">
                         <Button.Content>
-                            <Image Source="/MVVM/View/export.png" />
+                            <Image Source="/icons/export.png" />
                         </Button.Content>
                         <Button.Effect>
                             <DropShadowEffect
@@ -176,7 +176,7 @@
                         BorderBrush="Transparent"
                         Padding="7">
                         <Button.Content>
-                            <Image Source="/MVVM/View/import.png" />
+                            <Image Source="/icons/import.png" />
                         </Button.Content>
                         <Button.Effect>
                             <DropShadowEffect

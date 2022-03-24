@@ -231,6 +231,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="LICENSE.md" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -245,43 +246,40 @@
     <Resource Include="icons\logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="MVVM\View\export.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Profile.png" />
+    <Resource Include="icons\Play.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Folder.png" />
+    <Resource Include="icons\Folder Settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Settings.png" />
+    <Resource Include="icons\Folder_active.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="MVVM\View\Profile.png" />
+    <Resource Include="icons\edit.png" />
+    <Resource Include="icons\export.png" />
+    <Resource Include="icons\Folder.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="MVVM\View\Folders.png" />
+    <Resource Include="icons\Pages icons\Folders.png" />
+    <Resource Include="icons\Pages icons\Profile.png" />
+    <Resource Include="icons\Pages icons\Settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="MVVM\View\Settings.png" />
+    <Resource Include="icons\import.png" />
+    <Resource Include="icons\play-button.png" />
+    <Resource Include="icons\plus.png" />
+    <Resource Include="icons\Profile.png" />
+    <Resource Include="icons\Profile_active.png" />
+    <Resource Include="icons\remove.png" />
+    <Resource Include="icons\settings folder.png" />
+    <Resource Include="icons\settings.png" />
+    <Resource Include="icons\settings_active.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="controls\plus.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="controls\Settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="controls\Play.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="controls\Folder Settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="MVVM\View\import.png" />
+    <Content Include=".gitignore" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

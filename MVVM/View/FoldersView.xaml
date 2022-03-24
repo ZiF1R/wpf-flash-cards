@@ -22,7 +22,7 @@
             <Image
                 Width="40"
                 Height="40"
-                Source="/MVVM/View/Folders.png"
+                Source="/icons/Pages icons/Folders.png"
                 HorizontalAlignment="Left"/>
             <TextBlock
                 Grid.Column="0"
