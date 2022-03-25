@@ -4,159 +4,32 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:course_project1"
-        xmlns:viewModel="clr-namespace:course_project1.MVVM.ViewModel"
         xmlns:control="clr-namespace:course_project1.controls"
         mc:Ignorable="d"
-        Left="10"
-        Top="10"
+        Left="10" Top="10"
         Title="MainWindow" Height="750" Width="1500" Icon="/logo.png">
-
-    <Window.DataContext>
-        <viewModel:MainViewModel />
-    </Window.DataContext>
 
     <!-- Лингвистическое приложение FlashCards -->
     <!-- FlashCards - карточки для запоминания -->
 
     <Grid Background="{DynamicResource MainBg}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" />
-            <ColumnDefinition Width="1100*" MinWidth="500" />
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="1500*" MinWidth="500" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
-            <RowDefinition Height="655*" />
+            <RowDefinition Height="750*" />
         </Grid.RowDefinitions>
 
-        <Rectangle
-            Grid.Column="0"
-            Grid.Row="0"
-            Grid.RowSpan="2"
-            StrokeThickness="0"
-            Fill="{DynamicResource NavBg}" MinWidth="300">
-            <Rectangle.Effect>
-                <DropShadowEffect
-                    Opacity="0.1"
-                    ShadowDepth="5"
-                    BlurRadius="15"/>
-            </Rectangle.Effect>
-        </Rectangle>
-
-        <Image
-            Source="/logo.png"
-            Width="50"
-            Height="50"
-            Margin="35,28,0,0"
-            d:LayoutOverrides="Width, LeftMargin, RightMargin, TopMargin, BottomMargin"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top" />
-        <TextBlock
-            Foreground="{DynamicResource Primary}"
-            FontWeight="Black"
-            FontSize="20"
-            TextAlignment="Left"
-            Height="27"
-            Margin="92,44,0,0"
-            VerticalAlignment="Top"
-            HorizontalAlignment="Left" d:LayoutOverrides="TopMargin, BottomMargin">
-            <TextBlock.Text>FLASH CARDS</TextBlock.Text>
-        </TextBlock>
-
-        <StackPanel
-            Grid.Row="1"
-            Grid.Column="0"
-            Margin="0,50,0,0">
-
-            <RadioButton
-                IsChecked="True"
-                Name="Profile"
-                Style="{StaticResource MenuButton}"
-                Content="{DynamicResource Profile}"
-                Command="{Binding ProfileViewCommand}">
-                <RadioButton.Background>
-                    <ImageBrush ImageSource="/icons/Profile.png"/>
-                </RadioButton.Background>
-            </RadioButton>
-
-            <RadioButton
-                Name="Folders"
-                Style="{StaticResource MenuButton}"
-                Content="{DynamicResource Folders}"
-                Command="{Binding FoldersViewCommand}">
-                <RadioButton.Background>
-                    <ImageBrush ImageSource="/icons/Folder.png"/>
-                </RadioButton.Background>
-            </RadioButton>
-
-            <RadioButton
-                Name="Settings"
-                Style="{StaticResource MenuButton}"
-                Content="{DynamicResource Settings}"
-                Command="{Binding SettingsViewCommand}">
-                <RadioButton.Background>
-                    <ImageBrush ImageSource="/icons/Settings.png"/>
-                </RadioButton.Background>
-            </RadioButton>
-        </StackPanel>
-
-        <StackPanel
-            Grid.Row="1"
-            Grid.Column="0"
-            VerticalAlignment="Bottom"
-            Margin="0,0,0,30">
-            <Button
-                Width="200"
-                Content="{DynamicResource ContactWithUs}"
-                Style="{StaticResource CustomButton}"
-                Background="{DynamicResource Primary}"
-                VerticalAlignment="Bottom"
-                HorizontalAlignment="Center"/>
-
-            <TextBlock
-                HorizontalAlignment="Left"
-                FontSize="14"
-                FontFamily="Segoe UI Light"
-                Foreground="{DynamicResource TextColor}"
-                Margin="50,15,0,0">
-                
-                <Hyperlink
-                    Foreground="{DynamicResource TextColor}"
-                    NavigateUri="https://github.com/ZiF1R/wpf-flash-cards/blob/master/LICENSE.md"
-                    RequestNavigate="Hyperlink_RequestNavigate">
-                    <TextBlock Text="{DynamicResource PrivacyPolicy}"/>
-                </Hyperlink>
-                
-                <LineBreak />
-                
-                <Hyperlink
-                    Foreground="{DynamicResource TextColor}"
-                    NavigateUri="https://github.com/ZiF1R/wpf-flash-cards/blob/master/LICENSE.md"
-                    RequestNavigate="Hyperlink_RequestNavigate">
-                    <TextBlock Text="{DynamicResource TermsConditions}"/>
-                </Hyperlink>
-                
-                <LineBreak />
-                
-                <TextBlock
-                    Foreground="{DynamicResource TextColorOpacity}"
-                    Margin="0,25,0,0"
-                    Text="Copyright © 2022, created by Z1FiR"/>
-            </TextBlock>
-        </StackPanel>
-
-        <ContentControl
-            Grid.Column="1"
-            Grid.Row="0"
-            Grid.RowSpan="2"
-            Margin="110,50,0,20"
-            Content="{Binding CurrentView}"/>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
 
         <ComboBox
             Grid.Column="2"
             Grid.Row="0"
             Width="50"
             Height="30"
+            Margin="0,30,30,0"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Right"
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Center">
             <ComboBoxItem IsSelected="True">EN</ComboBoxItem>

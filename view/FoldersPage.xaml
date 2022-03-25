@@ -1,0 +1,107 @@
+﻿<Page x:Class="course_project1.view.FoldersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:course_project1.view" xmlns:control="clr-namespace:course_project1.controls"
+      mc:Ignorable="d" 
+      Title="FoldersPage"
+      d:DesignHeight="750" d:DesignWidth="1500">
+
+    <Grid VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="1100*" MinWidth="500" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="800*"/>
+        </Grid.RowDefinitions>
+
+        <control:AppMenu Margin="0,0,100,0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" />
+
+        <ScrollViewer
+            VerticalScrollBarVisibility="Hidden"
+            Grid.Row="1"
+            Grid.Column="1"
+            MinHeight="1000">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45" />
+                    <RowDefinition Height="55" />
+                    <RowDefinition Height="800*"/>
+                </Grid.RowDefinitions>
+                <Image
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Width="40"
+                    Height="40"
+                    Source="/icons/Pages icons/Folders.png"
+                    HorizontalAlignment="Left"/>
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    FontFamily="Segoe UI"
+                    FontSize="26"
+                    Padding="55,0,0,0"
+                    VerticalAlignment="Center"
+                    Foreground="{DynamicResource TextColor}" Grid.ColumnSpan="2" Margin="0,5,0,5"
+                    Text="{DynamicResource Folders}"/>
+
+                <Rectangle
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Height="1"
+                    Fill="{DynamicResource TextColor}"
+                    Margin="0,20,0,0"
+                    Width="350"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"/>
+
+                <WrapPanel
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top">
+
+                    <control:AddFolderButton
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="0,0,40,40"/>
+
+                    <control:FolderControl
+                        FolderName="TestFolder"
+                        FolderCardsCount="10"
+                        FolderMemorizedCardsCount="4"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="0,0,40,40"/>
+
+                    <control:FolderControl
+                        FolderName="TestFolder1"
+                        FolderCardsCount="14"
+                        FolderMemorizedCardsCount="2"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="0,0,40,40"/>
+
+                    <control:FolderControl
+                        FolderName="TestFolder2"
+                        FolderCardsCount="5"
+                        FolderMemorizedCardsCount="3"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="0,0,40,40"/>
+
+                    <control:FolderControl
+                        FolderName="TestFolder3"
+                        FolderCardsCount="23"
+                        FolderMemorizedCardsCount="14"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="0,0,40,40"/>
+                </WrapPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

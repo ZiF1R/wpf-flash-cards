@@ -3,6 +3,7 @@
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
     <v:String x:Key="Login">Login</v:String>
     <v:String x:Key="Registration">Registration</v:String>
+    <v:String x:Key="Registrate">Registrate</v:String>
     <v:String x:Key="Email">Email</v:String>
     <v:String x:Key="Password">Password</v:String>
     <v:String x:Key="ConfirmPassword">Confirm password</v:String>

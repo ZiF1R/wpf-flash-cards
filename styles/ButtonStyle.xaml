@@ -9,7 +9,7 @@
                     <ControlTemplate TargetType="Button">
                         <Grid>
                             <Button
-                                x:Name="button"
+                                x:Name="CustomButtonElement"
                                 Cursor="Hand"
                                 Content="{TemplateBinding Content}"
                                 Foreground="White"
@@ -21,11 +21,6 @@
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="5"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="Button.IsMouseOver" Value="True">
-                                                <Setter Property="Button.Opacity" Value="0.8" />
-                                            </Trigger>
-                                        </Style.Triggers>
                                     </Style>
                                 </Button.Resources>
                             </Button>
@@ -34,14 +29,14 @@
                 </Setter.Value>
             </Setter>
 
-            <!--<Setter Property="Opacity" Value="1" />
-            <Setter Property="Background" Value="{Binding Background, ElementName=button}" />-->
+            <Setter Property="Opacity" Value="1" />
+            <Setter Property="Background" Value="{Binding Background, ElementName=CustomButtonElement}" />
         </Style.Setters>
-        <!--<Style.Triggers>
-            <Trigger Property="Button.IsMouseOver" Value="True">
-                <Setter Property="Button.Opacity" Value="0.9" />
-                <Setter Property="Button.Background" Value="{Binding Background, ElementName=button}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.8" />
+                <Setter Property="Background" Value="{Binding Background, ElementName=CustomButtonElement}" />
             </Trigger>
-        </Style.Triggers>-->
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

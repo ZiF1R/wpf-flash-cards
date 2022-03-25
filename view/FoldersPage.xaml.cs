@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace course_project1.MVVM.View
+namespace course_project1.view
 {
     /// <summary>
-    /// Логика взаимодействия для RegistrationView.xaml
+    /// Логика взаимодействия для FoldersPage.xaml
     /// </summary>
-    public partial class RegistrationView : UserControl
+    public partial class FoldersPage : Page
     {
-        public RegistrationView()
+        public FoldersPage()
         {
             InitializeComponent();
         }

@@ -7,6 +7,7 @@
              mc:Ignorable="d"
              Name="FolderControlElement"
              d:DesignHeight="140" d:DesignWidth="280">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="33"/>
@@ -133,8 +134,7 @@
             </Popup>
         </StackPanel>
 
-
-         <Rectangle
+        <Rectangle
             Opacity="0.1"
             Fill="{DynamicResource TextColor}"
             Grid.Row="1"

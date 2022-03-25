@@ -1,13 +1,13 @@
-﻿<UserControl x:Class="course_project1.MVVM.View.RegistrationView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:course_project1.MVVM.View"
-             xmlns:control="clr-namespace:course_project1.controls"
-             mc:Ignorable="d" 
-             d:DesignHeight="750" d:DesignWidth="1500"
-             Background="{DynamicResource MainBg}">
+﻿<Page x:Class="course_project1.view.RegistrationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:course_project1.view" xmlns:control="clr-namespace:course_project1.controls"
+      mc:Ignorable="d" 
+      Title="RegistrationPage"
+      d:DesignHeight="750" d:DesignWidth="1500"
+      Background="{DynamicResource MainBg}">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -131,18 +131,20 @@
             Foreground="{DynamicResource TextColor}"
             Text="{DynamicResource HaveAlreadyAccount}"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top"/>
+            VerticalAlignment="Top"
+            MouseUp="GoToLogin_MouseUp"/>
 
         <Button
             Style="{StaticResource CustomButton}"
             Grid.Column="1"
             Grid.Row="1"
             Margin="30,0,0,30"
-            Content="{DynamicResource Login}"
+            Content="{DynamicResource Registrate}"
             Foreground="White"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Background="{DynamicResource Primary}"
-            OverridesDefaultStyle="True"/>
+            OverridesDefaultStyle="True"
+            Click="Registrate_Click"/>
     </Grid>
-</UserControl>
+</Page>

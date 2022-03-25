@@ -1,4 +1,5 @@
-﻿using System;
+﻿using course_project1.view;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -27,14 +28,11 @@ namespace course_project1
             var sri = Application.GetResourceStream(new Uri("pack://application:,,,/icons/cursor.cur", UriKind.RelativeOrAbsolute));
             var customCursor = new Cursor(sri.Stream);
             this.Cursor = customCursor;
+
+            MainFrame.Content = new LoginPage();
+
             //App app = new App();
             //app.Resources.MergedDictionaries
-        }
-
-        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
-            e.Handled = true;
         }
     }
 }

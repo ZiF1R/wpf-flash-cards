@@ -1,5 +1,4 @@
-﻿using course_project1.MVVM.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace course_project1.MVVM.View
+namespace course_project1.view
 {
     /// <summary>
-    /// Логика взаимодействия для LoginView.xaml
+    /// Логика взаимодействия для ProfilePage.xaml
     /// </summary>
-    public partial class LoginView : UserControl
+    public partial class ProfilePage : Page
     {
-        public LoginView()
+        public ProfilePage()
         {
             InitializeComponent();
         }
