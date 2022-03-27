@@ -8,6 +8,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
                         <Border
+                            x:Name="MenuButtonBorder"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Height="60"
@@ -16,9 +17,9 @@
                                 VerticalAlignment="Stretch"
                                 HorizontalAlignment="Stretch">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50" />
-                                    <ColumnDefinition Width="20" />
-                                    <ColumnDefinition Width="230" />
+                                    <ColumnDefinition Width="40" />
+                                    <ColumnDefinition Width="40" />
+                                    <ColumnDefinition Width="220" />
                                 </Grid.ColumnDefinitions>
 
                                 <Rectangle
@@ -28,11 +29,11 @@
 
                                 <Rectangle
                                     Grid.Column="1"
-                                    Width="20"
-                                    Height="20"
+                                    Width="40"
+                                    Height="40"
                                     Fill="{TemplateBinding Background}"
                                     HorizontalAlignment="Left"
-                                    VerticalAlignment="Stretch"/>
+                                    VerticalAlignment="Center"/>
                                 <TextBlock
                                     Grid.Column="2"
                                     VerticalAlignment="Center"
@@ -45,6 +46,11 @@
                                 </TextBlock>
                             </Grid>
                         </Border>
+                        <!--<ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" TargetName="MenuButtonBorder" Value="{StaticResource facebook_icon}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>-->
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>

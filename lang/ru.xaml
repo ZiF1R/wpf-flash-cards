@@ -40,4 +40,6 @@
     <v:String x:Key="ExportCardsDescr">Экспортируйте карточки из какой-либо папки в файл на вашем устройстве</v:String>
     <v:String x:Key="ImportCards">Импортировать карточки</v:String>
     <v:String x:Key="ImportCardsDescr">Импортируйте карточки из файла на вашем устройстве в папку</v:String>
+    <v:String x:Key="Edit">Редактировать</v:String>
+    <v:String x:Key="Remove">Удалить</v:String>
 </ResourceDictionary>

@@ -20,19 +20,22 @@ namespace course_project1.view
     /// </summary>
     public partial class LoginPage : Page
     {
-        public LoginPage()
+        Frame rootFrame;
+
+        public LoginPage(Frame frame)
         {
             InitializeComponent();
+            this.rootFrame = frame;
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new FoldersPage());
+            NavigationService.Navigate(new MainPage(this.rootFrame));
         }
 
         private void GoToRegistration_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new RegistrationPage());
+            NavigationService.Navigate(new RegistrationPage(this.rootFrame));
         }
     }
 }

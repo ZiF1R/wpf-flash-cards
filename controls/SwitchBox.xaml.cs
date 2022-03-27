@@ -24,5 +24,32 @@ namespace course_project1.controls
         {
             InitializeComponent();
         }
+
+        public static readonly DependencyProperty SwitchedProperty =
+        DependencyProperty.Register(
+           name: "Switched",
+           propertyType: typeof(bool),
+           ownerType: typeof(SwitchBox),
+           typeMetadata: new FrameworkPropertyMetadata(
+               defaultValue: false,
+               flags: FrameworkPropertyMetadataOptions.AffectsMeasure,
+               propertyChangedCallback: new PropertyChangedCallback(OnSwitchedChanged)
+           ));
+
+        public bool Switched
+        {
+            get => (bool)GetValue(SwitchedProperty);
+            set => SetValue(SwitchedProperty, value);
+        }
+
+        private static void OnSwitchedChanged(DependencyObject depObj, DependencyPropertyChangedEventArgs e)
+        {
+            
+        }
+
+        private void SwitchControl_Click(object sender, RoutedEventArgs e)
+        {
+            this.SetValue(SwitchedProperty, SwitchControl.IsChecked);
+        }
     }
 }

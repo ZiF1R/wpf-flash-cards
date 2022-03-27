@@ -13,25 +13,17 @@
     <!-- FlashCards - карточки для запоминания -->
 
     <Grid Background="{DynamicResource MainBg}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1500*" MinWidth="500" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="750*" />
-        </Grid.RowDefinitions>
+        <Frame Margin="0" Padding="0" BorderThickness="1" Name="MainFrame" NavigationUIVisibility="Hidden" />
 
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
-
-        <ComboBox
-            Grid.Column="2"
-            Grid.Row="0"
+        <ComboBox x:Name="AppLanguage"
             Width="50"
             Height="30"
             Margin="0,30,30,0"
             VerticalAlignment="Top"
             HorizontalAlignment="Right"
             VerticalContentAlignment="Center"
-            HorizontalContentAlignment="Center">
+            HorizontalContentAlignment="Center"
+            SelectionChanged="AppLanguage_SelectionChanged">
             <ComboBoxItem IsSelected="True">EN</ComboBoxItem>
             <ComboBoxItem>RU</ComboBoxItem>
             <ComboBoxItem>JP</ComboBoxItem>

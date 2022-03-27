@@ -20,9 +20,17 @@ namespace course_project1.view
     /// </summary>
     public partial class ProfilePage : Page
     {
-        public ProfilePage()
+        Frame rootFrame;
+
+        public ProfilePage(Frame frame)
         {
             InitializeComponent();
+            rootFrame = frame;
+        }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            this.rootFrame.Content = new LoginPage(this.rootFrame);
         }
     }
 }

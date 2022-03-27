@@ -84,9 +84,6 @@
     <Compile Include="controls\AddFolderButton.xaml.cs">
       <DependentUpon>AddFolderButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="controls\AppMenu.xaml.cs">
-      <DependentUpon>AppMenu.xaml</DependentUpon>
-    </Compile>
     <Compile Include="controls\CustomPasswordBox.xaml.cs">
       <DependentUpon>CustomPasswordBox.xaml</DependentUpon>
     </Compile>
@@ -105,6 +102,9 @@
     <Compile Include="controls\SwitchBox.xaml.cs">
       <DependentUpon>SwitchBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="view\FoldersPage.xaml.cs">
       <DependentUpon>FoldersPage.xaml</DependentUpon>
     </Compile>
@@ -121,10 +121,6 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Page Include="controls\AddFolderButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="controls\AppMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -151,6 +147,10 @@
     <Page Include="controls\SwitchBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -255,12 +255,8 @@
     <Resource Include="icons\Folder Settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons\Folder_active.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="icons\edit.png" />
     <Resource Include="icons\export.png" />
-    <Resource Include="icons\Folder.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icons\Pages icons\Folders.png" />
@@ -269,17 +265,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icons\import.png" />
-    <Resource Include="icons\play-button.png" />
     <Resource Include="icons\plus.png" />
-    <Resource Include="icons\Profile.png" />
-    <Resource Include="icons\Profile_active.png" />
     <Resource Include="icons\remove.png" />
-    <Resource Include="icons\settings folder.png" />
-    <Resource Include="icons\settings.png" />
-    <Resource Include="icons\settings_active.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Resource Include="icons\plus_active.png" />
+    <Resource Include="icons\MenuIcons\Dark\Folders.png" />
+    <Resource Include="icons\MenuIcons\Dark\Profile.png" />
+    <Resource Include="icons\MenuIcons\Dark\Settings.png" />
+    <Resource Include="icons\MenuIcons\Folders_Active.png" />
+    <Resource Include="icons\MenuIcons\Light\Folders.png" />
+    <Resource Include="icons\MenuIcons\Light\Profile.png" />
+    <Resource Include="icons\MenuIcons\Light\Settings.png" />
+    <Resource Include="icons\MenuIcons\Profile_Active.png" />
+    <Resource Include="icons\MenuIcons\Settings_Active.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

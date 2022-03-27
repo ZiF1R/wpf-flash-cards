@@ -10,13 +10,11 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400" />
             <ColumnDefinition Width="330" />
             <ColumnDefinition Width="350" />
             <ColumnDefinition Width="200*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
             <RowDefinition Height="45" />
             <RowDefinition Height="55" />
             <RowDefinition Height="65" />
@@ -27,16 +25,14 @@
             <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
 
-        <control:AppMenu Margin="0,0,100,0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="9" />
-
         <Image
-            Grid.Column="1"
-            Grid.Row="1"
+            Grid.Column="0"
+            Grid.Row="0"
             Source="/icons/Pages icons/Profile.png"
             HorizontalAlignment="Left"/>
         <TextBlock
-            Grid.Column="1"
-            Grid.Row="1"
+            Grid.Column="0"
+            Grid.Row="0"
             FontFamily="Segoe UI"
             FontSize="26"
             Padding="55,0,0,0"
@@ -44,33 +40,33 @@
             Text="{DynamicResource Profile}"/>
 
         <Rectangle
+            Grid.Column="0"
+            Grid.Row="1"
             Height="1"
             Fill="{DynamicResource TextColor}"
-            Grid.Column="1"
-            Grid.Row="2"
             Margin="0,20,-45,0"
             VerticalAlignment="Top"/>
 
         <control:SecondaryTextInput
             Placeholder="nickname"
-            Grid.Column="1"
-            Grid.Row="3"
+            Grid.Column="0"
+            Grid.Row="2"
             VerticalAlignment="Center"
             HorizontalContentAlignment="Stretch"
             d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>
 
         <control:SecondaryTextInput
             Placeholder="last name"
-            Grid.Column="1"
-            Grid.Row="4"
+            Grid.Column="0"
+            Grid.Row="3"
             VerticalAlignment="Center"
             HorizontalContentAlignment="Stretch"
             d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>
 
         <control:SecondaryTextInput
             Placeholder="name"
-            Grid.Column="2"
-            Grid.Row="4"
+            Grid.Column="1"
+            Grid.Row="3"
             VerticalAlignment="Center"
             HorizontalContentAlignment="Stretch"
             Margin="20,0,0,0"
@@ -78,16 +74,16 @@
 
         <control:SecondaryTextInput
             Placeholder="email"
-            Grid.Column="1"
-            Grid.Row="5"
+            Grid.Column="0"
+            Grid.Row="4"
             VerticalAlignment="Center"
             HorizontalContentAlignment="Stretch"
             d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>
 
         <control:SecondaryTextInput
             Placeholder="password"
-            Grid.Column="1"
-            Grid.Row="6"
+            Grid.Column="0"
+            Grid.Row="5"
             VerticalAlignment="Center"
             HorizontalContentAlignment="Stretch"
             d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>
@@ -96,18 +92,19 @@
             Content="{DynamicResource Save}"
             Style="{StaticResource CustomButton}"
             Background="{DynamicResource Primary}"
-            Grid.Column="1"
-            Grid.Row="7"
+            Grid.Column="0"
+            Grid.Row="6"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Left"/>
 
         <Button
+            x:Name="LogOut"
             Content="{DynamicResource LogOut}"
             Style="{StaticResource CustomButton}"
             Background="{DynamicResource Danger}"
-            Grid.Column="1"
-            Grid.Row="7"
+            Grid.Column="0"
+            Grid.Row="6"
             VerticalAlignment="Bottom"
-            HorizontalAlignment="Right"/>
+            HorizontalAlignment="Right" Click="LogOut_Click"/>
     </Grid>
 </Page>

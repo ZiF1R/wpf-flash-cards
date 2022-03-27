@@ -9,48 +9,35 @@
              d:DesignHeight="140" d:DesignWidth="280">
 
     <UserControl.Resources>
-        <ResourceDictionary>
-            <Style TargetType="{x:Type Rectangle}">
-                <Setter Property="Fill" Value="{DynamicResource CardBg}" />
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Fill" Value="{DynamicResource Primary}"/>
-                    </Trigger>
-                    <EventTrigger RoutedEvent="MouseDown">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation
-                                    To="0.8"
-                                    Storyboard.TargetProperty="Opacity"
-                                    Duration="0:0:0"
-                                    FillBehavior="HoldEnd"
-                                    From="1"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="MouseUp">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation
-                                    To="1"
-                                    Storyboard.TargetProperty="Opacity"
-                                    Duration="0:0:0"
-                                    FillBehavior="HoldEnd"
-                                    From="0.8"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Style.Triggers>
-            </Style>
-            <Style TargetType="TextBlock">
-                <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=AddButtonBg}" Value="true">
-                        <Setter Property="Foreground" Value="White" />
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </ResourceDictionary>
+        <BitmapImage x:Key="PlusIcon" UriSource="/icons/plus.png" />
+        <BitmapImage x:Key="PlusIconHover" UriSource="/icons/plus_active.png" />
+        <Style TargetType="{x:Type Rectangle}">
+            <Setter Property="Fill" Value="{DynamicResource CardBg}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsMouseOver, ElementName=AddButtonGrid}" Value="true">
+                    <Setter Property="Fill" Value="{DynamicResource Primary}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsPressed, ElementName=AddButtonGrid}" Value="true">
+                    <Setter Property="Opacity" Value="0.8" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsMouseOver, ElementName=AddButtonGrid}" Value="true">
+                    <Setter Property="Foreground" Value="White" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Image">
+            <Setter Property="Source" Value="{StaticResource PlusIcon}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsMouseOver, ElementName=AddButtonGrid}" Value="true">
+                    <Setter Property="Source" Value="{StaticResource PlusIconHover}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
     
     <Grid Cursor="Hand">
@@ -66,9 +53,10 @@
             </Rectangle.Effect>
         </Rectangle>
 
+        <Button Name="AddButtonGrid" Panel.ZIndex="1" Opacity="0" />
+
         <Image
             IsEnabled="False"
-            Source="/icons/plus.png"
             Width="45"
             Height="45"
             Margin="0,0,0,10"/>

@@ -20,9 +20,12 @@ namespace course_project1.view
     /// </summary>
     public partial class FoldersPage : Page
     {
-        public FoldersPage()
+        Frame rootFrame;
+
+        public FoldersPage(Frame frame)
         {
             InitializeComponent();
+            rootFrame = frame;
         }
     }
 }
