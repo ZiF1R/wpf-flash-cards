@@ -1,41 +1,74 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style BasedOn="{StaticResource {x:Type Button}}"
-           TargetType="{x:Type Button}"
-           x:Key="CustomButton">
-        <Style.Setters>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Button
-                                x:Name="CustomButtonElement"
-                                Cursor="Hand"
-                                Content="{TemplateBinding Content}"
-                                Foreground="White"
-                                Background="{TemplateBinding Background}"
-                                FontSize="16"
-                                Padding="35,8,35,10"
-                                BorderThickness="0,0,0,0"
-                                FontFamily="Segoe UI Light">
-                                <Button.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="5"/>
-                                    </Style>
-                                </Button.Resources>
-                            </Button>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-
-            <Setter Property="Opacity" Value="1" />
-            <Setter Property="Background" Value="{Binding Background, ElementName=CustomButtonElement}" />
-        </Style.Setters>
+    <Style TargetType="Button" x:Key="PrimaryButton">
+        <Setter Property="Background" Value="{DynamicResource Primary}"/>
+        <Setter Property="Opacity" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            Width="{TemplateBinding Width}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            CornerRadius="5"
+                            Cursor="Hand"
+                            BorderThickness="1"
+                            Padding="35,8,35,10"
+                            BorderBrush="Transparent">
+                        <TextBlock
+                            Foreground="White"
+                            FontFamily="Segoe UI Light"
+                            FontSize="16">
+                            <DockPanel>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DockPanel>
+                        </TextBlock>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Opacity" Value="0.8" />
-                <Setter Property="Background" Value="{Binding Background, ElementName=CustomButtonElement}" />
+                <Setter Property="Opacity" Value="0.8"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="Button" x:Key="DangerButton">
+        <Setter Property="Background" Value="{DynamicResource Danger}"/>
+        <Setter Property="Opacity" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            Width="{TemplateBinding Width}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            CornerRadius="5"
+                            Cursor="Hand"
+                            BorderThickness="1"
+                            Padding="35,8,35,10"
+                            BorderBrush="Transparent">
+                        <TextBlock
+                            Foreground="White"
+                            FontFamily="Segoe UI Light"
+                            FontSize="16">
+                            <DockPanel>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DockPanel>
+                        </TextBlock>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.8"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1"/>
             </Trigger>
         </Style.Triggers>
     </Style>
