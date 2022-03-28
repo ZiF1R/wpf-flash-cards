@@ -28,7 +28,7 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    
+
     <Grid Name="SwitchGrid" Cursor="Hand">
         <CheckBox
             IsChecked="{Binding Switched, ElementName=SwitchUserControl}"

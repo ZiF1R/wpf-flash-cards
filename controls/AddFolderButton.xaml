@@ -9,7 +9,6 @@
              d:DesignHeight="140" d:DesignWidth="280">
 
     <UserControl.Resources>
-        <BitmapImage x:Key="PlusIcon" UriSource="/icons/plus.png" />
         <BitmapImage x:Key="PlusIconHover" UriSource="/icons/plus_active.png" />
         <Style TargetType="{x:Type Rectangle}">
             <Setter Property="Fill" Value="{DynamicResource CardBg}" />
@@ -31,10 +30,10 @@
             </Style.Triggers>
         </Style>
         <Style TargetType="Image">
-            <Setter Property="Source" Value="{StaticResource PlusIcon}" />
+            <Setter Property="Source" Value="{DynamicResource PlusIcon}" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsMouseOver, ElementName=AddButtonGrid}" Value="true">
-                    <Setter Property="Source" Value="{StaticResource PlusIconHover}" />
+                    <Setter Property="Source" Value="{DynamicResource PlusIconHover}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>

@@ -61,6 +61,7 @@
                         HorizontalAlignment="Left"/>
 
                     <control:SwitchBox
+                        control:SwitchBox.SwitchChanged="ThemeSwitch_SwitchChanged"
                         Switched="False"
                         x:Name="ThemeSwitch"
                         HorizontalAlignment="Left"

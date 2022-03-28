@@ -21,10 +21,12 @@ namespace course_project1.view
     public partial class SettingsPage : Page
     {
         Frame rootFrame;
+        private ResourceDictionary currentTheme = new ResourceDictionary();
 
         public SettingsPage(Frame frame)
         {
             InitializeComponent();
+            this.currentTheme.Source = new Uri("pack://application:,,,/theme/Light.xaml");
             rootFrame = frame;
 
             (int min, int max, int step) cardsNum = (5, 100, 5);
@@ -42,6 +44,25 @@ namespace course_project1.view
                 if (i == timeLimit.min)
                     TimeLimit.SelectedValue = i;
             }
+        }
+
+        private void ThemeSwitch_SwitchChanged(object sender, RoutedEventArgs e)
+        {
+            Uri newSource;
+            if (ThemeSwitch.Switched)
+                newSource = new Uri($"pack://application:,,,/theme/Dark.xaml");
+            else
+                newSource = new Uri($"pack://application:,,,/theme/Light.xaml");
+
+            ResourceDictionary newResource = new ResourceDictionary();
+            try
+            {
+                newResource.Source = newSource;
+                Application.Current.Resources.MergedDictionaries.Remove(currentTheme);
+                Application.Current.Resources.MergedDictionaries.Add(newResource);
+                currentTheme.Source = newSource;
+            }
+            catch { }
         }
     }
 }

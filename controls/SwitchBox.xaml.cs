@@ -50,6 +50,16 @@ namespace course_project1.controls
         private void SwitchControl_Click(object sender, RoutedEventArgs e)
         {
             this.SetValue(SwitchedProperty, SwitchControl.IsChecked);
+            RaiseEvent(new RoutedEventArgs(SwitchChangedEvent));
+        }
+
+        public static readonly RoutedEvent SwitchChangedEvent
+            = EventManager.RegisterRoutedEvent("SwitchChangedEvent", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SwitchBox));
+
+        public event RoutedEventHandler SwitchChanged
+        {
+            add { AddHandler(SwitchChangedEvent, value); }
+            remove { RemoveHandler(SwitchChangedEvent, value); }
         }
     }
 }
