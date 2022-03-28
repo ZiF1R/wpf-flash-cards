@@ -135,7 +135,7 @@
             MouseUp="GoToLogin_MouseUp"/>
 
         <Button
-            Style="{StaticResource CustomButton}"
+            Style="{StaticResource PrimaryButton}"
             Grid.Column="1"
             Grid.Row="1"
             Margin="30,0,0,30"
@@ -143,8 +143,6 @@
             Foreground="White"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Background="{DynamicResource Primary}"
-            OverridesDefaultStyle="True"
             Click="Registrate_Click"/>
     </Grid>
 </Page>

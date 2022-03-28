@@ -4,8 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:course_project1" xmlns:control="clr-namespace:course_project1.controls"
-      mc:Ignorable="d" 
-      Height="800" Width="1600"
+      mc:Ignorable="d"
+      d:Height="750" d:Width="1500"
       Title="MainPage">
 
     <Grid>
@@ -22,7 +22,7 @@
         <Rectangle
             Grid.Column="0"
             Grid.Row="0"
-            Grid.RowSpan="3"
+            Grid.RowSpan="2"
             StrokeThickness="0"
             Fill="{DynamicResource NavBg}" MinWidth="300">
             <Rectangle.Effect>
@@ -96,12 +96,11 @@
             VerticalAlignment="Bottom"
             Margin="0,0,0,30">
             <Button
-                Width="200"
                 Content="{DynamicResource ContactWithUs}"
-                Style="{StaticResource CustomButton}"
-                Background="{DynamicResource Primary}"
+                Style="{StaticResource PrimaryButton}"
                 VerticalAlignment="Bottom"
-                HorizontalAlignment="Center"/>
+                Margin="50,0,0,0"
+                HorizontalAlignment="Left"/>
 
             <TextBlock
                 HorizontalAlignment="Left"

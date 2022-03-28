@@ -90,8 +90,7 @@
 
         <Button
             Content="{DynamicResource Save}"
-            Style="{StaticResource CustomButton}"
-            Background="{DynamicResource Primary}"
+            Style="{StaticResource PrimaryButton}"
             Grid.Column="0"
             Grid.Row="6"
             VerticalAlignment="Bottom"
@@ -100,8 +99,7 @@
         <Button
             x:Name="LogOut"
             Content="{DynamicResource LogOut}"
-            Style="{StaticResource CustomButton}"
-            Background="{DynamicResource Danger}"
+            Style="{StaticResource DangerButton}"
             Grid.Column="0"
             Grid.Row="6"
             VerticalAlignment="Bottom"

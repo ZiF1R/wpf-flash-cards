@@ -13,7 +13,21 @@
     <!-- FlashCards - карточки для запоминания -->
 
     <Grid Background="{DynamicResource MainBg}">
-        <Frame Margin="0" Padding="0" BorderThickness="1" Name="MainFrame" NavigationUIVisibility="Hidden" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="750*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1500*" />
+        </Grid.RowDefinitions>
+
+        <Frame
+            Name="MainFrame"
+            Margin="0"
+            Padding="0"
+            Grid.Row="0"
+            Grid.Column="0"
+            BorderThickness="1"
+            NavigationUIVisibility="Hidden" />
 
         <ComboBox x:Name="AppLanguage"
             Width="50"
