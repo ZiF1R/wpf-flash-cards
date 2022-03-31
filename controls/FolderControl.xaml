@@ -66,8 +66,8 @@
                 Opacity="0"/>
 
             <Popup
-                IsOpen="{Binding IsChecked, ElementName=FolderSettings}"
                 Name="myPopup"
+                IsOpen="{Binding IsChecked, ElementName=FolderSettings}"
                 Placement="Bottom"
                 PlacementTarget="{Binding ElementName=FolderSettings}"
                 PopupAnimation="Slide">
@@ -102,17 +102,16 @@
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter Property="Background" Value="{DynamicResource HoverBg}" />
                                         </Trigger>
-                                        <!--<DataTrigger Binding="{Binding IsPressed, ElementName=EditOption}" Value="true">
-                                            <Setter Property="Opacity" Value="0" />
-                                        </DataTrigger>-->
                                     </Style.Triggers>
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
 
                         <TextBlock
+                            Name="RemoveFolderButton"
                             Padding="15,7,17,7"
-                            Cursor="Hand">
+                            Cursor="Hand"
+                            MouseUp="RemoveFolderButton_MouseUp">
                             <Image
                                 Source="/icons/remove.png"
                                 Width="11"

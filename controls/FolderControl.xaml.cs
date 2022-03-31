@@ -1,4 +1,5 @@
-﻿using System;
+﻿using course_project1.controls.ModalWindows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,22 @@ namespace course_project1.controls
     /// </summary>
     public partial class FolderControl : UserControl
     {
-        public FolderControl()
+        Grid MainPageGrid;
+
+        public FolderControl(
+            Grid mainPageGrid,
+            string folderName,
+            string folderCategory = "none",
+            int folderCardsCount = 0,
+            int folderMemorizedCardsCount = 0
+            )
         {
             InitializeComponent();
+            MainPageGrid = mainPageGrid;
+            FolderName = folderName;
+            FolderCategory = folderCategory;
+            FolderCardsCount = folderCardsCount;
+            FolderMemorizedCardsCount = folderMemorizedCardsCount;
         }
 
         // Folder name
@@ -103,6 +117,29 @@ namespace course_project1.controls
         {
             int val = (int)value;
             return val >= 0;
+        }
+
+        public static readonly RoutedEvent RemoveFolderEvent
+            = EventManager.RegisterRoutedEvent("RemoveFolder", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(FolderControl));
+
+        public event RoutedEventHandler RemoveFolder
+        {
+            add { AddHandler(RemoveFolderEvent, value); }
+            remove { RemoveHandler(RemoveFolderEvent, value); }
+        }
+
+        private void RemoveFolderButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            myPopup.IsOpen = false;
+
+            SimpleModalWindow modal = new SimpleModalWindow();
+            modal.SetValue(Grid.RowSpanProperty, 2);
+            modal.SetValue(Grid.ColumnSpanProperty, 3);
+            modal.SetResourceReference(SimpleModalWindow.ModalContentProperty, "RemoveFolder");
+
+            MainPageGrid.Children.Add(modal);
+            modal.CloseModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
+            modal.NegativeButtonClick += (object s, RoutedEventArgs ev) => RaiseEvent(new RoutedEventArgs(RemoveFolderEvent)); ;
         }
     }
 }

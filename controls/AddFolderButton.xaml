@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:course_project1.controls"
              mc:Ignorable="d"
-             Name="AddFolder"
+             Name="AddFolderControl"
              d:DesignHeight="140" d:DesignWidth="280">
 
     <UserControl.Resources>
@@ -52,8 +52,6 @@
             </Rectangle.Effect>
         </Rectangle>
 
-        <Button Name="AddButtonGrid" Panel.ZIndex="1" Opacity="0" />
-
         <Image
             IsEnabled="False"
             Width="45"
@@ -69,5 +67,11 @@
             FontFamily="Segoe UI Light"
             Margin="0,80,0,0"
             Text="{DynamicResource AddFolder}"/>
+
+        <Button
+            Name="AddButtonGrid"
+            Click="Button_Click"
+            Panel.ZIndex="1"
+            Opacity="0"/>
     </Grid>
 </UserControl>

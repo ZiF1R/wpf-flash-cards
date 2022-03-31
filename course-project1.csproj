@@ -93,6 +93,9 @@
     <Compile Include="controls\FolderControl.xaml.cs">
       <DependentUpon>FolderControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="controls\ModalWindows\SimpleModalWindow.xaml.cs">
+      <DependentUpon>SimpleModalWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="controls\SecondaryTextInput.xaml.cs">
       <DependentUpon>SecondaryTextInput.xaml</DependentUpon>
     </Compile>
@@ -133,6 +136,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="controls\FolderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\ModalWindows\SimpleModalWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -281,5 +288,6 @@
     <Resource Include="icons\MenuIcons\Profile_Active.png" />
     <Resource Include="icons\MenuIcons\Settings_Active.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

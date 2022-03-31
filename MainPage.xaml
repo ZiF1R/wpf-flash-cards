@@ -8,7 +8,7 @@
       d:Height="750" d:Width="1500"
       Title="MainPage">
 
-    <Grid>
+    <Grid x:Name="MainPageGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" />
             <ColumnDefinition Width="100" />

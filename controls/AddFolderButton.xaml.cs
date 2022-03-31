@@ -24,5 +24,19 @@ namespace course_project1.controls
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            RaiseEvent(new RoutedEventArgs(AddFolderEvent));
+        }
+
+        public static readonly RoutedEvent AddFolderEvent
+            = EventManager.RegisterRoutedEvent("AddFolderEvent", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(AddFolderButton));
+
+        public event RoutedEventHandler AddFolder
+        {
+            add { AddHandler(AddFolderEvent, value); }
+            remove { RemoveHandler(AddFolderEvent, value); }
+        }
     }
 }
