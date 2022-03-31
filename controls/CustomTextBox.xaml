@@ -12,7 +12,7 @@
             x:Name="InputLabel"
             Text="{Binding Placeholder, ElementName=InputControl}"
             IsHitTestVisible="False"
-            Foreground="{DynamicResource TextColor}"
+            Foreground="{DynamicResource TextColorOpacity}"
             FontSize="20"
             IsEnabled="False"
             Padding="{Binding Padding, ElementName=InputControl}"
@@ -41,6 +41,7 @@
             BorderThickness="0,0,0,1"
             Background="{x:Null}"
             UndoLimit="100"
+            MaxLength="50"
             ToolTip="{Binding Placeholder, ElementName=InputControl}"/>
     </Grid>
 </UserControl>

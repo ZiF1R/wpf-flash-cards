@@ -54,7 +54,6 @@
             Grid.Row="1"
             Margin="30,100,30,0"
             Padding="0,5,0,5"
-            BorderThickness="0,0,0,1"
             d:LayoutOverrides="HorizontalAlignment"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Stretch"/>
@@ -66,7 +65,6 @@
             Grid.Row="1"
             Margin="30,155,30,0"
             Padding="0,5,0,5"
-            BorderThickness="0,0,0,1"
             d:LayoutOverrides="HorizontalAlignment"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Stretch"/>
@@ -78,7 +76,6 @@
             Grid.Row="1"
             Margin="30,210,30,0"
             Padding="0,5,0,5"
-            BorderThickness="0,0,0,1"
             d:LayoutOverrides="HorizontalAlignment"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Stretch"/>
@@ -90,7 +87,6 @@
             Grid.Row="1"
             Margin="30,265,30,0"
             Padding="0,5,0,5"
-            BorderThickness="0,0,0,1"
             d:LayoutOverrides="HorizontalAlignment"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Stretch"/>
@@ -102,7 +98,6 @@
             Grid.Row="1"
             Margin="30,320,30,0"
             Padding="0,5,0,5"
-            BorderThickness="0,0,0,1"
             d:LayoutOverrides="HorizontalAlignment"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Stretch"/>
@@ -114,7 +109,6 @@
             Grid.Row="1"
             Margin="30,375,30,0"
             Padding="0,5,0,5"
-            BorderThickness="0,0,0,1"
             d:LayoutOverrides="HorizontalAlignment"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Stretch"/>

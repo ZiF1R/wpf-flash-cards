@@ -55,19 +55,12 @@ namespace course_project1.controls.ModalWindows
                ownerType: typeof(SimpleModalWindow),
                typeMetadata: new FrameworkPropertyMetadata(
                    defaultValue: "Modal content",
-                   flags: FrameworkPropertyMetadataOptions.AffectsMeasure),
-               validateValueCallback: new ValidateValueCallback(IsValidReading));
+                   flags: FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public string ModalContent
         {
             get => (string)GetValue(ModalContentProperty);
             set => SetValue(ModalContentProperty, value);
-        }
-
-        public static bool IsValidReading(object value)
-        {
-            string val = (string)value;
-            return val != "";
         }
 
         private void Modal_Close(object sender, RoutedEventArgs e)

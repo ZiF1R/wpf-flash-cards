@@ -55,5 +55,5 @@ CREATE TABLE CARDS (
 	CREATED_DATE datetime NOT NULL,
 	TERM varchar(50) NOT NULL,
 	TRANSLATION varchar(50) NOT NULL,
-	EXAMPLES varchar(150) default('')
+	EXAMPLES varchar(50) default('')
 );
