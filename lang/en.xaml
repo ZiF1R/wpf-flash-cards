@@ -49,4 +49,8 @@
     <v:String x:Key="FolderName">Folder name</v:String>
     <v:String x:Key="CreateFolder">Create new folder</v:String>
     <v:String x:Key="Create">Create</v:String>
+    <v:String x:Key="EditFolder">Edit folder</v:String>
+    <v:String x:Key="CreateCategory">Create new category</v:String>
+    <v:String x:Key="AddCategory">Add category</v:String>
+    <v:String x:Key="CategoryName">Category name</v:String>
 </ResourceDictionary>

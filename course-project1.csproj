@@ -93,6 +93,9 @@
     <Compile Include="controls\FolderControl.xaml.cs">
       <DependentUpon>FolderControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="controls\ModalWindows\CategoryModalWindow.xaml.cs">
+      <DependentUpon>CategoryModalWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="controls\ModalWindows\FolderModalWindow.xaml.cs">
       <DependentUpon>FolderModalWindow.xaml</DependentUpon>
     </Compile>
@@ -139,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="controls\FolderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\ModalWindows\CategoryModalWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

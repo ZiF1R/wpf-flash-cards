@@ -32,6 +32,7 @@
         <TextBox
             Height="37"
             Name="Input"
+            Text="{Binding Value, ElementName=InputControl}"
             CaretBrush="{DynamicResource TextColor}"
             Foreground="{DynamicResource TextColor}"
             TextWrapping="Wrap"
@@ -42,6 +43,7 @@
             Background="{x:Null}"
             UndoLimit="100"
             MaxLength="50"
-            ToolTip="{Binding Placeholder, ElementName=InputControl}"/>
+            ToolTip="{Binding Placeholder, ElementName=InputControl}"
+            TextChanged="Input_TextChanged"/>
     </Grid>
 </UserControl>

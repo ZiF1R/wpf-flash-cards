@@ -85,6 +85,8 @@
                     Background="{DynamicResource CardBg}">
                     <StackPanel Background="{DynamicResource CardBg}" Margin="4,0,4,0">
                         <TextBlock
+                            Name="EditFolderButton"
+                            MouseUp="EditFolderButton_MouseUp"
                             Padding="15,7,17,7"
                             Cursor="Hand">
                             <Image
@@ -152,6 +154,7 @@
             Height="1"/>
 
         <TextBlock
+            x:Name="FolderNameField"
             Cursor="Hand"
             Text="{Binding FolderName, ElementName=FolderControlElement}"
             Panel.ZIndex="1"
@@ -175,7 +178,7 @@
             <TextBlock
                 Text="{DynamicResource Category}"/>: 
             <TextBlock
-                x:Name="Category"
+                Name="FolderCategoryField"
                 Text="{Binding FolderCategory, ElementName=FolderControlElement}"/>
         </TextBlock>
 

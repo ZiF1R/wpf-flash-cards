@@ -31,12 +31,12 @@ namespace course_project1.controls
             int folderMemorizedCardsCount = 0
             )
         {
-            InitializeComponent();
             MainPageGrid = mainPageGrid;
             FolderName = folderName;
             FolderCategory = folderCategory;
             FolderCardsCount = folderCardsCount;
             FolderMemorizedCardsCount = folderMemorizedCardsCount;
+            InitializeComponent();
         }
 
         // Folder name
@@ -139,7 +139,26 @@ namespace course_project1.controls
 
             MainPageGrid.Children.Add(modal);
             modal.CloseModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
-            modal.NegativeButtonClick += (object s, RoutedEventArgs ev) => RaiseEvent(new RoutedEventArgs(RemoveFolderEvent)); ;
+            modal.NegativeButtonClick += (object s, RoutedEventArgs ev) => RaiseEvent(new RoutedEventArgs(RemoveFolderEvent));
+        }
+
+        private void EditFolderButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            myPopup.IsOpen = false;
+
+            FolderModalWindow modal = new FolderModalWindow(MainPageGrid, this.FolderNameField.Text, this.FolderCategoryField.Text);
+            modal.SetValue(Grid.RowSpanProperty, 2);
+            modal.SetValue(Grid.ColumnSpanProperty, 3);
+            modal.SetResourceReference(FolderModalWindow.ModalHeaderProperty, "EditFolder");
+            modal.SetResourceReference(FolderModalWindow.ActionButtonContentProperty, "Edit");
+
+            MainPageGrid.Children.Add(modal);
+            modal.FolderAction += (object s, RoutedEventArgs ev) =>
+            {
+                this.FolderNameField.Text = modal.FolderName;
+                this.FolderCategoryField.Text = modal.FolderCategory;
+            };
+            modal.CloseFolderModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
         }
     }
 }

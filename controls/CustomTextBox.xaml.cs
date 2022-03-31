@@ -46,5 +46,25 @@ namespace course_project1.controls
             string val = (string)value;
             return val != "";
         }
+
+        public static readonly DependencyProperty ValueProperty =
+            DependencyProperty.Register(
+               name: "Value",
+               propertyType: typeof(string),
+               ownerType: typeof(CustomTextBox),
+               typeMetadata: new FrameworkPropertyMetadata(
+                   defaultValue: "",
+                   flags: FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        public string Value
+        {
+            get => (string)GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
+        }
+
+        private void Input_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            this.Value = Input.Text;
+        }
     }
 }

@@ -33,10 +33,10 @@ namespace course_project1.view
 
             (string name, string category, int cards, int memorized)[] folders =
             {
-                ("TestFolder", null, 10, 4),
-                ("TestFolder1", null, 14, 2),
-                ("TestFolder2", null, 5, 3),
-                ("TestFolder3", null, 23, 14)
+                ("TestFolder", "none", 10, 4),
+                ("TestFolder1", "none", 14, 2),
+                ("TestFolder2", "test category", 5, 3),
+                ("TestFolder3", "none", 23, 14)
             };
 
 
@@ -44,30 +44,34 @@ namespace course_project1.view
 
             foreach(var folder in folders)
             {
-                FolderControl folderControl = new FolderControl(
-                    mainPageGrid,
-                    folder.name,
-                    folder.category,
-                    folder.cards,
-                    folder.memorized);
-
-                folderControl.Margin = new Thickness(0, 0, 40, 40);
-                folderControl.RemoveFolder += (object s, RoutedEventArgs ev) => FoldersWrap.Children.Remove(folderControl);
-                FoldersWrap.Children.Add(folderControl);
+                FoldersWrap.Children.Add(this.CreateFolder(folder.name, folder.category, folder.cards, folder.memorized));
             }
 
             /// remove loader, show rendered folders code
         }
 
+        private FolderControl CreateFolder(string name, string category, int cardsCount, int memorizedCards)
+        {
+            FolderControl folderControl = new FolderControl(MainPageGrid, name, category, cardsCount, memorizedCards);
+
+            folderControl.Margin = new Thickness(0, 0, 40, 40);
+            folderControl.RemoveFolder += (object s, RoutedEventArgs ev) => FoldersWrap.Children.Remove(folderControl);
+
+            return folderControl;
+        }
+
         private void AddFolderButton_AddFolder(object sender, RoutedEventArgs e)
         {
-            SimpleModalWindow modal = new SimpleModalWindow();
+            FolderModalWindow modal = new FolderModalWindow(MainPageGrid, "", "");
             modal.SetValue(Grid.RowSpanProperty, 2);
             modal.SetValue(Grid.ColumnSpanProperty, 3);
-            modal.SetResourceReference(SimpleModalWindow.ModalContentProperty, "RemoveFolder");
+            modal.SetResourceReference(FolderModalWindow.ModalHeaderProperty, "CreateFolder");
+            modal.SetResourceReference(FolderModalWindow.ActionButtonContentProperty, "Create");
 
             MainPageGrid.Children.Add(modal);
-            modal.CloseModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
+            modal.FolderAction += (object s, RoutedEventArgs ev) =>
+                FoldersWrap.Children.Insert(1, this.CreateFolder(modal.FolderName, modal.FolderCategory, 0, 0));
+            modal.CloseFolderModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
         }
     }
 }
