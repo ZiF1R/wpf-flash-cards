@@ -38,7 +38,7 @@ namespace course_project1.controls.ModalWindows
             defaultItem.Content = "none";
             FolderCategorySelect.Items.Add(defaultItem);
 
-            if (folderCategory != "")
+            if (folderCategory != "" && folderCategory != "none")
             {
                 ComboBoxItem item = new ComboBoxItem();
                 item.Content = this.FolderCategory;
@@ -133,7 +133,12 @@ namespace course_project1.controls.ModalWindows
             modal.SetResourceReference(FolderModalWindow.ActionButtonContentProperty, "Create");
 
             MainPageGrid.Children.Add(modal);
-            modal.AddCategory += (object s, RoutedEventArgs ev) => MessageBox.Show(modal.CategoryValue);
+            modal.AddCategory += (object s, RoutedEventArgs ev) =>
+            {
+                ComboBoxItem item = new ComboBoxItem();
+                item.Content = modal.CategoryValue;
+                FolderCategorySelect.Items.Add(item);
+            };
             modal.CloseCategoryModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
         }
     }
