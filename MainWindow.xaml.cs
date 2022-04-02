@@ -1,6 +1,7 @@
 ﻿using course_project1.view;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,27 @@ namespace course_project1
             this.Cursor = customCursor;
 
             MainFrame.Content = new LoginPage(MainFrame);
+
+
+            SqlConnectionStringBuilder connectionStringBuilder = new SqlConnectionStringBuilder(); // создание конструктора строк подключения 
+
+            connectionStringBuilder.DataSource = @"DESKTOP-LT1S3LJ\ZIF1R";
+            connectionStringBuilder.InitialCatalog = "FlashCards";
+            connectionStringBuilder.UserID = @"DESKTOP-LT1S3LJ\HP";
+            connectionStringBuilder.IntegratedSecurity = true;
+            connectionStringBuilder.Password = "";
+            using (SqlConnection connection = new SqlConnection(connectionStringBuilder.ConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+
+            }
         }
 
         private void AppLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
