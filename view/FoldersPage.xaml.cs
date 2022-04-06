@@ -22,12 +22,12 @@ namespace course_project1.view
     /// </summary>
     public partial class FoldersPage : Page
     {
-        Frame rootFrame;
+        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+        Frame rootFrame = mainWindow.MainFrame;
         Grid MainPageGrid;
 
-        public FoldersPage(Frame frame, Grid mainPageGrid)
+        public FoldersPage(Grid mainPageGrid)
         {
-            rootFrame = frame;
             MainPageGrid = mainPageGrid;
             InitializeComponent();
 

@@ -126,9 +126,13 @@
     <Compile Include="controls\SwitchBox.xaml.cs">
       <DependentUpon>SwitchBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="storage\DataStorage.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="storage\Folder.cs" />
+    <Compile Include="storage\Settings.cs" />
+    <Compile Include="storage\User.cs" />
     <Compile Include="view\FoldersPage.xaml.cs">
       <DependentUpon>FoldersPage.xaml</DependentUpon>
     </Compile>

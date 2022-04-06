@@ -20,14 +20,14 @@ namespace course_project1.view
     /// </summary>
     public partial class SettingsPage : Page
     {
-        Frame rootFrame;
+        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+        Frame rootFrame = mainWindow.MainFrame;
         private ResourceDictionary currentTheme = new ResourceDictionary();
 
-        public SettingsPage(Frame frame)
+        public SettingsPage()
         {
             InitializeComponent();
             this.currentTheme.Source = new Uri("pack://application:,,,/theme/Light.xaml");
-            rootFrame = frame;
 
             (int min, int max, int step) cardsNum = (5, 100, 5);
             for (int i = cardsNum.min; i < cardsNum.max + 1; i += cardsNum.step)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,17 +21,19 @@ namespace course_project1.view
     /// </summary>
     public partial class ProfilePage : Page
     {
-        Frame rootFrame;
+        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+        Frame rootFrame = mainWindow.MainFrame;
+        SqlConnection CurrentConnection;
 
-        public ProfilePage(Frame frame)
+        public ProfilePage(SqlConnection currentConnection)
         {
+            CurrentConnection = currentConnection;
             InitializeComponent();
-            rootFrame = frame;
         }
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-            this.rootFrame.Content = new LoginPage(this.rootFrame);
+            this.rootFrame.Content = new LoginPage(CurrentConnection);
         }
     }
 }

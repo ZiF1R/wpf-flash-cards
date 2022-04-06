@@ -1,6 +1,7 @@
 ﻿using course_project1.view;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -22,13 +23,15 @@ namespace course_project1
     /// </summary>
     public partial class MainPage : Page
     {
-        Frame rootFrame;
+        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+        Frame rootFrame = mainWindow.MainFrame;
+        private SqlConnection CurrentConnection;
 
-        public MainPage(Frame frame)
+        public MainPage(SqlConnection currentConnection)
         {
+            this.CurrentConnection = currentConnection;
             InitializeComponent();
-            this.rootFrame = frame;
-            SecondFrame.Content = new ProfilePage(this.rootFrame);
+            SecondFrame.Content = new ProfilePage(CurrentConnection);
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -39,17 +42,17 @@ namespace course_project1
 
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
-            SecondFrame.Content = new ProfilePage(this.rootFrame);
+            SecondFrame.Content = new ProfilePage(CurrentConnection);
         }
 
         private void Folders_Click(object sender, RoutedEventArgs e)
         {
-            SecondFrame.Content = new FoldersPage(this.rootFrame, MainPageGrid);
+            SecondFrame.Content = new FoldersPage(MainPageGrid);
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            SecondFrame.Content = new SettingsPage(this.rootFrame);
+            SecondFrame.Content = new SettingsPage();
         }
     }
 }

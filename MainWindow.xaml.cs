@@ -25,6 +25,8 @@ namespace course_project1
     public partial class MainWindow : Window
     {
         private ResourceDictionary currentLang = new ResourceDictionary();
+        private SqlConnection CurrentConnection;
+        public DataStorage Storage = new DataStorage();
 
         public MainWindow()
         {
@@ -34,27 +36,28 @@ namespace course_project1
             var customCursor = new Cursor(sri.Stream);
             this.Cursor = customCursor;
 
-            MainFrame.Content = new LoginPage(MainFrame);
+            this.DataBaseConection();
+            MainFrame.Content = new LoginPage(CurrentConnection);
+        }
 
-
-            SqlConnectionStringBuilder connectionStringBuilder = new SqlConnectionStringBuilder(); // создание конструктора строк подключения 
+        private void DataBaseConection()
+        {
+            SqlConnectionStringBuilder connectionStringBuilder = new SqlConnectionStringBuilder();
 
             connectionStringBuilder.DataSource = @"DESKTOP-LT1S3LJ\ZIF1R";
             connectionStringBuilder.InitialCatalog = "FlashCards";
             connectionStringBuilder.UserID = @"DESKTOP-LT1S3LJ\HP";
             connectionStringBuilder.IntegratedSecurity = true;
             connectionStringBuilder.Password = "";
-            using (SqlConnection connection = new SqlConnection(connectionStringBuilder.ConnectionString))
-            {
-                try
-                {
-                    connection.Open();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString());
-                }
 
+            this.CurrentConnection = new SqlConnection(connectionStringBuilder.ConnectionString);
+            try
+            {
+                this.CurrentConnection.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
             }
         }
 
