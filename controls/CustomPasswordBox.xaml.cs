@@ -35,6 +35,7 @@ namespace course_project1.controls
             {
                 PasswordInputLabel.Visibility = Visibility.Hidden;
             }
+            this.Value = PasswordInput.Password;
         }
 
         public static readonly DependencyProperty PlaceholderProperty =
@@ -57,6 +58,21 @@ namespace course_project1.controls
         {
             string val = (string)value;
             return val != "";
+        }
+
+        public static readonly DependencyProperty ValueProperty =
+            DependencyProperty.Register(
+               name: "Value",
+               propertyType: typeof(string),
+               ownerType: typeof(CustomPasswordBox),
+               typeMetadata: new FrameworkPropertyMetadata(
+                   defaultValue: "",
+                   flags: FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        public string Value
+        {
+            get => (string)GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
         }
     }
 }
