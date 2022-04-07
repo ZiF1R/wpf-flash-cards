@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,6 +25,7 @@ namespace course_project1.view
         static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
         Frame rootFrame = mainWindow.MainFrame;
         SqlConnection CurrentConnection = mainWindow.CurrentConnection;
+        DataStorage Storage = mainWindow.Storage;
 
         public LoginPage()
         {
@@ -32,35 +34,28 @@ namespace course_project1.view
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            SqlCommand loginCommand = CurrentConnection.CreateCommand();
-            loginCommand.CommandText =
-                $"SELECT * " +
-                $"FROM USERS " +
-                $"WHERE USERS.EMAIL = '{EmailInput.Value.Trim()}' AND USERS.PASS = '{PasswordInput.Value.Trim()}'";
-            SqlDataReader loginCommandReader = loginCommand.ExecuteReader();
+            EmailInput.Value = EmailInput.Value.Trim();
+            PasswordInput.Value = PasswordInput.Value.Trim();
 
-            bool loginSuccess = loginCommandReader.Read();
-            while (loginCommandReader.Read())
+            if (EmailInput.Value == "" || PasswordInput.Value == "")
             {
-                int uid = loginCommandReader.GetInt32(0);
-                string nickname = loginCommandReader.GetString(1);
-                string name = loginCommandReader.GetString(2);
-                string username = loginCommandReader.GetString(3);
-                string email = loginCommandReader.GetString(4);
-                string password = loginCommandReader.GetString(5);
-            }
-            loginCommandReader.Close();
-
-            if (loginSuccess)
-            {
-                NavigationService.Navigate(new MainPage());
-            }
-            else
-            {
-                MessageBox.Show("Login or password wrong!", "Connection error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Заполните все поля!");
+                return;
             }
 
-            /// *
+            if (!Regex.IsMatch(EmailInput.Value, @"([\w\d-_]+)\@([\w\d]+)\.(\w+)"))
+            {
+                MessageBox.Show("Email-адрес имеет не правильный формат!");
+                return;
+            }
+
+            bool isLoginSuccess = Storage.user.LoadUser(EmailInput.Value, PasswordInput.Value, this.CurrentConnection);
+            if (!isLoginSuccess)
+            {
+                MessageBox.Show("Неправильный email-адрес или пороль!");
+                return;
+            }
+
             NavigationService.Navigate(new MainPage());
         }
 

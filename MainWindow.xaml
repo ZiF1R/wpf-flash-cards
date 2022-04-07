@@ -7,7 +7,7 @@
         xmlns:control="clr-namespace:course_project1.controls"
         mc:Ignorable="d"
         Left="10" Top="10"
-        Title="MainWindow" Height="750" Width="1500" Icon="/logo.png">
+        Title="MainWindow" Height="750" Width="1500" Icon="/logo.png" Closing="Window_Closing">
 
     <!-- Лингвистическое приложение FlashCards -->
     <!-- FlashCards - карточки для запоминания -->

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using course_project1.storage;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,6 +26,7 @@ namespace course_project1.view
         static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
         Frame rootFrame = mainWindow.MainFrame;
         SqlConnection CurrentConnection = mainWindow.CurrentConnection;
+        DataStorage Storage = mainWindow.Storage;
 
         public RegistrationPage()
         {
@@ -32,56 +35,73 @@ namespace course_project1.view
 
         private void Registrate_Click(object sender, RoutedEventArgs e)
         {
-            SqlCommand registrationCommand = CurrentConnection.CreateCommand();
-            registrationCommand.CommandText =
-                $"SELECT * " +
-                $"FROM USERS " +
-                $"WHERE USERS.EMAIL = '{EmailInput.Value.Trim()}'";
-            SqlDataReader registrationCommandReader = registrationCommand.ExecuteReader();
+            bool isValid = ValidateForm();
+            if (!isValid) return;
 
-            bool isUniqueEmail = !registrationCommandReader.Read();
-            registrationCommandReader.Close();
-
-            if (isUniqueEmail)
+            try
             {
-                /// * additional validation for each input
-
-                NicknameInput.Value = NicknameInput.Value.Trim();
-                SurnameInput.Value = SurnameInput.Value.Trim();
-                NameInput.Value = NameInput.Value.Trim();
-                EmailInput.Value = EmailInput.Value.Trim();
-                PasswordInput.Value = PasswordInput.Value.Trim();
-                ConfirmPasswordInput.Value = ConfirmPasswordInput.Value.Trim();
-
-                if (PasswordInput.Value == ConfirmPasswordInput.Value)
-                {
-                    registrationCommand.CommandText =
-                        "INSERT INTO USERS VALUES" +
-                        $"('{NicknameInput.Value}', '{SurnameInput.Value}', '{NameInput.Value}', '{EmailInput.Value}', '{PasswordInput.Value}')";
-                    try
-                    {
-                        registrationCommandReader = registrationCommand.ExecuteReader();
-                        NavigationService.Navigate(new LoginPage());
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Password value and confirm password value must be equal!");
-                }
+                Storage.user = new User(
+                    NicknameInput.Value,
+                    SurnameInput.Value,
+                    NameInput.Value,
+                    EmailInput.Value,
+                    PasswordInput.Value,
+                    CurrentConnection
+                );
+                NavigationService.Navigate(new LoginPage());
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("User with this email already exist!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message);
             }
+        }
+
+        private bool ValidateForm()
+        {
+            NicknameInput.Value = NicknameInput.Value.Trim();
+            SurnameInput.Value = SurnameInput.Value.Trim();
+            NameInput.Value = NameInput.Value.Trim();
+            EmailInput.Value = EmailInput.Value.Trim();
+            PasswordInput.Value = PasswordInput.Value.Trim();
+            ConfirmPasswordInput.Value = ConfirmPasswordInput.Value.Trim();
+
+            if (
+                NicknameInput.Value.Length == 0 ||
+                SurnameInput.Value.Length == 0 ||
+                NameInput.Value.Length == 0 ||
+                EmailInput.Value.Length == 0 ||
+                PasswordInput.Value.Length == 0
+            )
+            {
+                MessageBox.Show("Все поля должны быть заполнены!");
+                return false;
+            }
+
+            if (!Regex.IsMatch(EmailInput.Value, @"([\w\d-_]+)\@([\w\d]+)\.(\w+)"))
+            {
+                MessageBox.Show("Неправильный формат email-адреса. " +
+                    "Email-адрес может содержать только цифры, буквы, а также знак подчеркивания и тире!");
+                return false;
+            }
+
+            if (!Regex.IsMatch(PasswordInput.Value, @"([\w\d-_]){6,}"))
+            {
+                MessageBox.Show("Длина пороля должена быть не менее 6 символов. " +
+                    "Пороль может содержать только цифры, буквы, а также знак подчеркивания и тире!");
+                return false;
+            }
+
+            if (PasswordInput.Value != ConfirmPasswordInput.Value)
+            {
+                MessageBox.Show("Подтвердите пороль!");
+                return false;
+            }
+
+            return true;
         }
 
         private void GoToLogin_MouseUp(object sender, MouseButtonEventArgs e)
         {
-
             NavigationService.Navigate(new LoginPage());
         }
     }

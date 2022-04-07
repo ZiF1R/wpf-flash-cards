@@ -11,8 +11,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="330" />
-            <ColumnDefinition Width="350" />
-            <ColumnDefinition Width="200*" />
+            <ColumnDefinition Width="500*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="45" />
@@ -48,7 +47,8 @@
             VerticalAlignment="Top"/>
 
         <control:SecondaryTextInput
-            Placeholder="nickname"
+            x:Name="NicknameInput"
+            ToolTip="{DynamicResource Nickname}"
             Grid.Column="0"
             Grid.Row="2"
             VerticalAlignment="Center"
@@ -56,7 +56,8 @@
             d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>
 
         <control:SecondaryTextInput
-            Placeholder="last name"
+            x:Name="SurnameInput"
+            ToolTip="{DynamicResource LastName}"
             Grid.Column="0"
             Grid.Row="3"
             VerticalAlignment="Center"
@@ -64,16 +65,8 @@
             d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>
 
         <control:SecondaryTextInput
-            Placeholder="name"
-            Grid.Column="1"
-            Grid.Row="3"
-            VerticalAlignment="Center"
-            HorizontalContentAlignment="Stretch"
-            Margin="20,0,0,0"
-            d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>
-
-        <control:SecondaryTextInput
-            Placeholder="email"
+            x:Name="NameInput"
+            ToolTip="{DynamicResource Name}"
             Grid.Column="0"
             Grid.Row="4"
             VerticalAlignment="Center"
@@ -81,20 +74,31 @@
             d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>
 
         <control:SecondaryTextInput
-            Placeholder="password"
+            x:Name="EmailInput"
+            ToolTip="{DynamicResource Email}"
             Grid.Column="0"
             Grid.Row="5"
             VerticalAlignment="Center"
             HorizontalContentAlignment="Stretch"
             d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>
 
+        <!--<control:SecondaryTextInput
+            Placeholder="password"
+            Grid.Column="0"
+            Grid.Row="5"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Stretch"
+            d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>-->
+
         <Button
+            x:Name="SaveChanges"
             Content="{DynamicResource Save}"
             Style="{StaticResource PrimaryButton}"
             Grid.Column="0"
             Grid.Row="6"
             VerticalAlignment="Bottom"
-            HorizontalAlignment="Left"/>
+            HorizontalAlignment="Left"
+            Click="SaveChanges_Click"/>
 
         <Button
             x:Name="LogOut"

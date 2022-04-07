@@ -48,5 +48,10 @@ namespace course_project1.storage
             reviewCardsCount = 5;
             reviewTimeLimit = 0;
         }
+
+        public void LoadSettings(User user)
+        {
+            // **get user settings**
+        }
     }
 }

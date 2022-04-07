@@ -26,7 +26,7 @@ namespace course_project1
     {
         private ResourceDictionary currentLang = new ResourceDictionary();
         public SqlConnection CurrentConnection;
-        //public DataStorage Storage = new DataStorage();
+        public DataStorage Storage;
 
         public MainWindow()
         {
@@ -37,6 +37,7 @@ namespace course_project1
             this.Cursor = customCursor;
 
             this.DataBaseConection();
+            Storage = new DataStorage();
             MainFrame.Content = new LoginPage();
         }
 
@@ -58,6 +59,7 @@ namespace course_project1
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
+                this.CurrentConnection.Close();
             }
         }
 
@@ -75,6 +77,11 @@ namespace course_project1
                 currentLang.Source = newSource;
             }
             catch { }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.CurrentConnection.Close();
         }
     }
 }
