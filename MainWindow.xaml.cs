@@ -25,8 +25,8 @@ namespace course_project1
     public partial class MainWindow : Window
     {
         private ResourceDictionary currentLang = new ResourceDictionary();
-        private SqlConnection CurrentConnection;
-        public DataStorage Storage = new DataStorage();
+        public SqlConnection CurrentConnection;
+        //public DataStorage Storage = new DataStorage();
 
         public MainWindow()
         {
@@ -37,7 +37,7 @@ namespace course_project1
             this.Cursor = customCursor;
 
             this.DataBaseConection();
-            MainFrame.Content = new LoginPage(CurrentConnection);
+            MainFrame.Content = new LoginPage();
         }
 
         private void DataBaseConection()

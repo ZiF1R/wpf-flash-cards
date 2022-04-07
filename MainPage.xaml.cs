@@ -25,13 +25,12 @@ namespace course_project1
     {
         static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
         Frame rootFrame = mainWindow.MainFrame;
-        private SqlConnection CurrentConnection;
+        SqlConnection CurrentConnection = mainWindow.CurrentConnection;
 
-        public MainPage(SqlConnection currentConnection)
+        public MainPage()
         {
-            this.CurrentConnection = currentConnection;
             InitializeComponent();
-            SecondFrame.Content = new ProfilePage(CurrentConnection);
+            SecondFrame.Content = new ProfilePage();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -42,7 +41,7 @@ namespace course_project1
 
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
-            SecondFrame.Content = new ProfilePage(CurrentConnection);
+            SecondFrame.Content = new ProfilePage();
         }
 
         private void Folders_Click(object sender, RoutedEventArgs e)

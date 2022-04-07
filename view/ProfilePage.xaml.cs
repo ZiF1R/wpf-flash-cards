@@ -23,17 +23,16 @@ namespace course_project1.view
     {
         static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
         Frame rootFrame = mainWindow.MainFrame;
-        SqlConnection CurrentConnection;
+        SqlConnection CurrentConnection = mainWindow.CurrentConnection;
 
-        public ProfilePage(SqlConnection currentConnection)
+        public ProfilePage()
         {
-            CurrentConnection = currentConnection;
             InitializeComponent();
         }
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-            this.rootFrame.Content = new LoginPage(CurrentConnection);
+            this.rootFrame.Content = new LoginPage();
         }
     }
 }

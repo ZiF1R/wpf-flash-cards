@@ -49,6 +49,7 @@
 
         <!-- Email input -->
         <control:CustomTextBox
+            x:Name="EmailInput"
             Placeholder="{DynamicResource Email}"
             Grid.Column="1"
             Grid.Row="1"
@@ -60,6 +61,7 @@
 
         <!-- Password input -->
         <control:CustomPasswordBox
+            x:Name="PasswordInput"
             Placeholder="{DynamicResource Password}"
             Grid.Column="1"
             Grid.Row="1"

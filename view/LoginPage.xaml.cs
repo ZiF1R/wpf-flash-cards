@@ -21,22 +21,52 @@ namespace course_project1.view
     /// </summary>
     public partial class LoginPage : Page
     {
-        Frame rootFrame;
+        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+        Frame rootFrame = mainWindow.MainFrame;
+        SqlConnection CurrentConnection = mainWindow.CurrentConnection;
 
-        public LoginPage(Frame frame)
+        public LoginPage()
         {
             InitializeComponent();
-            this.rootFrame = frame;
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MainPage(this.rootFrame));
+            SqlCommand loginCommand = CurrentConnection.CreateCommand();
+            loginCommand.CommandText =
+                $"SELECT * " +
+                $"FROM USERS " +
+                $"WHERE USERS.EMAIL = '{EmailInput.Value.Trim()}' AND USERS.PASS = '{PasswordInput.Value.Trim()}'";
+            SqlDataReader loginCommandReader = loginCommand.ExecuteReader();
+
+            bool loginSuccess = loginCommandReader.Read();
+            while (loginCommandReader.Read())
+            {
+                int uid = loginCommandReader.GetInt32(0);
+                string nickname = loginCommandReader.GetString(1);
+                string name = loginCommandReader.GetString(2);
+                string username = loginCommandReader.GetString(3);
+                string email = loginCommandReader.GetString(4);
+                string password = loginCommandReader.GetString(5);
+            }
+            loginCommandReader.Close();
+
+            if (loginSuccess)
+            {
+                NavigationService.Navigate(new MainPage());
+            }
+            else
+            {
+                MessageBox.Show("Login or password wrong!", "Connection error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            /// *
+            NavigationService.Navigate(new MainPage());
         }
 
         private void GoToRegistration_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new RegistrationPage(this.rootFrame));
+            NavigationService.Navigate(new RegistrationPage());
         }
     }
 }

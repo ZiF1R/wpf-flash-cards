@@ -49,6 +49,7 @@
 
         <!-- Nickname input -->
         <control:CustomTextBox
+            x:Name="NicknameInput"
             Placeholder="{DynamicResource Nickname}"
             Grid.Column="1"
             Grid.Row="1"
@@ -60,6 +61,7 @@
 
         <!-- Last name input -->
         <control:CustomTextBox
+            x:Name="SurnameInput"
             Placeholder="{DynamicResource LastName}"
             Grid.Column="1"
             Grid.Row="1"
@@ -71,6 +73,7 @@
 
         <!-- Name input -->
         <control:CustomTextBox
+            x:Name="NameInput"
             Placeholder="{DynamicResource Name}"
             Grid.Column="1"
             Grid.Row="1"
@@ -82,6 +85,7 @@
 
         <!-- Email input -->
         <control:CustomTextBox
+            x:Name="EmailInput"
             Placeholder="{DynamicResource Email}"
             Grid.Column="1"
             Grid.Row="1"
@@ -93,6 +97,7 @@
 
         <!-- Password input -->
         <control:CustomPasswordBox
+            x:Name="PasswordInput"
             Placeholder="{DynamicResource Password}"
             Grid.Column="1"
             Grid.Row="1"
@@ -104,6 +109,7 @@
 
         <!-- Confirm password input -->
         <control:CustomPasswordBox
+            x:Name="ConfirmPasswordInput"
             Placeholder="{DynamicResource ConfirmPassword}"
             Grid.Column="1"
             Grid.Row="1"

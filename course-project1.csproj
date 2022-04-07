@@ -126,6 +126,7 @@
     <Compile Include="controls\SwitchBox.xaml.cs">
       <DependentUpon>SwitchBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="storage\Card.cs" />
     <Compile Include="storage\DataStorage.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
