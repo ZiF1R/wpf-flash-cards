@@ -403,10 +403,6 @@
             HorizontalContentAlignment="Center"
             SelectionChanged="AppLanguage_SelectionChanged"
             BorderThickness="0"
-            Background="Transparent">
-            <ComboBoxItem IsSelected="True">EN</ComboBoxItem>
-            <ComboBoxItem>RU</ComboBoxItem>
-            <ComboBoxItem>JP</ComboBoxItem>
-        </ComboBox>
+            Background="Transparent"/>
     </Grid>
 </Window>

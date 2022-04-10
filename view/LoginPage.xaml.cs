@@ -56,6 +56,11 @@ namespace course_project1.view
                 return;
             }
 
+            // **load folders**
+            // **load categories**
+            Storage.settings.LoadSettings(Storage.user.Uid, CurrentConnection);
+            mainWindow.AppLanguage.SelectedIndex = mainWindow.Storage.settings.currentLangId - 1;
+
             NavigationService.Navigate(new MainPage());
         }
 

@@ -61,9 +61,9 @@
                         HorizontalAlignment="Left"/>
 
                     <control:SwitchBox
-                        control:SwitchBox.SwitchChanged="ThemeSwitch_SwitchChanged"
-                        Switched="False"
                         x:Name="ThemeSwitch"
+                        SwitchChanged="ThemeSwitch_SwitchChanged"
+                        Switched="False"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Margin="70,15,0,0"/>
@@ -95,7 +95,8 @@
                         Height="30"
                         Margin="70,15,0,0"
                         VerticalContentAlignment="Center"
-                        HorizontalContentAlignment="Center"/>
+                        HorizontalContentAlignment="Center"
+                        SelectionChanged="CardsNumber_SelectionChanged"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
@@ -104,6 +105,8 @@
                         Description="{DynamicResource ReversedReviewDescr}"/>
 
                     <control:SwitchBox
+                        x:Name="ReviewSwitch"
+                        SwitchChanged="ReviewSwitch_SwitchChanged"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Margin="70,15,0,0"/>
@@ -116,6 +119,7 @@
 
                     <ComboBox
                         Name="TimeLimit"
+                        SelectionChanged="TimeLimit_SelectionChanged"
                         Grid.Column="2"
                         Grid.Row="0"
                         Width="50"

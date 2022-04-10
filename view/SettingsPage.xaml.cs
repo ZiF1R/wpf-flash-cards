@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,18 +23,22 @@ namespace course_project1.view
     {
         static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
         Frame rootFrame = mainWindow.MainFrame;
-        private ResourceDictionary currentTheme = new ResourceDictionary();
+        SqlConnection CurrentConnection = mainWindow.CurrentConnection;
+        DataStorage Storage = mainWindow.Storage;
 
         public SettingsPage()
         {
             InitializeComponent();
-            this.currentTheme.Source = new Uri("pack://application:,,,/theme/Light.xaml");
+            ApplySettings();
+        }
 
+        private void ApplySettings()
+        {
             (int min, int max, int step) cardsNum = (5, 100, 5);
             for (int i = cardsNum.min; i < cardsNum.max + 1; i += cardsNum.step)
             {
                 CardsNumber.Items.Add(i);
-                if (i == cardsNum.min)
+                if (i == Storage.settings.ReviewCardsLimit)
                     CardsNumber.SelectedValue = i;
             }
 
@@ -41,28 +46,55 @@ namespace course_project1.view
             for (int i = timeLimit.min; i < timeLimit.max + 1; i += timeLimit.step)
             {
                 TimeLimit.Items.Add(i);
-                if (i == timeLimit.min)
+                if (i == Storage.settings.ReviewTimeLimit)
                     TimeLimit.SelectedValue = i;
             }
+
+            ReviewSwitch.Switched = Storage.settings.isReviewSwitched;
+            ThemeSwitch.Switched = Storage.settings.currentThemeId != 1;
         }
 
         private void ThemeSwitch_SwitchChanged(object sender, RoutedEventArgs e)
         {
-            Uri newSource;
             if (ThemeSwitch.Switched)
-                newSource = new Uri($"pack://application:,,,/theme/Dark.xaml");
+                Storage.settings.ChangeAppTheme(2, CurrentConnection);
             else
-                newSource = new Uri($"pack://application:,,,/theme/Light.xaml");
+                Storage.settings.ChangeAppTheme(1, CurrentConnection);
+        }
 
-            ResourceDictionary newResource = new ResourceDictionary();
+        private void ReviewSwitch_SwitchChanged(object sender, RoutedEventArgs e)
+        {
             try
             {
-                newResource.Source = newSource;
-                Application.Current.Resources.MergedDictionaries.Remove(currentTheme);
-                Application.Current.Resources.MergedDictionaries.Add(newResource);
-                currentTheme.Source = newSource;
+                Storage.settings.ChangeReviewSwitched(ReviewSwitch.Switched, CurrentConnection);
             }
             catch { }
+        }
+
+        private void CardsNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (CardsNumber.Text != "")
+                    Storage.settings.ChangeCardsLimit(Convert.ToInt32(CardsNumber.SelectedItem), CurrentConnection);
+            }
+            catch
+            {
+                MessageBox.Show("Cannot set cards limit!");
+            }
+        }
+
+        private void TimeLimit_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (TimeLimit.Text != "")
+                    Storage.settings.ChangeTimeLimit(Convert.ToInt32(CardsNumber.SelectedItem), CurrentConnection);
+            }
+            catch
+            {
+                MessageBox.Show("Cannot set time limit!");
+            }
         }
     }
 }

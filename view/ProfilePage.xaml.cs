@@ -38,7 +38,11 @@ namespace course_project1.view
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-            this.Storage = new DataStorage();
+            Storage.settings.SetAppTheme(Storage.settings.GetThemeName(1, CurrentConnection));
+            Storage.settings.SetAppLang(Storage.settings.GetLangName(1, CurrentConnection));
+            mainWindow.Storage = new DataStorage();
+            mainWindow.AppLanguage.SelectedIndex = 0;
+
             this.rootFrame.Content = new LoginPage();
         }
 

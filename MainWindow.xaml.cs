@@ -24,21 +24,47 @@ namespace course_project1
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ResourceDictionary currentLang = new ResourceDictionary();
         public SqlConnection CurrentConnection;
         public DataStorage Storage;
 
         public MainWindow()
         {
             InitializeComponent();
-            this.currentLang.Source = new Uri("pack://application:,,,/lang/en.xaml");
             var sri = Application.GetResourceStream(new Uri("pack://application:,,,/icons/cursor.cur", UriKind.RelativeOrAbsolute));
-            var customCursor = new Cursor(sri.Stream);
-            this.Cursor = customCursor;
+            this.Cursor = new Cursor(sri.Stream);
 
             this.DataBaseConection();
             Storage = new DataStorage();
+            LoadLangs();
             MainFrame.Content = new LoginPage();
+        }
+
+        private void LoadLangs()
+        {
+            SqlCommand command = CurrentConnection.CreateCommand();
+            command.CommandText =
+                "SELECT LANG FROM LANGS ORDER BY LANG_ID";
+
+            SqlDataReader commandReader = command.ExecuteReader();
+            if (!commandReader.HasRows)
+            {
+                commandReader.Close();
+                MessageBox.Show("Cannot load langs!");
+                return;
+            };
+
+            int langNum = 1;
+            while (commandReader.Read())
+            {
+                string lang = commandReader.GetString(0);
+                ComboBoxItem item = new ComboBoxItem();
+                item.Content = lang;
+                if (langNum == Storage.settings.currentLangId)
+                    item.IsSelected = true;
+                AppLanguage.Items.Add(item);
+                langNum++;
+            }
+            commandReader.Close();
         }
 
         private void DataBaseConection()
@@ -65,18 +91,26 @@ namespace course_project1
 
         private void AppLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string lang = Regex.Replace(AppLanguage.SelectedItem.ToString(), @".*: ", "").ToLower();
-            Uri newSource = new Uri($"pack://application:,,,/lang/{lang}.xaml");
-            ResourceDictionary newResource = new ResourceDictionary();
-
-            try
+            if (Storage.user.Email != "")
             {
-                newResource.Source = newSource;
-                Application.Current.Resources.MergedDictionaries.Remove(currentLang);
-                Application.Current.Resources.MergedDictionaries.Add(newResource);
-                currentLang.Source = newSource;
+                Storage.settings.ChangeAppLang(AppLanguage.SelectedIndex + 1, CurrentConnection);
+                return;
             }
-            catch { }
+            else
+            {
+                string lang = Regex.Replace(AppLanguage.SelectedItem.ToString(), @".*: ", "").ToLower();
+                Uri newSource = new Uri($"pack://application:,,,/lang/{lang}.xaml");
+                ResourceDictionary newResource = new ResourceDictionary();
+
+                try
+                {
+                    newResource.Source = newSource;
+                    Application.Current.Resources.MergedDictionaries.Remove(Storage.settings.currentLang);
+                    Application.Current.Resources.MergedDictionaries.Add(newResource);
+                    Storage.settings.currentLang.Source = newSource;
+                }
+                catch { }
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

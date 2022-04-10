@@ -5,11 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Security.Cryptography;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace course_project1.storage
 {
     public class User
     {
+        private int uid;
         public string nickname;
         public string surname;
         public string name;
@@ -51,6 +55,11 @@ namespace course_project1.storage
             get => email;
         }
 
+        public int Uid
+        {
+            get => uid;
+        }
+
         public User()
         {
             nickname = "";
@@ -71,7 +80,11 @@ namespace course_project1.storage
             this.email = email;
             Password = password;
 
+            // password encription
+
             InsertUser(connection);
+            LoadUser(this.email, Password, connection);
+            ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.settings.CreateUserSettings(Uid, connection);
         }
 
         public bool LoadUser(string email, string password, SqlConnection connection)
@@ -90,16 +103,29 @@ namespace course_project1.storage
             };
 
             loginCommandReader.Read();
-            string nickname = loginCommandReader.GetString(1);
-            string surname = loginCommandReader.GetString(2);
-            string name = loginCommandReader.GetString(3);
-            loginCommandReader.Close();
+            try
+            {
+                int id = loginCommandReader.GetInt32(0);
+                string nickname = loginCommandReader.GetString(1);
+                string surname = loginCommandReader.GetString(2);
+                string name = loginCommandReader.GetString(3);
 
-            Nickname = nickname;
-            Surname = surname;
-            Name = name;
-            this.email = email;
-            Password = password;
+                this.uid = id;
+                Nickname = nickname;
+                Surname = surname;
+                Name = name;
+                this.email = email;
+                Password = password;
+            }
+            catch
+            {
+                MessageBox.Show("User loading error!");
+                return false;
+            }
+            finally
+            {
+                loginCommandReader.Close();
+            }
 
             return true;
         }
@@ -125,15 +151,14 @@ namespace course_project1.storage
             command.CommandText =
                 "INSERT INTO USERS VALUES" +
                 $"('{nickname}', '{surname}', '{name}', '{email}', '{Password}')";
-            SqlDataReader commandReader = command.ExecuteReader();
             try
             {
+                SqlDataReader commandReader = command.ExecuteReader();
                 commandReader.Close();
             }
             catch
             {
                 MessageBox.Show("User insert error!");
-                commandReader.Close();
             }
         }
 

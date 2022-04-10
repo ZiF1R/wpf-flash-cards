@@ -12,5 +12,6 @@
                 <ResourceDictionary Source="/lang/en.xaml"/>
                 <ResourceDictionary Source="/theme/Light.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>    </Application.Resources>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>
