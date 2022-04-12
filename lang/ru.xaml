@@ -22,8 +22,9 @@
     <v:String x:Key="PrivacyPolicy">Политика конфиденциальности</v:String>
     <v:String x:Key="TermsConditions">Условия и Положения</v:String>
     <v:String x:Key="AddFolder">Добавить новую папку</v:String>
+    <v:String x:Key="AddCard">Добавить новую карточку</v:String>
     <v:String x:Key="Category">Категория</v:String>
-    <v:String x:Key="Memorized">запомнено</v:String>
+    <v:String x:Key="memorized">запомнено</v:String>
     <v:String x:Key="Added">Добавлено</v:String>
     <v:String x:Key="General">Общие</v:String>
     <v:String x:Key="Review">Тренировка</v:String>
@@ -42,4 +43,7 @@
     <v:String x:Key="ImportCardsDescr">Импортируйте карточки из файла на вашем устройстве в папку</v:String>
     <v:String x:Key="Edit">Редактировать</v:String>
     <v:String x:Key="Remove">Удалить</v:String>
+    <v:String x:Key="All">Все</v:String>
+    <v:String x:Key="Memorized">Запомнено</v:String>
+    <v:String x:Key="NotMemorized">Не запомнено</v:String>
 </ResourceDictionary>

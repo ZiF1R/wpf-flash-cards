@@ -8,6 +8,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="styles/MenuButtonStyle.xaml"/>
+                <ResourceDictionary Source="styles/FilterButtonStyle.xaml"/>
                 <ResourceDictionary Source="styles/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="/lang/en.xaml"/>
                 <ResourceDictionary Source="/theme/Light.xaml"/>

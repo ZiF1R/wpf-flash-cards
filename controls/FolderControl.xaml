@@ -157,6 +157,7 @@
             x:Name="FolderNameField"
             Cursor="Hand"
             Text="{Binding FolderName, ElementName=FolderControlElement}"
+            MouseUp="FolderNameField_MouseUp"
             Panel.ZIndex="1"
             Grid.Row="1"
             VerticalAlignment="Bottom"
@@ -195,7 +196,7 @@
                 Text="{Binding FolderMemorizedCardsCount, ElementName=FolderControlElement}"/>/<TextBlock
                 Text="{Binding FolderCardsCount, ElementName=FolderControlElement}"/>
             <TextBlock
-                Text="{DynamicResource Memorized}"/>
+                Text="{DynamicResource memorized}"/>
         </TextBlock>
 
         <TextBlock

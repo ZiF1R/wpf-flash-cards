@@ -8,6 +8,10 @@
     <SolidColorBrush x:Key="NavBg">#ffffff</SolidColorBrush>
     <SolidColorBrush x:Key="HoverBg">#F6F6F6</SolidColorBrush>
     <SolidColorBrush x:Key="TextColorOpacity">#999999</SolidColorBrush>
+    <Color x:Key="HoverBgColor">#F6F6F6</Color>
+    <Color x:Key="MainBgColor">#f8f8f8</Color>
+    <Color x:Key="TextColorr">#171717</Color>
+    <BitmapImage x:Key="RightArrow" UriSource="/icons/right-arrow.png"/>
     <ImageBrush x:Key="ProfileIcon" ImageSource="/icons/MenuIcons/Light/Profile.png"/>
     <ImageBrush x:Key="ProfileIconActive" ImageSource="/icons/MenuIcons/Profile_Active.png"/>
     <ImageBrush x:Key="FoldersIcon" ImageSource="/icons/MenuIcons/Light/Folders.png"/>

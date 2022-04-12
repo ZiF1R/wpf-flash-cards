@@ -160,5 +160,20 @@ namespace course_project1.controls
             };
             modal.CloseFolderModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
         }
+
+
+        public static readonly RoutedEvent GoToCardsEvent
+            = EventManager.RegisterRoutedEvent("GoToCards", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(FolderControl));
+
+        public event RoutedEventHandler GoToCards
+        {
+            add { AddHandler(GoToCardsEvent, value); }
+            remove { RemoveHandler(GoToCardsEvent, value); }
+        }
+
+        private void FolderNameField_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            RaiseEvent(new RoutedEventArgs(GoToCardsEvent));
+        }
     }
 }

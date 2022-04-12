@@ -23,8 +23,9 @@
     <v:String x:Key="PrivacyPolicy">Privacy Policy</v:String>
     <v:String x:Key="TermsConditions">Terms and Conditions</v:String>
     <v:String x:Key="AddFolder">Add new folder</v:String>
+    <v:String x:Key="AddCard">Add new card</v:String>
     <v:String x:Key="Category">Category</v:String>
-    <v:String x:Key="Memorized">memorized</v:String>
+    <v:String x:Key="memorized">memorized</v:String>
     <v:String x:Key="Added">Added</v:String>
     <v:String x:Key="General">General</v:String>
     <v:String x:Key="AppTheme">App theme</v:String>
@@ -53,4 +54,7 @@
     <v:String x:Key="CreateCategory">Create new category</v:String>
     <v:String x:Key="AddCategory">Add category</v:String>
     <v:String x:Key="CategoryName">Category name</v:String>
+    <v:String x:Key="All">All</v:String>
+    <v:String x:Key="Memorized">Memorized</v:String>
+    <v:String x:Key="NotMemorized">Not memorized</v:String>
 </ResourceDictionary>
