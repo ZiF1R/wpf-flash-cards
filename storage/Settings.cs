@@ -266,7 +266,7 @@ namespace course_project1.storage
             {
                 command.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Upload settings error!");
             }

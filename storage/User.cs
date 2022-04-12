@@ -78,22 +78,29 @@ namespace course_project1.storage
             Surname = surname;
             Name = name;
             this.email = email;
-            Password = password;
 
-            // password encription
+            try
+            {
+                Password = DataEncriptor.Encrypt(password);
+            }
+            catch
+            {
+                MessageBox.Show("Password encryption error!");
+            }
 
             InsertUser(connection);
-            LoadUser(this.email, Password, connection);
+            LoadUser(this.email, DataEncriptor.Decrypt(Password), connection);
             ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.settings.CreateUserSettings(Uid, connection);
         }
 
         public bool LoadUser(string email, string password, SqlConnection connection)
         {
+            string encryptedPass = DataEncriptor.Encrypt(password);
             SqlCommand loginCommand = connection.CreateCommand();
             loginCommand.CommandText =
                 $"SELECT * " +
                 $"FROM USERS " +
-                $"WHERE USERS.EMAIL = '{email}' AND USERS.PASS = '{password}'";
+                $"WHERE USERS.EMAIL = '{email}' AND USERS.PASS = '{encryptedPass}'";
 
             SqlDataReader loginCommandReader = loginCommand.ExecuteReader();
             if (!loginCommandReader.HasRows)
@@ -115,7 +122,7 @@ namespace course_project1.storage
                 Surname = surname;
                 Name = name;
                 this.email = email;
-                Password = password;
+                Password = encryptedPass;
             }
             catch
             {
