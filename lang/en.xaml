@@ -57,4 +57,5 @@
     <v:String x:Key="All">All</v:String>
     <v:String x:Key="Memorized">Memorized</v:String>
     <v:String x:Key="NotMemorized">Not memorized</v:String>
+    <v:String x:Key="FolderNameUsed">* This folder name is already in use!</v:String>
 </ResourceDictionary>

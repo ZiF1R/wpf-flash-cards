@@ -99,8 +99,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="controls\AddFolderButton.xaml.cs">
-      <DependentUpon>AddFolderButton.xaml</DependentUpon>
+    <Compile Include="controls\AddCardButton.xaml.cs">
+      <DependentUpon>AddCardButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="controls\CustomPasswordBox.xaml.cs">
       <DependentUpon>CustomPasswordBox.xaml</DependentUpon>
@@ -130,6 +130,7 @@
       <DependentUpon>SwitchBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="storage\Card.cs" />
+    <Compile Include="storage\DataEncriptor.cs" />
     <Compile Include="storage\DataStorage.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -137,6 +138,9 @@
     <Compile Include="storage\Folder.cs" />
     <Compile Include="storage\Settings.cs" />
     <Compile Include="storage\User.cs" />
+    <Compile Include="view\CardsView.xaml.cs">
+      <DependentUpon>CardsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="view\FoldersPage.xaml.cs">
       <DependentUpon>FoldersPage.xaml</DependentUpon>
     </Compile>
@@ -152,7 +156,7 @@
     <Compile Include="view\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="controls\AddFolderButton.xaml">
+    <Page Include="controls\AddCardButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -212,6 +216,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="styles\FilterButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="styles\MenuButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -235,6 +243,10 @@
     <Page Include="lang\ru.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="view\CardsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="view\FoldersPage.xaml">
       <SubType>Designer</SubType>
@@ -318,6 +330,8 @@
     <Content Include="db queries\create tables.sql" />
     <Content Include="db queries\fill tables.sql" />
     <Content Include="db queries\select queries.sql" />
+    <Resource Include="icons\right-arrow.png" />
+    <Resource Include="icons\right-arrow_dark-theme.png" />
     <Resource Include="icons\plus_active.png" />
     <Resource Include="icons\MenuIcons\Dark\Folders.png" />
     <Resource Include="icons\MenuIcons\Dark\Profile.png" />

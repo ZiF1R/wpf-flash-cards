@@ -1,5 +1,7 @@
-﻿using System;
+﻿using course_project1.storage;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -24,12 +26,16 @@ namespace course_project1.controls.ModalWindows
         public string FolderName = "";
         public string FolderCategory = "";
         Grid MainPageGrid;
+        SqlConnection Connection;
+        int UserUid;
 
-        public FolderModalWindow(Grid mainPageGrid, string folderName, string folderCategory)
+        public FolderModalWindow(Grid mainPageGrid, SqlConnection connection, int uid, string folderName, string folderCategory)
         {
             this.FolderName = folderName;
             this.FolderCategory = folderCategory;
             this.MainPageGrid = mainPageGrid;
+            Connection = connection;
+            UserUid = uid;
             InitializeComponent();
 
             FolderNameTextBox.Value = this.FolderName;
@@ -110,6 +116,18 @@ namespace course_project1.controls.ModalWindows
             {
                 this.FolderName = FolderNameTextBox.Value.ToString();
                 this.FolderCategory = FolderCategorySelect.Text.ToString();
+
+                bool isUnique = Folder.IsUniqueFolderName(Connection, UserUid, FolderName);
+                if(!isUnique)
+                {
+                    FolderNameUsed.Visibility = Visibility.Visible;
+                    return;
+                }
+                else
+                {
+                    FolderNameUsed.Visibility = Visibility.Hidden;
+                }
+
                 RaiseEvent(new RoutedEventArgs(FolderActionEvent));
                 RaiseEvent(new RoutedEventArgs(CloseFolderModalEvent));
             }

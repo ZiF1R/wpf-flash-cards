@@ -43,6 +43,12 @@
                     Padding="0,5,0,5"
                     Placeholder="{DynamicResource FolderName}"/>
 
+                <Label
+                    Name="FolderNameUsed"
+                    Content="{DynamicResource FolderNameUsed}"
+                    Foreground="Tomato"
+                    Visibility="Hidden"/>
+
                 <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,10,0,20">
                     <TextBlock
                         FontSize="20"

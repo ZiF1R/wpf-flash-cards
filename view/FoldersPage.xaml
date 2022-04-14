@@ -8,8 +8,7 @@
       Title="FoldersPage"
       d:DesignHeight="750" d:DesignWidth="1500">
 
-    <ScrollViewer
-            VerticalScrollBarVisibility="Hidden">
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
         <Grid VerticalAlignment="Top" Name="FoldersGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="45" />
@@ -24,6 +23,7 @@
                 Source="/icons/Pages icons/Folders.png"
                 HorizontalAlignment="Left"/>
             <TextBlock
+                x:Name="teste"
                 Grid.Column="0"
                 Grid.Row="0"
                 FontFamily="Segoe UI"
@@ -50,8 +50,9 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Top">
 
-                <control:AddFolderButton
-                    control:AddFolderButton.AddFolder="AddFolderButton_AddFolder"
+                <control:AddCardButton
+                    ButtonName="{DynamicResource AddFolder}"
+                    AddCard="AddFolderButton_AddFolder"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
                     Margin="0,0,40,40"/>

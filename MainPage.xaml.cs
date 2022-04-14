@@ -46,7 +46,7 @@ namespace course_project1
 
         private void Folders_Click(object sender, RoutedEventArgs e)
         {
-            SecondFrame.Content = new FoldersPage(MainPageGrid);
+            SecondFrame.Content = new FoldersPage(MainPageGrid, SecondFrame);
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)

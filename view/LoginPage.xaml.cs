@@ -43,7 +43,7 @@ namespace course_project1.view
                 return;
             }
 
-            if (!Regex.IsMatch(EmailInput.Value, @"([\w\d-_]+)\@([\w\d]+)\.(\w+)"))
+            if (!Regex.IsMatch(EmailInput.Value, @"([\w\d-_]+)\@([\w\d]+)\.(\w){2,}"))
             {
                 MessageBox.Show("Email-адрес имеет не правильный формат!");
                 return;
@@ -55,13 +55,15 @@ namespace course_project1.view
                 MessageBox.Show("Неправильный email-адрес или пороль!");
                 return;
             }
+            else
+            {
+                // **load categories**
+                Storage.settings.LoadSettings(Storage.user.Uid, CurrentConnection);
+                Storage.LoadFolders(CurrentConnection, Storage.user.Uid);
+                mainWindow.AppLanguage.SelectedIndex = mainWindow.Storage.settings.currentLangId - 1;
 
-            // **load folders**
-            // **load categories**
-            Storage.settings.LoadSettings(Storage.user.Uid, CurrentConnection);
-            mainWindow.AppLanguage.SelectedIndex = mainWindow.Storage.settings.currentLangId - 1;
-
-            NavigationService.Navigate(new MainPage());
+                NavigationService.Navigate(new MainPage());
+            }
         }
 
         private void GoToRegistration_MouseUp(object sender, MouseButtonEventArgs e)

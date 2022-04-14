@@ -77,7 +77,7 @@ namespace course_project1.view
                 return false;
             }
 
-            if (!Regex.IsMatch(EmailInput.Value, @"([\w\d-_]+)\@([\w\d]+)\.(\w+)"))
+            if (!Regex.IsMatch(EmailInput.Value, @"([\w\d-_]+)\@([\w\d]+)\.(\w){2,}"))
             {
                 MessageBox.Show("Неправильный формат email-адреса. " +
                     "Email-адрес может содержать только цифры, буквы, а также знак подчеркивания и тире!");

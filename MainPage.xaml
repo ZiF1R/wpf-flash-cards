@@ -68,24 +68,21 @@
             <RadioButton
                 IsChecked="True"
                 Name="Profile"
-                Style="{StaticResource MenuButton}"
+                Style="{StaticResource ProfileMenuButton}"
                 Content="{DynamicResource Profile}"
-                Background="{DynamicResource ProfileIcon}"
                 Click="Profile_Click"/>
 
 
             <RadioButton
                 Name="Folders"
-                Style="{StaticResource MenuButton}"
+                Style="{StaticResource FoldersMenuButton}"
                 Content="{DynamicResource Folders}"
-                Background="{DynamicResource FoldersIcon}"
                 Click="Folders_Click"/>
 
             <RadioButton
                 Name="Settings"
-                Style="{StaticResource MenuButton}"
+                Style="{StaticResource SettingsMenuButton}"
                 Content="{DynamicResource Settings}"
-                Background="{DynamicResource SettingsIcon}"
                 Click="Settings_Click"/>
         </StackPanel>
 

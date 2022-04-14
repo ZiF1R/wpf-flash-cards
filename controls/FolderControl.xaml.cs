@@ -142,25 +142,20 @@ namespace course_project1.controls
             modal.NegativeButtonClick += (object s, RoutedEventArgs ev) => RaiseEvent(new RoutedEventArgs(RemoveFolderEvent));
         }
 
+        public static readonly RoutedEvent EditFolderEvent
+            = EventManager.RegisterRoutedEvent("EditFolder", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(FolderControl));
+
+        public event RoutedEventHandler EditFolder
+        {
+            add { AddHandler(EditFolderEvent, value); }
+            remove { RemoveHandler(EditFolderEvent, value); }
+        }
+
         private void EditFolderButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
             myPopup.IsOpen = false;
-
-            FolderModalWindow modal = new FolderModalWindow(MainPageGrid, this.FolderNameField.Text, this.FolderCategoryField.Text);
-            modal.SetValue(Grid.RowSpanProperty, 2);
-            modal.SetValue(Grid.ColumnSpanProperty, 3);
-            modal.SetResourceReference(FolderModalWindow.ModalHeaderProperty, "EditFolder");
-            modal.SetResourceReference(FolderModalWindow.ActionButtonContentProperty, "Edit");
-
-            MainPageGrid.Children.Add(modal);
-            modal.FolderAction += (object s, RoutedEventArgs ev) =>
-            {
-                this.FolderNameField.Text = modal.FolderName;
-                this.FolderCategoryField.Text = modal.FolderCategory;
-            };
-            modal.CloseFolderModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
+            RaiseEvent(new RoutedEventArgs(EditFolderEvent));
         }
-
 
         public static readonly RoutedEvent GoToCardsEvent
             = EventManager.RegisterRoutedEvent("GoToCards", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(FolderControl));
