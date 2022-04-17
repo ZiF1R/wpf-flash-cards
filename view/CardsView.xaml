@@ -52,17 +52,23 @@
 
                 <StackPanel Orientation="Horizontal">
                     <RadioButton
+                        Name="ShowAllCards"
                         IsChecked="True"
+                        Click="ShowAllCards_Click"
                         Style="{StaticResource FilterButton}"
                         Content="{DynamicResource All}"
                         Margin="0,0,15,0"/>
-                    
+
                     <RadioButton
+                        Name="ShowMemorizedCards"
+                        Click="ShowMemorizedCards_Click"
                         Style="{StaticResource FilterButton}"
                         Content="{DynamicResource Memorized}"
                         Margin="0,0,15,0"/>
 
                     <RadioButton
+                        Name="ShowNotMemorizedCards"
+                        Click="ShowNotMemorizedCards_Click"
                         Style="{StaticResource FilterButton}"
                         Content="{DynamicResource NotMemorized}"/>
                 </StackPanel>
@@ -76,7 +82,7 @@
             </StackPanel>
 
             <WrapPanel
-                Name="FoldersWrap"
+                Name="CardsWrap"
                 Grid.Column="0"
                 Grid.Row="2"
                 HorizontalAlignment="Stretch"

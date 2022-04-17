@@ -46,4 +46,5 @@
     <v:String x:Key="All">Все</v:String>
     <v:String x:Key="Memorized">Запомнено</v:String>
     <v:String x:Key="NotMemorized">Не запомнено</v:String>
+    <v:String x:Key="CopyAll">Скопировать все</v:String>
 </ResourceDictionary>

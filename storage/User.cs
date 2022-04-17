@@ -90,7 +90,7 @@ namespace course_project1.storage
 
             InsertUser(connection);
             LoadUser(this.email, DataEncriptor.Decrypt(Password), connection);
-            ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.settings.CreateUserSettings(Uid, connection);
+            ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.settings.CreateUserSettings(connection);
         }
 
         public bool LoadUser(string email, string password, SqlConnection connection)

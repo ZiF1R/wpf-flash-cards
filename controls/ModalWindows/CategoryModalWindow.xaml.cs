@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,10 @@ namespace course_project1.controls.ModalWindows
     /// </summary>
     public partial class CategoryModalWindow : UserControl
     {
+        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+        SqlConnection CurrentConnection = mainWindow.CurrentConnection;
+        DataStorage Storage = mainWindow.Storage;
+
         public CategoryModalWindow()
         {
             InitializeComponent();
@@ -72,9 +77,16 @@ namespace course_project1.controls.ModalWindows
         {
             if (FolderNameTextBox.Value != "")
             {
-                this.CategoryValue = FolderNameTextBox.Value;
-                RaiseEvent(new RoutedEventArgs(AddCategoryEvent));
-                RaiseEvent(new RoutedEventArgs(CloseCategoryModalEvent));
+                this.CategoryValue = FolderNameTextBox.Value.Trim();
+                bool isUnique = Storage.CheckForUniqueCategory(CurrentConnection, this.CategoryValue);
+
+                if (!isUnique) CategoryAlreadyUsed.Visibility = Visibility.Visible;
+                else
+                {
+                    CategoryAlreadyUsed.Visibility = Visibility.Hidden;
+                    RaiseEvent(new RoutedEventArgs(AddCategoryEvent));
+                    RaiseEvent(new RoutedEventArgs(CloseCategoryModalEvent));
+                }
             }
             else
             {

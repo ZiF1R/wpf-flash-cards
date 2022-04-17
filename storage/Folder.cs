@@ -15,6 +15,7 @@ namespace course_project1.storage
         private string category;
         public DateTime Created { get; }
         public Card[] Cards { get; set; }
+        public int FolderId { get; set; }
 
         public string Name
         {
@@ -40,32 +41,32 @@ namespace course_project1.storage
             }
         }
 
-        public Folder(SqlConnection connection, int uid, string name, string category)
+        public Folder(SqlConnection connection, string name, string category)
         {
             Name = name;
             Category = category;
             Created = DateTime.Now;
             Cards = new Card[] { };
 
-            InsertFolder(connection, uid);
+            InsertFolder(connection);
         }
 
-        public Folder(SqlConnection connection, int folderId, string name, string category, DateTime created)
+        public Folder(int folderId, string name, string category, DateTime created)
         {
             Name = name;
             Category = category;
             Created = created;
-
-            LoadFolderCards(connection, folderId);
+            FolderId = folderId;
+            Cards = new Card[] { };
         }
 
-        private void LoadFolderCards(SqlConnection connection, int folderId)
+        public void LoadFolderCards(SqlConnection connection)
         {
             SqlCommand command = connection.CreateCommand();
             command.CommandText =
                 $"SELECT * " +
                 $"FROM CARDS " +
-                $"WHERE CARDS.FOLDER_ID = {folderId}";
+                $"WHERE CARDS.FOLDER_ID = {FolderId}";
 
             SqlDataReader comandReader = command.ExecuteReader();
             if (comandReader.HasRows)
@@ -97,11 +98,13 @@ namespace course_project1.storage
 
         public int MemorizedCardsCount()
         {
-            return Cards.Where(card => card.isMemorized).ToArray().Length;
+            return Cards.Where(card => card.IsMemorized).ToArray().Length;
         }
 
-        private bool InsertFolder(SqlConnection connection, int uid)
+        private bool InsertFolder(SqlConnection connection)
         {
+            int uid = ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.user.Uid;
+
             var addFolderCommand = string.Format("INSERT INTO FOLDERS VALUES(@id, @name, @created, @category)");
             using (SqlCommand command = new SqlCommand(addFolderCommand, connection))
             {
@@ -122,8 +125,10 @@ namespace course_project1.storage
             return true;
         }
 
-        public void RemoveFolder(SqlConnection connection, int uid)
+        public void RemoveFolder(SqlConnection connection)
         {
+            int uid = ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.user.Uid;
+
             SqlCommand command = connection.CreateCommand();
             command.CommandText =
                 "DELETE FOLDERS WHERE " +
@@ -139,8 +144,9 @@ namespace course_project1.storage
             }
         }
 
-        public void ChangeFolderData(SqlConnection connection, int uid, string newName, string newCategory)
+        public void ChangeFolderData(SqlConnection connection, string newName, string newCategory)
         {
+            int uid = ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.user.Uid;
             try
             {
                 SqlCommand command = connection.CreateCommand();
@@ -160,8 +166,10 @@ namespace course_project1.storage
             Category = newCategory;
         }
 
-        public static bool IsUniqueFolderName(SqlConnection connection, int uid, string folderName)
+        public static bool IsUniqueFolderName(SqlConnection connection, string folderName)
         {
+            int uid = ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.user.Uid;
+
             SqlCommand command = connection.CreateCommand();
             command.CommandText =
                 $"SELECT * " +
@@ -173,6 +181,12 @@ namespace course_project1.storage
             commandReader.Close();
 
             return isUnique;
+        }
+
+        public void RemoveCard(SqlConnection connection, Card card)
+        {
+            this.Cards = this.Cards.Where(c => c != card).ToArray();
+            card.RemoveCard(connection, FolderId);
         }
     }
 }

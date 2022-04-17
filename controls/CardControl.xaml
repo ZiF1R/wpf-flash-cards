@@ -1,22 +1,21 @@
-﻿<UserControl x:Class="course_project1.controls.FolderControl"
+﻿<UserControl x:Class="course_project1.controls.CardControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:course_project1.controls"
-             mc:Ignorable="d"
-             Name="FolderControlElement"
+             mc:Ignorable="d" 
+             Name="CardControlElement"
              d:DesignHeight="140" d:DesignWidth="280">
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="33"/>
             <RowDefinition Height="32"/>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="20*"/>
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
-        
+
         <Rectangle
             Grid.RowSpan="5"
             Grid.Row="0"
@@ -31,16 +30,6 @@
             </Rectangle.Effect>
         </Rectangle>
 
-        <Image
-            Cursor="Hand"
-            Margin="20,0,20,0"
-            Grid.Row="0"
-            Source="/icons/Play.png"
-            Width="13"
-            Height="13"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"/>
-        
         <Image
             Margin="20,0,20,0"
             Grid.Row="0"
@@ -58,7 +47,7 @@
             Width="15"
             Height="15">
             <CheckBox
-                Name="FolderSettings"
+                Name="CardSettings"
                 Width="15"
                 Height="15"
                 Cursor="Hand"
@@ -67,9 +56,9 @@
 
             <Popup
                 Name="myPopup"
-                IsOpen="{Binding IsChecked, ElementName=FolderSettings}"
+                IsOpen="{Binding IsChecked, ElementName=CardSettings}"
                 Placement="Bottom"
-                PlacementTarget="{Binding ElementName=FolderSettings}"
+                PlacementTarget="{Binding ElementName=CardSettings}"
                 PopupAnimation="Slide">
                 <Popup.Effect>
                     <DropShadowEffect
@@ -85,8 +74,8 @@
                     Background="{DynamicResource CardBg}">
                     <StackPanel Background="{DynamicResource CardBg}" Margin="4,0,4,0">
                         <TextBlock
-                            Name="EditFolderButton"
-                            MouseUp="EditFolderButton_MouseUp"
+                            Name="EditCardButton"
+                            MouseUp="EditCardButton_MouseUp"
                             Padding="15,7,17,7"
                             Cursor="Hand">
                             <Image
@@ -110,10 +99,110 @@
                         </TextBlock>
 
                         <TextBlock
-                            Name="RemoveFolderButton"
+                            Name="CopyAllButton"
+                            MouseUp="CopyAllButton_MouseUp"
+                            Padding="15,7,17,7"
+                            Cursor="Hand">
+                            <Image
+                                Source="/icons/copy.png"
+                                Width="11"
+                                Height="11"
+                                Margin="0,0,5,0"/>
+
+                            <TextBlock Foreground="{DynamicResource TextColor}" Text="{DynamicResource CopyAll}"/>
+                            
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Background" Value="{DynamicResource CardBg}" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource HoverBg}" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                        <TextBlock
+                            Name="CopyTermButton"
+                            MouseUp="CopyTermButton_MouseUp"
+                            Padding="15,7,17,7"
+                            Cursor="Hand">
+                            <Image
+                                Source="/icons/copy.png"
+                                Width="11"
+                                Height="11"
+                                Margin="0,0,5,0"/>
+
+                            <TextBlock Foreground="{DynamicResource TextColor}" Text="{DynamicResource CopyTerm}"/>
+                            
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Background" Value="{DynamicResource CardBg}" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource HoverBg}" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                        <TextBlock
+                            Name="CopyTranslationButton"
+                            MouseUp="CopyTranslationButton_MouseUp"
+                            Padding="15,7,17,7"
+                            Cursor="Hand">
+                            <Image
+                                Source="/icons/copy.png"
+                                Width="11"
+                                Height="11"
+                                Margin="0,0,5,0"/>
+
+                            <TextBlock Foreground="{DynamicResource TextColor}" Text="{DynamicResource CopyTranslation}"/>
+                            
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Background" Value="{DynamicResource CardBg}" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource HoverBg}" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                        <TextBlock
+                            Name="CopyExamplesButton"
+                            MouseUp="CopyExamplesButton_MouseUp"
+                            Padding="15,7,17,7"
+                            Cursor="Hand">
+                            <Image
+                                Source="/icons/copy.png"
+                                Width="11"
+                                Height="11"
+                                Margin="0,0,5,0"/>
+
+                            <TextBlock Foreground="{DynamicResource TextColor}" Text="{DynamicResource CopyExamples}"/>
+                            
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Background" Value="{DynamicResource CardBg}" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource HoverBg}" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                        <TextBlock
+                            Name="RemoveCardButton"
                             Padding="15,7,17,7"
                             Cursor="Hand"
-                            MouseUp="RemoveFolderButton_MouseUp">
+                            MouseUp="RemoveCardButton_MouseUp">
                             <Image
                                 Source="/icons/remove.png"
                                 Width="11"
@@ -154,10 +243,8 @@
             Height="1"/>
 
         <TextBlock
-            x:Name="FolderNameField"
-            Cursor="Hand"
-            Text="{Binding FolderName, ElementName=FolderControlElement}"
-            MouseUp="FolderNameField_MouseUp"
+            x:Name="CardNameField"
+            Text="{Binding Term, ElementName=CardControlElement}"
             Panel.ZIndex="1"
             Grid.Row="1"
             VerticalAlignment="Bottom"
@@ -168,36 +255,28 @@
             Foreground="{DynamicResource TextColor}"/>
 
         <TextBlock
+            Name="CardTranslationField"
             Panel.ZIndex="1"
             Grid.Row="2"
+            Text="{Binding Translation, ElementName=CardControlElement}"
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
-            FontSize="14"
+            FontSize="16"
             FontFamily="Segoe UI Light"
             Margin="20,0,0,0"
-            Foreground="{DynamicResource TextColor}">
-            <TextBlock
-                Text="{DynamicResource Category}"/>: 
-            <TextBlock
-                Name="FolderCategoryField"
-                Text="{Binding FolderCategory, ElementName=FolderControlElement}"/>
-        </TextBlock>
+            Foreground="{DynamicResource TextColor}"/>
 
         <TextBlock
             Panel.ZIndex="1"
             Grid.Row="3"
+            Text="{Binding Examples, ElementName=CardControlElement}"
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
             FontSize="14"
+            FontStyle="Italic"
             FontFamily="Segoe UI Light"
             Margin="20,0,0,0"
-            Foreground="{DynamicResource TextColor}">
-            <TextBlock
-                Text="{Binding FolderMemorizedCardsCount, ElementName=FolderControlElement}"/>/<TextBlock
-                Text="{Binding FolderCardsCount, ElementName=FolderControlElement}"/>
-            <TextBlock
-                Text="{DynamicResource memorized}"/>
-        </TextBlock>
+            Foreground="{DynamicResource TextColor}"/>
 
         <TextBlock
             Panel.ZIndex="1"
@@ -212,7 +291,7 @@
                 Text="{DynamicResource Added}"/>
             <TextBlock
                 x:Name="AddedDate"
-                Text="{Binding FolderCreatedDate, ElementName=FolderControlElement}"/>
+                Text="{Binding Created, ElementName=CardControlElement}"/>
         </TextBlock>
     </Grid>
 </UserControl>

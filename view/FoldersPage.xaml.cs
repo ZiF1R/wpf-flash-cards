@@ -38,48 +38,56 @@ namespace course_project1.view
             InitializeComponent();
 
             foreach (Folder folder in Storage.folders)
-                CreateFolderElement(folder);
+                FoldersWrap.Children.Insert(1, this.CreateFolderElement(folder));
         }
 
         private FolderControl CreateFolderElement(Folder folder)
         {
-            FolderControl folderControl = new FolderControl(
-                MainPageGrid, folder.Name, folder.Category, folder.Cards.Length, folder.MemorizedCardsCount());
-
-            folderControl.Margin = new Thickness(0, 0, 40, 40);
-            folderControl.EditFolder += (object s, RoutedEventArgs ev) =>
+            FolderControl folderControl = null;
+            try
             {
-                FolderModalWindow modal = new FolderModalWindow(
-                    MainPageGrid, CurrentConnection, Storage.user.Uid, folderControl.FolderNameField.Text,folderControl.FolderCategoryField.Text);
-                modal.SetValue(Grid.RowSpanProperty, 2);
-                modal.SetValue(Grid.ColumnSpanProperty, 3);
-                modal.SetResourceReference(FolderModalWindow.ModalHeaderProperty, "EditFolder");
-                modal.SetResourceReference(FolderModalWindow.ActionButtonContentProperty, "Edit");
-                MainPageGrid.Children.Add(modal);
+                folderControl = new FolderControl(
+                    MainPageGrid, folder.Created, folder.Name, folder.Category, folder.Cards.Length, folder.MemorizedCardsCount());
 
-                modal.FolderAction += (object se, RoutedEventArgs evn) =>
+                folderControl.Margin = new Thickness(0, 0, 40, 40);
+
+                folderControl.EditFolder += (object s, RoutedEventArgs ev) =>
                 {
-                    folder.ChangeFolderData(CurrentConnection, Storage.user.Uid, modal.FolderName, modal.FolderCategory);
+                    FolderModalWindow modal = new FolderModalWindow(
+                        MainPageGrid, CurrentConnection, folderControl.FolderNameField.Text, folderControl.FolderCategoryField.Text);
+                    modal.SetValue(Grid.RowSpanProperty, 2);
+                    modal.SetValue(Grid.ColumnSpanProperty, 3);
+                    modal.SetResourceReference(FolderModalWindow.ModalHeaderProperty, "EditFolder");
+                    modal.SetResourceReference(FolderModalWindow.ActionButtonContentProperty, "Edit");
+                    MainPageGrid.Children.Add(modal);
 
-                    folderControl.FolderNameField.Text = modal.FolderName;
-                    folderControl.FolderCategoryField.Text = modal.FolderCategory;
+                    modal.FolderAction += (object se, RoutedEventArgs evn) =>
+                    {
+                        folder.ChangeFolderData(CurrentConnection, modal.FolderName, modal.FolderCategory);
+
+                        folderControl.FolderNameField.Text = modal.FolderName;
+                        folderControl.FolderCategoryField.Text = modal.FolderCategory;
+                    };
+                    modal.CloseFolderModal += (object se, RoutedEventArgs evn) => MainPageGrid.Children.Remove(modal);
                 };
-                modal.CloseFolderModal += (object se, RoutedEventArgs evn) => MainPageGrid.Children.Remove(modal);
-            };
-            folderControl.RemoveFolder += (object s, RoutedEventArgs ev) =>
+                folderControl.RemoveFolder += (object s, RoutedEventArgs ev) =>
+                {
+                    folder.RemoveFolder(CurrentConnection);
+                    Storage.folders = Storage.folders.Where(x => x.Name != folderControl.FolderName).ToArray();
+                    FoldersWrap.Children.Remove(folderControl);
+                };
+                folderControl.GoToCards += (object s, RoutedEventArgs ev) => SecondFrame.Content = new CardsView(MainPageGrid, SecondFrame, folder);
+            }
+            catch
             {
-                folder.RemoveFolder(CurrentConnection, Storage.user.Uid);
-                Storage.folders = Storage.folders.Where(x => x.Name != folderControl.FolderName).ToArray();
-                FoldersWrap.Children.Remove(folderControl);
-            };
-            folderControl.GoToCards += (object s, RoutedEventArgs ev) => SecondFrame.Content = new CardsView(MainPageGrid, SecondFrame, folderControl);
-
+                MessageBox.Show("Folder control creation error!");
+            }
             return folderControl;
         }
 
         private void AddFolderButton_AddFolder(object sender, RoutedEventArgs e)
         {
-            FolderModalWindow modal = new FolderModalWindow(MainPageGrid, CurrentConnection, Storage.user.Uid, "", "");
+            FolderModalWindow modal = new FolderModalWindow(MainPageGrid, CurrentConnection, "", "");
             modal.SetValue(Grid.RowSpanProperty, 2);
             modal.SetValue(Grid.ColumnSpanProperty, 3);
             modal.SetResourceReference(FolderModalWindow.ModalHeaderProperty, "CreateFolder");
@@ -92,7 +100,7 @@ namespace course_project1.view
                 string folderName = modal.FolderName;
                 string folderCategory = modal.FolderCategory;
 
-                Folder folder = new Folder(CurrentConnection, Storage.user.Uid, folderName, folderCategory);
+                Folder folder = new Folder(CurrentConnection, folderName, folderCategory);
                 Storage.folders = Storage.folders.Append(folder).ToArray();
                 FoldersWrap.Children.Insert(1, this.CreateFolderElement(folder));
             };

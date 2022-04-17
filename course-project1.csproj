@@ -102,6 +102,9 @@
     <Compile Include="controls\AddCardButton.xaml.cs">
       <DependentUpon>AddCardButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="controls\CardControl.xaml.cs">
+      <DependentUpon>CardControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="controls\CustomPasswordBox.xaml.cs">
       <DependentUpon>CustomPasswordBox.xaml</DependentUpon>
     </Compile>
@@ -110,6 +113,9 @@
     </Compile>
     <Compile Include="controls\FolderControl.xaml.cs">
       <DependentUpon>FolderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="controls\ModalWindows\CardModalWindow.xaml.cs">
+      <DependentUpon>CardModalWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="controls\ModalWindows\CategoryModalWindow.xaml.cs">
       <DependentUpon>CategoryModalWindow.xaml</DependentUpon>
@@ -160,6 +166,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="controls\CardControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="controls\CustomPasswordBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,6 +179,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="controls\FolderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\ModalWindows\CardModalWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -330,6 +344,7 @@
     <Content Include="db queries\create tables.sql" />
     <Content Include="db queries\fill tables.sql" />
     <Content Include="db queries\select queries.sql" />
+    <Resource Include="icons\copy.png" />
     <Resource Include="icons\right-arrow.png" />
     <Resource Include="icons\right-arrow_dark-theme.png" />
     <Resource Include="icons\plus_active.png" />

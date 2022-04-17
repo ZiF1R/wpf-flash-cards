@@ -23,37 +23,38 @@ namespace course_project1.controls.ModalWindows
     /// </summary>
     public partial class FolderModalWindow : UserControl
     {
+        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+        DataStorage Storage = mainWindow.Storage;
         public string FolderName = "";
         public string FolderCategory = "";
         Grid MainPageGrid;
         SqlConnection Connection;
-        int UserUid;
 
-        public FolderModalWindow(Grid mainPageGrid, SqlConnection connection, int uid, string folderName, string folderCategory)
+        public FolderModalWindow(Grid mainPageGrid, SqlConnection connection, string folderName, string folderCategory)
         {
             this.FolderName = folderName;
             this.FolderCategory = folderCategory;
             this.MainPageGrid = mainPageGrid;
             Connection = connection;
-            UserUid = uid;
             InitializeComponent();
 
             FolderNameTextBox.Value = this.FolderName;
 
-            ComboBoxItem defaultItem = new ComboBoxItem();
-            defaultItem.Content = "none";
-            FolderCategorySelect.Items.Add(defaultItem);
-
-            if (folderCategory != "" && folderCategory != "none")
+            foreach (string category in Storage.categories)
             {
                 ComboBoxItem item = new ComboBoxItem();
-                item.Content = this.FolderCategory;
-                item.IsSelected = true;
+                item.Content = category;
+
+                if (folderCategory != "" && category == folderCategory)
+                    item.IsSelected = true;
+                else if (FolderCategory == "" && category == "none")
+                    item.IsSelected = true;
+
                 FolderCategorySelect.Items.Add(item);
-            }
-            else
-            {
-                defaultItem.IsSelected = true;
+                item.MouseRightButtonUp += (sender, e) =>
+                {
+                    MessageBox.Show("Are you sure to delete the category?");
+                };
             }
         }
 
@@ -78,7 +79,7 @@ namespace course_project1.controls.ModalWindows
                propertyType: typeof(string),
                ownerType: typeof(FolderModalWindow),
                typeMetadata: new FrameworkPropertyMetadata(
-                   defaultValue: "ModalWindow Header",
+                   defaultValue: "Action",
                    flags: FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public string ActionButtonContent
@@ -88,7 +89,7 @@ namespace course_project1.controls.ModalWindows
         }
 
         public static readonly RoutedEvent CloseFolderModalEvent
-            = EventManager.RegisterRoutedEvent("CloseFolderModal", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SimpleModalWindow));
+            = EventManager.RegisterRoutedEvent("CloseFolderModal", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(FolderModalWindow));
 
         public event RoutedEventHandler CloseFolderModal
         {
@@ -97,7 +98,7 @@ namespace course_project1.controls.ModalWindows
         }
 
         public static readonly RoutedEvent FolderActionEvent
-            = EventManager.RegisterRoutedEvent("FolderAction", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SimpleModalWindow));
+            = EventManager.RegisterRoutedEvent("FolderAction", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(FolderModalWindow));
 
         public event RoutedEventHandler FolderAction
         {
@@ -112,21 +113,25 @@ namespace course_project1.controls.ModalWindows
 
         private void ActionButton_Click(object sender, RoutedEventArgs e)
         {
-            if (FolderNameTextBox.Value.ToString() != "")
+            FolderNameTextBox.Value = FolderNameTextBox.Value.Trim();
+            if (FolderNameTextBox.Value != "")
             {
-                this.FolderName = FolderNameTextBox.Value.ToString();
-                this.FolderCategory = FolderCategorySelect.Text.ToString();
+                if (FolderName != FolderNameTextBox.Value)
+                {
+                    bool isUnique = Folder.IsUniqueFolderName(Connection, FolderNameTextBox.Value);
+                    if (!isUnique)
+                    {
+                        FolderNameUsed.Visibility = Visibility.Visible;
+                        return;
+                    }
+                    else
+                    {
+                        FolderNameUsed.Visibility = Visibility.Hidden;
+                    }
+                }
 
-                bool isUnique = Folder.IsUniqueFolderName(Connection, UserUid, FolderName);
-                if(!isUnique)
-                {
-                    FolderNameUsed.Visibility = Visibility.Visible;
-                    return;
-                }
-                else
-                {
-                    FolderNameUsed.Visibility = Visibility.Hidden;
-                }
+                this.FolderName = FolderNameTextBox.Value;
+                this.FolderCategory = FolderCategorySelect.Text;
 
                 RaiseEvent(new RoutedEventArgs(FolderActionEvent));
                 RaiseEvent(new RoutedEventArgs(CloseFolderModalEvent));
@@ -153,6 +158,8 @@ namespace course_project1.controls.ModalWindows
             MainPageGrid.Children.Add(modal);
             modal.AddCategory += (object s, RoutedEventArgs ev) =>
             {
+                Storage.AddCategory(Connection, modal.CategoryValue);
+
                 ComboBoxItem item = new ComboBoxItem();
                 item.Content = modal.CategoryValue;
                 FolderCategorySelect.Items.Add(item);

@@ -66,8 +66,10 @@ namespace course_project1.storage
             this.currentTheme.Source = new Uri($"pack://application:,,,/theme/Light.xaml");
         }
 
-        public void CreateUserSettings(int uid, SqlConnection connection)
+        public void CreateUserSettings(SqlConnection connection)
         {
+            int uid = ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.user.Uid;
+
             SqlCommand command = connection.CreateCommand();
             command.CommandText =
                 "INSERT INTO SETTINGS VALUES" +
@@ -84,8 +86,10 @@ namespace course_project1.storage
             }
         }
 
-        public void LoadSettings(int uid, SqlConnection connection)
+        public void LoadSettings(SqlConnection connection)
         {
+            int uid = ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.user.Uid;
+
             SqlCommand command = connection.CreateCommand();
             command.CommandText =
                 $"SELECT * " +

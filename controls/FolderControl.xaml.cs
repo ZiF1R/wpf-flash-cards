@@ -25,6 +25,7 @@ namespace course_project1.controls
 
         public FolderControl(
             Grid mainPageGrid,
+            DateTime created,
             string folderName,
             string folderCategory = "none",
             int folderCardsCount = 0,
@@ -36,6 +37,7 @@ namespace course_project1.controls
             FolderCategory = folderCategory;
             FolderCardsCount = folderCardsCount;
             FolderMemorizedCardsCount = folderMemorizedCardsCount;
+            FolderCreatedDate = created;
             InitializeComponent();
         }
 
@@ -117,6 +119,22 @@ namespace course_project1.controls
         {
             int val = (int)value;
             return val >= 0;
+        }
+
+        // folder memorized cards count
+        public static readonly DependencyProperty FolderCreatedDateProperty =
+            DependencyProperty.Register(
+               name: "FolderCreatedDate",
+               propertyType: typeof(DateTime),
+               ownerType: typeof(FolderControl),
+               typeMetadata: new FrameworkPropertyMetadata(
+                   defaultValue: DateTime.Now,
+                   flags: FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        public DateTime FolderCreatedDate
+        {
+            get => (DateTime)GetValue(FolderCreatedDateProperty);
+            set => SetValue(FolderCreatedDateProperty, value);
         }
 
         public static readonly RoutedEvent RemoveFolderEvent

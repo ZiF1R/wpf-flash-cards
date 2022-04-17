@@ -57,9 +57,9 @@ namespace course_project1.view
             }
             else
             {
-                // **load categories**
-                Storage.settings.LoadSettings(Storage.user.Uid, CurrentConnection);
-                Storage.LoadFolders(CurrentConnection, Storage.user.Uid);
+                Storage.LoadCategories(CurrentConnection);
+                Storage.settings.LoadSettings(CurrentConnection);
+                Storage.LoadFolders(CurrentConnection);
                 mainWindow.AppLanguage.SelectedIndex = mainWindow.Storage.settings.currentLangId - 1;
 
                 NavigationService.Navigate(new MainPage());
