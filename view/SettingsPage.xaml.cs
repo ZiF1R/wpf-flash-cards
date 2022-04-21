@@ -89,7 +89,7 @@ namespace course_project1.view
             try
             {
                 if (TimeLimit.Text != "")
-                    Storage.settings.ChangeTimeLimit(Convert.ToInt32(CardsNumber.SelectedItem), CurrentConnection);
+                    Storage.settings.ChangeTimeLimit(Convert.ToInt32(TimeLimit.SelectedItem), CurrentConnection);
             }
             catch
             {

@@ -32,6 +32,8 @@
         </Rectangle>
 
         <Image
+            x:Name="ReviewButton"
+            MouseUp="ReviewButton_MouseUp"
             Cursor="Hand"
             Margin="20,0,20,0"
             Grid.Row="0"

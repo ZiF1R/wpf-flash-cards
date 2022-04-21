@@ -19,4 +19,5 @@
     <ImageBrush x:Key="SettingsIcon" ImageSource="/icons/MenuIcons/Light/Settings.png"/>
     <ImageBrush x:Key="SettingsIconActive" ImageSource="/icons/MenuIcons/Settings_Active.png"/>
     <BitmapImage x:Key="PlusIcon" UriSource="/icons/plus.png" />
+    <BitmapImage x:Key="ExitIcon" UriSource="/icons/close.png" />
 </ResourceDictionary>

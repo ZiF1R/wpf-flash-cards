@@ -46,9 +46,7 @@ namespace course_project1.view
             FolderControl folderControl = null;
             try
             {
-                folderControl = new FolderControl(
-                    MainPageGrid, folder.Created, folder.Name, folder.Category, folder.Cards.Length, folder.MemorizedCardsCount());
-
+                folderControl = new FolderControl(MainPageGrid, folder);
                 folderControl.Margin = new Thickness(0, 0, 40, 40);
 
                 folderControl.EditFolder += (object s, RoutedEventArgs ev) =>
@@ -72,7 +70,9 @@ namespace course_project1.view
                 };
                 folderControl.RemoveFolder += (object s, RoutedEventArgs ev) =>
                 {
-                    folder.RemoveFolder(CurrentConnection);
+                    bool isSuccessfully = folder.RemoveFolder(CurrentConnection);
+                    if (!isSuccessfully) return;
+
                     Storage.folders = Storage.folders.Where(x => x.Name != folderControl.FolderName).ToArray();
                     FoldersWrap.Children.Remove(folderControl);
                 };
@@ -100,9 +100,13 @@ namespace course_project1.view
                 string folderName = modal.FolderName;
                 string folderCategory = modal.FolderCategory;
 
-                Folder folder = new Folder(CurrentConnection, folderName, folderCategory);
-                Storage.folders = Storage.folders.Append(folder).ToArray();
-                FoldersWrap.Children.Insert(1, this.CreateFolderElement(folder));
+                try
+                {
+                    Folder folder = new Folder(CurrentConnection, folderName, folderCategory);
+                    Storage.folders = Storage.folders.Append(folder).ToArray();
+                    FoldersWrap.Children.Insert(1, this.CreateFolderElement(folder));
+                }
+                catch { }
             };
             modal.CloseFolderModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
         }

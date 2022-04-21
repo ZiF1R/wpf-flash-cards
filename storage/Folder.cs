@@ -48,7 +48,8 @@ namespace course_project1.storage
             Created = DateTime.Now;
             Cards = new Card[] { };
 
-            InsertFolder(connection);
+            if(!InsertFolder(connection))
+                throw new Exception("insert error");
         }
 
         public Folder(int folderId, string name, string category, DateTime created)
@@ -125,9 +126,12 @@ namespace course_project1.storage
             return true;
         }
 
-        public void RemoveFolder(SqlConnection connection)
+        public bool RemoveFolder(SqlConnection connection)
         {
             int uid = ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.user.Uid;
+
+            foreach (Card card in Cards)
+                card.RemoveCard(connection, FolderId);
 
             SqlCommand command = connection.CreateCommand();
             command.CommandText =
@@ -137,10 +141,12 @@ namespace course_project1.storage
             {
                 SqlDataReader commandReader = command.ExecuteReader();
                 commandReader.Close();
+                return true;
             }
             catch
             {
                 MessageBox.Show("Folder remove error!");
+                return false;
             }
         }
 
@@ -183,10 +189,12 @@ namespace course_project1.storage
             return isUnique;
         }
 
-        public void RemoveCard(SqlConnection connection, Card card)
+        public bool RemoveCard(SqlConnection connection, Card card)
         {
+            if (!card.RemoveCard(connection, FolderId)) return false;
             this.Cards = this.Cards.Where(c => c != card).ToArray();
-            card.RemoveCard(connection, FolderId);
+
+            return true;
         }
     }
 }

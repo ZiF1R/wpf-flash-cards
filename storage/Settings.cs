@@ -263,7 +263,7 @@ namespace course_project1.storage
                     break;
             }
 
-            int uid = ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.user.Uid;
+            int uid = ((MainWindow)Application.Current.MainWindow).Storage.user.Uid;
             command.CommandText += $" WHERE SETTINGS.USER_UID = {uid}";
             
             try

@@ -1,4 +1,5 @@
 ﻿using course_project1.controls.ModalWindows;
+using course_project1.storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,18 +24,13 @@ namespace course_project1.controls
     {
         Grid MainPageGrid;
 
-        public CardControl(
-            Grid mainPageGrid,
-            DateTime created,
-            string term,
-            string translation,
-            string examples)
+        public CardControl(Grid mainPageGrid, Card card)
         {
             this.MainPageGrid = mainPageGrid;
-            this.Created = created;
-            this.Term = term;
-            this.Translation = translation;
-            this.Examples = examples;
+            this.Created = card.Created;
+            this.Term = card.Term;
+            this.Translation = card.Translation;
+            this.Examples = card.Examples;
             InitializeComponent();
         }
 

@@ -56,7 +56,8 @@ namespace course_project1.storage
             this.wrongAnswers = 0;
             this.isMemorized = false;
 
-            InsertCard(connection, rootFolderId);
+            if (!InsertCard(connection, rootFolderId))
+                throw new Exception();
         }
 
         public Card(string term, string translation, string examples, DateTime created, bool isMemorized, int rightAnswers, int wrongAnswers)
@@ -112,7 +113,7 @@ namespace course_project1.storage
             return isUnique;
         }
 
-        public void RemoveCard(SqlConnection connection, int rootFolderId)
+        public bool RemoveCard(SqlConnection connection, int rootFolderId)
         {
             SqlCommand command = connection.CreateCommand();
             command.CommandText =
@@ -126,7 +127,9 @@ namespace course_project1.storage
             catch
             {
                 MessageBox.Show("Card remove error!");
+                return false;
             }
+            return true;
         }
 
         public void ChangeCardData(SqlConnection connection, int rootFolderId, string term, string translation, string examples)

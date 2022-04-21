@@ -23,7 +23,7 @@ namespace course_project1.controls.ModalWindows
     /// </summary>
     public partial class FolderModalWindow : UserControl
     {
-        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+        static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
         DataStorage Storage = mainWindow.Storage;
         public string FolderName = "";
         public string FolderCategory = "";

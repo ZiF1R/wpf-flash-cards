@@ -83,9 +83,8 @@ namespace course_project1
             {
                 this.CurrentConnection.Open();
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message.ToString());
                 this.CurrentConnection.Close();
             }
         }

@@ -47,6 +47,7 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Bottom"/>
                     <Button
+                        Name="NeutralButton"
                         Click="Modal_Close"
                         Style="{StaticResource PrimaryButton}"
                         Content="{DynamicResource Cancel}"

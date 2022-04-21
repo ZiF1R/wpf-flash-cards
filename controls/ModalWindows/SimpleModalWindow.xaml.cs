@@ -20,9 +20,18 @@ namespace course_project1.controls.ModalWindows
     /// </summary>
     public partial class SimpleModalWindow : UserControl
     {
-        public SimpleModalWindow()
+        public SimpleModalWindow(bool isCancelWindow = false)
         {
             InitializeComponent();
+
+            if (isCancelWindow)
+            {
+                NegativeButton.SetResourceReference(Button.ContentProperty, "Close");
+            }
+            else
+            {
+                NegativeButton.SetResourceReference(Button.ContentProperty, "Remove");
+            }
         }
 
         private void Overlay_MouseUp(object sender, MouseButtonEventArgs e)

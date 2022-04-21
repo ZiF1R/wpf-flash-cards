@@ -1,4 +1,5 @@
 ﻿using course_project1.controls.ModalWindows;
+using course_project1.storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,23 +23,31 @@ namespace course_project1.controls
     public partial class FolderControl : UserControl
     {
         Grid MainPageGrid;
+        Folder folder;
 
-        public FolderControl(
-            Grid mainPageGrid,
-            DateTime created,
-            string folderName,
-            string folderCategory = "none",
-            int folderCardsCount = 0,
-            int folderMemorizedCardsCount = 0
-            )
+        public FolderControl(Grid mainPageGrid, Folder folder)
         {
             MainPageGrid = mainPageGrid;
-            FolderName = folderName;
-            FolderCategory = folderCategory;
-            FolderCardsCount = folderCardsCount;
-            FolderMemorizedCardsCount = folderMemorizedCardsCount;
-            FolderCreatedDate = created;
+            FolderName = folder.Name;
+            FolderCategory = folder.Category;
+            FolderCardsCount = folder.Cards.Length;
+            FolderMemorizedCardsCount = folder.MemorizedCardsCount();
+            FolderCreatedDate = folder.Created;
+            this.folder = folder;
             InitializeComponent();
+
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            image.CacheOption = BitmapCacheOption.OnLoad;
+
+            if (folder.Cards.Length > 0)
+                image.UriSource = new Uri("pack://application:,,,/icons/Play.png");
+            else
+                image.UriSource = new Uri("pack://application:,,,/icons/Play_disable.png");
+
+            image.EndInit();
+            ReviewButton.Source = image;
         }
 
         // Folder name
@@ -187,6 +196,18 @@ namespace course_project1.controls
         private void FolderNameField_MouseUp(object sender, MouseButtonEventArgs e)
         {
             RaiseEvent(new RoutedEventArgs(GoToCardsEvent));
+        }
+
+        private void ReviewButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (folder.Cards.Length == 0) return;
+
+            ReviewModalWindow modal = new ReviewModalWindow(MainPageGrid, folder.FolderId, folder.Cards);
+            modal.SetValue(Grid.RowSpanProperty, 2);
+            modal.SetValue(Grid.ColumnSpanProperty, 3);
+            MainPageGrid.Children.Add(modal);
+
+            modal.CloseReview += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
         }
     }
 }

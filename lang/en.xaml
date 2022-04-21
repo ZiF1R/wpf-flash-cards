@@ -70,4 +70,22 @@
     <v:String x:Key="Translation">Translation</v:String>
     <v:String x:Key="Examples">Examples</v:String>
     <v:String x:Key="EditCard">Edit card</v:String>
+    <v:String x:Key="of">of</v:String>
+    <v:String x:Key="cards">cards</v:String>
+    <v:String x:Key="Answer">Answer</v:String>
+    <v:String x:Key="ShowAnswer">Show answer</v:String>
+    <v:String x:Key="HideAnswer">Hide answer</v:String>
+    <v:String x:Key="Submit">Submit</v:String>
+    <v:String x:Key="CloseReview">After the review is closed, you will not be able to continue it later! Are you sure about this?</v:String>
+    <v:String x:Key="WrongAnswer">Wrong answer!</v:String>
+    <v:String x:Key="RightAnswer">Right answer!</v:String>
+    <v:String x:Key="Next">Next</v:String>
+    <v:String x:Key="SetCorrect">Set as correct</v:String>
+    <v:String x:Key="Results">Results</v:String>
+    <v:String x:Key="TotalCards">Total cards</v:String>
+    <v:String x:Key="RightAnswers">Right answers</v:String>
+    <v:String x:Key="WrongAnswers">Wrong answers</v:String>
+    <v:String x:Key="TimePassed">Time passed</v:String>
+    <v:String x:Key="Finish">Finish</v:String>
+    <v:String x:Key="card_s">card(s)</v:String>
 </ResourceDictionary>

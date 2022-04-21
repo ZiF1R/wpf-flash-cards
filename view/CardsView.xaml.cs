@@ -32,6 +32,15 @@ namespace course_project1.view
         Folder RootFolder;
         Grid MainPageGrid;
 
+        enum CardFilter
+        {
+            All,
+            Memorized,
+            NotMemorized
+        }
+
+        CardFilter activeFilter = CardFilter.All;
+
         public CardsView(Grid mainPageGrid, Frame secondFrame, Folder folder)
         {
             SecondFrame = secondFrame;
@@ -59,9 +68,14 @@ namespace course_project1.view
                 string Translation = modal.Translation;
                 string Examples = modal.Examples;
 
-                Card card = new Card(CurrentConnection, RootFolder.FolderId, Term, Translation, Examples);
-                RootFolder.Cards = RootFolder.Cards.Append(card).ToArray();
-                CardsWrap.Children.Insert(1, this.CreateCardElement(card));
+                try
+                {
+                    Card card = new Card(CurrentConnection, RootFolder.FolderId, Term, Translation, Examples);
+                    RootFolder.Cards = RootFolder.Cards.Append(card).ToArray();
+                    if (activeFilter != CardFilter.Memorized)
+                        CardsWrap.Children.Insert(1, this.CreateCardElement(card));
+                }
+                catch { }
             };
             modal.CloseCardModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
         }
@@ -71,7 +85,7 @@ namespace course_project1.view
             CardControl cardControl = null;
             try
             {
-                cardControl = new CardControl(MainPageGrid, card.Created, card.Term, card.Translation, card.Examples);
+                cardControl = new CardControl(MainPageGrid, card);
 
                 cardControl.Margin = new Thickness(0, 0, 40, 40);
                 cardControl.EditCard += (object s, RoutedEventArgs ev) =>
@@ -96,8 +110,8 @@ namespace course_project1.view
                 };
                 cardControl.RemoveCard += (object s, RoutedEventArgs ev) =>
                 {
-                    RootFolder.RemoveCard(CurrentConnection, card);
-                    CardsWrap.Children.Remove(cardControl);
+                    if (RootFolder.RemoveCard(CurrentConnection, card))
+                        CardsWrap.Children.Remove(cardControl);
                 };
             }
             catch
@@ -114,6 +128,7 @@ namespace course_project1.view
 
         private void ShowAllCards_Click(object sender, RoutedEventArgs e)
         {
+            activeFilter = CardFilter.All;
             CardsWrap.Children.RemoveRange(1, RootFolder.Cards.Length);
             foreach (Card card in RootFolder.Cards)
                 CardsWrap.Children.Insert(1, this.CreateCardElement(card));
@@ -121,6 +136,7 @@ namespace course_project1.view
 
         private void ShowMemorizedCards_Click(object sender, RoutedEventArgs e)
         {
+            activeFilter = CardFilter.Memorized;
             CardsWrap.Children.RemoveRange(1, RootFolder.Cards.Length);
             Card[] memorizedCards = RootFolder.Cards.Where(card => card.IsMemorized).ToArray();
             foreach (Card card in memorizedCards)
@@ -129,6 +145,7 @@ namespace course_project1.view
 
         private void ShowNotMemorizedCards_Click(object sender, RoutedEventArgs e)
         {
+            activeFilter = CardFilter.NotMemorized;
             CardsWrap.Children.RemoveRange(1, RootFolder.Cards.Length);
             Card[] notMemorizedCards = RootFolder.Cards.Where(card => !card.IsMemorized).ToArray();
             foreach (Card card in notMemorizedCards)

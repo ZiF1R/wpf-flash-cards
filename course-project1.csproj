@@ -123,6 +123,10 @@
     <Compile Include="controls\ModalWindows\FolderModalWindow.xaml.cs">
       <DependentUpon>FolderModalWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="controls\ModalWindows\Review.cs" />
+    <Compile Include="controls\ModalWindows\ReviewModalWindow.xaml.cs">
+      <DependentUpon>ReviewModalWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="controls\ModalWindows\SimpleModalWindow.xaml.cs">
       <DependentUpon>SimpleModalWindow.xaml</DependentUpon>
     </Compile>
@@ -191,6 +195,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="controls\ModalWindows\FolderModalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\ModalWindows\ReviewModalWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -344,6 +352,9 @@
     <Content Include="db queries\create tables.sql" />
     <Content Include="db queries\fill tables.sql" />
     <Content Include="db queries\select queries.sql" />
+    <Resource Include="icons\Play_disable.png" />
+    <Resource Include="icons\close.png" />
+    <Resource Include="icons\close_dark.png" />
     <Resource Include="icons\copy.png" />
     <Resource Include="icons\right-arrow.png" />
     <Resource Include="icons\right-arrow_dark-theme.png" />
