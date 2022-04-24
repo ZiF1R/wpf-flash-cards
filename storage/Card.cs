@@ -178,5 +178,52 @@ namespace course_project1.storage
                 }
             }
         }
+
+        public void SendAnswer(string ConnectionString, int folderId, bool isRight, bool isSetAsCorrect = false)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    SqlCommand command = connection.CreateCommand();
+                    if (!isSetAsCorrect)
+                    {
+                        if (isRight)
+                        {
+                            command.CommandText = "Update CARDS " +
+                                "set RIGHT_ANSWERS = RIGHT_ANSWERS + 1, IS_MEMORIZED = 'True' " +
+                                $"Where FOLDER_ID = {folderId} and TERM = '{Term}'";
+                            rightAnswers++;
+                        }
+                        else
+                        {
+                            command.CommandText = "Update CARDS " +
+                                "set WRONG_ANSWERS = WRONG_ANSWERS + 1, IS_MEMORIZED = 'False' " +
+                                $"Where FOLDER_ID = {folderId} and TERM = '{Term}'";
+                            wrongAnswers++;
+                        }
+                    }
+                    else
+                    {
+                        command.CommandText = "Update CARDS " +
+                            "set RIGHT_ANSWERS = RIGHT_ANSWERS + 1, WRONG_ANSWERS = WRONG_ANSWERS - 1, IS_MEMORIZED = 'True' " +
+                            $"Where FOLDER_ID = {folderId} and TERM = '{Term}'";
+                        rightAnswers++;
+                        wrongAnswers--;
+                    }
+                    command.ExecuteNonQuery();
+                    isMemorized = isRight;
+                }
+                catch
+                {
+                    MessageBox.Show("Cannot send answer to database!");
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
     }
 }

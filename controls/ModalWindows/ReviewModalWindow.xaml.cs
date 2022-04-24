@@ -1,6 +1,7 @@
 ﻿using course_project1.storage;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,10 +31,12 @@ namespace course_project1.controls.ModalWindows
         private bool isSubmitted = false;
         private DispatcherTimer TimerToAnswer;
         private int CurrentTime = 0;
+        string ConnectionString;
 
-        public ReviewModalWindow(Grid mainPageGrid, DataStorage storage, int rootFolderId, Card[] cards)
+        public ReviewModalWindow(Grid mainPageGrid, DataStorage storage, string connectionString, int rootFolderId, Card[] cards)
         {
             Storage = storage;
+            ConnectionString = connectionString;
             RootFolderId = rootFolderId;
             MainPageGrid = mainPageGrid;
             RootFolderId = rootFolderId;
@@ -116,6 +119,8 @@ namespace course_project1.controls.ModalWindows
             {
                 Review.RightAnswers++;
                 Review.WrongAnswers--;
+
+                Review.CurrentCard.SendAnswer(ConnectionString, RootFolderId, true, true);
                 NextCard();
             }
             else
@@ -149,7 +154,6 @@ namespace course_project1.controls.ModalWindows
             CurrentCardAnswer.Visibility = Visibility.Visible;
 
             string answer = Storage.settings.isReviewSwitched ? Review.CurrentCard.Term : Review.CurrentCard.Translation;
-
             if (AnswerInput.Value == answer)
             {
                 Review.RightAnswers++;
@@ -157,6 +161,8 @@ namespace course_project1.controls.ModalWindows
                 AnswerCompareResult.Foreground = new SolidColorBrush(Colors.Green);
                 ShowAnswer.Visibility = Visibility.Hidden;
                 SubmitButton.SetResourceReference(Button.ContentProperty, "Next");
+
+                Review.CurrentCard.SendAnswer(ConnectionString, RootFolderId, true);
             }
             else
             {
@@ -166,6 +172,8 @@ namespace course_project1.controls.ModalWindows
                 ShowAnswer.SetResourceReference(Button.ContentProperty, "SetCorrect");
                 SubmitButton.SetResourceReference(Button.ContentProperty, "Next");
                 SubmitButton.Style = (Style)SubmitButton.FindResource("DangerButton");
+
+                Review.CurrentCard.SendAnswer(ConnectionString, RootFolderId, false);
             }
 
 

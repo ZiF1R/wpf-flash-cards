@@ -48,7 +48,7 @@ namespace course_project1.view
             FolderControl folderControl = null;
             try
             {
-                folderControl = new FolderControl(MainPageGrid, folder, Storage);
+                folderControl = new FolderControl(MainPageGrid, folder, Storage, ConnectionString);
                 folderControl.Margin = new Thickness(0, 0, 40, 40);
 
                 folderControl.EditFolder += (object s, RoutedEventArgs ev) =>

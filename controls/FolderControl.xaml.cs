@@ -25,10 +25,12 @@ namespace course_project1.controls
         Grid MainPageGrid;
         Folder folder;
         DataStorage Storage;
+        string ConnectionString;
 
-        public FolderControl(Grid mainPageGrid, Folder folder, DataStorage storage)
+        public FolderControl(Grid mainPageGrid, Folder folder, DataStorage storage, string connectionString)
         {
             Storage = storage;
+            ConnectionString = connectionString;
             MainPageGrid = mainPageGrid;
             FolderName = folder.Name;
             FolderCategory = folder.Category;
@@ -204,12 +206,16 @@ namespace course_project1.controls
         {
             if (folder.Cards.Length == 0) return;
 
-            ReviewModalWindow modal = new ReviewModalWindow(MainPageGrid, Storage, folder.FolderId, folder.Cards);
+            ReviewModalWindow modal = new ReviewModalWindow(MainPageGrid, Storage, ConnectionString, folder.FolderId, folder.Cards);
             modal.SetValue(Grid.RowSpanProperty, 2);
             modal.SetValue(Grid.ColumnSpanProperty, 3);
             MainPageGrid.Children.Add(modal);
 
-            modal.CloseReview += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
+            modal.CloseReview += (object s, RoutedEventArgs ev) =>
+            {
+                FolderMemorizedCardsCount = folder.MemorizedCardsCount();
+                MainPageGrid.Children.Remove(modal);
+            };
         }
     }
 }

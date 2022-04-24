@@ -42,7 +42,7 @@ namespace course_project1.view
         {
             Storage.settings.SetAppTheme(Storage.settings.GetThemeName(1, ConnectionString));
             Storage.settings.SetAppLang(Storage.settings.GetLangName(1, ConnectionString));
-            Storage = new DataStorage();
+            Storage.Clear();
             mainWindow.AppLanguage.SelectedIndex = 0;
 
             this.rootFrame.Content = new LoginPage(ConnectionString, Storage);

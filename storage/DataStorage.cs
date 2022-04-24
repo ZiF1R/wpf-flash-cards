@@ -152,5 +152,13 @@ namespace course_project1
                 return isUnique;
             }
         }
+
+        public void Clear()
+        {
+            user = new User();
+            settings = new Settings();
+            folders = new Folder[] { };
+            categories = new string[] { };
+        }
     }
 }

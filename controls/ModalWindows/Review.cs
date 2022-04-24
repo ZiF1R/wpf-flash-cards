@@ -1,6 +1,7 @@
 ﻿using course_project1.storage;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -128,11 +129,6 @@ namespace course_project1.controls.ModalWindows
             string secFormat = sec < 10 ? "0" + sec : sec.ToString();
 
             return $"{minFormat}:{secFormat}";
-        }
-
-        public void SendAnswer(int folderId)
-        {
-
         }
     }
 }
