@@ -13,7 +13,7 @@
     <v:String x:Key="HaveNoAccount">Have no account?</v:String>
     <v:String x:Key="SignUp">Sign Up!</v:String>
     <v:String x:Key="HaveAlreadyAccount">Already have an account?</v:String>
-    <v:String x:Key="Login!">Login!</v:String>
+    <v:String x:Key="Login!">Sign In!</v:String>
     <v:String x:Key="Profile">Profile</v:String>
     <v:String x:Key="Folders">Folders</v:String>
     <v:String x:Key="Settings">Settings</v:String>
@@ -58,9 +58,9 @@
     <v:String x:Key="All">All</v:String>
     <v:String x:Key="Memorized">Memorized</v:String>
     <v:String x:Key="NotMemorized">Not memorized</v:String>
-    <v:String x:Key="FolderNameUsed">* This folder name is already in use!</v:String>
-    <v:String x:Key="CategoryAlreadyUsed">* This category name is already in use!</v:String>
-    <v:String x:Key="CardTermUsed">* This card term is already in use!</v:String>
+    <v:String x:Key="FolderNameUsed">* Folder with such name is already exist!</v:String>
+    <v:String x:Key="CategoryAlreadyUsed">* Category with such name is already exist!</v:String>
+    <v:String x:Key="CardTermUsed">* Card with such term is already exist in this folder!</v:String>
     <v:String x:Key="CopyAll">Copy all</v:String>
     <v:String x:Key="CopyTerm">Copy term</v:String>
     <v:String x:Key="CopyTranslation">Copy translation</v:String>
