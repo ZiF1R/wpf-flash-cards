@@ -25,8 +25,8 @@ namespace course_project1
     /// </summary>
     public partial class MainWindow : Window
     {
-        public SqlConnection CurrentConnection;
-        public DataStorage Storage;
+        private string ConnectionString;
+        private DataStorage Storage;
 
         public MainWindow()
         {
@@ -37,35 +37,39 @@ namespace course_project1
             this.DataBaseConection();
             Storage = new DataStorage();
             LoadLangs();
-            MainFrame.Content = new LoginPage();
+            MainFrame.Content = new LoginPage(ConnectionString, Storage);
         }
 
         private void LoadLangs()
         {
-            SqlCommand command = CurrentConnection.CreateCommand();
-            command.CommandText =
-                "SELECT LANG FROM LANGS ORDER BY LANG_ID";
-
-            SqlDataReader commandReader = command.ExecuteReader();
-            if (!commandReader.HasRows)
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT LANG FROM LANGS ORDER BY LANG_ID";
+
+                SqlDataReader commandReader = command.ExecuteReader();
+                if (!commandReader.HasRows)
+                {
+                    commandReader.Close();
+                    MessageBox.Show("Cannot load langs!");
+                    return;
+                };
+
+                int langNum = 1;
+                while (commandReader.Read())
+                {
+                    string lang = commandReader.GetString(0);
+                    ComboBoxItem item = new ComboBoxItem();
+                    item.Content = lang;
+                    if (langNum == Storage.settings.currentLangId)
+                        item.IsSelected = true;
+                    AppLanguage.Items.Add(item);
+                    langNum++;
+                }
                 commandReader.Close();
-                MessageBox.Show("Cannot load langs!");
-                return;
-            };
-
-            int langNum = 1;
-            while (commandReader.Read())
-            {
-                string lang = commandReader.GetString(0);
-                ComboBoxItem item = new ComboBoxItem();
-                item.Content = lang;
-                if (langNum == Storage.settings.currentLangId)
-                    item.IsSelected = true;
-                AppLanguage.Items.Add(item);
-                langNum++;
+                connection.Close();
             }
-            commandReader.Close();
         }
 
         private void DataBaseConection()
@@ -78,14 +82,22 @@ namespace course_project1
             connectionStringBuilder.IntegratedSecurity = true;
             connectionStringBuilder.Password = "";
 
-            this.CurrentConnection = new SqlConnection(connectionStringBuilder.ConnectionString);
-            try
+            this.ConnectionString = connectionStringBuilder.ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionStringBuilder.ConnectionString))
             {
-                this.CurrentConnection.Open();
-            }
-            catch
-            {
-                this.CurrentConnection.Close();
+                try
+                {
+                    connection.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("Database connection error!");
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
         }
 
@@ -93,7 +105,7 @@ namespace course_project1
         {
             if (Storage.user.Email != "")
             {
-                Storage.settings.ChangeAppLang(AppLanguage.SelectedIndex + 1, CurrentConnection);
+                Storage.settings.ChangeAppLang(AppLanguage.SelectedIndex + 1, ConnectionString, Storage.user.Uid);
                 return;
             }
             else
@@ -111,11 +123,6 @@ namespace course_project1
                 }
                 catch { }
             }
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            this.CurrentConnection.Close();
         }
     }
 }

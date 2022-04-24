@@ -21,13 +21,15 @@ namespace course_project1.view
     /// </summary>
     public partial class ProfilePage : Page
     {
-        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+        static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
         Frame rootFrame = mainWindow.MainFrame;
-        SqlConnection CurrentConnection = mainWindow.CurrentConnection;
-        DataStorage Storage = mainWindow.Storage;
+        DataStorage Storage;
+        string ConnectionString;
 
-        public ProfilePage()
+        public ProfilePage(string connectionString, DataStorage storage)
         {
+            ConnectionString = connectionString;
+            Storage = storage;
             InitializeComponent();
 
             NicknameInput.Placeholder = Storage.user.Nickname;
@@ -38,12 +40,12 @@ namespace course_project1.view
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-            Storage.settings.SetAppTheme(Storage.settings.GetThemeName(1, CurrentConnection));
-            Storage.settings.SetAppLang(Storage.settings.GetLangName(1, CurrentConnection));
-            mainWindow.Storage = new DataStorage();
+            Storage.settings.SetAppTheme(Storage.settings.GetThemeName(1, ConnectionString));
+            Storage.settings.SetAppLang(Storage.settings.GetLangName(1, ConnectionString));
+            Storage = new DataStorage();
             mainWindow.AppLanguage.SelectedIndex = 0;
 
-            this.rootFrame.Content = new LoginPage();
+            this.rootFrame.Content = new LoginPage(ConnectionString, Storage);
         }
 
         private void SaveChanges_Click(object sender, RoutedEventArgs e)
@@ -68,7 +70,7 @@ namespace course_project1.view
                 NameInput.Placeholder == Storage.user.Name
             ) return;
 
-            Storage.user.ChangeUserData(NicknameInput.Placeholder, SurnameInput.Placeholder, SurnameInput.Placeholder, this.CurrentConnection);
+            Storage.user.ChangeUserData(NicknameInput.Placeholder, SurnameInput.Placeholder, SurnameInput.Placeholder, this.ConnectionString);
         }
     }
 }

@@ -129,5 +129,10 @@ namespace course_project1.controls.ModalWindows
 
             return $"{minFormat}:{secFormat}";
         }
+
+        public void SendAnswer(int folderId)
+        {
+
+        }
     }
 }

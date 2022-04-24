@@ -23,14 +23,17 @@ namespace course_project1
     /// </summary>
     public partial class MainPage : Page
     {
-        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+        static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
         Frame rootFrame = mainWindow.MainFrame;
-        SqlConnection CurrentConnection = mainWindow.CurrentConnection;
+        DataStorage Storage;
+        string ConnectionString;
 
-        public MainPage()
+        public MainPage(string connectionString, DataStorage storage)
         {
+            this.ConnectionString = connectionString;
+            this.Storage = storage;
             InitializeComponent();
-            SecondFrame.Content = new ProfilePage();
+            SecondFrame.Content = new ProfilePage(ConnectionString, Storage);
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -41,17 +44,17 @@ namespace course_project1
 
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
-            SecondFrame.Content = new ProfilePage();
+            SecondFrame.Content = new ProfilePage(ConnectionString, Storage);
         }
 
         private void Folders_Click(object sender, RoutedEventArgs e)
         {
-            SecondFrame.Content = new FoldersPage(MainPageGrid, SecondFrame);
+            SecondFrame.Content = new FoldersPage(MainPageGrid, SecondFrame, ConnectionString, Storage);
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            SecondFrame.Content = new SettingsPage();
+            SecondFrame.Content = new SettingsPage(ConnectionString, Storage);
         }
     }
 }

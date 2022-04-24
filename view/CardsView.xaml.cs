@@ -25,9 +25,9 @@ namespace course_project1.view
     /// </summary>
     public partial class CardsView : Page
     {
-        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
-        DataStorage Storage = mainWindow.Storage;
-        SqlConnection CurrentConnection = mainWindow.CurrentConnection;
+        static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+        DataStorage Storage;
+        string ConnectionString;
         Frame SecondFrame;
         Folder RootFolder;
         Grid MainPageGrid;
@@ -41,8 +41,10 @@ namespace course_project1.view
 
         CardFilter activeFilter = CardFilter.All;
 
-        public CardsView(Grid mainPageGrid, Frame secondFrame, Folder folder)
+        public CardsView(Grid mainPageGrid, Frame secondFrame, Folder folder, string connectionString, DataStorage storage)
         {
+            ConnectionString = connectionString;
+            Storage = storage;
             SecondFrame = secondFrame;
             RootFolder = folder;
             MainPageGrid = mainPageGrid;
@@ -55,7 +57,7 @@ namespace course_project1.view
 
         private void AddCardButton_AddCard(object sender, RoutedEventArgs e)
         {
-            CardModalWindow modal = new CardModalWindow(MainPageGrid, CurrentConnection, RootFolder.FolderId, "", "", "");
+            CardModalWindow modal = new CardModalWindow(MainPageGrid, ConnectionString, Storage, RootFolder.FolderId, "", "", "");
             modal.SetValue(Grid.RowSpanProperty, 2);
             modal.SetValue(Grid.ColumnSpanProperty, 3);
             modal.SetResourceReference(CardModalWindow.ModalHeaderProperty, "CreateCard");
@@ -70,7 +72,7 @@ namespace course_project1.view
 
                 try
                 {
-                    Card card = new Card(CurrentConnection, RootFolder.FolderId, Term, Translation, Examples);
+                    Card card = new Card(ConnectionString, RootFolder.FolderId, Term, Translation, Examples);
                     RootFolder.Cards = RootFolder.Cards.Append(card).ToArray();
                     if (activeFilter != CardFilter.Memorized)
                         CardsWrap.Children.Insert(1, this.CreateCardElement(card));
@@ -91,7 +93,7 @@ namespace course_project1.view
                 cardControl.EditCard += (object s, RoutedEventArgs ev) =>
                 {
                     CardModalWindow modal = new CardModalWindow(
-                        MainPageGrid, CurrentConnection, RootFolder.FolderId, card.Term, card.Translation, card.Examples);
+                        MainPageGrid, ConnectionString, Storage, RootFolder.FolderId, card.Term, card.Translation, card.Examples);
                     modal.SetValue(Grid.RowSpanProperty, 2);
                     modal.SetValue(Grid.ColumnSpanProperty, 3);
                     modal.SetResourceReference(CardModalWindow.ModalHeaderProperty, "EditCard");
@@ -100,7 +102,7 @@ namespace course_project1.view
 
                     modal.CardAction += (object se, RoutedEventArgs evn) =>
                     {
-                        card.ChangeCardData(CurrentConnection, RootFolder.FolderId, modal.Term, modal.Translation, modal.Examples);
+                        card.ChangeCardData(ConnectionString, RootFolder.FolderId, modal.Term, modal.Translation, modal.Examples);
 
                         cardControl.Term = modal.Term;
                         cardControl.Translation = modal.Translation;
@@ -110,7 +112,7 @@ namespace course_project1.view
                 };
                 cardControl.RemoveCard += (object s, RoutedEventArgs ev) =>
                 {
-                    if (RootFolder.RemoveCard(CurrentConnection, card))
+                    if (RootFolder.RemoveCard(ConnectionString, card))
                         CardsWrap.Children.Remove(cardControl);
                 };
             }
@@ -123,7 +125,7 @@ namespace course_project1.view
 
         private void ReturnToFolders_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            SecondFrame.Content = new FoldersPage(MainPageGrid, SecondFrame);
+            SecondFrame.Content = new FoldersPage(MainPageGrid, SecondFrame, ConnectionString, Storage);
         }
 
         private void ShowAllCards_Click(object sender, RoutedEventArgs e)

@@ -21,13 +21,15 @@ namespace course_project1.view
     /// </summary>
     public partial class SettingsPage : Page
     {
-        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+        static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
         Frame rootFrame = mainWindow.MainFrame;
-        SqlConnection CurrentConnection = mainWindow.CurrentConnection;
-        DataStorage Storage = mainWindow.Storage;
+        DataStorage Storage;
+        string ConnectionString;
 
-        public SettingsPage()
+        public SettingsPage(string connectionString, DataStorage storage)
         {
+            ConnectionString = connectionString;
+            Storage = storage;
             InitializeComponent();
             ApplySettings();
         }
@@ -57,16 +59,16 @@ namespace course_project1.view
         private void ThemeSwitch_SwitchChanged(object sender, RoutedEventArgs e)
         {
             if (ThemeSwitch.Switched)
-                Storage.settings.ChangeAppTheme(2, CurrentConnection);
+                Storage.settings.ChangeAppTheme(2, ConnectionString, Storage.user.Uid);
             else
-                Storage.settings.ChangeAppTheme(1, CurrentConnection);
+                Storage.settings.ChangeAppTheme(1, ConnectionString, Storage.user.Uid);
         }
 
         private void ReviewSwitch_SwitchChanged(object sender, RoutedEventArgs e)
         {
             try
             {
-                Storage.settings.ChangeReviewSwitched(ReviewSwitch.Switched, CurrentConnection);
+                Storage.settings.ChangeReviewSwitched(ReviewSwitch.Switched, ConnectionString, Storage.user.Uid);
             }
             catch { }
         }
@@ -76,7 +78,7 @@ namespace course_project1.view
             try
             {
                 if (CardsNumber.Text != "")
-                    Storage.settings.ChangeCardsLimit(Convert.ToInt32(CardsNumber.SelectedItem), CurrentConnection);
+                    Storage.settings.ChangeCardsLimit(Convert.ToInt32(CardsNumber.SelectedItem), ConnectionString, Storage.user.Uid);
             }
             catch
             {
@@ -89,7 +91,7 @@ namespace course_project1.view
             try
             {
                 if (TimeLimit.Text != "")
-                    Storage.settings.ChangeTimeLimit(Convert.ToInt32(TimeLimit.SelectedItem), CurrentConnection);
+                    Storage.settings.ChangeTimeLimit(Convert.ToInt32(TimeLimit.SelectedItem), ConnectionString, Storage.user.Uid);
             }
             catch
             {

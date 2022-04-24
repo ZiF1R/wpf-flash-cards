@@ -23,13 +23,14 @@ namespace course_project1.view
     /// </summary>
     public partial class RegistrationPage : Page
     {
-        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
-        Frame rootFrame = mainWindow.MainFrame;
-        SqlConnection CurrentConnection = mainWindow.CurrentConnection;
-        DataStorage Storage = mainWindow.Storage;
+        static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+        string ConnectionString;
+        DataStorage Storage;
 
-        public RegistrationPage()
+        public RegistrationPage(string connectionString, DataStorage storage)
         {
+            this.ConnectionString = connectionString;
+            this.Storage = storage;
             InitializeComponent();
         }
 
@@ -46,9 +47,10 @@ namespace course_project1.view
                     NameInput.Value,
                     EmailInput.Value,
                     PasswordInput.Value,
-                    CurrentConnection
+                    ConnectionString
                 );
-                NavigationService.Navigate(new LoginPage());
+                Storage.settings.CreateUserSettings(ConnectionString, Storage.user.Uid);
+                NavigationService.Navigate(new LoginPage(ConnectionString, Storage));
             }
             catch (Exception ex)
             {
@@ -102,7 +104,7 @@ namespace course_project1.view
 
         private void GoToLogin_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new LoginPage());
+            NavigationService.Navigate(new LoginPage(ConnectionString, Storage));
         }
     }
 }

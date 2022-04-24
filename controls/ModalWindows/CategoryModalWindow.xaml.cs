@@ -21,12 +21,13 @@ namespace course_project1.controls.ModalWindows
     /// </summary>
     public partial class CategoryModalWindow : UserControl
     {
-        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
-        SqlConnection CurrentConnection = mainWindow.CurrentConnection;
-        DataStorage Storage = mainWindow.Storage;
+        DataStorage Storage;
+        string ConnectionString;
 
-        public CategoryModalWindow()
+        public CategoryModalWindow(string connectionString, DataStorage storage)
         {
+            this.ConnectionString = connectionString;
+            this.Storage = storage;
             InitializeComponent();
         }
 
@@ -78,7 +79,7 @@ namespace course_project1.controls.ModalWindows
             if (FolderNameTextBox.Value != "")
             {
                 this.CategoryValue = FolderNameTextBox.Value.Trim();
-                bool isUnique = Storage.CheckForUniqueCategory(CurrentConnection, this.CategoryValue);
+                bool isUnique = Storage.CheckForUniqueCategory(ConnectionString, this.CategoryValue);
 
                 if (!isUnique) CategoryAlreadyUsed.Visibility = Visibility.Visible;
                 else

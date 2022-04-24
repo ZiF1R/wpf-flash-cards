@@ -23,8 +23,7 @@ namespace course_project1.controls.ModalWindows
     public partial class ReviewModalWindow : UserControl
     {
         Grid MainPageGrid;
-        static MainWindow MainWindow = (MainWindow)Application.Current.MainWindow;
-        DataStorage Storage = MainWindow.Storage;
+        DataStorage Storage;
 
         private Review Review;
         private int RootFolderId;
@@ -32,8 +31,10 @@ namespace course_project1.controls.ModalWindows
         private DispatcherTimer TimerToAnswer;
         private int CurrentTime = 0;
 
-        public ReviewModalWindow(Grid mainPageGrid, int rootFolderId, Card[] cards)
+        public ReviewModalWindow(Grid mainPageGrid, DataStorage storage, int rootFolderId, Card[] cards)
         {
+            Storage = storage;
+            RootFolderId = rootFolderId;
             MainPageGrid = mainPageGrid;
             RootFolderId = rootFolderId;
             InitializeComponent();
@@ -166,6 +167,8 @@ namespace course_project1.controls.ModalWindows
                 SubmitButton.SetResourceReference(Button.ContentProperty, "Next");
                 SubmitButton.Style = (Style)SubmitButton.FindResource("DangerButton");
             }
+
+
 
             isSubmitted = true;
         }

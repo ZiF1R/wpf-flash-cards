@@ -41,14 +41,14 @@ namespace course_project1.storage
             }
         }
 
-        public Folder(SqlConnection connection, string name, string category)
+        public Folder(string connectionString, int uid, string name, string category)
         {
             Name = name;
             Category = category;
             Created = DateTime.Now;
             Cards = new Card[] { };
 
-            if(!InsertFolder(connection))
+            if(!InsertFolder(connectionString, uid))
                 throw new Exception("insert error");
         }
 
@@ -61,40 +61,46 @@ namespace course_project1.storage
             Cards = new Card[] { };
         }
 
-        public void LoadFolderCards(SqlConnection connection)
+        public void LoadFolderCards(string connectionString)
         {
-            SqlCommand command = connection.CreateCommand();
-            command.CommandText =
-                $"SELECT * " +
-                $"FROM CARDS " +
-                $"WHERE CARDS.FOLDER_ID = {FolderId}";
-
-            SqlDataReader comandReader = command.ExecuteReader();
-            if (comandReader.HasRows)
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                try
-                {
-                    while (comandReader.Read())
-                    {
-                        DateTime created = comandReader.GetDateTime(1);
-                        string term = comandReader.GetString(2);
-                        string translation = comandReader.GetString(3);
-                        string examples = comandReader.GetString(4);
-                        bool isMemorized = comandReader.GetString(5) == "True";
-                        int rightAnswers = comandReader.GetInt32(6);
-                        int wrongAnswers = comandReader.GetInt32(7);
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText =
+                    $"SELECT * " +
+                    $"FROM CARDS " +
+                    $"WHERE CARDS.FOLDER_ID = {FolderId}";
 
-                        Card card = new Card(term, translation, examples, created, isMemorized, rightAnswers, wrongAnswers);
-                        Cards = Cards.Append(card).ToArray();
+                SqlDataReader comandReader = command.ExecuteReader();
+                if (comandReader.HasRows)
+                {
+                    try
+                    {
+                        while (comandReader.Read())
+                        {
+                            DateTime created = comandReader.GetDateTime(1);
+                            string term = comandReader.GetString(2);
+                            string translation = comandReader.GetString(3);
+                            string examples = comandReader.GetString(4);
+                            bool isMemorized = comandReader.GetString(5) == "True";
+                            int rightAnswers = comandReader.GetInt32(6);
+                            int wrongAnswers = comandReader.GetInt32(7);
+
+                            Card card = new Card(term, translation, examples, created, isMemorized, rightAnswers, wrongAnswers);
+                            Cards = Cards.Append(card).ToArray();
+                        }
+                    }
+                    catch
+                    {
+                        connection?.Close();
+                        MessageBox.Show("Cards loading error!");
+                        return;
                     }
                 }
-                catch
-                {
-                    MessageBox.Show("Cards loading error!");
-                    return;
-                }
+                comandReader.Close();
+                connection?.Close();
             }
-            comandReader.Close();
         }
 
         public int MemorizedCardsCount()
@@ -102,96 +108,114 @@ namespace course_project1.storage
             return Cards.Where(card => card.IsMemorized).ToArray().Length;
         }
 
-        private bool InsertFolder(SqlConnection connection)
+        private bool InsertFolder(string connectionString, int uid)
         {
-            int uid = ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.user.Uid;
-
-            var addFolderCommand = string.Format("INSERT INTO FOLDERS VALUES(@id, @name, @created, @category)");
-            using (SqlCommand command = new SqlCommand(addFolderCommand, connection))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                connection.Open();
+                var addFolderCommand = string.Format("INSERT INTO FOLDERS VALUES(@id, @name, @created, @category)");
+                using (SqlCommand command = new SqlCommand(addFolderCommand, connection))
+                {
+                    try
+                    {
+                        command.Parameters.AddWithValue("@id", uid);
+                        command.Parameters.AddWithValue("@name", Name);
+                        command.Parameters.AddWithValue("@created", Created);
+                        command.Parameters.AddWithValue("@category", Category);
+                        command.ExecuteNonQuery();
+                    }
+                    catch
+                    {
+                        connection.Close();
+                        MessageBox.Show("Folder insert error!");
+                        return false;
+                    }
+                }
+                connection.Close();
+                return true;
+            }
+        }
+
+        public bool RemoveFolder(string connectionString, int uid)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection?.Open();
+                foreach (Card card in Cards)
+                    card.RemoveCard(connectionString, FolderId);
+
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText =
+                    "DELETE FOLDERS WHERE " +
+                    $"FOLDERS.USER_UID = {uid} AND FOLDERS.FOLDER_NAME = '{Name}'";
                 try
                 {
-                    command.Parameters.AddWithValue("@id", uid);
-                    command.Parameters.AddWithValue("@name", Name);
-                    command.Parameters.AddWithValue("@created", Created);
-                    command.Parameters.AddWithValue("@category", Category);
-                    command.ExecuteNonQuery();
+                    SqlDataReader commandReader = command.ExecuteReader();
+                    commandReader.Close();
+                    connection.Close();
+                    return true;
                 }
                 catch
                 {
-                    MessageBox.Show("Folder insert error!");
+                    connection.Close();
+                    MessageBox.Show("Folder remove error!");
                     return false;
                 }
             }
-            return true;
         }
 
-        public bool RemoveFolder(SqlConnection connection)
+        public void ChangeFolderData(string connectionString, int uid, string newName, string newCategory)
         {
-            int uid = ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.user.Uid;
-
-            foreach (Card card in Cards)
-                card.RemoveCard(connection, FolderId);
-
-            SqlCommand command = connection.CreateCommand();
-            command.CommandText =
-                "DELETE FOLDERS WHERE " +
-                $"FOLDERS.USER_UID = {uid} AND FOLDERS.FOLDER_NAME = '{Name}'";
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlDataReader commandReader = command.ExecuteReader();
-                commandReader.Close();
-                return true;
-            }
-            catch
-            {
-                MessageBox.Show("Folder remove error!");
-                return false;
+                connection.Open();
+                try
+                {
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText =
+                        $"UPDATE FOLDERS " +
+                        $"SET FOLDER_NAME = '{newName}', CATEGORY = '{newCategory}' FROM FOLDERS " +
+                        $"WHERE USER_UID = {uid} AND FOLDER_NAME = '{Name}'";
+                    SqlDataReader commandReader = command.ExecuteReader();
+                    commandReader.Close();
+
+                    Name = newName;
+                    Category = newCategory;
+                }
+                catch
+                {
+                    MessageBox.Show("Folder update error!");
+                }
+                finally
+                {
+                    connection?.Close();
+                }
             }
         }
 
-        public void ChangeFolderData(SqlConnection connection, string newName, string newCategory)
+        public static bool IsUniqueFolderName(string connectionString, string folderName, int uid)
         {
-            int uid = ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.user.Uid;
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                connection.Open();
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText =
-                    $"UPDATE FOLDERS " +
-                    $"SET FOLDER_NAME = '{newName}', CATEGORY = '{newCategory}' FROM FOLDERS " +
-                    $"WHERE USER_UID = {uid} AND FOLDER_NAME = '{Name}'";
+                    $"SELECT * " +
+                    $"FROM FOLDERS " +
+                    $"WHERE FOLDERS.USER_UID = {uid} AND FOLDERS.FOLDER_NAME = '{folderName}'";
                 SqlDataReader commandReader = command.ExecuteReader();
+
+                bool isUnique = !commandReader.HasRows;
                 commandReader.Close();
-            }
-            catch
-            {
-                MessageBox.Show("Folder update error!");
-            }
 
-            Name = newName;
-            Category = newCategory;
+                connection?.Close();
+                return isUnique;
+            }
         }
 
-        public static bool IsUniqueFolderName(SqlConnection connection, string folderName)
+        public bool RemoveCard(string connectionString, Card card)
         {
-            int uid = ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.user.Uid;
-
-            SqlCommand command = connection.CreateCommand();
-            command.CommandText =
-                $"SELECT * " +
-                $"FROM FOLDERS " +
-                $"WHERE FOLDERS.USER_UID = {uid} AND FOLDERS.FOLDER_NAME = '{folderName}'";
-            SqlDataReader commandReader = command.ExecuteReader();
-
-            bool isUnique = !commandReader.HasRows;
-            commandReader.Close();
-
-            return isUnique;
-        }
-
-        public bool RemoveCard(SqlConnection connection, Card card)
-        {
-            if (!card.RemoveCard(connection, FolderId)) return false;
+            if (!card.RemoveCard(connectionString, FolderId)) return false;
             this.Cards = this.Cards.Where(c => c != card).ToArray();
 
             return true;

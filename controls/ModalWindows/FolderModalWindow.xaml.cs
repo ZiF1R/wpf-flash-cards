@@ -23,19 +23,19 @@ namespace course_project1.controls.ModalWindows
     /// </summary>
     public partial class FolderModalWindow : UserControl
     {
-        static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-        DataStorage Storage = mainWindow.Storage;
+        DataStorage Storage;
+        string ConnectionString;
         public string FolderName = "";
         public string FolderCategory = "";
         Grid MainPageGrid;
-        SqlConnection Connection;
 
-        public FolderModalWindow(Grid mainPageGrid, SqlConnection connection, string folderName, string folderCategory)
+        public FolderModalWindow(Grid mainPageGrid, string connectionString, DataStorage storage, string folderName, string folderCategory)
         {
+            ConnectionString = connectionString;
+            Storage = storage;
             this.FolderName = folderName;
             this.FolderCategory = folderCategory;
             this.MainPageGrid = mainPageGrid;
-            Connection = connection;
             InitializeComponent();
 
             FolderNameTextBox.Value = this.FolderName;
@@ -118,7 +118,7 @@ namespace course_project1.controls.ModalWindows
             {
                 if (FolderName != FolderNameTextBox.Value)
                 {
-                    bool isUnique = Folder.IsUniqueFolderName(Connection, FolderNameTextBox.Value);
+                    bool isUnique = Folder.IsUniqueFolderName(ConnectionString, FolderNameTextBox.Value, Storage.user.Uid);
                     if (!isUnique)
                     {
                         FolderNameUsed.Visibility = Visibility.Visible;
@@ -149,7 +149,7 @@ namespace course_project1.controls.ModalWindows
 
         private void AddCategoryButton_Click(object sender, RoutedEventArgs e)
         {
-            CategoryModalWindow modal = new CategoryModalWindow();
+            CategoryModalWindow modal = new CategoryModalWindow(ConnectionString, Storage);
             modal.SetValue(Grid.RowSpanProperty, 2);
             modal.SetValue(Grid.ColumnSpanProperty, 3);
             modal.SetResourceReference(FolderModalWindow.ModalHeaderProperty, "CreateCategory");
@@ -158,7 +158,7 @@ namespace course_project1.controls.ModalWindows
             MainPageGrid.Children.Add(modal);
             modal.AddCategory += (object s, RoutedEventArgs ev) =>
             {
-                Storage.AddCategory(Connection, modal.CategoryValue);
+                Storage.AddCategory(ConnectionString, modal.CategoryValue);
 
                 ComboBoxItem item = new ComboBoxItem();
                 item.Content = modal.CategoryValue;

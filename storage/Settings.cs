@@ -66,102 +66,118 @@ namespace course_project1.storage
             this.currentTheme.Source = new Uri($"pack://application:,,,/theme/Light.xaml");
         }
 
-        public void CreateUserSettings(SqlConnection connection)
+        public void CreateUserSettings(string connectionString, int uid)
         {
-            int uid = ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.user.Uid;
-
-            SqlCommand command = connection.CreateCommand();
-            command.CommandText =
-                "INSERT INTO SETTINGS VALUES" +
-                $"({uid}, {currentThemeId}, {currentLangId}, {reviewCardsLimit}, '{isReviewSwitched}', {reviewTimeLimit})";
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlDataReader commandReader = command.ExecuteReader();
-                commandReader.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                MessageBox.Show("Settings insert error!");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText =
+                    "INSERT INTO SETTINGS VALUES" +
+                    $"({uid}, {currentThemeId}, {currentLangId}, {reviewCardsLimit}, '{isReviewSwitched}', {reviewTimeLimit})";
+                try
+                {
+                    SqlDataReader commandReader = command.ExecuteReader();
+                    commandReader.Close();
+                }
+                catch
+                {
+                    MessageBox.Show("Settings insert error!");
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
         }
 
-        public void LoadSettings(SqlConnection connection)
+        public void LoadSettings(string connectionString, int uid)
         {
-            int uid = ((MainWindow)System.Windows.Application.Current.MainWindow).Storage.user.Uid;
-
-            SqlCommand command = connection.CreateCommand();
-            command.CommandText =
-                $"SELECT * " +
-                $"FROM SETTINGS " +
-                $"WHERE SETTINGS.USER_UID = {uid}";
-
-            SqlDataReader commandReader = command.ExecuteReader();
-            if (!commandReader.HasRows)
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                commandReader.Close();
-                MessageBox.Show("Cannot find user settings!");
-                return;
-            };
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText =
+                    $"SELECT * " +
+                    $"FROM SETTINGS " +
+                    $"WHERE SETTINGS.USER_UID = {uid}";
 
-            commandReader.Read();
-            try
-            {
-                int themeId = commandReader.GetInt32(1);
-                int langId = commandReader.GetInt32(2);
-                int cardsLimit = commandReader.GetInt32(3);
-                bool isSwitched = commandReader.GetString(4) == "True";
-                int timeLimit = commandReader.GetInt32(5);
+                SqlDataReader commandReader = command.ExecuteReader();
+                if (!commandReader.HasRows)
+                {
+                    commandReader.Close();
+                    MessageBox.Show("Cannot find user settings!");
+                    connection.Close();
+                    return;
+                };
 
-                currentLangId = langId;
-                currentThemeId = themeId;
-                reviewCardsLimit = cardsLimit;
-                isReviewSwitched = isSwitched;
-                reviewTimeLimit = timeLimit;
-                commandReader.Close();
+                commandReader.Read();
+                try
+                {
+                    int themeId = commandReader.GetInt32(1);
+                    int langId = commandReader.GetInt32(2);
+                    int cardsLimit = commandReader.GetInt32(3);
+                    bool isSwitched = commandReader.GetString(4) == "True";
+                    int timeLimit = commandReader.GetInt32(5);
 
-                this.SetAppTheme(this.GetThemeName(currentThemeId, connection));
-                this.SetAppLang(this.GetLangName(currentLangId, connection));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("User settings loading error!");
-                MessageBox.Show(ex.Message);
-                MessageBox.Show(ex.StackTrace);
+                    currentLangId = langId;
+                    currentThemeId = themeId;
+                    reviewCardsLimit = cardsLimit;
+                    isReviewSwitched = isSwitched;
+                    reviewTimeLimit = timeLimit;
+                    commandReader.Close();
+
+                    this.SetAppTheme(this.GetThemeName(currentThemeId, connectionString));
+                    this.SetAppLang(this.GetLangName(currentLangId, connectionString));
+                }
+                catch
+                {
+                    MessageBox.Show("User settings loading error!");
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
         }
 
         ///
 
-        public void ChangeAppTheme(int id, SqlConnection connection)
+        public void ChangeAppTheme(int id, string connectionString, int uid)
         {
             this.currentThemeId = id;
-            this.UploadSettingChanges(Setting.Theme, connection);
-            this.SetAppTheme(this.GetThemeName(currentThemeId, connection));
+            this.UploadSettingChanges(Setting.Theme, connectionString, uid);
+            this.SetAppTheme(this.GetThemeName(currentThemeId, connectionString));
         }
 
-        public string GetThemeName(int id, SqlConnection connection)
+        public string GetThemeName(int id, string connectionString)
         {
-            SqlCommand command = connection.CreateCommand();
-            command.CommandText =
-                "SELECT THEME " +
-                "FROM THEMES " +
-                $"WHERE THEMES.THEME_ID = {id}";
-
-            SqlDataReader commandReader = command.ExecuteReader();
-            if (!commandReader.HasRows)
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText =
+                    "SELECT THEME " +
+                    "FROM THEMES " +
+                    $"WHERE THEMES.THEME_ID = {id}";
+
+                SqlDataReader commandReader = command.ExecuteReader();
+                if (!commandReader.HasRows)
+                {
+                    commandReader.Close();
+                    MessageBox.Show("Cannot get theme!");
+                    connection.Close();
+                    return null;
+                };
+
+                commandReader.Read();
+                string theme = commandReader.GetString(0);
+                theme = $"{theme[0]}{theme.ToLower().Remove(0, 1)}";
                 commandReader.Close();
-                MessageBox.Show("Cannot get theme!");
-                return null;
-            };
+                connection.Close();
 
-            commandReader.Read();
-            string theme = commandReader.GetString(0);
-            theme = $"{theme[0]}{theme.ToLower().Remove(0, 1)}";
-            commandReader.Close();
-
-            return theme;
+                return theme;
+            }
         }
 
         public void SetAppTheme(string theme)
@@ -176,34 +192,40 @@ namespace course_project1.storage
 
         ///
 
-        public void ChangeAppLang(int id, SqlConnection connection)
+        public void ChangeAppLang(int id, string connectionString, int uid)
         {
             this.currentLangId = id;
-            this.UploadSettingChanges(Setting.Lang, connection);
-            this.SetAppLang(this.GetLangName(currentLangId, connection));
+            this.UploadSettingChanges(Setting.Lang, connectionString, uid);
+            this.SetAppLang(this.GetLangName(currentLangId, connectionString));
         }
 
-        public string GetLangName(int id, SqlConnection connection)
+        public string GetLangName(int id, string connectionString)
         {
-            SqlCommand command = connection.CreateCommand();
-            command.CommandText =
-                "SELECT LANG " +
-                "FROM LANGS " +
-                $"WHERE LANGS.LANG_ID = {id}";
-
-            SqlDataReader commandReader = command.ExecuteReader();
-            if (!commandReader.HasRows)
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText =
+                    "SELECT LANG " +
+                    "FROM LANGS " +
+                    $"WHERE LANGS.LANG_ID = {id}";
+
+                SqlDataReader commandReader = command.ExecuteReader();
+                if (!commandReader.HasRows)
+                {
+                    commandReader.Close();
+                    MessageBox.Show("Cannot get theme!");
+                    connection.Close();
+                    return null;
+                };
+
+                commandReader.Read();
+                string lang = commandReader.GetString(0).ToLower();
                 commandReader.Close();
-                MessageBox.Show("Cannot get theme!");
-                return null;
-            };
+                connection.Close();
 
-            commandReader.Read();
-            string lang = commandReader.GetString(0).ToLower();
-            commandReader.Close();
-
-            return lang;
+                return lang;
+            }
         }
 
         public void SetAppLang(string lang)
@@ -218,61 +240,67 @@ namespace course_project1.storage
 
         ///
 
-        public void ChangeReviewSwitched(bool value, SqlConnection connection)
+        public void ChangeReviewSwitched(bool value, string connectionString, int uid)
         {
             this.isReviewSwitched = value;
-            this.UploadSettingChanges(Setting.SwitchedReview, connection);
+            this.UploadSettingChanges(Setting.SwitchedReview, connectionString, uid);
         }
 
-        public void ChangeTimeLimit(int limit, SqlConnection connection)
+        public void ChangeTimeLimit(int limit, string connectionString, int uid)
         {
             this.ReviewTimeLimit = limit;
-            this.UploadSettingChanges(Setting.TimeLimit, connection);
+            this.UploadSettingChanges(Setting.TimeLimit, connectionString, uid);
         }
 
-        public void ChangeCardsLimit(int limit, SqlConnection connection)
+        public void ChangeCardsLimit(int limit, string connectionString, int uid)
         {
             this.ReviewCardsLimit = limit;
-            this.UploadSettingChanges(Setting.CardsLimit, connection);
+            this.UploadSettingChanges(Setting.CardsLimit, connectionString, uid);
         }
 
         ///
 
-        private void UploadSettingChanges(Setting setting, SqlConnection connection)
+        private void UploadSettingChanges(Setting setting, string connectionString, int uid)
         {
-            SqlCommand command = connection.CreateCommand();
-            command.CommandText =
-                "UPDATE SETTINGS SET ";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText =
+                    "UPDATE SETTINGS SET ";
 
-            switch (setting)
-            {
-                case Setting.Lang:
-                    command.CommandText += $"ACTIVE_LANG = {currentLangId}";
-                    break;
-                case Setting.Theme:
-                    command.CommandText += $"ACTIVE_THEME = {currentThemeId}";
-                    break;
-                case Setting.CardsLimit:
-                    command.CommandText += $"CARDS_LIMIT = {ReviewCardsLimit}";
-                    break;
-                case Setting.TimeLimit:
-                    command.CommandText += $"TIME_LIMIT = {ReviewTimeLimit}";
-                    break;
-                case Setting.SwitchedReview:
-                    command.CommandText += $"SWITCHED_REVIEW = '{isReviewSwitched}'";
-                    break;
-            }
-
-            int uid = ((MainWindow)Application.Current.MainWindow).Storage.user.Uid;
-            command.CommandText += $" WHERE SETTINGS.USER_UID = {uid}";
-            
-            try
-            {
-                command.ExecuteNonQuery();
-            }
-            catch
-            {
-                MessageBox.Show("Upload settings error!");
+                switch (setting)
+                {
+                    case Setting.Lang:
+                        command.CommandText += $"ACTIVE_LANG = {currentLangId}";
+                        break;
+                    case Setting.Theme:
+                        command.CommandText += $"ACTIVE_THEME = {currentThemeId}";
+                        break;
+                    case Setting.CardsLimit:
+                        command.CommandText += $"CARDS_LIMIT = {ReviewCardsLimit}";
+                        break;
+                    case Setting.TimeLimit:
+                        command.CommandText += $"TIME_LIMIT = {ReviewTimeLimit}";
+                        break;
+                    case Setting.SwitchedReview:
+                        command.CommandText += $"SWITCHED_REVIEW = '{isReviewSwitched}'";
+                        break;
+                }
+                
+                command.CommandText += $" WHERE SETTINGS.USER_UID = {uid}";
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch
+                {
+                    MessageBox.Show("Upload settings error!");
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
         }
     }

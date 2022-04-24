@@ -46,7 +46,7 @@ namespace course_project1.storage
         public int RightAnswers { get => rightAnswers; }
         public int WrongAnswers { get => wrongAnswers; }
 
-        public Card(SqlConnection connection, int rootFolderId, string term, string translation, string examples)
+        public Card(string connectionString, int rootFolderId, string term, string translation, string examples)
         {
             Term = term;
             Translation = translation;
@@ -56,7 +56,7 @@ namespace course_project1.storage
             this.wrongAnswers = 0;
             this.isMemorized = false;
 
-            if (!InsertCard(connection, rootFolderId))
+            if (!InsertCard(connectionString, rootFolderId))
                 throw new Exception();
         }
 
@@ -71,86 +71,111 @@ namespace course_project1.storage
             this.isMemorized = isMemorized;
         }
 
-        private bool InsertCard(SqlConnection connection, int rootFolderId)
+        private bool InsertCard(string connectionString, int rootFolderId)
         {
-            var addFolderCommand = string.Format("INSERT INTO CARDS VALUES(" +
-                "@folderId, @created, @term, @translation, @examples, @memorized, @right, @wrong)");
-            using (SqlCommand command = new SqlCommand(addFolderCommand, connection))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                connection.Open();
+                var addFolderCommand = string.Format("INSERT INTO CARDS VALUES(" +
+                   "@folderId, @created, @term, @translation, @examples, @memorized, @right, @wrong)");
+                using (SqlCommand command = new SqlCommand(addFolderCommand, connection))
+                {
+                    try
+                    {
+                        command.Parameters.AddWithValue("@folderId", rootFolderId);
+                        command.Parameters.AddWithValue("@created", Created);
+                        command.Parameters.AddWithValue("@term", Term);
+                        command.Parameters.AddWithValue("@translation", Translation);
+                        command.Parameters.AddWithValue("@examples", Examples);
+                        command.Parameters.AddWithValue("@memorized", IsMemorized.ToString());
+                        command.Parameters.AddWithValue("@right", RightAnswers);
+                        command.Parameters.AddWithValue("@wrong", WrongAnswers);
+                        command.ExecuteNonQuery();
+                        connection.Close();
+                    }
+                    catch
+                    {
+                        connection.Close();
+                        MessageBox.Show("Card insert error!");
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+
+        internal static bool IsUniqueCardTerm(string connectionString, int folderId, string term)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText =
+                    $"SELECT * " +
+                    $"FROM CARDS " +
+                    $"WHERE CARDS.FOLDER_ID = {folderId} AND CARDS.TERM = '{term}'";
+                SqlDataReader commandReader = command.ExecuteReader();
+
+                bool isUnique = !commandReader.HasRows;
+                commandReader.Close();
+
+                connection.Close();
+                return isUnique;
+            }
+        }
+
+        public bool RemoveCard(string connectionString, int rootFolderId)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText =
+                    "DELETE CARDS WHERE " +
+                    $"CARDS.FOLDER_ID = {rootFolderId} AND CARDS.TERM = '{Term}'";
                 try
                 {
-                    command.Parameters.AddWithValue("@folderId", rootFolderId);
-                    command.Parameters.AddWithValue("@created", Created);
-                    command.Parameters.AddWithValue("@term", Term);
-                    command.Parameters.AddWithValue("@translation", Translation);
-                    command.Parameters.AddWithValue("@examples", Examples);
-                    command.Parameters.AddWithValue("@memorized", IsMemorized.ToString());
-                    command.Parameters.AddWithValue("@right", RightAnswers);
-                    command.Parameters.AddWithValue("@wrong", WrongAnswers);
-                    command.ExecuteNonQuery();
+                    SqlDataReader commandReader = command.ExecuteReader();
+                    commandReader.Close();
                 }
                 catch
                 {
-                    MessageBox.Show("Card insert error!");
+                    connection.Close();
+                    MessageBox.Show("Card remove error!");
                     return false;
                 }
+                connection.Close();
+                return true;
             }
-            return true;
         }
 
-        internal static bool IsUniqueCardTerm(SqlConnection connection, int folderId, string term)
+        public void ChangeCardData(string connectionString, int rootFolderId, string term, string translation, string examples)
         {
-            SqlCommand command = connection.CreateCommand();
-            command.CommandText =
-                $"SELECT * " +
-                $"FROM CARDS " +
-                $"WHERE CARDS.FOLDER_ID = {folderId} AND CARDS.TERM = '{term}'";
-            SqlDataReader commandReader = command.ExecuteReader();
-
-            bool isUnique = !commandReader.HasRows;
-            commandReader.Close();
-
-            return isUnique;
-        }
-
-        public bool RemoveCard(SqlConnection connection, int rootFolderId)
-        {
-            SqlCommand command = connection.CreateCommand();
-            command.CommandText =
-                "DELETE CARDS WHERE " +
-                $"CARDS.FOLDER_ID = {rootFolderId} AND CARDS.TERM = '{Term}'";
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlDataReader commandReader = command.ExecuteReader();
-                commandReader.Close();
-            }
-            catch
-            {
-                MessageBox.Show("Card remove error!");
-                return false;
-            }
-            return true;
-        }
+                connection.Open();
+                try
+                {
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText =
+                        $"UPDATE CARDS " +
+                        $"SET TERM = '{term}', TRANSLATION = '{translation}', EXAMPLES = '{examples}' FROM CARDS " +
+                        $"WHERE FOLDER_ID = {rootFolderId} AND TERM = '{Term}'";
+                    SqlDataReader commandReader = command.ExecuteReader();
+                    commandReader.Close();
 
-        public void ChangeCardData(SqlConnection connection, int rootFolderId, string term, string translation, string examples)
-        {
-            try
-            {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    $"UPDATE CARDS " +
-                    $"SET TERM = '{term}', TRANSLATION = '{translation}', EXAMPLES = '{examples}' FROM CARDS " +
-                    $"WHERE FOLDER_ID = {rootFolderId} AND TERM = '{Term}'";
-                SqlDataReader commandReader = command.ExecuteReader();
-                commandReader.Close();
-
-                Term = term;
-                Translation = translation;
-                Examples = examples;
-            }
-            catch
-            {
-                MessageBox.Show("Card update error!");
+                    Term = term;
+                    Translation = translation;
+                    Examples = examples;
+                }
+                catch
+                {
+                    MessageBox.Show("Card update error!");
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
         }
     }

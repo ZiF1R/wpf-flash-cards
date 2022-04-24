@@ -22,20 +22,21 @@ namespace course_project1.controls.ModalWindows
     /// </summary>
     public partial class CardModalWindow : UserControl
     {
-        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
-        DataStorage Storage = mainWindow.Storage;
+        static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+        DataStorage Storage;
+        string ConnectionString;
         public int RootFolderId;
         public string Term = "";
         public string Translation = "";
         public string Examples = "";
         Grid MainPageGrid;
-        SqlConnection Connection;
 
-        public CardModalWindow(Grid mainPageGrid, SqlConnection connection, int folderId, string term, string translation, string examples)
+        public CardModalWindow(Grid mainPageGrid, string connectionString, DataStorage storage, int folderId, string term, string translation, string examples)
         {
             RootFolderId = folderId;
             MainPageGrid = mainPageGrid;
-            Connection = connection;
+            ConnectionString = connectionString;
+            Storage = storage;
             Term = term;
             Translation = translation;
             Examples = examples;
@@ -100,7 +101,7 @@ namespace course_project1.controls.ModalWindows
             {
                 if (CardTermTextBox.Value != Term)
                 {
-                    bool isUnique = Card.IsUniqueCardTerm(Connection, RootFolderId, CardTermTextBox.Value);
+                    bool isUnique = Card.IsUniqueCardTerm(ConnectionString, RootFolderId, CardTermTextBox.Value);
                     if (!isUnique)
                     {
                         CardTermUsed.Visibility = Visibility.Visible;

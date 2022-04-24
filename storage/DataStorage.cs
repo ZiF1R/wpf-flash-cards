@@ -24,113 +24,133 @@ namespace course_project1
             categories = new string[] { "none" };
         }
 
-        public bool AddCategory(SqlConnection connection, string category)
+        public bool AddCategory(string connectionString, string category)
         {
-            this.categories = categories.Append(category).ToArray();
-
-            var addCategoryCommand = string.Format("INSERT INTO CATEGORIES VALUES(@uid, @category)");
-            using (SqlCommand command = new SqlCommand(addCategoryCommand, connection))
+            using(SqlConnection connection = new SqlConnection(connectionString))
             {
+                connection.Open();
+                this.categories = categories.Append(category).ToArray();
+                var addCategoryCommand = string.Format("INSERT INTO CATEGORIES VALUES(@uid, @category)");
+                using (SqlCommand command = new SqlCommand(addCategoryCommand, connection))
+                {
+                    try
+                    {
+                        command.Parameters.AddWithValue("@uid", this.user.Uid);
+                        command.Parameters.AddWithValue("@category", category);
+                        command.ExecuteNonQuery();
+                    }
+                    catch
+                    {
+                        connection.Close();
+                        MessageBox.Show("Category insert error!");
+                        return false;
+                    }
+                }
+                connection.Close();
+                return true;
+            }
+        }
+
+        public void LoadFolders(string connectionString)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand comand = connection.CreateCommand();
+                comand.CommandText =
+                    $"SELECT * " +
+                    $"FROM FOLDERS " +
+                    $"WHERE FOLDERS.USER_UID = {this.user.Uid}";
+
+                SqlDataReader comandReader = comand.ExecuteReader();
+                if (!comandReader.HasRows)
+                {
+                    comandReader.Close();
+                    return;
+                }
+
                 try
                 {
-                    command.Parameters.AddWithValue("@uid", this.user.Uid);
-                    command.Parameters.AddWithValue("@category", category);
-                    command.ExecuteNonQuery();
+                    while (comandReader.Read())
+                    {
+                        int folderId = comandReader.GetInt32(0);
+                        string folderName = comandReader.GetString(2);
+                        DateTime created = comandReader.GetDateTime(3);
+                        string folderCategory = comandReader.GetString(4);
+
+                        Folder folder = new Folder(folderId, folderName, folderCategory, created);
+                        folders = folders.Append(folder).ToArray();
+                    }
+                    comandReader.Close();
+
+                    foreach (Folder folder1 in folders)
+                        folder1.LoadFolderCards(connectionString);
                 }
                 catch
                 {
-                    MessageBox.Show("Category insert error!");
-                    return false;
+                    MessageBox.Show("Folders loading error!");
+                    comandReader.Close();
                 }
+                connection.Close();
             }
-            return true;
         }
 
-        public void LoadFolders(SqlConnection connection)
+        public void LoadCategories(string connectionString)
         {
-            SqlCommand comand = connection.CreateCommand();
-            comand.CommandText =
-                $"SELECT * " +
-                $"FROM FOLDERS " +
-                $"WHERE FOLDERS.USER_UID = {this.user.Uid}";
-
-            SqlDataReader comandReader = comand.ExecuteReader();
-            if (!comandReader.HasRows)
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                comandReader.Close();
-                return;
-            }
+                connection.Open();
+                SqlCommand comand = connection.CreateCommand();
+                comand.CommandText =
+                    $"SELECT CATEGORY " +
+                    $"FROM CATEGORIES " +
+                    $"WHERE CATEGORIES.USER_UID = {this.user.Uid}";
 
-            try
-            {
-                while (comandReader.Read())
+                SqlDataReader comandReader = comand.ExecuteReader();
+                if (!comandReader.HasRows)
                 {
-                    int folderId = comandReader.GetInt32(0);
-                    string folderName = comandReader.GetString(2);
-                    DateTime created = comandReader.GetDateTime(3);
-                    string folderCategory = comandReader.GetString(4);
-
-                    Folder folder = new Folder(folderId, folderName, folderCategory, created);
-                    folders = folders.Append(folder).ToArray();
+                    comandReader.Close();
+                    return;
                 }
-                comandReader.Close();
 
-                foreach (Folder folder1 in folders)
-                    folder1.LoadFolderCards(connection);
-            }
-            catch
-            {
-                MessageBox.Show("Folders loading error!");
-                comandReader.Close();
-            }
-        }
-
-        public void LoadCategories(SqlConnection connection)
-        {
-            SqlCommand comand = connection.CreateCommand();
-            comand.CommandText =
-                $"SELECT CATEGORY " +
-                $"FROM CATEGORIES " +
-                $"WHERE CATEGORIES.USER_UID = {this.user.Uid}";
-
-            SqlDataReader comandReader = comand.ExecuteReader();
-            if (!comandReader.HasRows)
-            {
-                comandReader.Close();
-                return;
-            }
-
-            try
-            {
-                while (comandReader.Read())
+                try
                 {
-                    string category = comandReader.GetString(0);
-                    categories = categories.Append(category).ToArray();
+                    while (comandReader.Read())
+                    {
+                        string category = comandReader.GetString(0);
+                        categories = categories.Append(category).ToArray();
+                    }
                 }
-            }
-            catch
-            {
-                MessageBox.Show("Categories loading error!");
-            }
-            finally
-            {
-                comandReader.Close();
+                catch
+                {
+                    MessageBox.Show("Categories loading error!");
+                }
+                finally
+                {
+                    comandReader.Close();
+                }
+                connection.Close();
             }
         }
 
-        public bool CheckForUniqueCategory(SqlConnection connection, string category)
+        public bool CheckForUniqueCategory(string connectionString, string category)
         {
-            SqlCommand command = connection.CreateCommand();
-            command.CommandText =
-                $"SELECT * " +
-                $"FROM CATEGORIES " +
-                $"WHERE CATEGORIES.USER_UID = {this.user.Uid} AND CATEGORIES.CATEGORY = '{category}'";
-            SqlDataReader commandReader = command.ExecuteReader();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText =
+                    $"SELECT * " +
+                    $"FROM CATEGORIES " +
+                    $"WHERE CATEGORIES.USER_UID = {this.user.Uid} AND CATEGORIES.CATEGORY = '{category}'";
+                SqlDataReader commandReader = command.ExecuteReader();
 
-            bool isUnique = !commandReader.HasRows;
-            commandReader.Close();
+                bool isUnique = !commandReader.HasRows;
+                commandReader.Close();
 
-            return isUnique;
+                connection.Close();
+                return isUnique;
+            }
         }
     }
 }

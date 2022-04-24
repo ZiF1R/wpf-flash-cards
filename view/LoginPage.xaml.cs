@@ -22,13 +22,15 @@ namespace course_project1.view
     /// </summary>
     public partial class LoginPage : Page
     {
-        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+        static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
         Frame rootFrame = mainWindow.MainFrame;
-        SqlConnection CurrentConnection = mainWindow.CurrentConnection;
-        DataStorage Storage = mainWindow.Storage;
+        string ConnectionString;
+        DataStorage Storage;
 
-        public LoginPage()
+        public LoginPage(string connectionString, DataStorage storage)
         {
+            ConnectionString = connectionString;
+            Storage = storage;
             InitializeComponent();
         }
 
@@ -49,7 +51,7 @@ namespace course_project1.view
                 return;
             }
 
-            bool isLoginSuccess = Storage.user.LoadUser(EmailInput.Value, PasswordInput.Value, this.CurrentConnection);
+            bool isLoginSuccess = Storage.user.LoadUser(EmailInput.Value, PasswordInput.Value, this.ConnectionString);
             if (!isLoginSuccess)
             {
                 MessageBox.Show("Неправильный email-адрес или пороль!");
@@ -57,18 +59,18 @@ namespace course_project1.view
             }
             else
             {
-                Storage.LoadCategories(CurrentConnection);
-                Storage.settings.LoadSettings(CurrentConnection);
-                Storage.LoadFolders(CurrentConnection);
-                mainWindow.AppLanguage.SelectedIndex = mainWindow.Storage.settings.currentLangId - 1;
+                Storage.LoadCategories(ConnectionString);
+                Storage.settings.LoadSettings(ConnectionString, Storage.user.Uid);
+                Storage.LoadFolders(ConnectionString);
+                mainWindow.AppLanguage.SelectedIndex = Storage.settings.currentLangId - 1;
 
-                NavigationService.Navigate(new MainPage());
+                NavigationService.Navigate(new MainPage(ConnectionString, Storage));
             }
         }
 
         private void GoToRegistration_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new RegistrationPage());
+            NavigationService.Navigate(new RegistrationPage(ConnectionString, Storage));
         }
     }
 }

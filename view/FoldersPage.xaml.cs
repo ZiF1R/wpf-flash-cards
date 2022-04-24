@@ -24,15 +24,17 @@ namespace course_project1.view
     /// </summary>
     public partial class FoldersPage : Page
     {
-        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
-        SqlConnection CurrentConnection = mainWindow.CurrentConnection;
-        DataStorage Storage = mainWindow.Storage;
+        static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+        DataStorage Storage;
+        string ConnectionString;
         Frame rootFrame = mainWindow.MainFrame;
         Frame SecondFrame;
         Grid MainPageGrid;
 
-        public FoldersPage(Grid mainPageGrid, Frame secondFrame)
+        public FoldersPage(Grid mainPageGrid, Frame secondFrame, string connectionString, DataStorage storage)
         {
+            ConnectionString = connectionString;
+            Storage = storage;
             MainPageGrid = mainPageGrid;
             SecondFrame = secondFrame;
             InitializeComponent();
@@ -46,13 +48,13 @@ namespace course_project1.view
             FolderControl folderControl = null;
             try
             {
-                folderControl = new FolderControl(MainPageGrid, folder);
+                folderControl = new FolderControl(MainPageGrid, folder, Storage);
                 folderControl.Margin = new Thickness(0, 0, 40, 40);
 
                 folderControl.EditFolder += (object s, RoutedEventArgs ev) =>
                 {
                     FolderModalWindow modal = new FolderModalWindow(
-                        MainPageGrid, CurrentConnection, folderControl.FolderNameField.Text, folderControl.FolderCategoryField.Text);
+                        MainPageGrid, ConnectionString, Storage, folderControl.FolderNameField.Text, folderControl.FolderCategoryField.Text);
                     modal.SetValue(Grid.RowSpanProperty, 2);
                     modal.SetValue(Grid.ColumnSpanProperty, 3);
                     modal.SetResourceReference(FolderModalWindow.ModalHeaderProperty, "EditFolder");
@@ -61,7 +63,7 @@ namespace course_project1.view
 
                     modal.FolderAction += (object se, RoutedEventArgs evn) =>
                     {
-                        folder.ChangeFolderData(CurrentConnection, modal.FolderName, modal.FolderCategory);
+                        folder.ChangeFolderData(ConnectionString, Storage.user.Uid, modal.FolderName, modal.FolderCategory);
 
                         folderControl.FolderNameField.Text = modal.FolderName;
                         folderControl.FolderCategoryField.Text = modal.FolderCategory;
@@ -70,13 +72,14 @@ namespace course_project1.view
                 };
                 folderControl.RemoveFolder += (object s, RoutedEventArgs ev) =>
                 {
-                    bool isSuccessfully = folder.RemoveFolder(CurrentConnection);
+                    bool isSuccessfully = folder.RemoveFolder(ConnectionString, Storage.user.Uid);
                     if (!isSuccessfully) return;
 
                     Storage.folders = Storage.folders.Where(x => x.Name != folderControl.FolderName).ToArray();
                     FoldersWrap.Children.Remove(folderControl);
                 };
-                folderControl.GoToCards += (object s, RoutedEventArgs ev) => SecondFrame.Content = new CardsView(MainPageGrid, SecondFrame, folder);
+                folderControl.GoToCards += (object s, RoutedEventArgs ev) =>
+                    SecondFrame.Content = new CardsView(MainPageGrid, SecondFrame, folder, ConnectionString, Storage);
             }
             catch
             {
@@ -87,7 +90,7 @@ namespace course_project1.view
 
         private void AddFolderButton_AddFolder(object sender, RoutedEventArgs e)
         {
-            FolderModalWindow modal = new FolderModalWindow(MainPageGrid, CurrentConnection, "", "");
+            FolderModalWindow modal = new FolderModalWindow(MainPageGrid, ConnectionString, Storage, "", "");
             modal.SetValue(Grid.RowSpanProperty, 2);
             modal.SetValue(Grid.ColumnSpanProperty, 3);
             modal.SetResourceReference(FolderModalWindow.ModalHeaderProperty, "CreateFolder");
@@ -102,7 +105,7 @@ namespace course_project1.view
 
                 try
                 {
-                    Folder folder = new Folder(CurrentConnection, folderName, folderCategory);
+                    Folder folder = new Folder(ConnectionString, Storage.user.Uid, folderName, folderCategory);
                     Storage.folders = Storage.folders.Append(folder).ToArray();
                     FoldersWrap.Children.Insert(1, this.CreateFolderElement(folder));
                 }
