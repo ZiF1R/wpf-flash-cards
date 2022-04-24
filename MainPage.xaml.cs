@@ -56,5 +56,10 @@ namespace course_project1
         {
             SecondFrame.Content = new SettingsPage(ConnectionString, Storage);
         }
+
+        private void ContactWithUs_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("mailto:do-alex03@mail.ru");
+        }
     }
 }

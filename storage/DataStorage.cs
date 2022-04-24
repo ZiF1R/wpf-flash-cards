@@ -51,6 +51,33 @@ namespace course_project1
             }
         }
 
+        public bool RemoveCategory(string connectionString, string category)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText =
+                    "DELETE CATEGORIES WHERE " +
+                    $"CATEGORIES.USER_UID = {user.Uid} AND CATEGORIES.CATEGORY = '{category}'";
+                try
+                {
+                    SqlDataReader commandReader = command.ExecuteReader();
+                    commandReader.Close();
+                }
+                catch
+                {
+                    connection.Close();
+                    MessageBox.Show("Category remove error!");
+                    return false;
+                }
+                connection.Close();
+
+                categories = categories.Where(c => c != category).ToArray();
+                return true;
+            }
+        }
+
         public void LoadFolders(string connectionString)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))

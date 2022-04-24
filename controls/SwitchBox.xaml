@@ -19,7 +19,7 @@
                 </Style.Triggers>
             </Style>
             <Style TargetType="Border">
-                <Setter Property="Background" Value="#c1c1c1" />
+                <Setter Property="Background" Value="#aaa" />
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding IsChecked, ElementName=SwitchControl}" Value="true">
                         <Setter Property="Background" Value="{DynamicResource Primary}" />

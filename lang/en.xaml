@@ -48,6 +48,7 @@
     <v:String x:Key="Cancel">Cancel</v:String>
     <v:String x:Key="RemoveFolder">After deleting the folder, it will be impossible to restore the data! Are you sure about this?</v:String>
     <v:String x:Key="RemoveCard">After deleting the card, it will be impossible to restore the data! Are you sure about this?</v:String>
+    <v:String x:Key="RemoveCategory">After deleting the category, it will be impossible to restore the data! Are you sure about this?</v:String>
     <v:String x:Key="FolderName">Folder name</v:String>
     <v:String x:Key="CreateFolder">Create new folder</v:String>
     <v:String x:Key="Create">Create</v:String>

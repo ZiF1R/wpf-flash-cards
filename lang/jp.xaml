@@ -48,6 +48,7 @@
     <v:String x:Key="Cancel">キャンセル</v:String>
     <v:String x:Key="RemoveFolder">フォルダを削除した後、データを復元することは不可能になります！　もう一度考えて下さい。</v:String>
     <v:String x:Key="RemoveCard">カードを削除した後、データを復元することは不可能になります！　もう一度考えて下さい。</v:String>
+    <v:String x:Key="RemoveCategory">カテゴリを削除した後、データを復元することは不可能になります！　もう一度考えて下さい。</v:String>
     <v:String x:Key="FolderName">フォルダ名</v:String>
     <v:String x:Key="CreateFolder">フォルダの作成</v:String>
     <v:String x:Key="Create">作成</v:String>

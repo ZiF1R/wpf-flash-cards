@@ -48,6 +48,7 @@
     <v:String x:Key="Cancel">Отмена</v:String>
     <v:String x:Key="RemoveFolder">После удаления папки, восстановить данные будет невозможно! Вы уверены в этом?</v:String>
     <v:String x:Key="RemoveCard">После удаления карточки, восстановить данные будет невозможно! Вы уверены в этом?</v:String>
+    <v:String x:Key="RemoveCategory">После удаления категории, восстановить данные будет невозможно! Вы уверены в этом?</v:String>
     <v:String x:Key="FolderName">Название папки</v:String>
     <v:String x:Key="CreateFolder">Создать новую папку</v:String>
     <v:String x:Key="Create">Создать</v:String>

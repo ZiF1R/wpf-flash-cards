@@ -41,21 +41,40 @@ namespace course_project1.controls.ModalWindows
             FolderNameTextBox.Value = this.FolderName;
 
             foreach (string category in Storage.categories)
+                AddCategoryItem(category);
+        }
+
+        private void AddCategoryItem(string category)
+        {
+            ComboBoxItem item = new ComboBoxItem();
+            item.Content = category;
+
+            if (FolderCategory != "" && category == FolderCategory)
+                item.IsSelected = true;
+            else if (FolderCategory == "" && category == "none")
+                item.IsSelected = true;
+
+            FolderCategorySelect.Items.Add(item);
+            item.MouseRightButtonUp += (sender, e) =>
             {
-                ComboBoxItem item = new ComboBoxItem();
-                item.Content = category;
+                if (item.Content.ToString() == "none") return;
 
-                if (folderCategory != "" && category == folderCategory)
-                    item.IsSelected = true;
-                else if (FolderCategory == "" && category == "none")
-                    item.IsSelected = true;
+                SimpleModalWindow modal = new SimpleModalWindow();
+                modal.SetValue(Grid.RowSpanProperty, 2);
+                modal.SetValue(Grid.ColumnSpanProperty, 3);
+                modal.SetResourceReference(SimpleModalWindow.ModalContentProperty, "RemoveCategory");
 
-                FolderCategorySelect.Items.Add(item);
-                item.MouseRightButtonUp += (sender, e) =>
+                FolderCategorySelect.IsDropDownOpen = false;
+                MainPageGrid.Children.Add(modal);
+                modal.CloseModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
+                modal.NegativeButtonClick += (object s, RoutedEventArgs ev) =>
                 {
-                    MessageBox.Show("Are you sure to delete the category?");
+                    Storage.RemoveCategory(ConnectionString, item.Content.ToString());
+                    if (item.IsSelected)
+                        FolderCategorySelect.SelectedIndex = 0;
+                    FolderCategorySelect.Items.Remove(item);
                 };
-            }
+            };
         }
 
         public static readonly DependencyProperty ModalHeaderProperty =
@@ -159,10 +178,7 @@ namespace course_project1.controls.ModalWindows
             modal.AddCategory += (object s, RoutedEventArgs ev) =>
             {
                 Storage.AddCategory(ConnectionString, modal.CategoryValue);
-
-                ComboBoxItem item = new ComboBoxItem();
-                item.Content = modal.CategoryValue;
-                FolderCategorySelect.Items.Add(item);
+                AddCategoryItem(modal.CategoryValue);
             };
             modal.CloseCategoryModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
         }
