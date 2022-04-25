@@ -25,13 +25,15 @@ namespace course_project1
     {
         DataStorage Storage;
         string ConnectionString;
+        Grid MainWindowGrid;
 
-        public MainPage(string connectionString, DataStorage storage)
+        public MainPage(Grid mainWindowGrid, string connectionString, DataStorage storage)
         {
+            this.MainWindowGrid = mainWindowGrid;
             this.ConnectionString = connectionString;
             this.Storage = storage;
             InitializeComponent();
-            SecondFrame.Content = new ProfilePage(ConnectionString, Storage);
+            SecondFrame.Content = new ProfilePage(MainWindowGrid, ConnectionString, Storage);
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -42,17 +44,17 @@ namespace course_project1
 
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
-            SecondFrame.Content = new ProfilePage(ConnectionString, Storage);
+            SecondFrame.Content = new ProfilePage(MainWindowGrid, ConnectionString, Storage);
         }
 
         private void Folders_Click(object sender, RoutedEventArgs e)
         {
-            SecondFrame.Content = new FoldersPage(MainPageGrid, SecondFrame, ConnectionString, Storage);
+            SecondFrame.Content = new FoldersPage(MainWindowGrid, SecondFrame, ConnectionString, Storage);
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            SecondFrame.Content = new SettingsPage(MainPageGrid, ConnectionString, Storage, SecondFrame);
+            SecondFrame.Content = new SettingsPage(MainWindowGrid, ConnectionString, Storage, SecondFrame);
         }
 
         private void ContactWithUs_Click(object sender, RoutedEventArgs e)

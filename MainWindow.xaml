@@ -12,7 +12,7 @@
     <!-- Лингвистическое приложение FlashCards -->
     <!-- FlashCards - карточки для запоминания -->
 
-    <Grid Background="{DynamicResource MainBg}">
+    <Grid Name="MainWindowGrid" Background="{DynamicResource MainBg}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="750*" />
         </Grid.ColumnDefinitions>
@@ -32,7 +32,7 @@
         <ComboBox x:Name="AppLanguage"
             Width="50"
             Height="30"
-            Margin="0,30,30,0"
+            Margin="0,15,15,0"
             VerticalAlignment="Top"
             HorizontalAlignment="Right"
             VerticalContentAlignment="Center"

@@ -12,12 +12,12 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="490*" />
-            <ColumnDefinition Width="520*" />
+            <ColumnDefinition Width="520" />
             <ColumnDefinition Width="490*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="200*" />
-            <RowDefinition Height="350*" />
+            <RowDefinition Height="350" />
             <RowDefinition Height="200*" />
         </Grid.RowDefinitions>
 

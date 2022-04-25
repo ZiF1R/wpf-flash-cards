@@ -89,4 +89,5 @@
     <v:String x:Key="TimePassed">Времени прошло</v:String>
     <v:String x:Key="Finish">Завершить</v:String>
     <v:String x:Key="card_s">карт(а)</v:String>
+    <v:String x:Key="Search">Поиск</v:String>
 </ResourceDictionary>

@@ -11,7 +11,7 @@
     <ScrollViewer VerticalScrollBarVisibility="Hidden">
         <Grid VerticalAlignment="Top" Name="FoldersGrid">
             <Grid.RowDefinitions>
-                <RowDefinition Height="45" />
+                <RowDefinition Height="55" />
                 <RowDefinition Height="130" />
                 <RowDefinition Height="800*"/>
             </Grid.RowDefinitions>
@@ -31,6 +31,17 @@
                 VerticalAlignment="Center"
                 Foreground="{DynamicResource TextColor}" Grid.ColumnSpan="2" Margin="0,5,0,5"
                 Text="{DynamicResource Folders}"/>
+
+            <control:CustomTextBox
+                x:Name="SearchInput"
+                Input="SearchInput_Input"
+                Placeholder="{DynamicResource Search}"
+                Grid.Column="1"
+                Grid.Row="0"
+                Padding="0,5,0,5"
+                Margin="0,0,50,0"
+                VerticalAlignment="Bottom"
+                HorizontalContentAlignment="Right"/>
 
             <StackPanel
                 Grid.Column="0"

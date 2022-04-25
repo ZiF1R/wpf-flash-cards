@@ -37,7 +37,7 @@ namespace course_project1
             this.DataBaseConection();
             Storage = new DataStorage();
             LoadLangs();
-            MainFrame.Content = new LoginPage(ConnectionString, Storage);
+            MainFrame.Content = new LoginPage(MainWindowGrid, ConnectionString, Storage);
         }
 
         private void LoadLangs()

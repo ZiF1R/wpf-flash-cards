@@ -25,9 +25,11 @@ namespace course_project1.view
         Frame rootFrame = mainWindow.MainFrame;
         DataStorage Storage;
         string ConnectionString;
+        Grid MainWindowGrid;
 
-        public ProfilePage(string connectionString, DataStorage storage)
+        public ProfilePage(Grid mainWindowGrid, string connectionString, DataStorage storage)
         {
+            MainWindowGrid = mainWindowGrid;
             ConnectionString = connectionString;
             Storage = storage;
             InitializeComponent();
@@ -45,7 +47,7 @@ namespace course_project1.view
             Storage.Clear();
             mainWindow.AppLanguage.SelectedIndex = 0;
 
-            this.rootFrame.Content = new LoginPage(ConnectionString, Storage);
+            this.rootFrame.Content = new LoginPage(MainWindowGrid, ConnectionString, Storage);
         }
 
         private void SaveChanges_Click(object sender, RoutedEventArgs e)

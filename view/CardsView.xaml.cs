@@ -30,6 +30,7 @@ namespace course_project1.view
         Frame SecondFrame;
         Folder RootFolder;
         Grid MainPageGrid;
+        Card[] filteredCards;
 
         enum CardFilter
         {
@@ -50,6 +51,7 @@ namespace course_project1.view
             InitializeComponent();
             FolderName.Text = RootFolder.Name;
 
+            filteredCards = RootFolder.Cards;
             foreach (Card card in RootFolder.Cards)
                 CardsWrap.Children.Insert(1, this.CreateCardElement(card));
         }
@@ -74,7 +76,10 @@ namespace course_project1.view
                     Card card = new Card(ConnectionString, RootFolder.FolderId, Term, Translation, Examples);
                     RootFolder.Cards = RootFolder.Cards.Append(card).ToArray();
                     if (activeFilter != CardFilter.Memorized)
-                        CardsWrap.Children.Insert(1, this.CreateCardElement(card));
+                    {
+                        if (card.Term.Contains(SearchInput.Value))
+                            CardsWrap.Children.Insert(1, this.CreateCardElement(card));
+                    }
                 }
                 catch { }
             };
@@ -130,8 +135,9 @@ namespace course_project1.view
         private void ShowAllCards_Click(object sender, RoutedEventArgs e)
         {
             activeFilter = CardFilter.All;
+            filteredCards = RootFolder.Cards;
             CardsWrap.Children.RemoveRange(1, RootFolder.Cards.Length);
-            foreach (Card card in RootFolder.Cards)
+            foreach (Card card in filteredCards.Where(card => card.Term.Contains(SearchInput.Value)).ToArray())
                 CardsWrap.Children.Insert(1, this.CreateCardElement(card));
         }
 
@@ -139,8 +145,8 @@ namespace course_project1.view
         {
             activeFilter = CardFilter.Memorized;
             CardsWrap.Children.RemoveRange(1, RootFolder.Cards.Length);
-            Card[] memorizedCards = RootFolder.Cards.Where(card => card.IsMemorized).ToArray();
-            foreach (Card card in memorizedCards)
+            filteredCards = RootFolder.Cards.Where(card => card.IsMemorized).ToArray();
+            foreach (Card card in filteredCards.Where(card => card.Term.Contains(SearchInput.Value)).ToArray())
                 CardsWrap.Children.Insert(1, this.CreateCardElement(card));
         }
 
@@ -148,8 +154,17 @@ namespace course_project1.view
         {
             activeFilter = CardFilter.NotMemorized;
             CardsWrap.Children.RemoveRange(1, RootFolder.Cards.Length);
-            Card[] notMemorizedCards = RootFolder.Cards.Where(card => !card.IsMemorized).ToArray();
-            foreach (Card card in notMemorizedCards)
+            filteredCards = RootFolder.Cards.Where(card => !card.IsMemorized).ToArray();
+            foreach (Card card in filteredCards.Where(card => card.Term.Contains(SearchInput.Value)).ToArray())
+                CardsWrap.Children.Insert(1, this.CreateCardElement(card));
+        }
+
+        private void SearchInput_Input(object sender, RoutedEventArgs e)
+        {
+            CardsWrap.Children.RemoveRange(1, CardsWrap.Children.Count - 1);
+            Card[] cards = filteredCards.Where(c => c.Term.Contains(SearchInput.Value)).ToArray();
+
+            foreach (Card card in cards)
                 CardsWrap.Children.Insert(1, this.CreateCardElement(card));
         }
     }

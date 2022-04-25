@@ -89,4 +89,5 @@
     <v:String x:Key="TimePassed">Time passed</v:String>
     <v:String x:Key="Finish">Finish</v:String>
     <v:String x:Key="card_s">card(s)</v:String>
+    <v:String x:Key="Search">Search</v:String>
 </ResourceDictionary>

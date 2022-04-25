@@ -114,11 +114,22 @@ namespace course_project1.view
                 {
                     Folder folder = new Folder(ConnectionString, Storage.user.Uid, folderName, folderCategory);
                     Storage.folders = Storage.folders.Append(folder).ToArray();
-                    FoldersWrap.Children.Insert(1, this.CreateFolderElement(folder));
+
+                    if (folder.Name.Contains(SearchInput.Value))
+                        FoldersWrap.Children.Insert(1, this.CreateFolderElement(folder));
                 }
                 catch { }
             };
             modal.CloseFolderModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
+        }
+
+        private void SearchInput_Input(object sender, RoutedEventArgs e)
+        {
+            FoldersWrap.Children.RemoveRange(1, FoldersWrap.Children.Count - 1);
+            Folder[] folders = Storage.folders.Where(f => f.Name.Contains(SearchInput.Value)).ToArray();
+
+            foreach (Folder folder in folders)
+                FoldersWrap.Children.Insert(1, this.CreateFolderElement(folder));
         }
     }
 }

@@ -89,4 +89,5 @@
     <v:String x:Key="TimePassed">かかった時間</v:String>
     <v:String x:Key="Finish">終了</v:String>
     <v:String x:Key="card_s">枚のカード</v:String>
+    <v:String x:Key="Search">検索</v:String>
 </ResourceDictionary>

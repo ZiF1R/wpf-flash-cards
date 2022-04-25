@@ -25,9 +25,11 @@ namespace course_project1.view
     {
         string ConnectionString;
         DataStorage Storage;
+        Grid MainWindowGrid;
 
-        public RegistrationPage(string connectionString, DataStorage storage)
+        public RegistrationPage(Grid mainWindowGrid, string connectionString, DataStorage storage)
         {
+            MainWindowGrid = mainWindowGrid;
             this.ConnectionString = connectionString;
             this.Storage = storage;
             InitializeComponent();
@@ -49,7 +51,7 @@ namespace course_project1.view
                     ConnectionString
                 );
                 Storage.settings.CreateUserSettings(ConnectionString, Storage.user.Uid);
-                NavigationService.Navigate(new LoginPage(ConnectionString, Storage));
+                NavigationService.Navigate(new LoginPage(MainWindowGrid, ConnectionString, Storage));
             }
             catch (Exception ex)
             {
@@ -103,7 +105,7 @@ namespace course_project1.view
 
         private void GoToLogin_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new LoginPage(ConnectionString, Storage));
+            NavigationService.Navigate(new LoginPage(MainWindowGrid, ConnectionString, Storage));
         }
     }
 }

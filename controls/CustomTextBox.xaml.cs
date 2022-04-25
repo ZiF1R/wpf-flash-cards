@@ -62,9 +62,19 @@ namespace course_project1.controls
             set => SetValue(ValueProperty, value);
         }
 
+        public static readonly RoutedEvent InputEvent
+            = EventManager.RegisterRoutedEvent("Input", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(CustomTextBox));
+
+        public event RoutedEventHandler Input
+        {
+            add { AddHandler(InputEvent, value); }
+            remove { RemoveHandler(InputEvent, value); }
+        }
+
         private void Input_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.Value = Input.Text;
+            this.Value = TextInput.Text;
+            RaiseEvent(new RoutedEventArgs(InputEvent));
         }
     }
 }

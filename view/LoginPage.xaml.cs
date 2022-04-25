@@ -25,9 +25,11 @@ namespace course_project1.view
         static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
         string ConnectionString;
         DataStorage Storage;
+        Grid MainWindowGrid;
 
-        public LoginPage(string connectionString, DataStorage storage)
+        public LoginPage(Grid mainWindowGrid, string connectionString, DataStorage storage)
         {
+            MainWindowGrid = mainWindowGrid;
             ConnectionString = connectionString;
             Storage = storage;
             InitializeComponent();
@@ -63,13 +65,13 @@ namespace course_project1.view
                 Storage.LoadFolders(ConnectionString);
                 mainWindow.AppLanguage.SelectedIndex = Storage.settings.currentLangId - 1;
 
-                NavigationService.Navigate(new MainPage(ConnectionString, Storage));
+                NavigationService.Navigate(new MainPage(MainWindowGrid, ConnectionString, Storage));
             }
         }
 
         private void GoToRegistration_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new RegistrationPage(ConnectionString, Storage));
+            NavigationService.Navigate(new RegistrationPage(MainWindowGrid, ConnectionString, Storage));
         }
     }
 }
