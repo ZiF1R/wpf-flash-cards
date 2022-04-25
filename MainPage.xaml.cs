@@ -23,8 +23,6 @@ namespace course_project1
     /// </summary>
     public partial class MainPage : Page
     {
-        static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-        Frame rootFrame = mainWindow.MainFrame;
         DataStorage Storage;
         string ConnectionString;
 
@@ -54,7 +52,7 @@ namespace course_project1
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            SecondFrame.Content = new SettingsPage(ConnectionString, Storage);
+            SecondFrame.Content = new SettingsPage(MainPageGrid, ConnectionString, Storage, SecondFrame);
         }
 
         private void ContactWithUs_Click(object sender, RoutedEventArgs e)

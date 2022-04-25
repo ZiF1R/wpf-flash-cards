@@ -22,21 +22,16 @@ namespace course_project1.controls.ModalWindows
     /// </summary>
     public partial class CardModalWindow : UserControl
     {
-        static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-        DataStorage Storage;
         string ConnectionString;
         public int RootFolderId;
         public string Term = "";
         public string Translation = "";
         public string Examples = "";
-        Grid MainPageGrid;
 
-        public CardModalWindow(Grid mainPageGrid, string connectionString, DataStorage storage, int folderId, string term, string translation, string examples)
+        public CardModalWindow(string connectionString, int folderId, string term, string translation, string examples)
         {
             RootFolderId = folderId;
-            MainPageGrid = mainPageGrid;
             ConnectionString = connectionString;
-            Storage = storage;
             Term = term;
             Translation = translation;
             Examples = examples;

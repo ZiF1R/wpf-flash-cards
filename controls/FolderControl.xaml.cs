@@ -1,8 +1,12 @@
 ﻿using course_project1.controls.ModalWindows;
 using course_project1.storage;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,8 +31,19 @@ namespace course_project1.controls
         DataStorage Storage;
         string ConnectionString;
 
-        public FolderControl(Grid mainPageGrid, Folder folder, DataStorage storage, string connectionString)
+        public enum Action
         {
+            None,
+            Export,
+            Import
+        };
+        Action action;
+
+        public FolderControl(
+            Grid mainPageGrid, Folder folder, DataStorage storage,
+            string connectionString, bool isForExportImport = false, Action action = Action.None)
+        {
+            this.action = action;
             Storage = storage;
             ConnectionString = connectionString;
             MainPageGrid = mainPageGrid;
@@ -52,6 +67,9 @@ namespace course_project1.controls
 
             image.EndInit();
             ReviewButton.Source = image;
+
+            if (this.action != Action.None)
+                BlinkRectangle.Visibility = Visibility.Visible;
         }
 
         // Folder name
@@ -216,6 +234,94 @@ namespace course_project1.controls
                 FolderMemorizedCardsCount = folder.MemorizedCardsCount();
                 MainPageGrid.Children.Remove(modal);
             };
+        }
+
+        private void BlinkRectangle_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (action == Action.Import)
+                ImportCards();
+            else if (action == Action.Export)
+                ExportCards();
+        }
+
+        public static readonly RoutedEvent ReturnToSettingsEvent
+            = EventManager.RegisterRoutedEvent("ReturnToSettings", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(FolderControl));
+
+        public event RoutedEventHandler ReturnToSettings
+        {
+            add { AddHandler(ReturnToSettingsEvent, value); }
+            remove { RemoveHandler(ReturnToSettingsEvent, value); }
+        }
+
+        private void ExportCards()
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "JSON format|*.json";
+            dialog.FileName = folder.Name;
+
+            if (dialog.ShowDialog() == true)
+            {
+                try
+                {
+                    using (FileStream fs = File.Create(dialog.FileName))
+                    {
+                        string extension = System.IO.Path.GetExtension(dialog.FileName).ToLower();
+                        if (extension != ".json") throw new Exception("Неверное расширение файла!");
+
+                        DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Card[]));
+                        serializer.WriteObject(fs, folder.Cards);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                RaiseEvent(new RoutedEventArgs(ReturnToSettingsEvent));
+            }
+        }
+
+        private void ImportCards()
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "JSON format|*.json";
+
+            if (dialog.ShowDialog() == true)
+            {
+                try
+                {
+                    using (FileStream fs = File.OpenRead(dialog.FileName))
+                    {
+                        string extension = System.IO.Path.GetExtension(dialog.FileName).ToLower();
+                        if (extension != ".json") throw new Exception("Неверное расширение файла!");
+
+                        DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Card[]));
+                        Card[] cards = (Card[])serializer.ReadObject(fs);
+
+                        if (cards != null && cards?.Length > 0)
+                            MergeCards(cards);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                RaiseEvent(new RoutedEventArgs(ReturnToSettingsEvent));
+            }
+        }
+
+        private void MergeCards(Card[] cards)
+        {
+            foreach (Card card in cards)
+            {
+                // check for unique card termin
+                if (folder.Cards.Where(c => c.Term == card.Term).ToArray().Length == 0)
+                {
+                    folder.Cards = folder.Cards.Append(card).ToArray();
+                    card.InsertCard(ConnectionString, folder.FolderId);
+                }
+            }
         }
     }
 }

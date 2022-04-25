@@ -148,6 +148,9 @@
                         Description="{DynamicResource ExportCardsDescr}"/>
 
                     <Button
+                        Name="ExportButton"
+                        Click="ExportButton_Click"
+                        Cursor="Hand"
                         Margin="70,15,0,0"
                         VerticalAlignment="Center"
                         Background="{DynamicResource CardBg}"
@@ -173,6 +176,9 @@
                         Description="{DynamicResource ImportCardsDescr}"/>
 
                     <Button
+                        Name="ImportButton"
+                        Click="ImportButton_Click"
+                        Cursor="Hand"
                         Margin="70,15,0,0"
                         VerticalAlignment="Center"
                         Background="{DynamicResource CardBg}"

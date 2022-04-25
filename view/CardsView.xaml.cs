@@ -25,7 +25,6 @@ namespace course_project1.view
     /// </summary>
     public partial class CardsView : Page
     {
-        static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
         DataStorage Storage;
         string ConnectionString;
         Frame SecondFrame;
@@ -57,7 +56,7 @@ namespace course_project1.view
 
         private void AddCardButton_AddCard(object sender, RoutedEventArgs e)
         {
-            CardModalWindow modal = new CardModalWindow(MainPageGrid, ConnectionString, Storage, RootFolder.FolderId, "", "", "");
+            CardModalWindow modal = new CardModalWindow(ConnectionString, RootFolder.FolderId, "", "", "");
             modal.SetValue(Grid.RowSpanProperty, 2);
             modal.SetValue(Grid.ColumnSpanProperty, 3);
             modal.SetResourceReference(CardModalWindow.ModalHeaderProperty, "CreateCard");
@@ -93,7 +92,7 @@ namespace course_project1.view
                 cardControl.EditCard += (object s, RoutedEventArgs ev) =>
                 {
                     CardModalWindow modal = new CardModalWindow(
-                        MainPageGrid, ConnectionString, Storage, RootFolder.FolderId, card.Term, card.Translation, card.Examples);
+                        ConnectionString, RootFolder.FolderId, card.Term, card.Translation, card.Examples);
                     modal.SetValue(Grid.RowSpanProperty, 2);
                     modal.SetValue(Grid.ColumnSpanProperty, 3);
                     modal.SetResourceReference(CardModalWindow.ModalHeaderProperty, "EditCard");

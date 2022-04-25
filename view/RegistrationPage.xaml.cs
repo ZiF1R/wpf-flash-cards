@@ -23,7 +23,6 @@ namespace course_project1.view
     /// </summary>
     public partial class RegistrationPage : Page
     {
-        static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
         string ConnectionString;
         DataStorage Storage;
 

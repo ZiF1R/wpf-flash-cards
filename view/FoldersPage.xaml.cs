@@ -24,15 +24,20 @@ namespace course_project1.view
     /// </summary>
     public partial class FoldersPage : Page
     {
-        static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
         DataStorage Storage;
         string ConnectionString;
-        Frame rootFrame = mainWindow.MainFrame;
         Frame SecondFrame;
         Grid MainPageGrid;
+        bool IsForExportImport;
 
-        public FoldersPage(Grid mainPageGrid, Frame secondFrame, string connectionString, DataStorage storage)
+        FolderControl.Action action;
+
+        public FoldersPage(
+            Grid mainPageGrid, Frame secondFrame,
+            string connectionString, DataStorage storage, bool isForExportImport = false, FolderControl.Action action = FolderControl.Action.None)
         {
+            this.action = action;
+            IsForExportImport = isForExportImport;
             ConnectionString = connectionString;
             Storage = storage;
             MainPageGrid = mainPageGrid;
@@ -48,7 +53,7 @@ namespace course_project1.view
             FolderControl folderControl = null;
             try
             {
-                folderControl = new FolderControl(MainPageGrid, folder, Storage, ConnectionString);
+                folderControl = new FolderControl(MainPageGrid, folder, Storage, ConnectionString, IsForExportImport, action);
                 folderControl.Margin = new Thickness(0, 0, 40, 40);
 
                 folderControl.EditFolder += (object s, RoutedEventArgs ev) =>
@@ -80,6 +85,8 @@ namespace course_project1.view
                 };
                 folderControl.GoToCards += (object s, RoutedEventArgs ev) =>
                     SecondFrame.Content = new CardsView(MainPageGrid, SecondFrame, folder, ConnectionString, Storage);
+                folderControl.ReturnToSettings += (object s, RoutedEventArgs ev) =>
+                    SecondFrame.Content = new SettingsPage(MainPageGrid, ConnectionString, Storage, SecondFrame);
             }
             catch
             {

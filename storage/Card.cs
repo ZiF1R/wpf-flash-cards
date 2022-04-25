@@ -2,20 +2,30 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace course_project1.storage
 {
+    [Serializable]
+    [DataContract]
     public class Card
     {
+        [DataMember]
         private string term;
+        [DataMember]
         private string translation;
+        [DataMember]
         public string Examples { get; set; }
-        public DateTime Created { get; }
+        [DataMember]
+        public DateTime Created { get; set; }
+        [DataMember]
         private bool isMemorized;
+        [DataMember]
         private int rightAnswers;
+        [DataMember]
         private int wrongAnswers;
 
         public string Term
@@ -46,6 +56,8 @@ namespace course_project1.storage
         public int RightAnswers { get => rightAnswers; }
         public int WrongAnswers { get => wrongAnswers; }
 
+        public Card() { }
+
         public Card(string connectionString, int rootFolderId, string term, string translation, string examples)
         {
             Term = term;
@@ -71,7 +83,7 @@ namespace course_project1.storage
             this.isMemorized = isMemorized;
         }
 
-        private bool InsertCard(string connectionString, int rootFolderId)
+        public bool InsertCard(string connectionString, int rootFolderId)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

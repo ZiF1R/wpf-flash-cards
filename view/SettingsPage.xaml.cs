@@ -21,13 +21,15 @@ namespace course_project1.view
     /// </summary>
     public partial class SettingsPage : Page
     {
-        static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-        Frame rootFrame = mainWindow.MainFrame;
         DataStorage Storage;
         string ConnectionString;
+        Frame SecondFrame;
+        Grid MainPageGrid;
 
-        public SettingsPage(string connectionString, DataStorage storage)
+        public SettingsPage(Grid mainPageGrid, string connectionString, DataStorage storage, Frame secondFrame)
         {
+            this.MainPageGrid = mainPageGrid;
+            SecondFrame = secondFrame;
             ConnectionString = connectionString;
             Storage = storage;
             InitializeComponent();
@@ -97,6 +99,18 @@ namespace course_project1.view
             {
                 MessageBox.Show("Cannot set time limit!");
             }
+        }
+
+        private void ExportButton_Click(object sender, RoutedEventArgs e)
+        {
+            SecondFrame.Content = new FoldersPage(
+                MainPageGrid, SecondFrame, ConnectionString, Storage, true, controls.FolderControl.Action.Export);
+        }
+
+        private void ImportButton_Click(object sender, RoutedEventArgs e)
+        {
+            SecondFrame.Content = new FoldersPage(
+                MainPageGrid, SecondFrame, ConnectionString, Storage, true, controls.FolderControl.Action.Import);
         }
     }
 }

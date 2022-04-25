@@ -51,6 +51,7 @@
                 VerticalAlignment="Top">
 
                 <control:AddCardButton
+                    x:Name="AddCard"
                     ButtonName="{DynamicResource AddFolder}"
                     AddCard="AddFolderButton_AddFolder"
                     VerticalAlignment="Top"

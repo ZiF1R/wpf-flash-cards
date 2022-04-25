@@ -23,7 +23,6 @@ namespace course_project1.view
     public partial class LoginPage : Page
     {
         static MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-        Frame rootFrame = mainWindow.MainFrame;
         string ConnectionString;
         DataStorage Storage;
 

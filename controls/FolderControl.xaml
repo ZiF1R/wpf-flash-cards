@@ -8,7 +8,7 @@
              Name="FolderControlElement"
              d:DesignHeight="140" d:DesignWidth="280">
 
-    <Grid>
+    <Grid x:Name="FolderGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="33"/>
             <RowDefinition Height="32"/>
@@ -16,6 +16,39 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
+
+
+        <Rectangle
+            Name="BlinkRectangle"
+            MouseUp="BlinkRectangle_MouseUp"
+            Panel.ZIndex="10"
+            Cursor="Hand"
+            Visibility="Hidden"
+            Grid.RowSpan="5"
+            Opacity="0.2"
+            Grid.Row="0"
+            Height="140"
+            Width="280"
+            Fill="Transparent">
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="Rectangle.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
+                                                    Duration="0:0:4"
+                                                    FillBehavior="HoldEnd"
+                                                    RepeatBehavior="Forever">
+                                <ColorAnimationUsingKeyFrames.KeyFrames>
+                                    <LinearColorKeyFrame KeyTime="0:0:0" Value="Transparent"/>
+                                    <LinearColorKeyFrame KeyTime="0:0:2" Value="Yellow"/>
+                                    <LinearColorKeyFrame KeyTime="0:0:4" Value="Transparent"/>
+                                </ColorAnimationUsingKeyFrames.KeyFrames>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Rectangle.Triggers>
+        </Rectangle>
         
         <Rectangle
             Grid.RowSpan="5"
