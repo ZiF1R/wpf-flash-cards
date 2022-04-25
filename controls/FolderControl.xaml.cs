@@ -276,9 +276,9 @@ namespace course_project1.controls
                 {
                     MessageBox.Show(ex.Message);
                 }
-
-                RaiseEvent(new RoutedEventArgs(ReturnToSettingsEvent));
             }
+
+            RaiseEvent(new RoutedEventArgs(ReturnToSettingsEvent));
         }
 
         private void ImportCards()
@@ -306,9 +306,9 @@ namespace course_project1.controls
                 {
                     MessageBox.Show(ex.Message);
                 }
-
-                RaiseEvent(new RoutedEventArgs(ReturnToSettingsEvent));
             }
+
+            RaiseEvent(new RoutedEventArgs(ReturnToSettingsEvent));
         }
 
         private void MergeCards(Card[] cards)
