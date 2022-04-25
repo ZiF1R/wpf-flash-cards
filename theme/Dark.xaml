@@ -8,7 +8,7 @@
     <SolidColorBrush x:Key="NavBg">#2D2D2D</SolidColorBrush>
     <SolidColorBrush x:Key="HoverBg">#393939</SolidColorBrush>
     <SolidColorBrush x:Key="TextColorOpacity">#aaaaaa</SolidColorBrush>
-    <Color x:Key="HoverBgColor">#393939</Color>
+    <SolidColorBrush x:Key="HoverBgColor">#393939</SolidColorBrush>
     <Color x:Key="MainBgColor">#2B2B2B</Color>
     <Color x:Key="TextColorr">#ffffff</Color>
     <BitmapImage x:Key="RightArrow" UriSource="/icons/right-arrow_dark-theme.png"/>

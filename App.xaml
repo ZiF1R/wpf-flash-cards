@@ -7,6 +7,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="styles/ComboBoxStyle.xaml"/>
                 <ResourceDictionary Source="styles/MenuButtonStyle.xaml"/>
                 <ResourceDictionary Source="styles/FilterButtonStyle.xaml"/>
                 <ResourceDictionary Source="styles/ButtonStyle.xaml"/>
