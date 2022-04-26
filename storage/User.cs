@@ -190,6 +190,7 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                connection.Open();
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText =
                     $"UPDATE USERS " +

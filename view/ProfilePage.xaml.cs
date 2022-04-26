@@ -72,7 +72,7 @@ namespace course_project1.view
                 NameInput.Placeholder == Storage.user.Name
             ) return;
 
-            Storage.user.ChangeUserData(NicknameInput.Placeholder, SurnameInput.Placeholder, SurnameInput.Placeholder, this.ConnectionString);
+            Storage.user.ChangeUserData(NicknameInput.Placeholder, SurnameInput.Placeholder, NameInput.Placeholder, this.ConnectionString);
         }
     }
 }
