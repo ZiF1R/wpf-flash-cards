@@ -40,24 +40,31 @@
 
                 <control:CustomTextBox
                     x:Name="CardTermTextBox"
+                    MaxLength="30"
                     Padding="0,5,0,5"
                     Placeholder="{DynamicResource Term}"/>
 
                 <control:CustomTextBox
                     x:Name="CardTranslationTextBox"
+                    MaxLength="30"
                     Padding="0,5,0,5"
                     Placeholder="{DynamicResource Translation}"/>
 
                 <control:CustomTextBox
                     x:Name="CardExamplesTextBox"
+                    MaxLength="30"
                     Padding="0,5,0,5"
                     Placeholder="{DynamicResource Examples}"/>
+
+                <Label
+                    Content="{DynamicResource RequiredFields}"
+                    Foreground="{DynamicResource TextColorOpacity}"/>
 
                 <Label
                     Name="CardTermUsed"
                     Content="{DynamicResource CardTermUsed}"
                     Foreground="Tomato"
-                    Visibility="Hidden"/>
+                    Visibility="Visible"/>
 
                 <Grid HorizontalAlignment="Stretch" Margin="0,100,0,0">
                     <Button

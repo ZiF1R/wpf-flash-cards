@@ -18,7 +18,7 @@ namespace course_project1.storage
         public string surname;
         public string name;
         private string email;
-        private string Password;
+        private string password;
 
         public string Nickname
         {
@@ -55,6 +55,11 @@ namespace course_project1.storage
             get => email;
         }
 
+        public string Password
+        {
+            get { return password; }
+        }
+
         public int Uid
         {
             get => uid;
@@ -66,7 +71,7 @@ namespace course_project1.storage
             surname = "";
             name = "";
             email = "";
-            Password = "";
+            password = "";
         }
 
         public User(string nickname, string surname, string name, string email, string password, string connectionString)
@@ -81,7 +86,7 @@ namespace course_project1.storage
 
             try
             {
-                Password = DataEncriptor.Encrypt(password);
+                this.password = DataEncriptor.Encrypt(password);
             }
             catch
             {
@@ -125,7 +130,7 @@ namespace course_project1.storage
                     Surname = surname;
                     Name = name;
                     this.email = email;
-                    Password = encryptedPass;
+                    this.password = encryptedPass;
                     connection.Close();
                     loginCommandReader.Close();
                 }
@@ -186,15 +191,17 @@ namespace course_project1.storage
             }
         }
 
-        public void ChangeUserData(string nickname, string surname, string name, string connectionString)
+        public void ChangeUserData(string nickname, string surname, string name, string password, string connectionString)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
+                string encryptedPass = DataEncriptor.Encrypt(password);
+
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText =
                     $"UPDATE USERS " +
-                    $"SET NICKNAME = '{nickname}', SURNAME = '{surname}', NAME = '{name}' FROM USERS " +
+                    $"SET NICKNAME = '{nickname}', SURNAME = '{surname}', NAME = '{name}', PASS = '{encryptedPass}' FROM USERS " +
                     $"WHERE EMAIL = '{this.Email}'";
                 SqlDataReader commandReader = command.ExecuteReader();
                 try
@@ -204,6 +211,7 @@ namespace course_project1.storage
                     Nickname = nickname;
                     Surname = surname;
                     Name = name;
+                    this.password = encryptedPass;
                 }
                 catch
                 {

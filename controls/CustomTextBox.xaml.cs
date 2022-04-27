@@ -62,6 +62,21 @@ namespace course_project1.controls
             set => SetValue(ValueProperty, value);
         }
 
+        public static readonly DependencyProperty MaxLengthProperty =
+            DependencyProperty.Register(
+               name: "MaxLength",
+               propertyType: typeof(uint),
+               ownerType: typeof(CustomTextBox),
+               typeMetadata: new FrameworkPropertyMetadata(
+                   defaultValue: (uint)40,
+                   flags: FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        public uint MaxLength
+        {
+            get => (uint)GetValue(MaxLengthProperty);
+            set => SetValue(MaxLengthProperty, value);
+        }
+
         public static readonly RoutedEvent InputEvent
             = EventManager.RegisterRoutedEvent("Input", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(CustomTextBox));
 

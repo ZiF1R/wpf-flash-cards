@@ -12,6 +12,8 @@
             Text="{Binding Placeholder, ElementName=InputControl}"
             Height="45"
             Name="Input"
+            MaxLength="{Binding MaxLength, ElementName=InputControl}"
+            IsReadOnly="{Binding IsReadOnly, ElementName=InputControl}"
             CaretBrush="{DynamicResource TextColor}"
             Foreground="{DynamicResource TextColor}"
             TextWrapping="Wrap"

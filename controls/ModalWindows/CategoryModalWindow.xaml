@@ -39,7 +39,8 @@
                        TextWrapping="Wrap"/>
 
                 <control:CustomTextBox
-                    x:Name="FolderNameTextBox"
+                    x:Name="CategoryNameTextBox"
+                    MaxLength="20"
                     Padding="0,5,0,5"
                     Placeholder="{DynamicResource CategoryName}"/>
 

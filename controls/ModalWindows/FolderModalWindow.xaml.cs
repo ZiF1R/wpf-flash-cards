@@ -132,9 +132,10 @@ namespace course_project1.controls.ModalWindows
 
         private void ActionButton_Click(object sender, RoutedEventArgs e)
         {
-            FolderNameTextBox.Value = FolderNameTextBox.Value.Trim();
-            if (FolderNameTextBox.Value != "")
+            try
             {
+                Validator.ValidateInput(FolderNameTextBox, true);
+
                 if (FolderName != FolderNameTextBox.Value)
                 {
                     bool isUnique = Folder.IsUniqueFolderName(ConnectionString, FolderNameTextBox.Value, Storage.user.Uid);
@@ -155,9 +156,10 @@ namespace course_project1.controls.ModalWindows
                 RaiseEvent(new RoutedEventArgs(FolderActionEvent));
                 RaiseEvent(new RoutedEventArgs(CloseFolderModalEvent));
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please fill all fields!");
+                MessageBox.Show(ex.Message);
+                return;
             }
         }
 
@@ -171,8 +173,8 @@ namespace course_project1.controls.ModalWindows
             CategoryModalWindow modal = new CategoryModalWindow(ConnectionString, Storage);
             modal.SetValue(Grid.RowSpanProperty, 2);
             modal.SetValue(Grid.ColumnSpanProperty, 3);
-            modal.SetResourceReference(FolderModalWindow.ModalHeaderProperty, "CreateCategory");
-            modal.SetResourceReference(FolderModalWindow.ActionButtonContentProperty, "Create");
+            modal.SetResourceReference(ModalHeaderProperty, "CreateCategory");
+            modal.SetResourceReference(ActionButtonContentProperty, "Create");
 
             MainPageGrid.Children.Add(modal);
             modal.AddCategory += (object s, RoutedEventArgs ev) =>

@@ -34,7 +34,8 @@ namespace course_project1.view
 
         public FoldersPage(
             Grid mainPageGrid, Frame secondFrame,
-            string connectionString, DataStorage storage, bool isForExportImport = false, FolderControl.Action action = FolderControl.Action.None)
+            string connectionString, DataStorage storage, bool isForExportImport = false,
+            FolderControl.Action action = FolderControl.Action.None)
         {
             this.action = action;
             IsForExportImport = isForExportImport;
@@ -104,7 +105,6 @@ namespace course_project1.view
             modal.SetResourceReference(FolderModalWindow.ActionButtonContentProperty, "Create");
 
             MainPageGrid.Children.Add(modal);
-
             modal.FolderAction += (object s, RoutedEventArgs ev) =>
             {
                 string folderName = modal.FolderName;
@@ -125,6 +125,7 @@ namespace course_project1.view
 
         private void SearchInput_Input(object sender, RoutedEventArgs e)
         {
+            SearchInput.Value = SearchInput.Value.Trim();
             FoldersWrap.Children.RemoveRange(1, FoldersWrap.Children.Count - 1);
             Folder[] folders = Storage.folders.Where(f => f.Name.Contains(SearchInput.Value)).ToArray();
 

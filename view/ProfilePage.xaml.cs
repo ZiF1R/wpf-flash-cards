@@ -1,4 +1,5 @@
-﻿using System;
+﻿using course_project1.storage;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -38,6 +39,7 @@ namespace course_project1.view
             SurnameInput.Placeholder = Storage.user.Surname;
             NameInput.Placeholder = Storage.user.Name;
             EmailInput.Placeholder = Storage.user.Email;
+            PasswordInput.Placeholder = DataEncriptor.Decrypt(Storage.user.Password);
         }
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
@@ -52,27 +54,28 @@ namespace course_project1.view
 
         private void SaveChanges_Click(object sender, RoutedEventArgs e)
         {
-            NicknameInput.Placeholder = NicknameInput.Placeholder.Trim();
-            SurnameInput.Placeholder = SurnameInput.Placeholder.Trim();
-            NameInput.Placeholder = NameInput.Placeholder.Trim();
-
-            if (
-                NicknameInput.Placeholder == "" ||
-                SurnameInput.Placeholder == "" ||
-                NameInput.Placeholder == ""
-            )
+            try
             {
-                MessageBox.Show("Поля не могут быть пустыми!");
-                return;
+                Validator.ValidateInput(NicknameInput, true);
+                Validator.ValidateInput(SurnameInput);
+                Validator.ValidateInput(NameInput);
+                Validator.ValidatePassword(PasswordInput);
+
+                if (
+                    NicknameInput.Placeholder == Storage.user.Nickname &&
+                    SurnameInput.Placeholder == Storage.user.Surname &&
+                    NameInput.Placeholder == Storage.user.Name &&
+                    PasswordInput.Placeholder == DataEncriptor.Decrypt(Storage.user.Password)
+                ) return;
+
+                Storage.user.ChangeUserData(
+                    NicknameInput.Placeholder, SurnameInput.Placeholder,
+                    NameInput.Placeholder, PasswordInput.Placeholder, this.ConnectionString);
             }
-
-            if (
-                NicknameInput.Placeholder == Storage.user.Nickname &&
-                SurnameInput.Placeholder == Storage.user.Surname &&
-                NameInput.Placeholder == Storage.user.Name
-            ) return;
-
-            Storage.user.ChangeUserData(NicknameInput.Placeholder, SurnameInput.Placeholder, NameInput.Placeholder, this.ConnectionString);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

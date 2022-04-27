@@ -59,16 +59,17 @@
     <v:String x:Key="All">全部</v:String>
     <v:String x:Key="Memorized">暗記された</v:String>
     <v:String x:Key="NotMemorized">暗記されていない</v:String>
-    <v:String x:Key="FolderNameUsed">* 同じ名前を持ったフォルダがすでにあります！</v:String>
-    <v:String x:Key="CategoryAlreadyUsed">* 同じ名前を持ったカテゴリがすでにあります！</v:String>
-    <v:String x:Key="CardTermUsed">* 同じ用語を持ったカードがすでにあります！</v:String>
+    <v:String x:Key="FolderNameUsed">同じ名前を持ったフォルダがすでにあります！</v:String>
+    <v:String x:Key="CategoryAlreadyUsed">同じ名前を持ったカテゴリがすでにあります！</v:String>
+    <v:String x:Key="CardTermUsed">同じ用語を持ったカードがすでにあります！</v:String>
+    <v:String x:Key="RequiredFields">* 必須フィールド</v:String>
     <v:String x:Key="CopyAll">カード全体のコピー</v:String>
     <v:String x:Key="CopyTerm">用語のコピー</v:String>
     <v:String x:Key="CopyTranslation">翻訳のコピー</v:String>
     <v:String x:Key="CopyExamples">例のコピー</v:String>
     <v:String x:Key="CreateCard">新しいカードの作成</v:String>
-    <v:String x:Key="Term">用語</v:String>
-    <v:String x:Key="Translation">翻訳</v:String>
+    <v:String x:Key="Term">*用語</v:String>
+    <v:String x:Key="Translation">*翻訳</v:String>
     <v:String x:Key="Examples">例</v:String>
     <v:String x:Key="EditCard">カードの編集</v:String>
     <v:String x:Key="of">枚目は</v:String>
@@ -90,4 +91,12 @@
     <v:String x:Key="Finish">終了</v:String>
     <v:String x:Key="card_s">枚のカード</v:String>
     <v:String x:Key="Search">検索</v:String>
+    <v:String x:Key="PasswordError">パスワードにはスペースを含めることはできません！</v:String>
+    <v:String x:Key="EmptyString">テクスト欄に何かを入力しなくてはいけません！</v:String>
+    <v:String x:Key="ErrorPattern">テクスト欄フォーマットエラー！ テクスト欄には、記号だけを含めることができます。</v:String>
+    <v:String x:Key="ErrorSpecialPattern">ニックネーム欄フォーマットエラー！ ニックネームには、記号、数字、アンダースコアまたはダッシュのみを含めることができます。</v:String>
+    <v:String x:Key="ErrorPasswordPattern">パスワードの形式が間違っています！ パスワードには6文字以上が含まれている必要があります。 パスワードには、記号、数字、アンダースコア、ダッシュを含めることができます。</v:String>
+    <v:String x:Key="ConfirmPasswordError">パスワード再記入してください。</v:String>
+    <v:String x:Key="EmailFormatError">メールアドレスの形式が無効です。 メールアドレスには、記号、数字、アンダースコア、ダッシュのみを含めることができ、example@test.com の形式にすることができます。</v:String>
+    <v:String x:Key="LoginError">間違ったメールアドレスまたはパスワード！</v:String>
 </ResourceDictionary>

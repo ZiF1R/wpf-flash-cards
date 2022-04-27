@@ -17,7 +17,6 @@
                 <RowDefinition Height="80" />
                 <RowDefinition Height="240" />
                 <RowDefinition Height="190" />
-                <RowDefinition Height="130" />
             </Grid.RowDefinitions>
 
             <Image

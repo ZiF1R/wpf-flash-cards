@@ -76,9 +76,11 @@ namespace course_project1.controls.ModalWindows
 
         private void ActionButton_Click(object sender, RoutedEventArgs e)
         {
-            if (FolderNameTextBox.Value != "")
+            try
             {
-                this.CategoryValue = FolderNameTextBox.Value.Trim();
+                Validator.ValidateInput(CategoryNameTextBox);
+
+                this.CategoryValue = CategoryNameTextBox.Value.Trim();
                 bool isUnique = Storage.CheckForUniqueCategory(ConnectionString, this.CategoryValue);
 
                 if (!isUnique) CategoryAlreadyUsed.Visibility = Visibility.Visible;
@@ -89,9 +91,10 @@ namespace course_project1.controls.ModalWindows
                     RaiseEvent(new RoutedEventArgs(CloseCategoryModalEvent));
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please fill all fields!");
+                MessageBox.Show(ex.Message);
+                return;
             }
         }
     }

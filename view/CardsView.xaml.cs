@@ -161,6 +161,7 @@ namespace course_project1.view
 
         private void SearchInput_Input(object sender, RoutedEventArgs e)
         {
+            SearchInput.Value = SearchInput.Value.Trim();
             CardsWrap.Children.RemoveRange(1, CardsWrap.Children.Count - 1);
             Card[] cards = filteredCards.Where(c => c.Term.Contains(SearchInput.Value)).ToArray();
 

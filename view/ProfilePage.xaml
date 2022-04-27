@@ -20,6 +20,7 @@
             <RowDefinition Height="65" />
             <RowDefinition Height="65" />
             <RowDefinition Height="65" />
+            <RowDefinition Height="65" />
             <RowDefinition Height="70"/>
             <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
@@ -75,6 +76,7 @@
 
         <control:SecondaryTextInput
             x:Name="EmailInput"
+            IsReadOnly="True"
             ToolTip="{DynamicResource Email}"
             Grid.Column="0"
             Grid.Row="5"
@@ -82,20 +84,21 @@
             HorizontalContentAlignment="Stretch"
             d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>
 
-        <!--<control:SecondaryTextInput
-            Placeholder="password"
+        <control:SecondaryTextInput
+            x:Name="PasswordInput"
+            ToolTip="{DynamicResource Password}"
             Grid.Column="0"
-            Grid.Row="5"
+            Grid.Row="6"
             VerticalAlignment="Center"
             HorizontalContentAlignment="Stretch"
-            d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>-->
+            d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>
 
         <Button
             x:Name="SaveChanges"
             Content="{DynamicResource Save}"
             Style="{StaticResource PrimaryButton}"
             Grid.Column="0"
-            Grid.Row="6"
+            Grid.Row="7"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Left"
             Click="SaveChanges_Click"/>
@@ -105,7 +108,7 @@
             Content="{DynamicResource LogOut}"
             Style="{StaticResource DangerButton}"
             Grid.Column="0"
-            Grid.Row="6"
+            Grid.Row="7"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Right" Click="LogOut_Click"/>
     </Grid>

@@ -6,15 +6,20 @@
       xmlns:local="clr-namespace:course_project1.view" xmlns:control="clr-namespace:course_project1.controls"
       mc:Ignorable="d" 
       Title="FoldersPage"
-      d:DesignHeight="750" d:DesignWidth="1500">
+      d:DesignHeight="750" d:DesignWidth="1300">
 
     <ScrollViewer VerticalScrollBarVisibility="Hidden">
         <Grid VerticalAlignment="Top" Name="FoldersGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1100*"/>
+                <ColumnDefinition Width="250"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="55" />
                 <RowDefinition Height="55" />
                 <RowDefinition Height="800*"/>
             </Grid.RowDefinitions>
+            
             <Image
                 Grid.Column="0"
                 Grid.Row="0"
@@ -52,11 +57,12 @@
                 Padding="0,5,0,5"
                 Margin="0,0,50,0"
                 VerticalAlignment="Bottom"
-                HorizontalContentAlignment="Right"/>
+                HorizontalContentAlignment="Stretch"/>
 
             <WrapPanel
                 Name="FoldersWrap"
                 Grid.Column="0"
+                Grid.ColumnSpan="2"
                 Grid.Row="2"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Top">

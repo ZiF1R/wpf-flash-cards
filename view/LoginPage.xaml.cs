@@ -37,35 +37,31 @@ namespace course_project1.view
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            EmailInput.Value = EmailInput.Value.Trim();
-            PasswordInput.Value = PasswordInput.Value.Trim();
-
-            if (EmailInput.Value == "" || PasswordInput.Value == "")
+            try
             {
-                MessageBox.Show("Заполните все поля!");
-                return;
+                Validator.ValidateEmail(EmailInput);
+                Validator.ValidatePassword(PasswordInput);
+
+                bool isLoginSuccess = Storage.user.LoadUser(EmailInput.Value, PasswordInput.Value, this.ConnectionString);
+                if (!isLoginSuccess)
+                {
+                    MessageBox.Show((string)Application.Current.FindResource("LoginError"));
+                    return;
+                }
+                else
+                {
+                    Storage.LoadCategories(ConnectionString);
+                    Storage.settings.LoadSettings(ConnectionString, Storage.user.Uid);
+                    Storage.LoadFolders(ConnectionString);
+                    mainWindow.AppLanguage.SelectedIndex = Storage.settings.currentLangId - 1;
+
+                    NavigationService.Navigate(new MainPage(MainWindowGrid, ConnectionString, Storage));
+                }
             }
-
-            if (!Regex.IsMatch(EmailInput.Value, @"([\w\d-_]+)\@([\w\d]+)\.(\w){2,}"))
+            catch (Exception ex)
             {
-                MessageBox.Show("Email-адрес имеет не правильный формат!");
+                MessageBox.Show(ex.Message);
                 return;
-            }
-
-            bool isLoginSuccess = Storage.user.LoadUser(EmailInput.Value, PasswordInput.Value, this.ConnectionString);
-            if (!isLoginSuccess)
-            {
-                MessageBox.Show("Неправильный email-адрес или пороль!");
-                return;
-            }
-            else
-            {
-                Storage.LoadCategories(ConnectionString);
-                Storage.settings.LoadSettings(ConnectionString, Storage.user.Uid);
-                Storage.LoadFolders(ConnectionString);
-                mainWindow.AppLanguage.SelectedIndex = Storage.settings.currentLangId - 1;
-
-                NavigationService.Navigate(new MainPage(MainWindowGrid, ConnectionString, Storage));
             }
         }
 

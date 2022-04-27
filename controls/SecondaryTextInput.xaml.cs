@@ -36,5 +36,32 @@ namespace course_project1.controls
             get => (string)GetValue(PlaceholderProperty);
             set => SetValue(PlaceholderProperty, value);
         }
+
+        public static readonly DependencyProperty IsReadOnlyProperty =
+            DependencyProperty.Register(
+               name: "IsReadOnly",
+               propertyType: typeof(bool),
+               ownerType: typeof(SecondaryTextInput));
+
+        public bool IsReadOnly
+        {
+            get => (bool)GetValue(IsReadOnlyProperty);
+            set => SetValue(IsReadOnlyProperty, value);
+        }
+
+        public static readonly DependencyProperty MaxLengthProperty =
+            DependencyProperty.Register(
+               name: "MaxLength",
+               propertyType: typeof(uint),
+               ownerType: typeof(SecondaryTextInput),
+               typeMetadata: new FrameworkPropertyMetadata(
+                   defaultValue: (uint)40,
+                   flags: FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        public uint MaxLength
+        {
+            get => (uint)GetValue(MaxLengthProperty);
+            set => SetValue(MaxLengthProperty, value);
+        }
     }
 }

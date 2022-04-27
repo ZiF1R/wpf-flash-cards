@@ -92,8 +92,12 @@ namespace course_project1.controls.ModalWindows
 
         private void ActionButton_Click(object sender, RoutedEventArgs e)
         {
-            if (CardTermTextBox.Value != "" && CardTranslationTextBox.Value != "")
+            try
             {
+                Validator.ValidateInput(CardTermTextBox, true);
+                Validator.ValidateInput(CardTranslationTextBox, true);
+                Validator.ValidateInput(CardExamplesTextBox, true, false);
+
                 if (CardTermTextBox.Value != Term)
                 {
                     bool isUnique = Card.IsUniqueCardTerm(ConnectionString, RootFolderId, CardTermTextBox.Value);
@@ -114,11 +118,11 @@ namespace course_project1.controls.ModalWindows
                 RaiseEvent(new RoutedEventArgs(CardActionEvent));
                 RaiseEvent(new RoutedEventArgs(CloseCardModalEvent));
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please fill all fields!");
+                MessageBox.Show(ex.Message);
+                return;
             }
-
         }
 
         private void Modal_Close(object sender, RoutedEventArgs e)

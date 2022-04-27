@@ -5,8 +5,8 @@
     <v:String x:Key="Registration">Регистрация</v:String>
     <v:String x:Key="Registrate">Зарегистрировать</v:String>
     <v:String x:Key="Email">Почта</v:String>
-    <v:String x:Key="Password">Пороль</v:String>
-    <v:String x:Key="ConfirmPassword">Подтвердите пороль</v:String>
+    <v:String x:Key="Password">Пароль</v:String>
+    <v:String x:Key="ConfirmPassword">Подтвердите пароль</v:String>
     <v:String x:Key="Nickname">Псевдоним</v:String>
     <v:String x:Key="Name">Имя</v:String>
     <v:String x:Key="LastName">Фамилия</v:String>
@@ -59,16 +59,17 @@
     <v:String x:Key="All">Все</v:String>
     <v:String x:Key="Memorized">Запомнено</v:String>
     <v:String x:Key="NotMemorized">Не запомнено</v:String>
-    <v:String x:Key="FolderNameUsed">* Папка с таким названием уже есть!</v:String>
-    <v:String x:Key="CategoryAlreadyUsed">* Категория с таким названием уже есть!</v:String>
-    <v:String x:Key="CardTermUsed">* Карточка с таким термином уже есть в данной папке!</v:String>
+    <v:String x:Key="FolderNameUsed">Папка с таким названием уже есть!</v:String>
+    <v:String x:Key="CategoryAlreadyUsed">Категория с таким названием уже есть!</v:String>
+    <v:String x:Key="CardTermUsed">Карточка с таким термином уже есть в данной папке!</v:String>
+    <v:String x:Key="RequiredFields">* Обязательное поле</v:String>
     <v:String x:Key="CopyAll">Скопировать все</v:String>
     <v:String x:Key="CopyTerm">Скопировать термин</v:String>
     <v:String x:Key="CopyTranslation">Скопировать перевод</v:String>
     <v:String x:Key="CopyExamples">Скопировать примеры</v:String>
     <v:String x:Key="CreateCard">Создать новую карточку</v:String>
-    <v:String x:Key="Term">Термин</v:String>
-    <v:String x:Key="Translation">Перевод</v:String>
+    <v:String x:Key="Term">*Термин</v:String>
+    <v:String x:Key="Translation">*Перевод</v:String>
     <v:String x:Key="Examples">Примеры</v:String>
     <v:String x:Key="EditCard">Редактировать карточку</v:String>
     <v:String x:Key="of">из</v:String>
@@ -90,4 +91,12 @@
     <v:String x:Key="Finish">Завершить</v:String>
     <v:String x:Key="card_s">карт(а)</v:String>
     <v:String x:Key="Search">Поиск</v:String>
+    <v:String x:Key="PasswordError">Пароль не может содержать пробелы!</v:String>
+    <v:String x:Key="EmptyString">Текстовое поле не может быть пустым!</v:String>
+    <v:String x:Key="ErrorPattern">Неверный формат текстового поля! Текстовое поле может содержать только символы!</v:String>
+    <v:String x:Key="ErrorSpecialPattern">Неверный формат поля для псевдонима! Псевдоним может содержать только символы, цифры а также знак подчеркивания или тире</v:String>
+    <v:String x:Key="ErrorPasswordPattern">Неверный формат пароля! Пароль должен содержать минимум 6 знаков. Пароль может содержать только символы, цифры а также знак подчеркивания или тире!</v:String>
+    <v:String x:Key="ConfirmPasswordError">Подтвердите пароль!</v:String>
+    <v:String x:Key="EmailFormatError">Неверный формат email-адреса! Email-адрес может содержать только символы, цифры а также знак подчеркивания или тире и быть вида example@test.com!</v:String>
+    <v:String x:Key="LoginError">Неправильный email-адрес или пароль!</v:String>
 </ResourceDictionary>

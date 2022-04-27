@@ -42,8 +42,7 @@
             BorderThickness="0,0,0,1"
             Background="{x:Null}"
             UndoLimit="100"
-            MinWidth="200"
-            MaxLength="50"
+            MaxLength="{Binding MaxLength, ElementName=InputControl}"
             ToolTip="{Binding Placeholder, ElementName=InputControl}"
             TextChanged="Input_TextChanged"/>
     </Grid>

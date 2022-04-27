@@ -162,6 +162,7 @@
     <Compile Include="storage\Folder.cs" />
     <Compile Include="storage\Settings.cs" />
     <Compile Include="storage\User.cs" />
+    <Compile Include="Validator.cs" />
     <Compile Include="view\CardsView.xaml.cs">
       <DependentUpon>CardsView.xaml</DependentUpon>
     </Compile>

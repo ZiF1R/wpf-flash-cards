@@ -1,4 +1,5 @@
-﻿using course_project1.storage;
+﻿using course_project1.controls;
+using course_project1.storage;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -61,46 +62,27 @@ namespace course_project1.view
 
         private bool ValidateForm()
         {
-            NicknameInput.Value = NicknameInput.Value.Trim();
-            SurnameInput.Value = SurnameInput.Value.Trim();
-            NameInput.Value = NameInput.Value.Trim();
-            EmailInput.Value = EmailInput.Value.Trim();
-            PasswordInput.Value = PasswordInput.Value.Trim();
-            ConfirmPasswordInput.Value = ConfirmPasswordInput.Value.Trim();
-
-            if (
-                NicknameInput.Value.Length == 0 ||
-                SurnameInput.Value.Length == 0 ||
-                NameInput.Value.Length == 0 ||
-                EmailInput.Value.Length == 0 ||
-                PasswordInput.Value.Length == 0
-            )
+            try
             {
-                MessageBox.Show("Все поля должны быть заполнены!");
+                Validator.ValidateInput(NicknameInput, true);
+                Validator.ValidateInput(SurnameInput);
+                Validator.ValidateInput(NameInput);
+                Validator.ValidateEmail(EmailInput);
+                Validator.ValidatePassword(PasswordInput);
+
+                if (PasswordInput.Value != ConfirmPasswordInput.Value)
+                {
+                    MessageBox.Show((string)Application.Current.FindResource("ConfirmPasswordError"));
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
                 return false;
             }
-
-            if (!Regex.IsMatch(EmailInput.Value, @"([\w\d-_]+)\@([\w\d]+)\.(\w){2,}"))
-            {
-                MessageBox.Show("Неправильный формат email-адреса. " +
-                    "Email-адрес может содержать только цифры, буквы, а также знак подчеркивания и тире!");
-                return false;
-            }
-
-            if (!Regex.IsMatch(PasswordInput.Value, @"([\w\d-_]){6,}"))
-            {
-                MessageBox.Show("Длина пороля должена быть не менее 6 символов. " +
-                    "Пороль может содержать только цифры, буквы, а также знак подчеркивания и тире!");
-                return false;
-            }
-
-            if (PasswordInput.Value != ConfirmPasswordInput.Value)
-            {
-                MessageBox.Show("Подтвердите пороль!");
-                return false;
-            }
-
-            return true;
         }
 
         private void GoToLogin_MouseUp(object sender, MouseButtonEventArgs e)
