@@ -8,6 +8,7 @@ using System.Windows;
 using System.Security.Cryptography;
 using System.IO;
 using Newtonsoft.Json;
+using course_project1.controls.ModalWindows;
 
 namespace course_project1.storage
 {
@@ -77,7 +78,7 @@ namespace course_project1.storage
         public User(string nickname, string surname, string name, string email, string password, string connectionString)
         {
             bool isUnique = CheckForUniqueEmail(connectionString, email);
-            if (!isUnique) throw new ArgumentException("Such email already used!");
+            if (!isUnique) throw new ArgumentException((string)Application.Current.FindResource("EmailAlreadyUsed"));
 
             Nickname = nickname;
             Surname = surname;
@@ -90,7 +91,7 @@ namespace course_project1.storage
             }
             catch
             {
-                MessageBox.Show("Password encryption error!");
+                CustomMessage.Show((string)Application.Current.FindResource("PasswordEncryptionError"));
             }
 
             InsertUser(connectionString);
@@ -136,7 +137,7 @@ namespace course_project1.storage
                 }
                 catch
                 {
-                    MessageBox.Show("User loading error!");
+                    CustomMessage.Show((string)Application.Current.FindResource("UserLoadingError"));
                     connection.Close();
                     loginCommandReader.Close();
                     return false;
@@ -182,7 +183,7 @@ namespace course_project1.storage
                 }
                 catch
                 {
-                    MessageBox.Show("User insert error!");
+                    CustomMessage.Show((string)Application.Current.FindResource("UserInsertError"));
                 }
                 finally
                 {
@@ -215,7 +216,7 @@ namespace course_project1.storage
                 }
                 catch
                 {
-                    MessageBox.Show("User update error!");
+                    CustomMessage.Show((string)Application.Current.FindResource("UserUpdateError"));
                 }
                 finally
                 {

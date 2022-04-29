@@ -70,8 +70,8 @@ namespace course_project1.controls.ModalWindows
                 modal.NegativeButtonClick += (object s, RoutedEventArgs ev) =>
                 {
                     Storage.RemoveCategory(ConnectionString, item.Content.ToString());
-                    if (item.IsSelected)
-                        FolderCategorySelect.SelectedIndex = 0;
+                    FolderCategorySelect.SelectedIndex = 0;
+                    FolderCategory = ((ComboBoxItem)FolderCategorySelect.Items.GetItemAt(0)).Content.ToString();
                     FolderCategorySelect.Items.Remove(item);
                 };
             };
@@ -158,7 +158,7 @@ namespace course_project1.controls.ModalWindows
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                CustomMessage.Show(ex.Message);
                 return;
             }
         }

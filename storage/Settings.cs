@@ -1,4 +1,5 @@
-﻿using System;
+﻿using course_project1.controls.ModalWindows;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace course_project1.storage
                 if (value >= 0 && value <= 120)
                     reviewTimeLimit = value;
                 else
-                    throw new ArgumentOutOfRangeException("Time limit must be in range of 0 and 120!");
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -49,7 +50,7 @@ namespace course_project1.storage
                 if (value >= 5 && value <= 100)
                     reviewCardsLimit = value;
                 else
-                    throw new ArgumentOutOfRangeException("Cards count must be in range of 5 and 100!");
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -82,7 +83,7 @@ namespace course_project1.storage
                 }
                 catch
                 {
-                    MessageBox.Show("Settings insert error!");
+                    CustomMessage.Show((string)Application.Current.FindResource("SettingsInsertError"));
                 }
                 finally
                 {
@@ -106,7 +107,7 @@ namespace course_project1.storage
                 if (!commandReader.HasRows)
                 {
                     commandReader.Close();
-                    MessageBox.Show("Cannot find user settings!");
+                    CustomMessage.Show((string)Application.Current.FindResource("FindSettingsError"));
                     connection.Close();
                     return;
                 };
@@ -132,7 +133,7 @@ namespace course_project1.storage
                 }
                 catch
                 {
-                    MessageBox.Show("User settings loading error!");
+                    CustomMessage.Show((string)Application.Current.FindResource("SettingsLoadingError"));
                 }
                 finally
                 {
@@ -165,7 +166,7 @@ namespace course_project1.storage
                 if (!commandReader.HasRows)
                 {
                     commandReader.Close();
-                    MessageBox.Show("Cannot get theme!");
+                    CustomMessage.Show((string)Application.Current.FindResource("GetThemeError"));
                     connection.Close();
                     return null;
                 };
@@ -214,7 +215,7 @@ namespace course_project1.storage
                 if (!commandReader.HasRows)
                 {
                     commandReader.Close();
-                    MessageBox.Show("Cannot get theme!");
+                    CustomMessage.Show((string)Application.Current.FindResource("GetLangError"));
                     connection.Close();
                     return null;
                 };
@@ -295,7 +296,7 @@ namespace course_project1.storage
                 }
                 catch
                 {
-                    MessageBox.Show("Upload settings error!");
+                    CustomMessage.Show((string)Application.Current.FindResource("SettingsUploadError"));
                 }
                 finally
                 {

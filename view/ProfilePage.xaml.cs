@@ -1,4 +1,5 @@
-﻿using course_project1.storage;
+﻿using course_project1.controls.ModalWindows;
+using course_project1.storage;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -74,7 +75,7 @@ namespace course_project1.view
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                CustomMessage.Show(ex.Message);
             }
         }
     }

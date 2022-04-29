@@ -1,4 +1,5 @@
-﻿using System;
+﻿using course_project1.controls.ModalWindows;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -68,11 +69,7 @@ namespace course_project1.view
 
         private void ReviewSwitch_SwitchChanged(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Storage.settings.ChangeReviewSwitched(ReviewSwitch.Switched, ConnectionString, Storage.user.Uid);
-            }
-            catch { }
+            Storage.settings.ChangeReviewSwitched(ReviewSwitch.Switched, ConnectionString, Storage.user.Uid);
         }
 
         private void CardsNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -84,7 +81,7 @@ namespace course_project1.view
             }
             catch
             {
-                MessageBox.Show("Cannot set cards limit!");
+                CustomMessage.Show((string)Application.Current.FindResource("SetCardsLimitError"));
             }
         }
 
@@ -97,7 +94,7 @@ namespace course_project1.view
             }
             catch
             {
-                MessageBox.Show("Cannot set time limit!");
+                CustomMessage.Show((string)Application.Current.FindResource("SetTimeLimitError"));
             }
         }
 

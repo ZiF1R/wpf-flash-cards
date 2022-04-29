@@ -91,7 +91,7 @@ namespace course_project1.view
             }
             catch
             {
-                MessageBox.Show("Folder control creation error!");
+                CustomMessage.Show((string)Application.Current.FindResource("FolderCreateError"));
             }
             return folderControl;
         }

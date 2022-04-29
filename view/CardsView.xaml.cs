@@ -122,7 +122,7 @@ namespace course_project1.view
             }
             catch
             {
-                MessageBox.Show("Card control creation error!");
+                CustomMessage.Show((string)Application.Current.FindResource("CardCreateError"));
             }
             return cardControl;
         }

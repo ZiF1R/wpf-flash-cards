@@ -93,7 +93,7 @@ namespace course_project1.controls.ModalWindows
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                CustomMessage.Show(ex.Message);
                 return;
             }
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using course_project1.controls.ModalWindows;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace course_project1.view
                 bool isLoginSuccess = Storage.user.LoadUser(EmailInput.Value, PasswordInput.Value, this.ConnectionString);
                 if (!isLoginSuccess)
                 {
-                    MessageBox.Show((string)Application.Current.FindResource("LoginError"));
+                    CustomMessage.Show((string)Application.Current.FindResource("LoginError"));
                     return;
                 }
                 else
@@ -60,7 +61,7 @@ namespace course_project1.view
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                CustomMessage.Show(ex.Message);
                 return;
             }
         }

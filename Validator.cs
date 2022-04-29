@@ -14,7 +14,7 @@ namespace course_project1
         public static void ValidateInput(CustomTextBox textBox, bool IsSpecialFormat = false, bool IsRequiredField = true)
         {
             if (textBox == null)
-                throw new ArgumentNullException("Received textbox is not exist!");
+                throw new ArgumentNullException((string)Application.Current.FindResource("TextBoxNotExist"));
 
             textBox.Value = textBox.Value.Trim().Replace(" ", "");
 
@@ -42,7 +42,7 @@ namespace course_project1
         public static void ValidateInput(SecondaryTextInput textBox, bool IsSpecialFormat = false)
         {
             if (textBox == null)
-                throw new ArgumentNullException("Received textbox is not exist!");
+                throw new ArgumentNullException((string)Application.Current.FindResource("TextBoxNotExist"));
 
             textBox.Placeholder = textBox.Placeholder.Trim().Replace(" ", "");
 
@@ -64,7 +64,7 @@ namespace course_project1
         public static void ValidateEmail(CustomTextBox textBox)
         {
             if (textBox == null)
-                throw new ArgumentNullException("Received textbox is not exist!");
+                throw new ArgumentNullException((string)Application.Current.FindResource("TextBoxNotExist"));
 
             textBox.Value = textBox.Value.Trim().Replace(" ", "");
 
@@ -78,7 +78,7 @@ namespace course_project1
         public static void ValidatePassword(CustomPasswordBox passwordBox)
         {
             if (passwordBox == null)
-                throw new ArgumentNullException("Received textbox is not exist!");
+                throw new ArgumentNullException((string)Application.Current.FindResource("TextBoxNotExist"));
 
             //passwordBox.Value = passwordBox.Value.Trim().Replace(" ", "");
             if (passwordBox.Value.Length == 0)
@@ -94,7 +94,7 @@ namespace course_project1
         public static void ValidatePassword(SecondaryTextInput passwordBox)
         {
             if (passwordBox == null)
-                throw new ArgumentNullException("Received textbox is not exist!");
+                throw new ArgumentNullException((string)Application.Current.FindResource("TextBoxNotExist"));
 
             if (passwordBox.Placeholder.Length == 0)
                 throw new Exception((string)Application.Current.FindResource("EmptyString"));

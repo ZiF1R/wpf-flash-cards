@@ -1,4 +1,5 @@
-﻿using System;
+﻿using course_project1.controls.ModalWindows;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -69,7 +70,7 @@ namespace course_project1.storage
             this.isMemorized = false;
 
             if (!InsertCard(connectionString, rootFolderId))
-                throw new Exception();
+                throw new Exception((string)Application.Current.FindResource("CardInsertError");
         }
 
         public Card(string term, string translation, string examples, DateTime created, bool isMemorized, int rightAnswers, int wrongAnswers)
@@ -108,7 +109,7 @@ namespace course_project1.storage
                     catch
                     {
                         connection.Close();
-                        MessageBox.Show("Card insert error!");
+                        CustomMessage.Show((string)Application.Current.FindResource("CardInsertError"));
                         return false;
                     }
                 }
@@ -153,7 +154,7 @@ namespace course_project1.storage
                 catch
                 {
                     connection.Close();
-                    MessageBox.Show("Card remove error!");
+                    CustomMessage.Show((string)Application.Current.FindResource("CardRemoveError"));
                     return false;
                 }
                 connection.Close();
@@ -182,7 +183,7 @@ namespace course_project1.storage
                 }
                 catch
                 {
-                    MessageBox.Show("Card update error!");
+                    CustomMessage.Show((string)Application.Current.FindResource("CardUpdateError"));
                 }
                 finally
                 {
@@ -229,7 +230,7 @@ namespace course_project1.storage
                 }
                 catch
                 {
-                    MessageBox.Show("Cannot send answer to database!");
+                    CustomMessage.Show((string)Application.Current.FindResource("SendAnswerError"));
                 }
                 finally
                 {

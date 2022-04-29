@@ -1,4 +1,5 @@
 ﻿using course_project1.controls;
+using course_project1.controls.ModalWindows;
 using course_project1.storage;
 using System;
 using System.Collections.Generic;
@@ -56,7 +57,7 @@ namespace course_project1.view
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                CustomMessage.Show(ex.Message);
             }
         }
 
@@ -72,7 +73,7 @@ namespace course_project1.view
 
                 if (PasswordInput.Value != ConfirmPasswordInput.Value)
                 {
-                    MessageBox.Show((string)Application.Current.FindResource("ConfirmPasswordError"));
+                    CustomMessage.Show((string)Application.Current.FindResource("ConfirmPasswordError"));
                     return false;
                 }
 
@@ -80,7 +81,7 @@ namespace course_project1.view
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                CustomMessage.Show(ex.Message);
                 return false;
             }
         }

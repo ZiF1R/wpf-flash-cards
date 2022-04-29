@@ -6,15 +6,20 @@
              xmlns:local="clr-namespace:course_project1.controls"
              mc:Ignorable="d"
              Name="FolderControlElement"
-             d:DesignHeight="140" d:DesignWidth="280">
+              d:MinHeight="140" d:DesignWidth="280">
 
     <Grid x:Name="FolderGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="240"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="33"/>
-            <RowDefinition Height="32"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="35"/>
+            <RowDefinition MinHeight="32"/>
+            <RowDefinition MinHeight="20"/>
+            <RowDefinition MinHeight="20"/>
+            <RowDefinition MinHeight="35"/>
         </Grid.RowDefinitions>
 
 
@@ -25,9 +30,11 @@
             Cursor="Hand"
             Visibility="Hidden"
             Grid.RowSpan="5"
-            Opacity="0.2"
+            Opacity="0.15"
             Grid.Row="0"
-            Height="140"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            MinHeight="140"
             Width="280"
             Fill="Transparent">
             <Rectangle.Triggers>
@@ -35,13 +42,13 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
-                                                    Duration="0:0:4"
+                                                    Duration="0:0:3"
                                                     FillBehavior="HoldEnd"
                                                     RepeatBehavior="Forever">
                                 <ColorAnimationUsingKeyFrames.KeyFrames>
                                     <LinearColorKeyFrame KeyTime="0:0:0" Value="Transparent"/>
-                                    <LinearColorKeyFrame KeyTime="0:0:2" Value="Yellow"/>
-                                    <LinearColorKeyFrame KeyTime="0:0:4" Value="Transparent"/>
+                                    <LinearColorKeyFrame KeyTime="0:0:1.5" Value="Yellow"/>
+                                    <LinearColorKeyFrame KeyTime="0:0:3" Value="Transparent"/>
                                 </ColorAnimationUsingKeyFrames.KeyFrames>
                             </ColorAnimationUsingKeyFrames>
                         </Storyboard>
@@ -51,9 +58,11 @@
         </Rectangle>
         
         <Rectangle
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
             Grid.RowSpan="5"
             Grid.Row="0"
-            Height="140"
+            MinHeight="140"
             Width="280"
             Fill="{DynamicResource CardBg}">
             <Rectangle.Effect>
@@ -68,16 +77,16 @@
             x:Name="ReviewButton"
             MouseUp="ReviewButton_MouseUp"
             Cursor="Hand"
-            Margin="20,0,20,0"
             Grid.Row="0"
+            Grid.Column="1"
             Source="/icons/Play.png"
             Width="13"
             Height="13"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"/>
-        
+
         <Image
-            Margin="20,0,20,0"
+            Grid.Column="1"
             Grid.Row="0"
             Source="/icons/Folder Settings.png"
             Width="15"
@@ -86,7 +95,7 @@
             VerticalAlignment="Center"/>
 
         <StackPanel
-            Margin="20,0,20,0"
+            Grid.Column="1"
             Grid.Row="0"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
@@ -104,6 +113,7 @@
                 Name="myPopup"
                 IsOpen="{Binding IsChecked, ElementName=FolderSettings}"
                 Placement="Bottom"
+                StaysOpen="False"
                 PlacementTarget="{Binding ElementName=FolderSettings}"
                 PopupAnimation="Slide">
                 <Popup.Effect>
@@ -182,8 +192,9 @@
         <Rectangle
             Opacity="0.1"
             Fill="{DynamicResource TextColor}"
-            Grid.Row="1"
-            VerticalAlignment="Top"
+            Grid.Row="0"
+            Grid.Column="1"
+            VerticalAlignment="Bottom"
             HorizontalAlignment="Center"
             Width="240"
             Height="1"/>
@@ -196,21 +207,21 @@
             MouseUp="FolderNameField_MouseUp"
             Panel.ZIndex="1"
             Grid.Row="1"
+            Grid.Column="1"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Left"
             FontSize="16"
             FontFamily="Segoe UI Semibold"
-            Margin="20,0,0,0"
             Foreground="{DynamicResource TextColor}"/>
 
         <TextBlock
             Panel.ZIndex="1"
             Grid.Row="2"
+            Grid.Column="1"
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
             FontSize="14"
             FontFamily="Segoe UI Light"
-            Margin="20,0,0,0"
             TextWrapping="Wrap"
             Foreground="{DynamicResource TextColor}">
             <TextBlock
@@ -224,11 +235,11 @@
         <TextBlock
             Panel.ZIndex="1"
             Grid.Row="3"
+            Grid.Column="1"
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
             FontSize="14"
             FontFamily="Segoe UI Light"
-            Margin="20,0,0,0"
             TextWrapping="Wrap"
             Foreground="{DynamicResource TextColor}">
             <TextBlock
@@ -241,11 +252,12 @@
         <TextBlock
             Panel.ZIndex="1"
             Grid.Row="4"
+            Grid.Column="1"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Right"
             FontSize="10"
             FontFamily="Segoe UI Light"
-            Margin="0,0,10,10"
+            Margin="0,10,10,10"
             TextWrapping="Wrap"
             Foreground="{DynamicResource TextColorOpacity}">
             <TextBlock

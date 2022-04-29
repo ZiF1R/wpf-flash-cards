@@ -1,4 +1,5 @@
-﻿using System;
+﻿using course_project1.controls.ModalWindows;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -49,7 +50,7 @@ namespace course_project1.storage
             Cards = new Card[] { };
 
             if(!InsertFolder(connectionString, uid))
-                throw new Exception("insert error");
+                throw new Exception((string)Application.Current.FindResource("FolderInsertError"));
         }
 
         public Folder(int folderId, string name, string category, DateTime created)
@@ -94,7 +95,7 @@ namespace course_project1.storage
                     catch
                     {
                         connection?.Close();
-                        MessageBox.Show("Cards loading error!");
+                        CustomMessage.Show((string)Application.Current.FindResource("CardsLoadingError"));
                         return;
                     }
                 }
@@ -127,7 +128,7 @@ namespace course_project1.storage
                     catch
                     {
                         connection.Close();
-                        MessageBox.Show("Folder insert error!");
+                        CustomMessage.Show((string)Application.Current.FindResource("FolderInsertError"));
                         return false;
                     }
                 }
@@ -158,7 +159,7 @@ namespace course_project1.storage
                 catch
                 {
                     connection.Close();
-                    MessageBox.Show("Folder remove error!");
+                    CustomMessage.Show((string)Application.Current.FindResource("FolderRemoveError"));
                     return false;
                 }
             }
@@ -184,7 +185,7 @@ namespace course_project1.storage
                 }
                 catch
                 {
-                    MessageBox.Show("Folder update error!");
+                    CustomMessage.Show((string)Application.Current.FindResource("FolderRemoveError"));
                 }
                 finally
                 {

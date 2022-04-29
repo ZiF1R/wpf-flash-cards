@@ -1,4 +1,5 @@
-﻿using course_project1.storage;
+﻿using course_project1.controls.ModalWindows;
+using course_project1.storage;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -29,7 +30,6 @@ namespace course_project1
             using(SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                this.categories = categories.Append(category).ToArray();
                 var addCategoryCommand = string.Format("INSERT INTO CATEGORIES VALUES(@uid, @category)");
                 using (SqlCommand command = new SqlCommand(addCategoryCommand, connection))
                 {
@@ -38,11 +38,12 @@ namespace course_project1
                         command.Parameters.AddWithValue("@uid", this.user.Uid);
                         command.Parameters.AddWithValue("@category", category);
                         command.ExecuteNonQuery();
+                        this.categories = categories.Append(category).ToArray();
                     }
                     catch
                     {
                         connection.Close();
-                        MessageBox.Show("Category insert error!");
+                        CustomMessage.Show((string)Application.Current.FindResource("CategoryInsertError"));
                         return false;
                     }
                 }
@@ -68,7 +69,7 @@ namespace course_project1
                 catch
                 {
                     connection.Close();
-                    MessageBox.Show("Category remove error!");
+                    CustomMessage.Show((string)Application.Current.FindResource("CategoryRemoveError"));
                     return false;
                 }
                 connection.Close();
@@ -115,7 +116,7 @@ namespace course_project1
                 }
                 catch
                 {
-                    MessageBox.Show("Folders loading error!");
+                    CustomMessage.Show((string)Application.Current.FindResource("FoldersLoadingError"));
                     comandReader.Close();
                 }
                 connection.Close();
@@ -150,7 +151,7 @@ namespace course_project1
                 }
                 catch
                 {
-                    MessageBox.Show("Categories loading error!");
+                    CustomMessage.Show((string)Application.Current.FindResource("CategoriesLoadingError"));
                 }
                 finally
                 {

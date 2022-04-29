@@ -266,7 +266,7 @@ namespace course_project1.controls
                     using (FileStream fs = File.Create(dialog.FileName))
                     {
                         string extension = System.IO.Path.GetExtension(dialog.FileName).ToLower();
-                        if (extension != ".json") throw new Exception("Неверное расширение файла!");
+                        if (extension != ".json") throw new Exception((string)Application.Current.FindResource("InvalidFileExtension"));
 
                         DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Card[]));
                         serializer.WriteObject(fs, folder.Cards);
@@ -274,7 +274,7 @@ namespace course_project1.controls
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    CustomMessage.Show(ex.Message);
                 }
             }
 
@@ -293,7 +293,7 @@ namespace course_project1.controls
                     using (FileStream fs = File.OpenRead(dialog.FileName))
                     {
                         string extension = System.IO.Path.GetExtension(dialog.FileName).ToLower();
-                        if (extension != ".json") throw new Exception("Неверное расширение файла!");
+                        if (extension != ".json") throw new Exception((string)Application.Current.FindResource("InvalidFileExtension"));
 
                         DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Card[]));
                         Card[] cards = (Card[])serializer.ReadObject(fs);
@@ -304,7 +304,7 @@ namespace course_project1.controls
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    CustomMessage.Show(ex.Message);
                 }
             }
 
