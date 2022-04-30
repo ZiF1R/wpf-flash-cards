@@ -51,6 +51,46 @@ namespace course_project1.storage
 
             if(!InsertFolder(connectionString, uid))
                 throw new Exception((string)Application.Current.FindResource("FolderInsertError"));
+
+            FolderId = GetFolderId(connectionString, uid);
+        }
+
+        private int GetFolderId(string connectionString, int uid)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand comand = connection.CreateCommand();
+                comand.CommandText =
+                    $"SELECT * " +
+                    $"FROM FOLDERS " +
+                    $"WHERE FOLDERS.USER_UID = {uid} AND FOLDER_NAME = '{Name}'";
+
+                SqlDataReader comandReader = comand.ExecuteReader();
+                if (!comandReader.HasRows)
+                {
+                    comandReader.Close();
+                    return 0;
+                }
+
+                int folderId = 0;
+                try
+                {
+                    comandReader.Read();
+                    folderId = comandReader.GetInt32(0);
+                }
+                catch
+                {
+                    CustomMessage.Show((string)Application.Current.FindResource("FoldersLoadingError"));
+                }
+                finally
+                {
+                    comandReader.Close();
+                    connection.Close();
+                }
+
+                return folderId;
+            }
         }
 
         public Folder(int folderId, string name, string category, DateTime created)

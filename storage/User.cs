@@ -181,9 +181,10 @@ namespace course_project1.storage
                     SqlDataReader commandReader = command.ExecuteReader();
                     commandReader.Close();
                 }
-                catch
+                catch (Exception ex)
                 {
                     CustomMessage.Show((string)Application.Current.FindResource("UserInsertError"));
+                    CustomMessage.Show(ex.Message);
                 }
                 finally
                 {

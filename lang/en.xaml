@@ -120,7 +120,7 @@
     <v:String x:Key="UserUpdateError">User update error!</v:String>
     <v:String x:Key="InvalidFileExtension">Invalid file extension!</v:String>
     <v:String x:Key="TextBoxNotExist">Received textbox not exist!</v:String>
-    <v:String x:Key="PasswordError">Password cannot contain spaces!</v:String>
+    <v:String x:Key="TextBoxError">Textboxes cannot contain spaces!</v:String>
     <v:String x:Key="EmptyString">Textbox cannot be empty!</v:String>
     <v:String x:Key="ErrorPattern">Invalid textbox format! The textbox can contain only symbols!</v:String>
     <v:String x:Key="ErrorSpecialPattern">Invalid textbox format for nickname! Nickname can only contain symbols, numbers, and underscores or dashes!</v:String>

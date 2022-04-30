@@ -119,7 +119,10 @@ namespace course_project1
                     CustomMessage.Show((string)Application.Current.FindResource("FoldersLoadingError"));
                     comandReader.Close();
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
         }
 

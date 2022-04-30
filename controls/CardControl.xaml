@@ -8,15 +8,21 @@
              Name="CardControlElement"
              d:DesignHeight="140" d:DesignWidth="280">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="240"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="33"/>
-            <RowDefinition Height="32"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="35"/>
+            <RowDefinition MinHeight="32"/>
+            <RowDefinition MinHeight="20"/>
+            <RowDefinition MinHeight="20"/>
+            <RowDefinition MinHeight="35"/>
         </Grid.RowDefinitions>
 
         <Rectangle
+            Grid.ColumnSpan="3"
             Grid.RowSpan="5"
             Grid.Row="0"
             Height="140"
@@ -31,8 +37,8 @@
         </Rectangle>
 
         <Image
-            Margin="20,0,20,0"
             Grid.Row="0"
+            Grid.Column="1"
             Source="/icons/Folder Settings.png"
             Width="15"
             Height="15"
@@ -40,7 +46,7 @@
             VerticalAlignment="Center"/>
 
         <StackPanel
-            Margin="20,0,20,0"
+            Grid.Column="1"
             Grid.Row="0"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
@@ -236,8 +242,9 @@
         <Rectangle
             Opacity="0.1"
             Fill="{DynamicResource TextColor}"
-            Grid.Row="1"
-            VerticalAlignment="Top"
+            Grid.Row="0"
+            Grid.Column="1"
+            VerticalAlignment="Bottom"
             HorizontalAlignment="Center"
             Width="240"
             Height="1"/>
@@ -247,40 +254,41 @@
             Text="{Binding Term, ElementName=CardControlElement}"
             Panel.ZIndex="1"
             Grid.Row="1"
+            Grid.Column="1"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Left"
             FontSize="16"
             FontFamily="Segoe UI Semibold"
-            Margin="20,0,0,0"
             Foreground="{DynamicResource TextColor}"/>
 
         <TextBlock
             Name="CardTranslationField"
             Panel.ZIndex="1"
             Grid.Row="2"
+            Grid.Column="1"
             Text="{Binding Translation, ElementName=CardControlElement}"
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
             FontSize="16"
             FontFamily="Segoe UI Light"
-            Margin="20,0,0,0"
             Foreground="{DynamicResource TextColor}"/>
 
         <TextBlock
             Panel.ZIndex="1"
             Grid.Row="3"
+            Grid.Column="1"
             Text="{Binding Examples, ElementName=CardControlElement}"
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
             FontSize="14"
             FontStyle="Italic"
             FontFamily="Segoe UI Light"
-            Margin="20,0,0,0"
             Foreground="{DynamicResource TextColor}"/>
 
         <TextBlock
             Panel.ZIndex="1"
             Grid.Row="4"
+            Grid.Column="1"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Right"
             FontSize="10"

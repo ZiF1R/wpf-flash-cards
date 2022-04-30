@@ -70,7 +70,7 @@ namespace course_project1.storage
             this.isMemorized = false;
 
             if (!InsertCard(connectionString, rootFolderId))
-                throw new Exception((string)Application.Current.FindResource("CardInsertError");
+                throw new Exception((string)Application.Current.FindResource("CardInsertError"));
         }
 
         public Card(string term, string translation, string examples, DateTime created, bool isMemorized, int rightAnswers, int wrongAnswers)

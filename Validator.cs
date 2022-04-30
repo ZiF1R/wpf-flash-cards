@@ -16,13 +16,14 @@ namespace course_project1
             if (textBox == null)
                 throw new ArgumentNullException((string)Application.Current.FindResource("TextBoxNotExist"));
 
-            textBox.Value = textBox.Value.Trim().Replace(" ", "");
-
             if (IsRequiredField)
             {
                 if (textBox.Value.Length == 0)
                     throw new Exception((string)Application.Current.FindResource("EmptyString"));
             }
+
+            if (textBox.Value.Contains(" "))
+                throw new Exception((string)Application.Current.FindResource("TextBoxError"));
 
             if ((IsRequiredField == false && textBox.Value.Length > 0) || IsRequiredField)
             {
@@ -33,7 +34,7 @@ namespace course_project1
                 }
                 else
                 {
-                    if (Regex.IsMatch(textBox.Value, @"[\d\W]"))
+                    if (Regex.IsMatch(textBox.Value, @"[_\d\W]"))
                         throw new Exception((string)Application.Current.FindResource("ErrorPattern"));
                 }
             }
@@ -44,10 +45,11 @@ namespace course_project1
             if (textBox == null)
                 throw new ArgumentNullException((string)Application.Current.FindResource("TextBoxNotExist"));
 
-            textBox.Placeholder = textBox.Placeholder.Trim().Replace(" ", "");
-
             if (textBox.Placeholder.Length == 0)
                 throw new Exception((string)Application.Current.FindResource("EmptyString"));
+
+            if (textBox.Placeholder.Contains(" "))
+                throw new Exception((string)Application.Current.FindResource("TextBoxError"));
 
             if (IsSpecialFormat)
             {
@@ -56,7 +58,7 @@ namespace course_project1
             }
             else
             {
-                if (Regex.IsMatch(textBox.Placeholder, @"[\d\W]"))
+                if (Regex.IsMatch(textBox.Placeholder, @"[_\d\W]"))
                     throw new Exception((string)Application.Current.FindResource("ErrorPattern"));
             }
         }
@@ -66,12 +68,16 @@ namespace course_project1
             if (textBox == null)
                 throw new ArgumentNullException((string)Application.Current.FindResource("TextBoxNotExist"));
 
-            textBox.Value = textBox.Value.Trim().Replace(" ", "");
-
             if (textBox.Value.Length == 0)
                 throw new Exception((string)Application.Current.FindResource("EmptyString"));
 
-            if (!Regex.IsMatch(textBox.Value, @"([\w\d-_]+)\@([\w\d]+)\.(\w){2,}"))
+            if (textBox.Value.Contains(" "))
+                throw new Exception((string)Application.Current.FindResource("TextBoxError"));
+
+            if (!Regex.IsMatch(textBox.Value, @"^(([a-zA-Z\d-_]+)\@([a-zA-Z\d]+)\.([a-zA-Z]){2,})$") ||
+                Regex.IsMatch(textBox.Value, @"^(([^a-zA-Z\d-_]+)\@)") ||
+                Regex.IsMatch(textBox.Value, @"^((.+)\@([^a-zA-Z\d]+))\.") ||
+                Regex.IsMatch(textBox.Value, @"^((.+)\@(.+)\.([^a-zA-Z]+))$"))
                 throw new Exception((string)Application.Current.FindResource("EmailFormatError"));
         }
 
@@ -80,12 +86,11 @@ namespace course_project1
             if (passwordBox == null)
                 throw new ArgumentNullException((string)Application.Current.FindResource("TextBoxNotExist"));
 
-            //passwordBox.Value = passwordBox.Value.Trim().Replace(" ", "");
             if (passwordBox.Value.Length == 0)
                 throw new Exception((string)Application.Current.FindResource("EmptyString"));
 
             if (passwordBox.Value.Contains(" "))
-                throw new Exception((string)Application.Current.FindResource("PasswordError"));
+                throw new Exception((string)Application.Current.FindResource("TextBoxError"));
 
             if (!Regex.IsMatch(passwordBox.Value, @"([\w\d-_]){6,}"))
                 throw new Exception((string)Application.Current.FindResource("ErrorPasswordPattern"));
@@ -100,7 +105,7 @@ namespace course_project1
                 throw new Exception((string)Application.Current.FindResource("EmptyString"));
 
             if (passwordBox.Placeholder.Contains(" "))
-                throw new Exception((string)Application.Current.FindResource("PasswordError"));
+                throw new Exception((string)Application.Current.FindResource("TextBoxError"));
 
             if (!Regex.IsMatch(passwordBox.Placeholder, @"([\w\d-_]){6,}"))
                 throw new Exception((string)Application.Current.FindResource("ErrorPasswordPattern"));

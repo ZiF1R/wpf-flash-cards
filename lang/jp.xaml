@@ -120,7 +120,7 @@
     <v:String x:Key="UserUpdateError">Ошибка редактирования пользователя!</v:String>
     <v:String x:Key="InvalidFileExtension">Неверное расширение файла!</v:String>
     <v:String x:Key="TextBoxNotExist">Полученное текстовое поле не существует!</v:String>
-    <v:String x:Key="PasswordError">パスワードにはスペースを含めることはできません！</v:String>
+    <v:String x:Key="TextBoxError">テクスト欄にはスペースを含めることはできません！</v:String>
     <v:String x:Key="EmptyString">テクスト欄に何かを入力しなくてはいけません！</v:String>
     <v:String x:Key="ErrorPattern">テクスト欄フォーマットエラー！ テクスト欄には、記号だけを含めることができます。</v:String>
     <v:String x:Key="ErrorSpecialPattern">ニックネーム欄フォーマットエラー！ ニックネームには、記号、数字、アンダースコアまたはダッシュのみを含めることができます。</v:String>
