@@ -89,6 +89,7 @@
             ToolTip="{DynamicResource Password}"
             Grid.Column="0"
             Grid.Row="6"
+            MaxLength="31"
             VerticalAlignment="Center"
             HorizontalContentAlignment="Stretch"
             d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>

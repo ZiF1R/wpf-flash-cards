@@ -156,6 +156,10 @@ namespace course_project1.controls.ModalWindows
                 RaiseEvent(new RoutedEventArgs(FolderActionEvent));
                 RaiseEvent(new RoutedEventArgs(CloseFolderModalEvent));
             }
+            catch (FormatException ex)
+            {
+                CustomMessage.Show((string)Application.Current.FindResource("FolderNameFormatError"));
+            }
             catch (Exception ex)
             {
                 CustomMessage.Show(ex.Message);

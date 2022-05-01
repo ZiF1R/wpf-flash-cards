@@ -121,11 +121,20 @@
     <v:String x:Key="InvalidFileExtension">Invalid file extension!</v:String>
     <v:String x:Key="TextBoxNotExist">Received textbox not exist!</v:String>
     <v:String x:Key="TextBoxError">Textboxes cannot contain spaces!</v:String>
-    <v:String x:Key="EmptyString">Textbox cannot be empty!</v:String>
-    <v:String x:Key="ErrorPattern">Invalid textbox format! The textbox can contain only symbols!</v:String>
-    <v:String x:Key="ErrorSpecialPattern">Invalid textbox format for nickname! Nickname can only contain symbols, numbers, and underscores or dashes!</v:String>
-    <v:String x:Key="ErrorPasswordPattern">Wrong password format! The password must contain at least 6 characters. The password can contain symbols, numbers, as well as underscores and dashes!</v:String>
+    <v:String x:Key="EmptyString">All fields must be filled!</v:String>
+    <v:String x:Key="ErrorPattern">Invalid textbox format! The textbox can contain only alphabetic symbols!</v:String>
+    <v:String x:Key="ErrorSpecialPattern">Invalid textbox with special format! Textbox with special format can only contain alphabetic symbols, numbers, and underscores or dashes!</v:String>
+    <v:String x:Key="ErrorPasswordPattern">Invalid password format! The password must contain at least 6 characters. The password can contain alphabetic symbols, numbers, as well as underscores and dashes!</v:String>
     <v:String x:Key="ConfirmPasswordError">Confirm the password!</v:String>
-    <v:String x:Key="EmailFormatError">Invalid email address format! The email address can only contain symbols, numbers, underscores and dashes and be of the form example@test.com!</v:String>
-    <v:String x:Key="LoginError">Wrong email address or password!</v:String>
+    <v:String x:Key="EmailFormatError">Invalid email address format! The email address can only contain alphabetic symbols, numbers, underscores or dashes and be of the form example@test.com!</v:String>
+    <v:String x:Key="LoginError">Invalid email address or password!</v:String>
+
+    <v:String x:Key="NicknameFormatError">Invalid nickname format! Nickname can only contain alphabetic symbols, numbers, underscores or dashes!</v:String>
+    <v:String x:Key="SurnameFormatError">Invalid surname textbox format! Surname can contain only alphabetic symbols!</v:String>
+    <v:String x:Key="NameFormatError">Invalid name textbox format! Name can contain only alphabetic symbols!</v:String>
+    <v:String x:Key="CategoryFormatError">Invalid category name format! Category name can contain only alphabetic symbols!</v:String>
+    <v:String x:Key="CardTermFormatError">Invalid card term format! Card term can only contain alphabetic symbols, numbers, underscores or dashes!</v:String>
+    <v:String x:Key="CardTranslationFormatError">Invalid card translation format! Card translation can only contain alphabetic symbols, numbers, underscores or dashes!</v:String>
+    <v:String x:Key="CardExamplesFormatError">Invalid card examples format! Card examples can only contain alphabetic symbols, numbers, underscores or dashes!</v:String>
+    <v:String x:Key="FolderNameFormatError">Invalid folder name format! Folder name can only contain alphabetic symbols, numbers, underscores or dashes!</v:String>
 </ResourceDictionary>

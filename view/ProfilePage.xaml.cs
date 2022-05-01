@@ -1,4 +1,5 @@
-﻿using course_project1.controls.ModalWindows;
+﻿using course_project1.controls;
+using course_project1.controls.ModalWindows;
 using course_project1.storage;
 using System;
 using System.Collections.Generic;
@@ -57,9 +58,9 @@ namespace course_project1.view
         {
             try
             {
-                Validator.ValidateInput(NicknameInput, true);
-                Validator.ValidateInput(SurnameInput);
-                Validator.ValidateInput(NameInput);
+                ValidateInput(NicknameInput, "NicknameFormatError", true);
+                ValidateInput(SurnameInput, "SurnameFormatError");
+                ValidateInput(NameInput, "NameFormatError");
                 Validator.ValidatePassword(PasswordInput);
 
                 if (
@@ -76,6 +77,22 @@ namespace course_project1.view
             catch (Exception ex)
             {
                 CustomMessage.Show(ex.Message);
+            }
+        }
+
+        private void ValidateInput(SecondaryTextInput textBox, string errorFormatMessageResourceName, bool specialFormat = false)
+        {
+            try
+            {
+                Validator.ValidateInput(textBox, specialFormat);
+            }
+            catch (FormatException ex)
+            {
+                throw new FormatException((string)Application.Current.FindResource(errorFormatMessageResourceName));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }

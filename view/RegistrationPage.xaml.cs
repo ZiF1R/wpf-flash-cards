@@ -65,9 +65,9 @@ namespace course_project1.view
         {
             try
             {
-                Validator.ValidateInput(NicknameInput, true);
-                Validator.ValidateInput(SurnameInput);
-                Validator.ValidateInput(NameInput);
+                ValidateInput(NicknameInput, "NicknameFormatError", true);
+                ValidateInput(SurnameInput, "SurnameFormatError");
+                ValidateInput(NameInput, "NameFormatError");
                 Validator.ValidateEmail(EmailInput);
                 Validator.ValidatePassword(PasswordInput);
 
@@ -83,6 +83,22 @@ namespace course_project1.view
             {
                 CustomMessage.Show(ex.Message);
                 return false;
+            }
+        }
+
+        private void ValidateInput(CustomTextBox textBox, string errorFormatMessageResourceName, bool specialFormat = false)
+        {
+            try
+            {
+                Validator.ValidateInput(textBox, specialFormat);
+            }
+            catch (FormatException ex)
+            {
+                throw new FormatException((string)Application.Current.FindResource(errorFormatMessageResourceName));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 

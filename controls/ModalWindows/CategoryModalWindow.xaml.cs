@@ -91,6 +91,11 @@ namespace course_project1.controls.ModalWindows
                     RaiseEvent(new RoutedEventArgs(CloseCategoryModalEvent));
                 }
             }
+            catch (FormatException ex)
+            {
+                CustomMessage.Show((string)Application.Current.FindResource("CategoryFormatError"));
+                return;
+            }
             catch (Exception ex)
             {
                 CustomMessage.Show(ex.Message);

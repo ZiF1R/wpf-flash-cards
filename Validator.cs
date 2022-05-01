@@ -30,12 +30,12 @@ namespace course_project1
                 if (IsSpecialFormat)
                 {
                     if (Regex.IsMatch(textBox.Value, @"[^\w\d-_]"))
-                        throw new Exception((string)Application.Current.FindResource("ErrorSpecialPattern"));
+                        throw new FormatException();
                 }
                 else
                 {
                     if (Regex.IsMatch(textBox.Value, @"[_\d\W]"))
-                        throw new Exception((string)Application.Current.FindResource("ErrorPattern"));
+                        throw new FormatException();
                 }
             }
         }
@@ -54,12 +54,12 @@ namespace course_project1
             if (IsSpecialFormat)
             {
                 if (Regex.IsMatch(textBox.Placeholder, @"[^\w\d-_]"))
-                    throw new Exception((string)Application.Current.FindResource("ErrorSpecialPattern"));
+                    throw new FormatException();
             }
             else
             {
                 if (Regex.IsMatch(textBox.Placeholder, @"[_\d\W]"))
-                    throw new Exception((string)Application.Current.FindResource("ErrorPattern"));
+                    throw new FormatException();
             }
         }
 
@@ -78,7 +78,7 @@ namespace course_project1
                 Regex.IsMatch(textBox.Value, @"^(([^a-zA-Z\d-_]+)\@)") ||
                 Regex.IsMatch(textBox.Value, @"^((.+)\@([^a-zA-Z\d]+))\.") ||
                 Regex.IsMatch(textBox.Value, @"^((.+)\@(.+)\.([^a-zA-Z]+))$"))
-                throw new Exception((string)Application.Current.FindResource("EmailFormatError"));
+                throw new FormatException((string)Application.Current.FindResource("EmailFormatError"));
         }
 
         public static void ValidatePassword(CustomPasswordBox passwordBox)
@@ -93,7 +93,7 @@ namespace course_project1
                 throw new Exception((string)Application.Current.FindResource("TextBoxError"));
 
             if (!Regex.IsMatch(passwordBox.Value, @"([\w\d-_]){6,}"))
-                throw new Exception((string)Application.Current.FindResource("ErrorPasswordPattern"));
+                throw new FormatException((string)Application.Current.FindResource("ErrorPasswordPattern"));
         }
 
         public static void ValidatePassword(SecondaryTextInput passwordBox)
@@ -108,7 +108,7 @@ namespace course_project1
                 throw new Exception((string)Application.Current.FindResource("TextBoxError"));
 
             if (!Regex.IsMatch(passwordBox.Placeholder, @"([\w\d-_]){6,}"))
-                throw new Exception((string)Application.Current.FindResource("ErrorPasswordPattern"));
+                throw new FormatException((string)Application.Current.FindResource("ErrorPasswordPattern"));
         }
     }
 }
