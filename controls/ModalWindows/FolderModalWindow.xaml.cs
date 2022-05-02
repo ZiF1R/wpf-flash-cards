@@ -69,6 +69,12 @@ namespace course_project1.controls.ModalWindows
                 modal.CloseModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
                 modal.NegativeButtonClick += (object s, RoutedEventArgs ev) =>
                 {
+                    if (!Storage.IsUnusedCategory(category))
+                    {
+                        CustomMessage.Show((string)Application.Current.FindResource("UsedCategoryError"));
+                        return;
+                    }
+
                     Storage.RemoveCategory(ConnectionString, item.Content.ToString());
                     FolderCategorySelect.SelectedIndex = 0;
                     FolderCategory = ((ComboBoxItem)FolderCategorySelect.Items.GetItemAt(0)).Content.ToString();

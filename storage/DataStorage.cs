@@ -184,6 +184,11 @@ namespace course_project1
             }
         }
 
+        public bool IsUnusedCategory(string category)
+        {
+            return !this.folders.Where(folder => folder.Category == category).Any();
+        }
+
         public void Clear()
         {
             user = new User();

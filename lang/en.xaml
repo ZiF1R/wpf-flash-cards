@@ -129,6 +129,7 @@
     <v:String x:Key="EmailFormatError">Invalid email address format! The email address can only contain alphabetic symbols, numbers, underscores or dashes and be of the form example@test.com!</v:String>
     <v:String x:Key="LoginError">Invalid email address or password!</v:String>
 
+    <v:String x:Key="UsedCategoryError">Cannot remove category. This category is currently in use!</v:String>
     <v:String x:Key="NicknameFormatError">Invalid nickname format! Nickname can only contain alphabetic symbols, numbers, underscores or dashes!</v:String>
     <v:String x:Key="SurnameFormatError">Invalid surname textbox format! Surname can contain only alphabetic symbols!</v:String>
     <v:String x:Key="NameFormatError">Invalid name textbox format! Name can contain only alphabetic symbols!</v:String>

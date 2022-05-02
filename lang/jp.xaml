@@ -128,7 +128,8 @@
     <v:String x:Key="ConfirmPasswordError">パスワード再記入してください。</v:String>
     <v:String x:Key="EmailFormatError">メールアドレスの形式が無効です。 メールアドレスには、記号、数字、アンダースコア、ダッシュのみを含めることができ、example@test.com の形式にすることができます。</v:String>
     <v:String x:Key="LoginError">間違ったメールアドレスまたはパスワード！</v:String>
-    
+
+    <v:String x:Key="UsedCategoryError">カテゴリの削除に失敗しました。 このカテゴリは現在使用中です！</v:String>
     <v:String x:Key="NicknameFormatError">無効なニックネーム形式！エイリアスには、英字、数字、アンダースコア、またはダッシュのみを含めることができます！</v:String>
     <v:String x:Key="SurnameFormatError">無効な名前フィールド形式！姓には英字のみを含めることができます！</v:String>
     <v:String x:Key="NameFormatError">無効な名前フィールド形式！名前には英字のみを含めることができます！</v:String>

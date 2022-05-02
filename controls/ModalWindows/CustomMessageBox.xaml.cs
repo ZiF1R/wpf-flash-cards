@@ -19,7 +19,7 @@ namespace course_project1.controls.ModalWindows
     /// </summary>
     public partial class CustomMessageBox : Window
     {
-        public CustomMessageBox(string message)
+        internal CustomMessageBox(string message)
         {
             InitializeComponent();
             MessageText.Text = message;

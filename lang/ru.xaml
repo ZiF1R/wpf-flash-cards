@@ -129,6 +129,7 @@
     <v:String x:Key="EmailFormatError">Неверный формат email-адреса! Email-адрес может содержать только буквенные символы, цифры а также знак подчеркивания или тире и быть вида example@test.com!</v:String>
     <v:String x:Key="LoginError">Неправильный email-адрес или пароль!</v:String>
 
+    <v:String x:Key="UsedCategoryError">Не получилось удалить категорию. Эта категория в настоящее время используется!</v:String>
     <v:String x:Key="NicknameFormatError">Неверный формат псевдонима! Псевдоним может содержать только буквенные символы, цифры, символы подчеркивания или тире!</v:String>
     <v:String x:Key="SurnameFormatError">Неверный формат поля для фамилии! Фамилия может содержать только буквенные символы!</v:String>
     <v:String x:Key="NameFormatError">Неверный формат поля для имени! Имя может содержать только буквенные символы!</v:String>
