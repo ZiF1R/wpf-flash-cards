@@ -29,6 +29,7 @@ namespace course_project1.view
         Frame SecondFrame;
         Grid MainPageGrid;
         bool IsForExportImport;
+        Folder[] filteredFolders;
 
         FolderControl.Action action;
 
@@ -43,10 +44,14 @@ namespace course_project1.view
             Storage = storage;
             MainPageGrid = mainPageGrid;
             SecondFrame = secondFrame;
+            filteredFolders = Storage.folders;
             InitializeComponent();
 
             foreach (Folder folder in Storage.folders)
                 FoldersWrap.Children.Insert(1, this.CreateFolderElement(folder));
+
+            foreach (Category category in Storage.categories)
+                CategorySearch.Items.Add(category.Name);
         }
 
         private FolderControl CreateFolderElement(Folder folder)
@@ -116,7 +121,14 @@ namespace course_project1.view
                     Storage.folders = Storage.folders.Append(folder).ToArray();
 
                     if (folder.Name.Contains(SearchInput.Value))
-                        FoldersWrap.Children.Insert(1, this.CreateFolderElement(folder));
+                    {
+                        if (CategorySearch.SelectedIndex != 0 &&
+                            folder.Category.ToString() ==
+                            CategorySearch.Items.GetItemAt(CategorySearch.SelectedIndex).ToString())
+                        {
+                            FoldersWrap.Children.Insert(1, this.CreateFolderElement(folder));
+                        }
+                    }
                 }
                 catch { }
             };
@@ -127,10 +139,31 @@ namespace course_project1.view
         {
             SearchInput.Value = SearchInput.Value.Trim();
             FoldersWrap.Children.RemoveRange(1, FoldersWrap.Children.Count - 1);
-            Folder[] folders = Storage.folders.Where(f => f.Name.Contains(SearchInput.Value)).ToArray();
+            filteredFolders = Storage.folders.Where(f => f.Name.Contains(SearchInput.Value)).ToArray();
 
-            foreach (Folder folder in folders)
+            if (CategorySearch.SelectedIndex != 0)
+                filteredFolders = filteredFolders.Where(f => f.Category == CategorySearch.Text).ToArray();
+
+            foreach (Folder folder in filteredFolders)
                 FoldersWrap.Children.Insert(1, this.CreateFolderElement(folder));
+        }
+
+        private void CategorySearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (FoldersWrap == null) return;
+
+                FoldersWrap.Children.RemoveRange(1, FoldersWrap.Children.Count - 1);
+                filteredFolders = Storage.folders.Where(f => f.Name.Contains(SearchInput.Value)).ToArray();
+
+                if (CategorySearch.SelectedIndex != 0)
+                    filteredFolders = filteredFolders.Where(f =>
+                        f.Category.ToString() == CategorySearch.Items.GetItemAt(CategorySearch.SelectedIndex).ToString()).ToArray();
+
+                foreach (Folder folder in filteredFolders)
+                    FoldersWrap.Children.Insert(1, this.CreateFolderElement(folder));
+            } catch { }
         }
     }
 }

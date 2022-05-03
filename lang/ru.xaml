@@ -25,6 +25,7 @@
     <v:String x:Key="AddFolder">Добавить новую папку</v:String>
     <v:String x:Key="AddCard">Добавить новую карточку</v:String>
     <v:String x:Key="Category">Категория</v:String>
+    <v:String x:Key="ResetCategory">Сбросить категорию</v:String>
     <v:String x:Key="memorized">запомнено</v:String>
     <v:String x:Key="Added">Добавлено</v:String>
     <v:String x:Key="General">Общие</v:String>

@@ -25,6 +25,7 @@
     <v:String x:Key="AddFolder">新しいフォルダーの追加</v:String>
     <v:String x:Key="AddCard">新しいカードの追加</v:String>
     <v:String x:Key="Category">カテゴリ</v:String>
+    <v:String x:Key="ResetCategory">カテゴリリセット</v:String>
     <v:String x:Key="memorized">覚えた</v:String>
     <v:String x:Key="Added">追加日時</v:String>
     <v:String x:Key="General">一般</v:String>
