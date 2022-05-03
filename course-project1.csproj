@@ -157,6 +157,7 @@
       <DependentUpon>SwitchBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="storage\Card.cs" />
+    <Compile Include="storage\Category.cs" />
     <Compile Include="storage\DataEncriptor.cs" />
     <Compile Include="storage\DataStorage.cs" />
     <Compile Include="MainPage.xaml.cs">

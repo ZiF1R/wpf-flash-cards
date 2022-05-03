@@ -1,4 +1,5 @@
-﻿using System;
+﻿using course_project1.storage;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -81,7 +82,7 @@ namespace course_project1.controls.ModalWindows
                 Validator.ValidateInput(CategoryNameTextBox);
 
                 this.CategoryValue = CategoryNameTextBox.Value.Trim();
-                bool isUnique = Storage.CheckForUniqueCategory(ConnectionString, this.CategoryValue);
+                bool isUnique = Category.CheckForUniqueCategory(ConnectionString, this.CategoryValue, Storage.user.Uid);
 
                 if (!isUnique) CategoryAlreadyUsed.Visibility = Visibility.Visible;
                 else

@@ -15,68 +15,14 @@ namespace course_project1
         public User user;
         public Settings settings;
         public Folder[] folders;
-        public string[] categories;
+        public Category[] categories;
 
         public DataStorage()
         {
             user = new User();
             settings = new Settings();
             folders = new Folder[] { };
-            categories = new string[] { "none" };
-        }
-
-        public bool AddCategory(string connectionString, string category)
-        {
-            using(SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                var addCategoryCommand = string.Format("INSERT INTO CATEGORIES VALUES(@uid, @category)");
-                using (SqlCommand command = new SqlCommand(addCategoryCommand, connection))
-                {
-                    try
-                    {
-                        command.Parameters.AddWithValue("@uid", this.user.Uid);
-                        command.Parameters.AddWithValue("@category", category);
-                        command.ExecuteNonQuery();
-                        this.categories = categories.Append(category).ToArray();
-                    }
-                    catch
-                    {
-                        connection.Close();
-                        CustomMessage.Show((string)Application.Current.FindResource("CategoryInsertError"));
-                        return false;
-                    }
-                }
-                connection.Close();
-                return true;
-            }
-        }
-
-        public bool RemoveCategory(string connectionString, string category)
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    "DELETE CATEGORIES WHERE " +
-                    $"CATEGORIES.USER_UID = {user.Uid} AND CATEGORIES.CATEGORY = '{category}'";
-                try
-                {
-                    SqlDataReader commandReader = command.ExecuteReader();
-                    commandReader.Close();
-                }
-                catch
-                {
-                    connection.Close();
-                    CustomMessage.Show((string)Application.Current.FindResource("CategoryRemoveError"));
-                    return false;
-                }
-                connection.Close();
-
-                categories = categories.Where(c => c != category).ToArray();
-                return true;
-            }
+            categories = new Category[] { new Category("none") };
         }
 
         public void LoadFolders(string connectionString)
@@ -149,7 +95,7 @@ namespace course_project1
                     while (comandReader.Read())
                     {
                         string category = comandReader.GetString(0);
-                        categories = categories.Append(category).ToArray();
+                        categories = categories.Append(new Category(category)).ToArray();
                     }
                 }
                 catch
@@ -164,26 +110,6 @@ namespace course_project1
             }
         }
 
-        public bool CheckForUniqueCategory(string connectionString, string category)
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    $"SELECT * " +
-                    $"FROM CATEGORIES " +
-                    $"WHERE CATEGORIES.USER_UID = {this.user.Uid} AND CATEGORIES.CATEGORY = '{category}'";
-                SqlDataReader commandReader = command.ExecuteReader();
-
-                bool isUnique = !commandReader.HasRows;
-                commandReader.Close();
-
-                connection.Close();
-                return isUnique;
-            }
-        }
-
         public bool IsUnusedCategory(string category)
         {
             return !this.folders.Where(folder => folder.Category == category).Any();
@@ -194,7 +120,7 @@ namespace course_project1
             user = new User();
             settings = new Settings();
             folders = new Folder[] { };
-            categories = new string[] { };
+            categories = new Category[] { new Category("none") };
         }
     }
 }

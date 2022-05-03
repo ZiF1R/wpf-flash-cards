@@ -55,6 +55,15 @@ namespace course_project1.storage
             FolderId = GetFolderId(connectionString, uid);
         }
 
+        public Folder(int folderId, string name, string category, DateTime created)
+        {
+            Name = name;
+            Category = category;
+            Created = created;
+            FolderId = folderId;
+            Cards = new Card[] { };
+        }
+
         private int GetFolderId(string connectionString, int uid)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -91,15 +100,6 @@ namespace course_project1.storage
 
                 return folderId;
             }
-        }
-
-        public Folder(int folderId, string name, string category, DateTime created)
-        {
-            Name = name;
-            Category = category;
-            Created = created;
-            FolderId = folderId;
-            Cards = new Card[] { };
         }
 
         public void LoadFolderCards(string connectionString)

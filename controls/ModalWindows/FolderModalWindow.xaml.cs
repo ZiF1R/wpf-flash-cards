@@ -40,18 +40,18 @@ namespace course_project1.controls.ModalWindows
 
             FolderNameTextBox.Value = this.FolderName;
 
-            foreach (string category in Storage.categories)
+            foreach (Category category in Storage.categories)
                 AddCategoryItem(category);
         }
 
-        private void AddCategoryItem(string category)
+        private void AddCategoryItem(Category category)
         {
             ComboBoxItem item = new ComboBoxItem();
-            item.Content = category;
+            item.Content = category.Name;
 
-            if (FolderCategory != "" && category == FolderCategory)
+            if (FolderCategory != "" && category.Name == FolderCategory)
                 item.IsSelected = true;
-            else if (FolderCategory == "" && category == "none")
+            else if (FolderCategory == "" && category.Name == "none")
                 item.IsSelected = true;
 
             FolderCategorySelect.Items.Add(item);
@@ -69,13 +69,14 @@ namespace course_project1.controls.ModalWindows
                 modal.CloseModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
                 modal.NegativeButtonClick += (object s, RoutedEventArgs ev) =>
                 {
-                    if (!Storage.IsUnusedCategory(category))
+                    if (!Storage.IsUnusedCategory(category.Name))
                     {
                         CustomMessage.Show((string)Application.Current.FindResource("UsedCategoryError"));
                         return;
                     }
 
-                    Storage.RemoveCategory(ConnectionString, item.Content.ToString());
+                    category.RemoveCategory(ConnectionString, item.Content.ToString(), Storage.user.Uid);
+                    Storage.categories = Storage.categories.Where(c => c.Name != category.Name).ToArray();
                     FolderCategorySelect.SelectedIndex = 0;
                     FolderCategory = ((ComboBoxItem)FolderCategorySelect.Items.GetItemAt(0)).Content.ToString();
                     FolderCategorySelect.Items.Remove(item);
@@ -189,8 +190,10 @@ namespace course_project1.controls.ModalWindows
             MainPageGrid.Children.Add(modal);
             modal.AddCategory += (object s, RoutedEventArgs ev) =>
             {
-                Storage.AddCategory(ConnectionString, modal.CategoryValue);
-                AddCategoryItem(modal.CategoryValue);
+                Category category = new Category(modal.CategoryValue);
+                category.AddCategory(ConnectionString, category.Name, Storage.user.Uid);
+                AddCategoryItem(category);
+                Storage.categories = Storage.categories.Append(category).ToArray();
             };
             modal.CloseCategoryModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
         }
