@@ -52,6 +52,11 @@ namespace course_project1.view
 
             foreach (Category category in Storage.categories)
                 CategorySearch.Items.Add(category.Name);
+
+            if (action != FolderControl.Action.None)
+            {
+                AddCard.Visibility = Visibility.Collapsed;
+            }
         }
 
         private FolderControl CreateFolderElement(Folder folder)
@@ -138,7 +143,7 @@ namespace course_project1.view
 
                     if (folder.Name.Contains(SearchInput.Value))
                     {
-                        if (CategorySearch.SelectedIndex != 0 &&
+                        if (CategorySearch.SelectedIndex == 0 ||
                             folder.Category.ToString() ==
                             CategorySearch.Items.GetItemAt(CategorySearch.SelectedIndex).ToString())
                         {

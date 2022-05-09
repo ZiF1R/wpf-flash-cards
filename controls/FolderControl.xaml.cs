@@ -298,9 +298,43 @@ namespace course_project1.controls
                         DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Card[]));
                         Card[] cards = (Card[])serializer.ReadObject(fs);
 
+                        if (cards == null) return;
+                        foreach (Card card in cards)
+                        {
+                            if (card.Examples == null)
+                                card.Examples = "";
+
+                            if (card.Term == null || card.Term == "" ||
+                                card.Translation == null || card.Translation == "")
+                            {
+                                throw new Exception((string)Application.Current.FindResource("InvalidImportedRequiredData"));
+                            }
+
+                            if (card.Created == DateTime.MinValue || card.Created == null)
+                                card.Created = DateTime.Now;
+
+                            if (card.Created > DateTime.Now ||
+                                card.Created < new DateTime(1970, 1, 1))
+                            {
+                                throw new Exception((string)Application.Current.FindResource("InvalidImportedCardDate"));
+                            }
+
+                            ValidateInput(card.Term, "CardTermFormatError", true);
+                            ValidateInput(card.Translation, "CardTranslationFormatError", true);
+                            ValidateInput(card.Examples, "CardExamplesFormatError", true, false);
+
+                            if (card.RightAnswers < 0 || card.WrongAnswers < 0)
+                            {
+                                throw new Exception((string)Application.Current.FindResource("InvalidImportedCardReviewData"));
+                            }
+                        }
                         if (cards != null && cards?.Length > 0)
                             MergeCards(cards);
                     }
+                }
+                catch (SerializationException ex)
+                {
+                    CustomMessage.Show((string)Application.Current.FindResource("SerializationError"));
                 }
                 catch (Exception ex)
                 {
@@ -309,6 +343,22 @@ namespace course_project1.controls
             }
 
             RaiseEvent(new RoutedEventArgs(ReturnToSettingsEvent));
+        }
+
+        private void ValidateInput(string value, string errorFormatMessageResourceName, bool specialFormat = false, bool requiredField = true)
+        {
+            try
+            {
+                Validator.ValidateInput(value, specialFormat, requiredField);
+            }
+            catch (FormatException ex)
+            {
+                throw new FormatException((string)Application.Current.FindResource(errorFormatMessageResourceName));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         private void MergeCards(Card[] cards)

@@ -123,20 +123,24 @@
     <v:String x:Key="TextBoxNotExist">受信したテキストボックスが存在しません！</v:String>
     <v:String x:Key="TextBoxError">テクスト欄にはスペースを含めることはできません！</v:String>
     <v:String x:Key="EmptyString">すべてのフィールドに入力する必要があります！</v:String>
-    <v:String x:Key="ErrorPattern">テクスト欄フォーマットエラー！ テクスト欄には、記号だけを含めることができます。</v:String>
-    <v:String x:Key="ErrorSpecialPattern">ニックネーム欄フォーマットエラー！ ニックネームには、記号、数字、アンダースコアまたはダッシュのみを含めることができます。</v:String>
-    <v:String x:Key="ErrorPasswordPattern">パスワードの形式が間違っています！ パスワードには6文字以上が含まれている必要があります。 パスワードには、記号、数字、アンダースコア、ダッシュを含めることができます。</v:String>
+    <v:String x:Key="ErrorPattern">テクスト欄フォーマットエラー！ テクスト欄には、アルファベットの記号だけを含めることができます。</v:String>
+    <v:String x:Key="ErrorSpecialPattern">ニックネーム欄フォーマットエラー！ ニックネームには、アルファベットの記号、数字、アンダースコアまたはダッシュのみを含めることができます。</v:String>
+    <v:String x:Key="ErrorPasswordPattern">パスワードの形式が間違っています！ パスワードには6文字以上が含まれている必要があります。 パスワードには、アルファベットの記号、数字、アンダースコア、ダッシュを含めることができます。</v:String>
     <v:String x:Key="ConfirmPasswordError">パスワード再記入してください。</v:String>
-    <v:String x:Key="EmailFormatError">メールアドレスの形式が無効です。 メールアドレスには、記号、数字、アンダースコア、ダッシュのみを含めることができ、example@test.com の形式にすることができます。</v:String>
+    <v:String x:Key="EmailFormatError">メールアドレスの形式が無効です。 メールアドレスには、ラテンアルファベットの記号、数字、アンダースコア、ダッシュのみを含めることができ、example@test.com の形式にすることができます。</v:String>
     <v:String x:Key="LoginError">間違ったメールアドレスまたはパスワード！</v:String>
+    <v:String x:Key="SerializationError">エラー！ インポートされたデータの形式が間違っています！</v:String>
+    <v:String x:Key="InvalidImportedRequiredData">エラー！ 用語と翻訳のフィールドを空にすることはできません！</v:String>
+    <v:String x:Key="InvalidImportedCardReviewData">エラー！ インポートされたデータの形式が間違っているため、正解と不正解の数を負の数にすることはできません。</v:String>
+    <v:String x:Key="InvalidImportedCardDate">エラー！ 日付形式が無効です。日付を現在の時点より遅くすることはできません。また、1970-01-01より前にすることもできません。</v:String>
 
     <v:String x:Key="UsedCategoryError">カテゴリの削除に失敗しました。 このカテゴリは現在使用中です！</v:String>
     <v:String x:Key="NicknameFormatError">無効なニックネーム形式！エイリアスには、英字、数字、アンダースコア、またはダッシュのみを含めることができます！</v:String>
     <v:String x:Key="SurnameFormatError">無効な名前フィールド形式！姓には英字のみを含めることができます！</v:String>
     <v:String x:Key="NameFormatError">無効な名前フィールド形式！名前には英字のみを含めることができます！</v:String>
     <v:String x:Key="CategoryFormatError">無効なカテゴリ名の形式です！カテゴリ名には英字のみを含めることができます！</v:String>
-    <v:String x:Key="CardTermFormatError">カード用語の形式が正しくありません！カード用語には、アルファベット、数字、アンダースコア、またはダッシュのみを含めることができます！</v:String>
-    <v:String x:Key="CardTranslationFormatError">カードの翻訳形式が正しくありません！カードの翻訳には、アルファベット、数字、アンダースコア、またはダッシュのみを含めることができます！</v:String>
-    <v:String x:Key="CardExamplesFormatError">カードの例の形式が正しくありません！カードの例には、アルファベット、数字、アンダースコア、またはダッシュのみを含めることができます！</v:String>
+    <v:String x:Key="CardTermFormatError">カード用語の形式が正しくありません！カード用語には、アルファベットの記号、数字、アンダースコア、またはダッシュのみを含めることができます！</v:String>
+    <v:String x:Key="CardTranslationFormatError">カードの翻訳形式が正しくありません！カードの翻訳には、アルファベットの記号、数字、アンダースコア、またはダッシュのみを含めることができます！</v:String>
+    <v:String x:Key="CardExamplesFormatError">カードの例の形式が正しくありません！カードの例には、アルファベットの記号、数字、アンダースコア、またはダッシュのみを含めることができます！</v:String>
     <v:String x:Key="FolderNameFormatError">無効なフォルダ名の形式！フォルダ名には、英字、数字、アンダースコア、またはダッシュのみを含めることができます！</v:String>
 </ResourceDictionary>

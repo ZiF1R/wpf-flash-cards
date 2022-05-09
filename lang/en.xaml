@@ -127,8 +127,12 @@
     <v:String x:Key="ErrorSpecialPattern">Invalid textbox with special format! Textbox with special format can only contain alphabetic symbols, numbers, and underscores or dashes!</v:String>
     <v:String x:Key="ErrorPasswordPattern">Invalid password format! The password must contain at least 6 characters. The password can contain alphabetic symbols, numbers, as well as underscores and dashes!</v:String>
     <v:String x:Key="ConfirmPasswordError">Confirm the password!</v:String>
-    <v:String x:Key="EmailFormatError">Invalid email address format! The email address can only contain alphabetic symbols, numbers, underscores or dashes and be of the form example@test.com!</v:String>
+    <v:String x:Key="EmailFormatError">Invalid email address format! The email address can only contain latin alphabetic symbols, numbers, underscores or dashes and be of the form example@test.com!</v:String>
     <v:String x:Key="LoginError">Invalid email address or password!</v:String>
+    <v:String x:Key="SerializationError">Error! Wrong format of imported data!</v:String>
+    <v:String x:Key="InvalidImportedRequiredData">Error! Fields for term and translation cannot be empty!</v:String>
+    <v:String x:Key="InvalidImportedCardReviewData">Error! Wrong format of imported data, the number of correct and incorrect answers cannot be a negative number!</v:String>
+    <v:String x:Key="InvalidImportedCardDate">Error! Invalid date format, the date cannot be later than the current moment, and also cannot be later than 1970-01-01!</v:String>
 
     <v:String x:Key="UsedCategoryError">Cannot remove category. This category is currently in use!</v:String>
     <v:String x:Key="NicknameFormatError">Invalid nickname format! Nickname can only contain alphabetic symbols, numbers, underscores or dashes!</v:String>
