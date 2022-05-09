@@ -88,7 +88,7 @@ namespace course_project1.controls
 
         private void Input_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.Value = TextInput.Text;
+            this.Value = TextBoxInput.Text;
             RaiseEvent(new RoutedEventArgs(InputEvent));
         }
     }

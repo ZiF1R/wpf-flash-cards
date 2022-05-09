@@ -79,7 +79,23 @@ namespace course_project1.view
                         folderControl.FolderNameField.Text = modal.FolderName;
                         folderControl.FolderCategoryField.Text = modal.FolderCategory;
                     };
-                    modal.CloseFolderModal += (object se, RoutedEventArgs evn) => MainPageGrid.Children.Remove(modal);
+                    modal.CloseFolderModal += (object se, RoutedEventArgs evn) =>
+                    {
+                        MainPageGrid.Children.Remove(modal);
+
+                        if (Storage.categories.Length != CategorySearch.Items.Count - 1)
+                        {
+                            CategorySearch.Items.Clear();
+
+                            ComboBoxItem item = new ComboBoxItem();
+                            item.Content = (string)Application.Current.FindResource("ResetCategory");
+                            item.IsSelected = true;
+                            CategorySearch.Items.Add(item);
+
+                            foreach (Category category in Storage.categories)
+                                CategorySearch.Items.Add(category.Name);
+                        }
+                    };
                 };
                 folderControl.RemoveFolder += (object s, RoutedEventArgs ev) =>
                 {

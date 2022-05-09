@@ -40,8 +40,8 @@ namespace course_project1.view
         {
             try
             {
-                Validator.ValidateEmail(EmailInput);
-                Validator.ValidatePassword(PasswordInput);
+                Validator.ValidateEmail(EmailInput.Value);
+                Validator.ValidatePassword(PasswordInput.Value);
 
                 bool isLoginSuccess = Storage.user.LoadUser(EmailInput.Value, PasswordInput.Value, this.ConnectionString);
                 if (!isLoginSuccess)

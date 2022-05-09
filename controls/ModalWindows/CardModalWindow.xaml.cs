@@ -94,9 +94,9 @@ namespace course_project1.controls.ModalWindows
         {
             try
             {
-                ValidateInput(CardTermTextBox, "CardTermFormatError", true);
-                ValidateInput(CardTranslationTextBox, "CardTranslationFormatError", true);
-                ValidateInput(CardExamplesTextBox, "CardExamplesFormatError", true, false);
+                ValidateInput(CardTermTextBox.Value, "CardTermFormatError", true);
+                ValidateInput(CardTranslationTextBox.Value, "CardTranslationFormatError", true);
+                ValidateInput(CardExamplesTextBox.Value, "CardExamplesFormatError", true, false);
 
                 if (CardTermTextBox.Value != Term)
                 {
@@ -125,11 +125,11 @@ namespace course_project1.controls.ModalWindows
             }
         }
 
-        private void ValidateInput(CustomTextBox textBox, string errorFormatMessageResourceName, bool specialFormat = false, bool requiredField = true)
+        private void ValidateInput(string value, string errorFormatMessageResourceName, bool specialFormat = false, bool requiredField = true)
         {
             try
             {
-                Validator.ValidateInput(textBox, specialFormat, requiredField);
+                Validator.ValidateInput(value, specialFormat, requiredField);
             }
             catch (FormatException ex)
             {

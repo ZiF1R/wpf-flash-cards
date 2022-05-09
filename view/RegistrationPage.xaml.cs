@@ -65,11 +65,11 @@ namespace course_project1.view
         {
             try
             {
-                ValidateInput(NicknameInput, "NicknameFormatError", true);
-                ValidateInput(SurnameInput, "SurnameFormatError");
-                ValidateInput(NameInput, "NameFormatError");
-                Validator.ValidateEmail(EmailInput);
-                Validator.ValidatePassword(PasswordInput);
+                ValidateInput(NicknameInput.Value, "NicknameFormatError", true);
+                ValidateInput(SurnameInput.Value, "SurnameFormatError");
+                ValidateInput(NameInput.Value, "NameFormatError");
+                Validator.ValidateEmail(EmailInput.Value);
+                Validator.ValidatePassword(PasswordInput.Value);
 
                 if (PasswordInput.Value != ConfirmPasswordInput.Value)
                 {
@@ -86,11 +86,11 @@ namespace course_project1.view
             }
         }
 
-        private void ValidateInput(CustomTextBox textBox, string errorFormatMessageResourceName, bool specialFormat = false)
+        private void ValidateInput(string value, string errorFormatMessageResourceName, bool specialFormat = false)
         {
             try
             {
-                Validator.ValidateInput(textBox, specialFormat);
+                Validator.ValidateInput(value, specialFormat);
             }
             catch (FormatException ex)
             {

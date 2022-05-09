@@ -21,7 +21,7 @@
                 <Style TargetType="{x:Type TextBlock}">
                     <Setter Property="Visibility" Value="Hidden" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=TextInput}" Value="">
+                        <DataTrigger Binding="{Binding Text, ElementName=TextBoxInput}" Value="">
                             <Setter Property="Visibility" Value="Visible" />
                         </DataTrigger>
                     </Style.Triggers>
@@ -31,7 +31,7 @@
 
         <TextBox
             Height="37"
-            Name="TextInput"
+            Name="TextBoxInput"
             Text="{Binding Value, ElementName=InputControl}"
             CaretBrush="{DynamicResource TextColor}"
             Foreground="{DynamicResource TextColor}"

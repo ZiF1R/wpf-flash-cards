@@ -141,7 +141,7 @@ namespace course_project1.controls.ModalWindows
         {
             try
             {
-                Validator.ValidateInput(FolderNameTextBox, true);
+                Validator.ValidateInput(FolderNameTextBox.Value, true);
 
                 if (FolderName != FolderNameTextBox.Value)
                 {

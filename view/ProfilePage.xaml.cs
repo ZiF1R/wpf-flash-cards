@@ -58,10 +58,10 @@ namespace course_project1.view
         {
             try
             {
-                ValidateInput(NicknameInput, "NicknameFormatError", true);
-                ValidateInput(SurnameInput, "SurnameFormatError");
-                ValidateInput(NameInput, "NameFormatError");
-                Validator.ValidatePassword(PasswordInput);
+                ValidateInput(NicknameInput.Placeholder, "NicknameFormatError", true);
+                ValidateInput(SurnameInput.Placeholder, "SurnameFormatError");
+                ValidateInput(NameInput.Placeholder, "NameFormatError");
+                Validator.ValidatePassword(PasswordInput.Placeholder);
 
                 if (
                     NicknameInput.Placeholder == Storage.user.Nickname &&
@@ -80,11 +80,11 @@ namespace course_project1.view
             }
         }
 
-        private void ValidateInput(SecondaryTextInput textBox, string errorFormatMessageResourceName, bool specialFormat = false)
+        private void ValidateInput(string value, string errorFormatMessageResourceName, bool specialFormat = false)
         {
             try
             {
-                Validator.ValidateInput(textBox, specialFormat);
+                Validator.ValidateInput(value, specialFormat);
             }
             catch (FormatException ex)
             {
