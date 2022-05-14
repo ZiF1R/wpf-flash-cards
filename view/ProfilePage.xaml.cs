@@ -46,11 +46,6 @@ namespace course_project1.view
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-            Storage.settings.SetAppTheme(Storage.settings.GetThemeName(1, ConnectionString));
-            Storage.settings.SetAppLang(Storage.settings.GetLangName(1, ConnectionString));
-            Storage.Clear();
-            mainWindow.AppLanguage.SelectedIndex = 0;
-
             this.rootFrame.Content = new LoginPage(MainWindowGrid, ConnectionString, Storage);
         }
 

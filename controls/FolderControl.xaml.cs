@@ -63,7 +63,10 @@ namespace course_project1.controls
             if (folder.Cards.Length > 0)
                 image.UriSource = new Uri("pack://application:,,,/icons/Play.png");
             else
+            {
                 image.UriSource = new Uri("pack://application:,,,/icons/Play_disable.png");
+                FolderReview.IsEnabled = false;
+            }
 
             image.EndInit();
             ReviewButton.Source = image;
@@ -222,18 +225,22 @@ namespace course_project1.controls
 
         private void ReviewButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (folder.Cards.Length == 0) return;
-
-            ReviewModalWindow modal = new ReviewModalWindow(MainPageGrid, Storage, ConnectionString, folder.FolderId, folder.Cards);
-            modal.SetValue(Grid.RowSpanProperty, 2);
-            modal.SetValue(Grid.ColumnSpanProperty, 3);
-            MainPageGrid.Children.Add(modal);
-
-            modal.CloseReview += (object s, RoutedEventArgs ev) =>
+            return;
+            try
             {
-                FolderMemorizedCardsCount = folder.MemorizedCardsCount();
-                MainPageGrid.Children.Remove(modal);
-            };
+                if (folder.Cards.Length == 0) return;
+
+                ReviewModalWindow modal = new ReviewModalWindow(MainPageGrid, Storage, ConnectionString, folder.FolderId, folder.Cards);
+                modal.SetValue(Grid.RowSpanProperty, 2);
+                modal.SetValue(Grid.ColumnSpanProperty, 3);
+                MainPageGrid.Children.Add(modal);
+
+                modal.CloseReview += (object s, RoutedEventArgs ev) =>
+                {
+                    FolderMemorizedCardsCount = folder.MemorizedCardsCount();
+                    MainPageGrid.Children.Remove(modal);
+                };
+            } catch { }
         }
 
         private void BlinkRectangle_MouseUp(object sender, MouseButtonEventArgs e)
@@ -372,6 +379,21 @@ namespace course_project1.controls
                     card.InsertCard(ConnectionString, folder.FolderId);
                 }
             }
+        }
+
+        private void WritingReviewButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void MultipleAnswersButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void MatchAnswersButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

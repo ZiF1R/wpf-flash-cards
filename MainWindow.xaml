@@ -27,7 +27,8 @@
             Grid.Row="0"
             Grid.Column="0"
             BorderThickness="1"
-            NavigationUIVisibility="Hidden" />
+            NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated" 
+            />
 
         <ComboBox x:Name="AppLanguage"
             Width="50"

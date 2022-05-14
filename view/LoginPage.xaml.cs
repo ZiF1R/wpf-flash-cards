@@ -34,6 +34,11 @@ namespace course_project1.view
             ConnectionString = connectionString;
             Storage = storage;
             InitializeComponent();
+
+            Storage.settings.SetAppTheme(Storage.settings.GetThemeName(1, ConnectionString));
+            Storage.settings.SetAppLang(Storage.settings.GetLangName(1, ConnectionString));
+            Storage.Clear();
+            mainWindow.AppLanguage.SelectedIndex = 0;
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)

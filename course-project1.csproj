@@ -380,6 +380,9 @@
     <Content Include="db queries\create tables.sql" />
     <Content Include="db queries\fill tables.sql" />
     <Content Include="db queries\select queries.sql" />
+    <Resource Include="icons\review\match.png" />
+    <Resource Include="icons\review\multiple.png" />
+    <Resource Include="icons\review\writing.png" />
     <Resource Include="icons\Play_disable.png" />
     <Resource Include="icons\close.png" />
     <Resource Include="icons\close_dark.png" />

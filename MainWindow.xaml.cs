@@ -133,5 +133,22 @@ namespace course_project1
                 catch { }
             }
         }
+
+        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            if (MainFrame.Content.GetType() == typeof(LoginPage))
+            {
+                Storage.settings.SetAppTheme(Storage.settings.GetThemeName(1, ConnectionString));
+                Storage.settings.SetAppLang(Storage.settings.GetLangName(1, ConnectionString));
+                Storage.Clear();
+                AppLanguage.SelectedIndex = 0;
+            }
+            else if (MainFrame.Content.GetType() == typeof(MainPage) && Storage.user?.Email == "")
+            {
+                MainFrame.IsEnabled = false;
+                MainFrame.Navigate(new LoginPage(MainWindowGrid, ConnectionString, Storage));
+                MainFrame.IsEnabled = true;
+            }
+        }
     }
 }

@@ -73,6 +73,9 @@
     <v:String x:Key="Translation">*翻訳</v:String>
     <v:String x:Key="Examples">例</v:String>
     <v:String x:Key="EditCard">カードの編集</v:String>
+    <v:String x:Key="WritingReview">クラシックレビュー</v:String>
+    <v:String x:Key="MatchCardsReview">カードマッチング</v:String>
+    <v:String x:Key="MultipleAnswersReview">複数の応答</v:String>
     <v:String x:Key="of">枚目は</v:String>
     <v:String x:Key="cards">枚カードの中で</v:String>
     <v:String x:Key="Answer">回答</v:String>

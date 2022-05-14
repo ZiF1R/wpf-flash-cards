@@ -115,26 +115,15 @@ namespace course_project1.controls.ModalWindows
 
         private void ShowAnswer_Click(object sender, RoutedEventArgs e)
         {
-            if (isSubmitted)
+            if (CurrentCardAnswer.Visibility == Visibility.Visible)
             {
-                Review.RightAnswers++;
-                Review.WrongAnswers--;
-
-                Review.CurrentCard.SendAnswer(ConnectionString, RootFolderId, true, true);
-                NextCard();
+                CurrentCardAnswer.Visibility = Visibility.Hidden;
+                ShowAnswer.SetResourceReference(Button.ContentProperty, "ShowAnswer");
             }
             else
             {
-                if (CurrentCardAnswer.Visibility == Visibility.Visible)
-                {
-                    CurrentCardAnswer.Visibility = Visibility.Hidden;
-                    ShowAnswer.SetResourceReference(Button.ContentProperty, "ShowAnswer");
-                }
-                else
-                {
-                    CurrentCardAnswer.Visibility = Visibility.Visible;
-                    ShowAnswer.SetResourceReference(Button.ContentProperty, "HideAnswer");
-                }
+                CurrentCardAnswer.Visibility = Visibility.Visible;
+                ShowAnswer.SetResourceReference(Button.ContentProperty, "HideAnswer");
             }
         }
 
@@ -159,7 +148,6 @@ namespace course_project1.controls.ModalWindows
                 Review.RightAnswers++;
                 AnswerCompareResult.SetResourceReference(Label.ContentProperty, "RightAnswer");
                 AnswerCompareResult.Foreground = new SolidColorBrush(Colors.Green);
-                ShowAnswer.Visibility = Visibility.Hidden;
                 SubmitButton.SetResourceReference(Button.ContentProperty, "Next");
 
                 Review.CurrentCard.SendAnswer(ConnectionString, RootFolderId, true);
@@ -169,14 +157,11 @@ namespace course_project1.controls.ModalWindows
                 Review.WrongAnswers++;
                 AnswerCompareResult.SetResourceReference(Label.ContentProperty, "WrongAnswer");
                 AnswerCompareResult.Foreground = new SolidColorBrush(Colors.Tomato);
-                ShowAnswer.SetResourceReference(Button.ContentProperty, "SetCorrect");
                 SubmitButton.SetResourceReference(Button.ContentProperty, "Next");
                 SubmitButton.Style = (Style)SubmitButton.FindResource("DangerButton");
-
                 Review.CurrentCard.SendAnswer(ConnectionString, RootFolderId, false);
             }
-
-
+            ShowAnswer.Visibility = Visibility.Hidden;
 
             isSubmitted = true;
         }
