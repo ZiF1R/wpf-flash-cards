@@ -28,17 +28,25 @@ namespace course_project1
     {
         private string ConnectionString;
         private DataStorage Storage;
-
+ 
         public MainWindow()
         {
             InitializeComponent();
             var sri = Application.GetResourceStream(new Uri("pack://application:,,,/icons/cursor.cur", UriKind.RelativeOrAbsolute));
             this.Cursor = new Cursor(sri.Stream);
 
-            this.DataBaseConection();
-            Storage = new DataStorage();
-            LoadLangs();
-            MainFrame.Content = new LoginPage(MainWindowGrid, ConnectionString, Storage);
+            try
+            {
+                this.DataBaseConection();
+                Storage = new DataStorage();
+                LoadLangs();
+                MainFrame.Content = new LoginPage(MainWindowGrid, ConnectionString, Storage);
+            }
+            catch (Exception ex)
+            {
+                CustomMessage.Show(ex.Message);
+                this.Close();
+            }
         }
 
         private void LoadLangs()
@@ -90,14 +98,14 @@ namespace course_project1
                 try
                 {
                     connection.Open();
+                    connection.Close();
                 }
                 catch
                 {
-                    MessageBox.Show("Database connection error!");
-                }
-                finally
-                {
                     connection.Close();
+
+                    /// try to create db with code
+                    throw new Exception("Database connection error!");
                 }
             }
         }

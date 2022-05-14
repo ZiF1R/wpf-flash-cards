@@ -336,6 +336,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram2.cd" />
     <None Include="LICENSE.md" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

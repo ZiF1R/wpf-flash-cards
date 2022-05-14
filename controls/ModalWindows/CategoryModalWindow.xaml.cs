@@ -79,7 +79,7 @@ namespace course_project1.controls.ModalWindows
         {
             try
             {
-                Validator.ValidateInput(CategoryNameTextBox.Value);
+                Validator.ValidateInput(CategoryNameTextBox.Value,true);
 
                 this.CategoryValue = CategoryNameTextBox.Value.Trim();
                 bool isUnique = Category.CheckForUniqueCategory(ConnectionString, this.CategoryValue, Storage.user.Uid);

@@ -47,7 +47,7 @@ namespace course_project1
 
             if (!Regex.IsMatch(value, @"^(([a-zA-Z\d-_]+)\@([a-zA-Z\d]+)\.([a-zA-Z]){2,})$") ||
                 Regex.IsMatch(value, @"^(([^a-zA-Z\d-_]+)\@)") ||
-                Regex.IsMatch(value, @"^((.+)\@([^a-zA-Z\d]+))\.") ||
+                Regex.IsMatch(value, @"^((.+)\@([^a-zA-Z]+))\.") ||
                 Regex.IsMatch(value, @"^((.+)\@(.+)\.([^a-zA-Z]+))$"))
                 throw new FormatException((string)Application.Current.FindResource("EmailFormatError"));
         }
