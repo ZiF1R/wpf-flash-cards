@@ -1,5 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="RightAnswerBg">#384a00</SolidColorBrush>
+    <SolidColorBrush x:Key="WrongAnswerBg">#63000e</SolidColorBrush>
     <SolidColorBrush x:Key="Primary">#00a3ff</SolidColorBrush>
     <SolidColorBrush x:Key="Danger">#CE1010</SolidColorBrush>
     <SolidColorBrush x:Key="MainBg">#2B2B2B</SolidColorBrush>

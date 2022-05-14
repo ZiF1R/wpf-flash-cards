@@ -223,26 +223,6 @@ namespace course_project1.controls
             RaiseEvent(new RoutedEventArgs(GoToCardsEvent));
         }
 
-        private void ReviewButton_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            return;
-            try
-            {
-                if (folder.Cards.Length == 0) return;
-
-                ReviewModalWindow modal = new ReviewModalWindow(MainPageGrid, Storage, ConnectionString, folder.FolderId, folder.Cards);
-                modal.SetValue(Grid.RowSpanProperty, 2);
-                modal.SetValue(Grid.ColumnSpanProperty, 3);
-                MainPageGrid.Children.Add(modal);
-
-                modal.CloseReview += (object s, RoutedEventArgs ev) =>
-                {
-                    FolderMemorizedCardsCount = folder.MemorizedCardsCount();
-                    MainPageGrid.Children.Remove(modal);
-                };
-            } catch { }
-        }
-
         private void BlinkRectangle_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (action == Action.Import)
@@ -383,17 +363,70 @@ namespace course_project1.controls
 
         private void WritingReviewButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            try
+            {
+                if (folder.Cards.Length == 0) return;
+                ReviewPopup.IsOpen = false;
 
+                ReviewModalWindow modal = new ReviewModalWindow(MainPageGrid, Storage, ConnectionString, folder.FolderId, folder.Cards);
+                modal.SetValue(Grid.RowSpanProperty, 2);
+                modal.SetValue(Grid.ColumnSpanProperty, 3);
+                MainPageGrid.Children.Add(modal);
+
+                modal.CloseReview += (object s, RoutedEventArgs ev) =>
+                {
+                    FolderMemorizedCardsCount = folder.MemorizedCardsCount();
+                    MainPageGrid.Children.Remove(modal);
+
+                    if (modal.reviewResults != null)
+                    {
+                        ReviewResults reviewResults = new ReviewResults(modal.reviewResults);
+                        reviewResults.SetValue(Grid.RowSpanProperty, 2);
+                        reviewResults.SetValue(Grid.ColumnSpanProperty, 3);
+                        MainPageGrid.Children.Add(reviewResults);
+
+                        reviewResults.CloseReview += (object se, RoutedEventArgs eve) => MainPageGrid.Children.Remove(reviewResults);
+                    }
+                };
+            }
+            catch { }
         }
 
         private void MultipleAnswersButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            try
+            {
+                if (folder.Cards.Length == 0) return;
+                ReviewPopup.IsOpen = false;
 
+                MultipleAnswersReviewModalWindow modal = new MultipleAnswersReviewModalWindow(
+                    MainPageGrid, Storage, ConnectionString, folder.FolderId, folder.Cards);
+                modal.SetValue(Grid.RowSpanProperty, 2);
+                modal.SetValue(Grid.ColumnSpanProperty, 3);
+                MainPageGrid.Children.Add(modal);
+
+                modal.CloseReview += (object s, RoutedEventArgs ev) =>
+                {
+                    FolderMemorizedCardsCount = folder.MemorizedCardsCount();
+                    MainPageGrid.Children.Remove(modal);
+
+                    if (modal.reviewResults != null)
+                    {
+                        ReviewResults reviewResults = new ReviewResults(modal.reviewResults);
+                        reviewResults.SetValue(Grid.RowSpanProperty, 2);
+                        reviewResults.SetValue(Grid.ColumnSpanProperty, 3);
+                        MainPageGrid.Children.Add(reviewResults);
+
+                        reviewResults.CloseReview += (object se, RoutedEventArgs eve) => MainPageGrid.Children.Remove(reviewResults);
+                    }
+                };
+            }
+            catch { }
         }
 
         private void MatchAnswersButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
-
+            ReviewPopup.IsOpen = false;
         }
     }
 }

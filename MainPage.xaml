@@ -133,6 +133,12 @@
             </TextBlock>
         </StackPanel>
 
-        <Frame Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" x:Name="SecondFrame" NavigationUIVisibility="Hidden" />
+        <Frame
+            x:Name="SecondFrame"
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Grid.Column="2"
+            NavigationUIVisibility="Hidden"
+            TabIndex="-1" />
     </Grid>
 </Page>

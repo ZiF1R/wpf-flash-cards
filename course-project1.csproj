@@ -140,9 +140,18 @@
     <Compile Include="controls\ModalWindows\FolderModalWindow.xaml.cs">
       <DependentUpon>FolderModalWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="controls\ModalWindows\MatchReviewModalWindow.xaml.cs">
+      <DependentUpon>MatchReviewModalWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="controls\ModalWindows\MultipleAnswersReviewModalWindow.xaml.cs">
+      <DependentUpon>MultipleAnswersReviewModalWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="controls\ModalWindows\Review.cs" />
     <Compile Include="controls\ModalWindows\ReviewModalWindow.xaml.cs">
       <DependentUpon>ReviewModalWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="controls\ModalWindows\ReviewResults.xaml.cs">
+      <DependentUpon>ReviewResults.xaml</DependentUpon>
     </Compile>
     <Compile Include="controls\ModalWindows\SimpleModalWindow.xaml.cs">
       <DependentUpon>SimpleModalWindow.xaml</DependentUpon>
@@ -221,7 +230,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="controls\ModalWindows\MatchReviewModalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\ModalWindows\MultipleAnswersReviewModalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="controls\ModalWindows\ReviewModalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\ModalWindows\ReviewResults.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
