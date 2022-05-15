@@ -77,6 +77,7 @@
     <v:String x:Key="MatchCardsReview">Сопоставление карточек</v:String>
     <v:String x:Key="MultipleAnswersReview">Множественные ответы</v:String>
     <v:String x:Key="ChooseAnswer">Выберите ответ:</v:String>
+    <v:String x:Key="MatchAnswer">Сопоставьте ответы</v:String>
     <v:String x:Key="of">из</v:String>
     <v:String x:Key="cards">карт</v:String>
     <v:String x:Key="Answer">Ответ</v:String>

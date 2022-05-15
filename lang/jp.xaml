@@ -77,6 +77,7 @@
     <v:String x:Key="MatchCardsReview">カードマッチング</v:String>
     <v:String x:Key="MultipleAnswersReview">複数の応答</v:String>
     <v:String x:Key="ChooseAnswer">答えを選んでください：</v:String>
+    <v:String x:Key="MatchAnswer">答えを一致させてください</v:String>
     <v:String x:Key="of">枚目は</v:String>
     <v:String x:Key="cards">枚カードの中で</v:String>
     <v:String x:Key="Answer">回答</v:String>

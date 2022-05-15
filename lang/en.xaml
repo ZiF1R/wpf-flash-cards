@@ -77,6 +77,7 @@
     <v:String x:Key="MatchCardsReview">Match cards</v:String>
     <v:String x:Key="MultipleAnswersReview">Multiple answers</v:String>
     <v:String x:Key="ChooseAnswer">Choose the answer:</v:String>
+    <v:String x:Key="MatchAnswer">Match the answers</v:String>
     <v:String x:Key="of">of</v:String>
     <v:String x:Key="cards">cards</v:String>
     <v:String x:Key="Answer">Answer</v:String>

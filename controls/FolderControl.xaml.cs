@@ -368,7 +368,8 @@ namespace course_project1.controls
                 if (folder.Cards.Length == 0) return;
                 ReviewPopup.IsOpen = false;
 
-                ReviewModalWindow modal = new ReviewModalWindow(MainPageGrid, Storage, ConnectionString, folder.FolderId, folder.Cards);
+                ReviewModalWindow modal =
+                    new ReviewModalWindow(MainPageGrid, Storage, ConnectionString, folder.FolderId, folder.Cards);
                 modal.SetValue(Grid.RowSpanProperty, 2);
                 modal.SetValue(Grid.ColumnSpanProperty, 3);
                 MainPageGrid.Children.Add(modal);
@@ -385,7 +386,7 @@ namespace course_project1.controls
                         reviewResults.SetValue(Grid.ColumnSpanProperty, 3);
                         MainPageGrid.Children.Add(reviewResults);
 
-                        reviewResults.CloseReview += (object se, RoutedEventArgs eve) => MainPageGrid.Children.Remove(reviewResults);
+                        reviewResults.CloseResults += (object se, RoutedEventArgs eve) => MainPageGrid.Children.Remove(reviewResults);
                     }
                 };
             }
@@ -417,7 +418,7 @@ namespace course_project1.controls
                         reviewResults.SetValue(Grid.ColumnSpanProperty, 3);
                         MainPageGrid.Children.Add(reviewResults);
 
-                        reviewResults.CloseReview += (object se, RoutedEventArgs eve) => MainPageGrid.Children.Remove(reviewResults);
+                        reviewResults.CloseResults += (object se, RoutedEventArgs eve) => MainPageGrid.Children.Remove(reviewResults);
                     }
                 };
             }
@@ -426,7 +427,34 @@ namespace course_project1.controls
 
         private void MatchAnswersButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            ReviewPopup.IsOpen = false;
+            try
+            {
+                if (folder.Cards.Length == 0) return;
+                ReviewPopup.IsOpen = false;
+
+                MatchReviewModalWindow modal = new MatchReviewModalWindow(
+                    MainPageGrid, Storage, ConnectionString, folder.FolderId, folder.Cards);
+                modal.SetValue(Grid.RowSpanProperty, 2);
+                modal.SetValue(Grid.ColumnSpanProperty, 3);
+                MainPageGrid.Children.Add(modal);
+
+                modal.CloseReview += (object s, RoutedEventArgs ev) =>
+                {
+                    FolderMemorizedCardsCount = folder.MemorizedCardsCount();
+                    MainPageGrid.Children.Remove(modal);
+
+                    if (modal.reviewResults != null)
+                    {
+                        ReviewResults reviewResults = new ReviewResults(modal.reviewResults);
+                        reviewResults.SetValue(Grid.RowSpanProperty, 2);
+                        reviewResults.SetValue(Grid.ColumnSpanProperty, 3);
+                        MainPageGrid.Children.Add(reviewResults);
+
+                        reviewResults.CloseResults += (object se, RoutedEventArgs eve) => MainPageGrid.Children.Remove(reviewResults);
+                    }
+                };
+            }
+            catch { }
         }
     }
 }

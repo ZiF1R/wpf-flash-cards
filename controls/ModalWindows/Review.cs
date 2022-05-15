@@ -80,7 +80,7 @@ namespace course_project1.controls.ModalWindows
             return Deck;
         }
 
-        private Card[] ShuffleDeck(Card[] deck)
+        public Card[] ShuffleDeck(Card[] deck)
         {
             for (int i = deck.Length - 1; i > 0; i--)
             {

@@ -30,18 +30,18 @@ namespace course_project1.controls.ModalWindows
             TimePassed.Text = reviewResults?.timePassed;
         }
 
-        public static readonly RoutedEvent CloseReviewEvent
-            = EventManager.RegisterRoutedEvent("CloseReview", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ReviewResults));
+        public static readonly RoutedEvent CloseResultsEvent
+            = EventManager.RegisterRoutedEvent("CloseResults", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ReviewResults));
 
-        public event RoutedEventHandler CloseReview
+        public event RoutedEventHandler CloseResults
         {
-            add { AddHandler(CloseReviewEvent, value); }
-            remove { RemoveHandler(CloseReviewEvent, value); }
+            add { AddHandler(CloseResultsEvent, value); }
+            remove { RemoveHandler(CloseResultsEvent, value); }
         }
 
         private void FinishReviewButton_Click(object sender, RoutedEventArgs e)
         {
-            RaiseEvent(new RoutedEventArgs(CloseReviewEvent));
+            RaiseEvent(new RoutedEventArgs(CloseResultsEvent));
         }
     }
 }

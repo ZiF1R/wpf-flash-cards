@@ -76,8 +76,10 @@ namespace course_project1.controls.ModalWindows
             }
 
             AnswerCompareResult.Visibility = Visibility.Hidden;
-            AnswersListBox.Items.Clear();
+            SubmitButton.Style = (Style)SubmitButton.FindResource("PrimaryButton");
+            SubmitButton.SetResourceReference(Button.ContentProperty, "Submit");
 
+            AnswersListBox.Items.Clear();
             string[] answers = Review.GenerateCardAnswers(4, Storage.settings.isReviewSwitched);
             foreach (string answer in answers)
             {
@@ -109,7 +111,6 @@ namespace course_project1.controls.ModalWindows
 
         private void SubmitAction()
         {
-            AnswersListBox.IsManipulationEnabled = false;
             AnswerCompareResult.Visibility = Visibility.Visible;
 
             string answer = Storage.settings.isReviewSwitched ? Review.CurrentCard.Term : Review.CurrentCard.Translation;
@@ -122,7 +123,6 @@ namespace course_project1.controls.ModalWindows
                 SubmitButton.SetResourceReference(Button.ContentProperty, "Next");
                 ((ListBoxItem)AnswersListBox.SelectedItem).SetResourceReference(BackgroundProperty, "RightAnswerBg");
 
-                ((ListBoxItem)AnswersListBox.SelectedItem).IsSelected = false;
                 Review.CurrentCard.SendAnswer(ConnectionString, RootFolderId, true);
             }
             else
@@ -134,7 +134,6 @@ namespace course_project1.controls.ModalWindows
                 SubmitButton.Style = (Style)SubmitButton.FindResource("DangerButton");
                 ((ListBoxItem)AnswersListBox.SelectedItem).SetResourceReference(BackgroundProperty, "WrongAnswerBg");
 
-                ((ListBoxItem)AnswersListBox.SelectedItem).IsSelected = false;
                 for (int i = 0; i < AnswersListBox.Items.Count; i++)
                 {
                     string item = (string)((ListBoxItem)AnswersListBox.Items[i]).Content;
@@ -149,6 +148,7 @@ namespace course_project1.controls.ModalWindows
             }
 
             isSubmitted = true;
+            ((ListBoxItem)AnswersListBox.SelectedItem).IsSelected = false;
         }
 
         private void CloseReviewButton_MouseUp(object sender, MouseButtonEventArgs e)
