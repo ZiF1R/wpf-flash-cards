@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:course_project1.controls"
              mc:Ignorable="d"
              Name="FolderControlElement"
-              d:MinHeight="140" d:DesignWidth="280">
+             d:MinHeight="140" d:DesignWidth="280">
 
     <Grid x:Name="FolderGrid">
         <Grid.ColumnDefinitions>
@@ -21,7 +21,6 @@
             <RowDefinition MinHeight="20"/>
             <RowDefinition MinHeight="35"/>
         </Grid.RowDefinitions>
-
 
         <Rectangle
             Name="BlinkRectangle"
@@ -376,7 +375,7 @@
             HorizontalAlignment="Right"
             FontSize="10"
             FontFamily="Segoe UI Light"
-            Margin="0,10,10,10"
+            Margin="0,10,0,10"
             TextWrapping="Wrap"
             Foreground="{DynamicResource TextColorOpacity}">
             <TextBlock

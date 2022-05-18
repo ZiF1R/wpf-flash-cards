@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:course_project1.controls"
              mc:Ignorable="d" 
              Name="CardControlElement"
-             d:DesignHeight="140" d:DesignWidth="280">
+             d:MinHeight="140" d:DesignWidth="280">
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -25,7 +26,7 @@
             Grid.ColumnSpan="3"
             Grid.RowSpan="5"
             Grid.Row="0"
-            Height="140"
+            MinHeight="140"
             Width="280"
             Fill="{DynamicResource CardBg}">
             <Rectangle.Effect>
@@ -64,6 +65,7 @@
                 Name="myPopup"
                 IsOpen="{Binding IsChecked, ElementName=CardSettings}"
                 Placement="Bottom"
+                StaysOpen="False"
                 PlacementTarget="{Binding ElementName=CardSettings}"
                 PopupAnimation="Slide">
                 <Popup.Effect>
@@ -259,6 +261,7 @@
             HorizontalAlignment="Left"
             FontSize="16"
             FontFamily="Segoe UI Semibold"
+            TextWrapping="Wrap"
             Foreground="{DynamicResource TextColor}"/>
 
         <TextBlock
@@ -271,6 +274,7 @@
             HorizontalAlignment="Left"
             FontSize="16"
             FontFamily="Segoe UI Light"
+            TextWrapping="Wrap"
             Foreground="{DynamicResource TextColor}"/>
 
         <TextBlock
@@ -281,8 +285,10 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
             FontSize="14"
-            FontStyle="Italic"
+            FontStyle="Oblique"
             FontFamily="Segoe UI Light"
+            TextWrapping="Wrap"
+            Margin="0,2,0,0"
             Foreground="{DynamicResource TextColor}"/>
 
         <TextBlock
@@ -293,7 +299,7 @@
             HorizontalAlignment="Right"
             FontSize="10"
             FontFamily="Segoe UI Light"
-            Margin="0,0,10,10"
+            Margin="0,0,0,10"
             Foreground="{DynamicResource TextColorOpacity}">
             <TextBlock
                 Text="{DynamicResource Added}"/>

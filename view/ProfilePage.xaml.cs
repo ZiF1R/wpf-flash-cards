@@ -37,11 +37,11 @@ namespace course_project1.view
             Storage = storage;
             InitializeComponent();
 
-            NicknameInput.Placeholder = Storage.user.Nickname;
-            SurnameInput.Placeholder = Storage.user.Surname;
-            NameInput.Placeholder = Storage.user.Name;
-            EmailInput.Placeholder = Storage.user.Email;
-            PasswordInput.Placeholder = DataEncriptor.Decrypt(Storage.user.Password);
+            NicknameInput.Value = Storage.user.Nickname;
+            SurnameInput.Value = Storage.user.Surname;
+            NameInput.Value = Storage.user.Name;
+            EmailInput.Value = Storage.user.Email;
+            PasswordInput.Value = DataEncriptor.Decrypt(Storage.user.Password);
         }
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
@@ -53,41 +53,33 @@ namespace course_project1.view
         {
             try
             {
-                ValidateInput(NicknameInput.Placeholder, "NicknameFormatError", true);
-                ValidateInput(SurnameInput.Placeholder, "SurnameFormatError");
-                ValidateInput(NameInput.Placeholder, "NameFormatError");
-                Validator.ValidatePassword(PasswordInput.Placeholder);
+                NicknameInput.Value = NicknameInput.Value.Trim();
+                SurnameInput.Value = SurnameInput.Value.Trim();
+                NameInput.Value = NameInput.Value.Trim();
+
+                Validator.ValidateInput(NicknameInput.Value, "NicknameFormatError", true);
+                Validator.ValidateInput(SurnameInput.Value, "SurnameFormatError");
+                Validator.ValidateInput(NameInput.Value, "NameFormatError");
+                Validator.ValidatePassword(PasswordInput.Value);
 
                 if (
-                    NicknameInput.Placeholder == Storage.user.Nickname &&
-                    SurnameInput.Placeholder == Storage.user.Surname &&
-                    NameInput.Placeholder == Storage.user.Name &&
-                    PasswordInput.Placeholder == DataEncriptor.Decrypt(Storage.user.Password)
+                    NicknameInput.Value == Storage.user.Nickname &&
+                    SurnameInput.Value == Storage.user.Surname &&
+                    NameInput.Value == Storage.user.Name &&
+                    PasswordInput.Value == DataEncriptor.Decrypt(Storage.user.Password)
                 ) return;
 
                 Storage.user.ChangeUserData(
-                    NicknameInput.Placeholder, SurnameInput.Placeholder,
-                    NameInput.Placeholder, PasswordInput.Placeholder, this.ConnectionString);
+                    NicknameInput.Value, SurnameInput.Value,
+                    NameInput.Value, PasswordInput.Value, this.ConnectionString);
+            }
+            catch (FormatException ex)
+            {
+                CustomMessage.Show(ex.Message);
             }
             catch (Exception ex)
             {
                 CustomMessage.Show(ex.Message);
-            }
-        }
-
-        private void ValidateInput(string value, string errorFormatMessageResourceName, bool specialFormat = false)
-        {
-            try
-            {
-                Validator.ValidateInput(value, specialFormat);
-            }
-            catch (FormatException ex)
-            {
-                throw new FormatException((string)Application.Current.FindResource(errorFormatMessageResourceName));
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
             }
         }
     }

@@ -136,6 +136,7 @@ namespace course_project1
 
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)
         {
+            MainFrame.NavigationService.RemoveBackEntry();
             if (MainFrame.Content.GetType() == typeof(LoginPage))
             {
                 Storage.settings.SetAppTheme(Storage.settings.GetThemeName(1, ConnectionString));

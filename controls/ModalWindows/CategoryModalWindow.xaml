@@ -40,7 +40,6 @@
 
                 <control:CustomTextBox
                     x:Name="CategoryNameTextBox"
-                    MaxLength="25"
                     Padding="0,5,0,5"
                     Placeholder="{DynamicResource CategoryName}"/>
 

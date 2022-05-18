@@ -25,16 +25,16 @@ namespace course_project1.controls
             InitializeComponent();
         }
 
-        public static readonly DependencyProperty PlaceholderProperty =
+        public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register(
-               name: "Placeholder",
+               name: "Value",
                propertyType: typeof(string),
                ownerType: typeof(SecondaryTextInput));
 
-        public string Placeholder
+        public string Value
         {
-            get => (string)GetValue(PlaceholderProperty);
-            set => SetValue(PlaceholderProperty, value);
+            get => (string)GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
         }
 
         public static readonly DependencyProperty IsReadOnlyProperty =
@@ -55,7 +55,7 @@ namespace course_project1.controls
                propertyType: typeof(uint),
                ownerType: typeof(SecondaryTextInput),
                typeMetadata: new FrameworkPropertyMetadata(
-                   defaultValue: (uint)40,
+                   defaultValue: (uint)50,
                    flags: FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public uint MaxLength

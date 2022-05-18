@@ -68,7 +68,7 @@ namespace course_project1.controls
                propertyType: typeof(uint),
                ownerType: typeof(CustomTextBox),
                typeMetadata: new FrameworkPropertyMetadata(
-                   defaultValue: (uint)40,
+                   defaultValue: (uint)50,
                    flags: FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public uint MaxLength

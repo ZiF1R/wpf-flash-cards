@@ -306,9 +306,9 @@ namespace course_project1.controls
                                 throw new Exception((string)Application.Current.FindResource("InvalidImportedCardDate"));
                             }
 
-                            ValidateInput(card.Term, "CardTermFormatError", true);
-                            ValidateInput(card.Translation, "CardTranslationFormatError", true);
-                            ValidateInput(card.Examples, "CardExamplesFormatError", true, false);
+                            Validator.ValidateInput(card.Term, "CardTermFormatError", true);
+                            Validator.ValidateInput(card.Translation, "CardTranslationFormatError", true);
+                            Validator.ValidateInput(card.Examples, "CardExamplesFormatError", true, false);
 
                             if (card.RightAnswers < 0 || card.WrongAnswers < 0)
                             {
@@ -323,6 +323,10 @@ namespace course_project1.controls
                 {
                     CustomMessage.Show((string)Application.Current.FindResource("SerializationError"));
                 }
+                catch (FormatException ex)
+                {
+                    CustomMessage.Show(ex.Message);
+                }
                 catch (Exception ex)
                 {
                     CustomMessage.Show(ex.Message);
@@ -330,22 +334,6 @@ namespace course_project1.controls
             }
 
             RaiseEvent(new RoutedEventArgs(ReturnToSettingsEvent));
-        }
-
-        private void ValidateInput(string value, string errorFormatMessageResourceName, bool specialFormat = false, bool requiredField = true)
-        {
-            try
-            {
-                Validator.ValidateInput(value, specialFormat, requiredField);
-            }
-            catch (FormatException ex)
-            {
-                throw new FormatException((string)Application.Current.FindResource(errorFormatMessageResourceName));
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
         }
 
         private void MergeCards(Card[] cards)

@@ -40,19 +40,17 @@
 
                 <control:CustomTextBox
                     x:Name="CardTermTextBox"
-                    MaxLength="30"
                     Padding="0,5,0,5"
                     Placeholder="{DynamicResource Term}"/>
 
                 <control:CustomTextBox
                     x:Name="CardTranslationTextBox"
-                    MaxLength="30"
                     Padding="0,5,0,5"
                     Placeholder="{DynamicResource Translation}"/>
 
                 <control:CustomTextBox
                     x:Name="CardExamplesTextBox"
-                    MaxLength="30"
+                    MaxLength="200"
                     Padding="0,5,0,5"
                     Placeholder="{DynamicResource Examples}"/>
 

@@ -79,9 +79,10 @@ namespace course_project1.controls.ModalWindows
         {
             try
             {
-                Validator.ValidateInput(CategoryNameTextBox.Value,true);
+                CategoryNameTextBox.Value = CategoryNameTextBox.Value.Trim();
+                Validator.ValidateInput(CategoryNameTextBox.Value, "CategoryFormatError", true);
 
-                this.CategoryValue = CategoryNameTextBox.Value.Trim();
+                this.CategoryValue = CategoryNameTextBox.Value;
                 bool isUnique = Category.CheckForUniqueCategory(ConnectionString, this.CategoryValue, Storage.user.Uid);
 
                 if (!isUnique) CategoryAlreadyUsed.Visibility = Visibility.Visible;
@@ -94,13 +95,11 @@ namespace course_project1.controls.ModalWindows
             }
             catch (FormatException ex)
             {
-                CustomMessage.Show((string)Application.Current.FindResource("CategoryFormatError"));
-                return;
+                CustomMessage.Show(ex.Message);
             }
             catch (Exception ex)
             {
                 CustomMessage.Show(ex.Message);
-                return;
             }
         }
     }

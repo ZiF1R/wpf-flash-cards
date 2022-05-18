@@ -40,7 +40,6 @@
 
                 <control:CustomTextBox
                     x:Name="FolderNameTextBox"
-                    MaxLength="30"
                     Padding="0,5,0,5"
                     Placeholder="{DynamicResource FolderName}"/>
 

@@ -93,6 +93,7 @@ namespace course_project1.view
             {
                 cardControl = new CardControl(MainPageGrid, card);
 
+                cardControl.VerticalAlignment = VerticalAlignment.Top;
                 cardControl.Margin = new Thickness(0, 0, 40, 40);
                 cardControl.EditCard += (object s, RoutedEventArgs ev) =>
                 {

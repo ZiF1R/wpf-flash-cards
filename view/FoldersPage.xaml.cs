@@ -66,6 +66,7 @@ namespace course_project1.view
             {
                 folderControl = new FolderControl(MainPageGrid, folder, Storage, ConnectionString, IsForExportImport, action);
                 folderControl.Margin = new Thickness(0, 0, 40, 40);
+                folderControl.VerticalAlignment = VerticalAlignment.Top;
 
                 folderControl.EditFolder += (object s, RoutedEventArgs ev) =>
                 {
@@ -153,7 +154,23 @@ namespace course_project1.view
                 }
                 catch { }
             };
-            modal.CloseFolderModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
+            modal.CloseFolderModal += (object s, RoutedEventArgs ev) =>
+            {
+                MainPageGrid.Children.Remove(modal);
+
+                if (Storage.categories.Length != CategorySearch.Items.Count - 1)
+                {
+                    CategorySearch.Items.Clear();
+
+                    ComboBoxItem item = new ComboBoxItem();
+                    item.Content = (string)Application.Current.FindResource("ResetCategory");
+                    item.IsSelected = true;
+                    CategorySearch.Items.Add(item);
+
+                    foreach (Category category in Storage.categories)
+                        CategorySearch.Items.Add(category.Name);
+                }
+            };
         }
 
         private void SearchInput_Input(object sender, RoutedEventArgs e)

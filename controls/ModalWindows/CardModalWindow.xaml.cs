@@ -94,9 +94,13 @@ namespace course_project1.controls.ModalWindows
         {
             try
             {
-                ValidateInput(CardTermTextBox.Value, "CardTermFormatError", true);
-                ValidateInput(CardTranslationTextBox.Value, "CardTranslationFormatError", true);
-                ValidateInput(CardExamplesTextBox.Value, "CardExamplesFormatError", true, false);
+                CardTermTextBox.Value = CardTermTextBox.Value.Trim();
+                CardTranslationTextBox.Value = CardTranslationTextBox.Value.Trim();
+                CardExamplesTextBox.Value = CardExamplesTextBox.Value.Trim();
+
+                Validator.ValidateInput(CardTermTextBox.Value, "CardTermFormatError", true);
+                Validator.ValidateInput(CardTranslationTextBox.Value, "CardTranslationFormatError", true);
+                Validator.ValidateInput(CardExamplesTextBox.Value, "CardExamplesFormatError", true, false);
 
                 if (CardTermTextBox.Value != Term)
                 {
@@ -118,26 +122,13 @@ namespace course_project1.controls.ModalWindows
                 RaiseEvent(new RoutedEventArgs(CardActionEvent));
                 RaiseEvent(new RoutedEventArgs(CloseCardModalEvent));
             }
+            catch (FormatException ex)
+            {
+                CustomMessage.Show(ex.Message);
+            }
             catch (Exception ex)
             {
                 CustomMessage.Show(ex.Message);
-                return;
-            }
-        }
-
-        private void ValidateInput(string value, string errorFormatMessageResourceName, bool specialFormat = false, bool requiredField = true)
-        {
-            try
-            {
-                Validator.ValidateInput(value, specialFormat, requiredField);
-            }
-            catch (FormatException ex)
-            {
-                throw new FormatException((string)Application.Current.FindResource(errorFormatMessageResourceName));
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
             }
         }
 

@@ -134,6 +134,7 @@
         </StackPanel>
 
         <Frame
+            Focusable="False"
             x:Name="SecondFrame"
             Grid.Row="1"
             Grid.RowSpan="2"

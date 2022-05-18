@@ -21,6 +21,7 @@
         </Grid.RowDefinitions>
 
         <Frame
+            Focusable="False"
             Name="MainFrame"
             Margin="0"
             Padding="0"

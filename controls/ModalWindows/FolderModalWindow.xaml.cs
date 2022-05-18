@@ -46,42 +46,50 @@ namespace course_project1.controls.ModalWindows
 
         private void AddCategoryItem(Category category)
         {
-            ComboBoxItem item = new ComboBoxItem();
-            item.Content = category.Name;
-
-            if (FolderCategory != "" && category.Name == FolderCategory)
-                item.IsSelected = true;
-            else if (FolderCategory == "" && category.Name == "none")
-                item.IsSelected = true;
-
-            FolderCategorySelect.Items.Add(item);
-            item.MouseRightButtonUp += (sender, e) =>
+            try
             {
-                if (item.Content.ToString() == "none") return;
+                ComboBoxItem item = new ComboBoxItem();
+                item.Content = category.Name;
 
-                SimpleModalWindow modal = new SimpleModalWindow();
-                modal.SetValue(Grid.RowSpanProperty, 2);
-                modal.SetValue(Grid.ColumnSpanProperty, 3);
-                modal.SetResourceReference(SimpleModalWindow.ModalContentProperty, "RemoveCategory");
+                if (FolderCategory != "" && category.Name == FolderCategory)
+                    item.IsSelected = true;
+                else if (FolderCategory == "" && category.Name == "none")
+                    item.IsSelected = true;
 
-                FolderCategorySelect.IsDropDownOpen = false;
-                MainPageGrid.Children.Add(modal);
-                modal.CloseModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
-                modal.NegativeButtonClick += (object s, RoutedEventArgs ev) =>
+                FolderCategorySelect.Items.Add(item);
+                item.MouseRightButtonUp += (sender, e) =>
                 {
-                    if (!Storage.IsUnusedCategory(category.Name))
-                    {
-                        CustomMessage.Show((string)Application.Current.FindResource("UsedCategoryError"));
-                        return;
-                    }
+                    if (item.Content.ToString() == "none") return;
 
-                    category.RemoveCategory(ConnectionString, item.Content.ToString(), Storage.user.Uid);
-                    Storage.categories = Storage.categories.Where(c => c.Name != category.Name).ToArray();
-                    FolderCategorySelect.SelectedIndex = 0;
-                    FolderCategory = ((ComboBoxItem)FolderCategorySelect.Items.GetItemAt(0)).Content.ToString();
-                    FolderCategorySelect.Items.Remove(item);
+                    SimpleModalWindow modal = new SimpleModalWindow();
+                    modal.SetValue(Grid.RowSpanProperty, 2);
+                    modal.SetValue(Grid.ColumnSpanProperty, 3);
+                    modal.SetResourceReference(SimpleModalWindow.ModalContentProperty, "RemoveCategory");
+
+                    FolderCategorySelect.IsDropDownOpen = false;
+                    MainPageGrid.Children.Add(modal);
+                    modal.CloseModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
+                    modal.NegativeButtonClick += (object s, RoutedEventArgs ev) =>
+                    {
+                        if (!Storage.IsUnusedCategory(category.Name))
+                        {
+                            CustomMessage.Show((string)Application.Current.FindResource("UsedCategoryError"));
+                            return;
+                        }
+
+                        category.RemoveCategory(ConnectionString, item.Content.ToString(), Storage.user.Uid);
+                        Storage.categories = Storage.categories.Where(c => c.Name != category.Name).ToArray();
+                        FolderCategorySelect.SelectedIndex = 0;
+                        FolderCategory = ((ComboBoxItem)FolderCategorySelect.Items.GetItemAt(0)).Content.ToString();
+                        FolderCategorySelect.Items.Remove(item);
+                    };
                 };
-            };
+            }
+            catch (Exception ex)
+            {
+                CustomMessage.Show(ex.Message);
+            }
+            
         }
 
         public static readonly DependencyProperty ModalHeaderProperty =
@@ -141,7 +149,8 @@ namespace course_project1.controls.ModalWindows
         {
             try
             {
-                Validator.ValidateInput(FolderNameTextBox.Value, true);
+                FolderNameTextBox.Value = FolderNameTextBox.Value.Trim();
+                Validator.ValidateInput(FolderNameTextBox.Value, "FolderNameFormatError", true);
 
                 if (FolderName != FolderNameTextBox.Value)
                 {
@@ -165,12 +174,11 @@ namespace course_project1.controls.ModalWindows
             }
             catch (FormatException ex)
             {
-                CustomMessage.Show((string)Application.Current.FindResource("FolderNameFormatError"));
+                CustomMessage.Show(ex.Message);
             }
             catch (Exception ex)
             {
                 CustomMessage.Show(ex.Message);
-                return;
             }
         }
 
