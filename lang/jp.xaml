@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <v:String x:Key="WindowTitle">FlashCards - 暗記するためのカード</v:String>
     <v:String x:Key="Login">ログイン</v:String>
     <v:String x:Key="Registration">サインアップ</v:String>
     <v:String x:Key="Registrate">サインアップ</v:String>
@@ -125,13 +126,15 @@
     <v:String x:Key="UserInsertError">データベースでのユーザーの作成中にエラーが発生しました！</v:String>
     <v:String x:Key="UserUpdateError">ユーザーの編集中にエラーが発生しました！</v:String>
     <v:String x:Key="InvalidFileExtension">無効なファイル拡張子！</v:String>
+
     <v:String x:Key="PasswordError">パスワードにはスペースを含めることはできません！</v:String>
+    <v:String x:Key="EmailSpaceError">メールにはスペースを含めることはできません！</v:String>
     <v:String x:Key="TextBoxNotExist">受信したテキストボックスが存在しません！</v:String>
     <v:String x:Key="TextBoxError">テキストフィールドには、2つ以上のスペースを連続して含めることはできません。</v:String>
     <v:String x:Key="EmptyString">すべてのフィールドに入力する必要があります！</v:String>
     <v:String x:Key="ErrorPattern">テクスト欄フォーマットエラー！ テクスト欄には、アルファベットの記号だけを含めることができます。</v:String>
-    <v:String x:Key="ErrorSpecialPattern">ニックネーム欄フォーマットエラー！ ニックネームには、アルファベットの記号、数字、アンダースコアまたはダッシュのみを含めることができます。</v:String>
-    <v:String x:Key="ErrorPasswordPattern">パスワードの形式が間違っています！ パスワードには6文字以上が含まれている必要があります。 パスワードには、アルファベット記号、数字、次の文字を含めることができます： -_$=+*^.！%＃@, 。</v:String>
+    <v:String x:Key="ErrorSpecialPattern">ニックネーム欄フォーマットエラー！ ニックネームには、アルファベットの記号、数字、次の文字を含めることができます： -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? 。</v:String>
+    <v:String x:Key="ErrorPasswordPattern">パスワードの形式が間違っています！ パスワードには6文字以上が含まれている必要があります。 パスワードには、アルファベット記号、数字、次の文字を含めることができます： -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? 。</v:String>
     <v:String x:Key="ConfirmPasswordError">パスワード再記入してください。</v:String>
     <v:String x:Key="EmailFormatError">メールアドレスの形式が無効です。 メールアドレスには、ラテンアルファベットの記号、数字、アンダースコア、ダッシュのみを含めることができ、example@test.com の形式にすることができます。</v:String>
     <v:String x:Key="LoginError">間違ったメールアドレスまたはパスワード！</v:String>
@@ -141,12 +144,12 @@
     <v:String x:Key="InvalidImportedCardDate">エラー！ 日付形式が無効です。日付を現在の時点より遅くすることはできません。また、1970-01-01より前にすることもできません。</v:String>
 
     <v:String x:Key="UsedCategoryError">カテゴリの削除に失敗しました。 このカテゴリは現在使用中です！</v:String>
-    <v:String x:Key="NicknameFormatError">無効なニックネーム形式！エイリアスには、英字、数字、アンダースコア、またはダッシュのみを含めることができます！</v:String>
+    <v:String x:Key="NicknameFormatError">無効なニックネーム形式！エイリアスには、アルファベットの記号、数字、次の文字を含めることができます： -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? 。</v:String>
     <v:String x:Key="SurnameFormatError">無効な名前フィールド形式！姓には英字のみを含めることができます！</v:String>
     <v:String x:Key="NameFormatError">無効な名前フィールド形式！名前には英字のみを含めることができます！</v:String>
-    <v:String x:Key="CategoryFormatError">無効なカテゴリ名の形式です！カテゴリ名には、アルファベットの記号、数字、アンダースコア、またはダッシュのみを含めることができます！</v:String>
-    <v:String x:Key="CardTermFormatError">カード用語の形式が正しくありません！カード用語には、アルファベットの記号、数字、アンダースコア、またはダッシュのみを含めることができます！</v:String>
-    <v:String x:Key="CardTranslationFormatError">カードの翻訳形式が正しくありません！カードの翻訳には、アルファベットの記号、数字、アンダースコア、またはダッシュのみを含めることができます！</v:String>
-    <v:String x:Key="CardExamplesFormatError">カードの例の形式が正しくありません！カードの例には、アルファベットの記号、数字、アンダースコア、またはダッシュのみを含めることができます！</v:String>
-    <v:String x:Key="FolderNameFormatError">無効なフォルダ名の形式！フォルダ名には、英字、数字、アンダースコア、またはダッシュのみを含めることができます！</v:String>
+    <v:String x:Key="CategoryFormatError">無効なカテゴリ名の形式です！カテゴリ名には、アルファベットの記号、数字、次の文字を含めることができます： -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? 。</v:String>
+    <v:String x:Key="CardTermFormatError">カード用語の形式が正しくありません！カード用語には、アルファベットの記号、数字、次の文字を含めることができます： -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? 。</v:String>
+    <v:String x:Key="CardTranslationFormatError">カードの翻訳形式が正しくありません！カードの翻訳には、アルファベットの記号、数字、次の文字を含めることができます： -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? 。</v:String>
+    <v:String x:Key="CardExamplesFormatError">カードの例の形式が正しくありません！カードの例には、アルファベットの記号、数字、次の文字を含めることができます： -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? 。</v:String>
+    <v:String x:Key="FolderNameFormatError">無効なフォルダ名の形式！フォルダ名には、アルファベットの記号、数字、次の文字を含めることができます： -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? 。</v:String>
 </ResourceDictionary>

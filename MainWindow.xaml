@@ -7,9 +7,8 @@
         xmlns:control="clr-namespace:course_project1.controls"
         mc:Ignorable="d"
         Left="10" Top="10"
-        Title="FlashCards - карточки для запоминания" Height="750" Width="1500" Icon="/logo.png">
-
-    <!-- Лингвистическое приложение FlashCards -->
+        Title="{DynamicResource WindowTitle}" Height="750" Width="1500" Icon="/logo.png">
+    
     <!-- FlashCards - карточки для запоминания -->
 
     <Grid Name="MainWindowGrid" Background="{DynamicResource MainBg}">

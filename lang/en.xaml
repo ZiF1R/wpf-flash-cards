@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <v:String x:Key="WindowTitle">FlashCards - cards for memorizing</v:String>
     <v:String x:Key="Login">Login</v:String>
     <v:String x:Key="Registration">Registration</v:String>
     <v:String x:Key="Registrate">Registrate</v:String>
@@ -125,13 +126,15 @@
     <v:String x:Key="UserInsertError">User insert error!</v:String>
     <v:String x:Key="UserUpdateError">User update error!</v:String>
     <v:String x:Key="InvalidFileExtension">Invalid file extension!</v:String>
+    
     <v:String x:Key="TextBoxNotExist">Received textbox not exist!</v:String>
+    <v:String x:Key="EmailSpaceError">Email cannot contain spaces!</v:String>
     <v:String x:Key="TextBoxError">Text fields cannot contain more than two spaces in a row!</v:String>
     <v:String x:Key="EmptyString">All fields must be filled!</v:String>
     <v:String x:Key="PasswordError">Password cannot contain spaces!</v:String>
     <v:String x:Key="ErrorPattern">Invalid textbox format! The textbox can contain only alphabetic symbols!</v:String>
-    <v:String x:Key="ErrorSpecialPattern">Invalid textbox with special format! Textbox with special format can only contain alphabetic symbols, numbers, and underscores or dashes!</v:String>
-    <v:String x:Key="ErrorPasswordPattern">Invalid password format! The password must contain at least 6 characters. The password can contain alphabetic symbols, numbers, and next characters: -_$=+*^.!%#@, .</v:String>
+    <v:String x:Key="ErrorSpecialPattern">Invalid textbox with special format! Textbox with special format can only contain alphabetic symbols, numbers, and next characters: -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? .</v:String>
+    <v:String x:Key="ErrorPasswordPattern">Invalid password format! The password must contain at least 6 characters. The password can contain alphabetic symbols, numbers, and next characters: -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? .</v:String>
     <v:String x:Key="ConfirmPasswordError">Confirm the password!</v:String>
     <v:String x:Key="EmailFormatError">Invalid email address format! The email address can only contain latin alphabetic symbols, numbers, underscores or dashes and be of the form example@test.com!</v:String>
     <v:String x:Key="LoginError">Invalid email address or password!</v:String>
@@ -141,12 +144,12 @@
     <v:String x:Key="InvalidImportedCardDate">Error! Invalid date format, the date cannot be later than the current moment, and also cannot be later than 1970-01-01!</v:String>
 
     <v:String x:Key="UsedCategoryError">Cannot remove category. This category is currently in use!</v:String>
-    <v:String x:Key="NicknameFormatError">Invalid nickname format! Nickname can only contain alphabetic symbols, numbers, underscores or dashes!</v:String>
+    <v:String x:Key="NicknameFormatError">Invalid nickname format! Nickname can only contain alphabetic symbols, numbers, and next characters: -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? .</v:String>
     <v:String x:Key="SurnameFormatError">Invalid surname textbox format! Surname can contain only alphabetic symbols!</v:String>
     <v:String x:Key="NameFormatError">Invalid name textbox format! Name can contain only alphabetic symbols!</v:String>
-    <v:String x:Key="CategoryFormatError">Invalid category name format! Category name can contain only alphabetic symbols, numbers, underscores or dashes!</v:String>
-    <v:String x:Key="CardTermFormatError">Invalid card term format! Card term can only contain alphabetic symbols, numbers, underscores or dashes!</v:String>
-    <v:String x:Key="CardTranslationFormatError">Invalid card translation format! Card translation can only contain alphabetic symbols, numbers, underscores or dashes!</v:String>
-    <v:String x:Key="CardExamplesFormatError">Invalid card examples format! Card examples can only contain alphabetic symbols, numbers, underscores or dashes!</v:String>
-    <v:String x:Key="FolderNameFormatError">Invalid folder name format! Folder name can only contain alphabetic symbols, numbers, underscores or dashes!</v:String>
+    <v:String x:Key="CategoryFormatError">Invalid category name format! Category name can contain only alphabetic symbols, numbers, and next characters: -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? .</v:String>
+    <v:String x:Key="CardTermFormatError">Invalid card term format! Card term can only contain alphabetic symbols, numbers, and next characters: -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? .</v:String>
+    <v:String x:Key="CardTranslationFormatError">Invalid card translation format! Card translation can only contain alphabetic symbols, numbers, and next characters: -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? .</v:String>
+    <v:String x:Key="CardExamplesFormatError">Invalid card examples format! Card examples can only contain alphabetic symbols, numbers, and next characters: -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? .</v:String>
+    <v:String x:Key="FolderNameFormatError">Invalid folder name format! Folder name can only contain alphabetic symbols, numbers, and next characters: -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? .</v:String>
 </ResourceDictionary>

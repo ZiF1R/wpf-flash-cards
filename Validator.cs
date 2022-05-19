@@ -26,7 +26,7 @@ namespace course_project1
             {
                 if (IsSpecialFormat)
                 {
-                    if (Regex.IsMatch(value, @"[^a-zA-Zа-яА-Я\d-_$=+*^%#,;<>:\.!?\s]"))
+                    if (Regex.IsMatch(value, @"[^a-zA-Zа-яА-Я\d-_[\]{}()&$=+*^%#,;<>:\.!?\s]"))
                         throw new FormatException((string)Application.Current.FindResource(formatErrorMessageKey));
                 }
                 else
@@ -43,7 +43,7 @@ namespace course_project1
                 throw new Exception((string)Application.Current.FindResource("EmptyString"));
 
             if (value.Contains(" "))
-                throw new Exception((string)Application.Current.FindResource("TextBoxError"));
+                throw new Exception((string)Application.Current.FindResource("EmailSpaceError"));
 
             if (!Regex.IsMatch(value, @"^(([a-zA-Z\d-_]+)\@([a-zA-Z\d]+)\.([a-zA-Z]){2,})$") ||
                 Regex.IsMatch(value, @"^(([^a-zA-Z\d-_]+)\@)") ||
@@ -60,7 +60,7 @@ namespace course_project1
             if (value.Contains(" "))
                 throw new Exception((string)Application.Current.FindResource("PasswordError"));
 
-            if (!Regex.IsMatch(value, @"([a-zA-Zа-яА-Я\d-_$=+*^%#,;:\.!?]){6,}"))
+            if (!Regex.IsMatch(value, @"([a-zA-Zа-яА-Я\d-_[\]{}()&$=+*^%#,;:\.!?]){6,}"))
                 throw new FormatException((string)Application.Current.FindResource("ErrorPasswordPattern"));
         }
     }

@@ -129,7 +129,7 @@
                 <TextBlock
                     Foreground="{DynamicResource TextColorOpacity}"
                     Margin="0,25,0,0"
-                    Text="Copyright © 2022, created by Z1FiR"/>
+                    Text="Copyright © 2022, created by ZiF1R"/>
             </TextBlock>
         </StackPanel>
 

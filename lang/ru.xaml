@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <v:String x:Key="WindowTitle">FlashCards - карточки для запоминания</v:String>
     <v:String x:Key="Login">Авторизоваться</v:String>
     <v:String x:Key="Registration">Регистрация</v:String>
     <v:String x:Key="Registrate">Зарегистрировать</v:String>
@@ -109,7 +110,7 @@
     <v:String x:Key="CategoriesLoadingError">Ошибка загрузки категорий!</v:String>
     <v:String x:Key="FoldersLoadingError">Ошибка загрузки папок!</v:String>
     <v:String x:Key="CategoryRemoveError">Ошибка удаления категории!</v:String>
-    <v:String x:Key="CategoryInsertError">Ошибка отправки котегории в базу данных!</v:String>
+    <v:String x:Key="CategoryInsertError">Ошибка отправки категории в базу данных!</v:String>
     <v:String x:Key="SetCardsLimitError">Ошибка установки ограничения по карточкам!</v:String>
     <v:String x:Key="SetTimeLimitError">Ошибка установки ограничения по времени!</v:String>
     <v:String x:Key="CardsLoadingError">Ошибка загрузки карточек!</v:String>
@@ -124,14 +125,16 @@
     <v:String x:Key="UserLoadingError">Ошибка загрузки пользователя!</v:String>
     <v:String x:Key="UserUpdateError">Ошибка редактирования пользователя!</v:String>
     <v:String x:Key="InvalidFileExtension">Неверное расширение файла!</v:String>
+
     <v:String x:Key="UserInsertError">Ошибка создания пользователя в базе данных!</v:String>
+    <v:String x:Key="EmailSpaceError">Email-адрес не может содержать пробелы!</v:String>
     <v:String x:Key="TextBoxNotExist">Полученное текстовое поле не существует!</v:String>
     <v:String x:Key="TextBoxError">Текстовые поля не могут содержать больше двух пробелов подряд!</v:String>
     <v:String x:Key="EmptyString">Все поля должны быть заполнены!</v:String>
     <v:String x:Key="PasswordError">Пароль не может содержать пробелы!</v:String>
     <v:String x:Key="ErrorPattern">Неверный формат текстового поля! Текстовое поле может содержать только буквенные символы!</v:String>
-    <v:String x:Key="ErrorSpecialPattern">Неверный формат поля для псевдонима! Псевдоним может содержать только буквенные символы, цифры а также знак подчеркивания или тире</v:String>
-    <v:String x:Key="ErrorPasswordPattern">Неверный формат пароля! Пароль должен содержать минимум 6 знаков. Пароль может содержать только буквенные символы, цифры а также следующие символы: -_$=+*^.!%#@, .</v:String>
+    <v:String x:Key="ErrorSpecialPattern">Неверный формат поля для псевдонима! Псевдоним может содержать только буквенные символы, цифры а также следующие символы: -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? .</v:String>
+    <v:String x:Key="ErrorPasswordPattern">Неверный формат пароля! Пароль должен содержать минимум 6 знаков. Пароль может содержать только буквенные символы, цифры а также следующие символы: -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? .</v:String>
     <v:String x:Key="ConfirmPasswordError">Подтвердите пароль!</v:String>
     <v:String x:Key="EmailFormatError">Неверный формат email-адреса! Email-адрес может содержать только символы латинского алфавита, цифры а также знак подчеркивания или тире и быть вида example@test.com!</v:String>
     <v:String x:Key="LoginError">Неправильный email-адрес или пароль!</v:String>
@@ -141,12 +144,12 @@
     <v:String x:Key="InvalidImportedCardDate">Ошибка! Неверный формат даты, дата не может быть позже текущего момента, а также не может быть раньше 1970-01-01!</v:String>
 
     <v:String x:Key="UsedCategoryError">Не получилось удалить категорию. Эта категория в настоящее время используется!</v:String>
-    <v:String x:Key="NicknameFormatError">Неверный формат псевдонима! Псевдоним может содержать только буквенные символы, цифры, символы подчеркивания или тире!</v:String>
+    <v:String x:Key="NicknameFormatError">Неверный формат псевдонима! Псевдоним может содержать только буквенные символы, цифры а также следующие символы: -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? .</v:String>
     <v:String x:Key="SurnameFormatError">Неверный формат поля для фамилии! Фамилия может содержать только буквенные символы!</v:String>
     <v:String x:Key="NameFormatError">Неверный формат поля для имени! Имя может содержать только буквенные символы!</v:String>
-    <v:String x:Key="CategoryFormatError">Неверный формат названия категории! Название категории может содержать только буквенные символы, цифры, знаки подчеркивания или тире!</v:String>
-    <v:String x:Key="CardTermFormatError">Неверный формат термина карточки! Термин карточки может содержать только буквенные символы, цифры, знаки подчеркивания или тире!</v:String>
-    <v:String x:Key="CardTranslationFormatError">Неверный формат перевода карточки! Перевод карточки может содержать только буквенные символы, цифры, знаки подчеркивания или тире!</v:String>
-    <v:String x:Key="CardExamplesFormatError">Неверный формат примеров карточки! Примеры карточки могут содержать только буквенные символы, цифры, знаки подчеркивания или тире!</v:String>
-    <v:String x:Key="FolderNameFormatError">Неверный формат названия папки! Название папки может содержать только буквенные символы, цифры, символы подчеркивания или тире!</v:String>
+    <v:String x:Key="CategoryFormatError">Неверный формат названия категории! Название категории может содержать только буквенные символы, цифры а также следующие символы: -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? .</v:String>
+    <v:String x:Key="CardTermFormatError">Неверный формат термина карточки! Термин карточки может содержать только буквенные символы, цифры а также следующие символы: -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? .</v:String>
+    <v:String x:Key="CardTranslationFormatError">Неверный формат перевода карточки! Перевод карточки может содержать только буквенные символы, цифры а также следующие символы: -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? .</v:String>
+    <v:String x:Key="CardExamplesFormatError">Неверный формат примеров карточки! Примеры карточки могут содержать только буквенные символы, цифры а также следующие символы: -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? .</v:String>
+    <v:String x:Key="FolderNameFormatError">Неверный формат названия папки! Название папки может содержать только буквенные символы, цифры а также следующие символы: -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? .</v:String>
 </ResourceDictionary>

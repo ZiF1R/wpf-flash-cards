@@ -54,7 +54,7 @@
             Grid.Row="2"
             VerticalAlignment="Center"
             HorizontalContentAlignment="Stretch"
-            d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+            d:LayoutOverrides="HorizontalAlignment"/>
 
         <control:SecondaryTextInput
             x:Name="SurnameInput"
@@ -63,7 +63,7 @@
             Grid.Row="3"
             VerticalAlignment="Center"
             HorizontalContentAlignment="Stretch"
-            d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+            d:LayoutOverrides="HorizontalAlignment"/>
 
         <control:SecondaryTextInput
             x:Name="NameInput"
@@ -72,7 +72,7 @@
             Grid.Row="4"
             VerticalAlignment="Center"
             HorizontalContentAlignment="Stretch"
-            d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+            d:LayoutOverrides="HorizontalAlignment"/>
 
         <control:SecondaryTextInput
             x:Name="EmailInput"
@@ -82,7 +82,7 @@
             Grid.Row="5"
             VerticalAlignment="Center"
             HorizontalContentAlignment="Stretch"
-            d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+            d:LayoutOverrides="HorizontalAlignment"/>
 
         <control:SecondaryTextInput
             x:Name="PasswordInput"
@@ -92,7 +92,7 @@
             MaxLength="31"
             VerticalAlignment="Center"
             HorizontalContentAlignment="Stretch"
-            d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+            d:LayoutOverrides="HorizontalAlignment"/>
 
         <Button
             x:Name="SaveChanges"
