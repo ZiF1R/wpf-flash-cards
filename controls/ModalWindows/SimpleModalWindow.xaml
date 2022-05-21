@@ -7,54 +7,56 @@
              mc:Ignorable="d"
              x:Name="SimpleModalWindowControl"
              d:DesignHeight="450" d:DesignWidth="800">
-    
-    <Grid VerticalAlignment="Stretch"
-          HorizontalAlignment="Stretch">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150*"/>
-            <ColumnDefinition Width="500"/>
-            <ColumnDefinition Width="150*"/>
-        </Grid.ColumnDefinitions>
+
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <Grid VerticalAlignment="Stretch"
+              HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150*"/>
+                <ColumnDefinition Width="500"/>
+                <ColumnDefinition Width="150*"/>
+            </Grid.ColumnDefinitions>
         
-        <Rectangle
-            x:Name="Overlay"
-            Panel.ZIndex="1"
-            MouseUp="Overlay_MouseUp"
-            Fill="Black"
-            Opacity="0.6"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"/>
+            <Rectangle
+                x:Name="Overlay"
+                Panel.ZIndex="1"
+                MouseUp="Overlay_MouseUp"
+                Fill="Black"
+                Opacity="0.6"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"/>
 
-        <Grid VerticalAlignment="Center"
-                HorizontalAlignment="Stretch"
-                Background="{DynamicResource CardBg}"
-                Panel.ZIndex="2"
-                Grid.Column="1">
-            <StackPanel Orientation="Vertical" Margin="25,25,25,20">
-                <TextBlock Foreground="{DynamicResource TextColor}"
-                       Text="{Binding ModalContent, ElementName=SimpleModalWindowControl}"
-                       Padding="0,0,0,45"
-                       FontFamily="Segoe UI Light"
-                       FontSize="20"
-                       TextWrapping="Wrap"/>
+            <Grid VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    Background="{DynamicResource CardBg}"
+                    Panel.ZIndex="2"
+                    Grid.Column="1">
+                <StackPanel Orientation="Vertical" Margin="25,25,25,20">
+                    <TextBlock Foreground="{DynamicResource TextColor}"
+                           Text="{Binding ModalContent, ElementName=SimpleModalWindowControl}"
+                           Padding="0,0,0,45"
+                           FontFamily="Segoe UI Light"
+                           FontSize="20"
+                           TextWrapping="Wrap"/>
 
-                <Grid HorizontalAlignment="Stretch">
-                    <Button
-                        Name="NegativeButton"
-                        Click="NegativeButton_Click"
-                        Style="{StaticResource DangerButton}"
-                        Content="{DynamicResource Remove}"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom"/>
-                    <Button
-                        Name="NeutralButton"
-                        Click="Modal_Close"
-                        Style="{StaticResource PrimaryButton}"
-                        Content="{DynamicResource Cancel}"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Bottom"/>
-                </Grid>
-            </StackPanel>
+                    <Grid HorizontalAlignment="Stretch">
+                        <Button
+                            Name="NegativeButton"
+                            Click="NegativeButton_Click"
+                            Style="{StaticResource DangerButton}"
+                            Content="{DynamicResource Remove}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"/>
+                        <Button
+                            Name="NeutralButton"
+                            Click="Modal_Close"
+                            Style="{StaticResource PrimaryButton}"
+                            Content="{DynamicResource Cancel}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
         </Grid>
-    </Grid>
+    </ScrollViewer>
 </UserControl>

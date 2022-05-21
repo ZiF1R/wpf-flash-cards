@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
     <v:String x:Key="WindowTitle">FlashCards - 暗記するためのカード</v:String>
+    <v:String x:Key="SignIn">サインイン</v:String>
     <v:String x:Key="Login">ログイン</v:String>
     <v:String x:Key="Registration">サインアップ</v:String>
     <v:String x:Key="Registrate">サインアップ</v:String>
@@ -126,11 +127,12 @@
     <v:String x:Key="UserInsertError">データベースでのユーザーの作成中にエラーが発生しました！</v:String>
     <v:String x:Key="UserUpdateError">ユーザーの編集中にエラーが発生しました！</v:String>
     <v:String x:Key="InvalidFileExtension">無効なファイル拡張子！</v:String>
+    <v:String x:Key="ShowExamplesTip">カードの例を表示する</v:String>
 
     <v:String x:Key="PasswordError">パスワードにはスペースを含めることはできません！</v:String>
     <v:String x:Key="EmailSpaceError">メールにはスペースを含めることはできません！</v:String>
     <v:String x:Key="TextBoxNotExist">受信したテキストボックスが存在しません！</v:String>
-    <v:String x:Key="TextBoxError">テキストフィールドには、2つ以上のスペースを連続して含めることはできません。</v:String>
+    <v:String x:Key="TextBoxError">テキストフィールドには、1つ以上のスペースを連続して含めることはできません。</v:String>
     <v:String x:Key="EmptyString">すべてのフィールドに入力する必要があります！</v:String>
     <v:String x:Key="ErrorPattern">テクスト欄フォーマットエラー！ テクスト欄には、アルファベットの記号だけを含めることができます。</v:String>
     <v:String x:Key="ErrorSpecialPattern">ニックネーム欄フォーマットエラー！ ニックネームには、アルファベットの記号、数字、次の文字を含めることができます： -_[]{}()&amp;$=+*^%#,&lt;&gt;;:.!? 。</v:String>

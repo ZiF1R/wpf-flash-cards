@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
     <v:String x:Key="WindowTitle">FlashCards - карточки для запоминания</v:String>
+    <v:String x:Key="SignIn">Авторизация</v:String>
     <v:String x:Key="Login">Авторизоваться</v:String>
     <v:String x:Key="Registration">Регистрация</v:String>
     <v:String x:Key="Registrate">Зарегистрировать</v:String>
@@ -96,7 +97,7 @@
     <v:String x:Key="WrongAnswers">Неправильные ответы</v:String>
     <v:String x:Key="TimePassed">Времени прошло</v:String>
     <v:String x:Key="Finish">Завершить</v:String>
-    <v:String x:Key="card_s">карт(а)</v:String>
+    <v:String x:Key="card_s">карт</v:String>
     <v:String x:Key="Search">Поиск</v:String>
     <v:String x:Key="FolderCreateError">Ошибка создания папки!</v:String>
     <v:String x:Key="FolderInsertError">Ошибка создания папки в базе данных!</v:String>
@@ -125,11 +126,12 @@
     <v:String x:Key="UserLoadingError">Ошибка загрузки пользователя!</v:String>
     <v:String x:Key="UserUpdateError">Ошибка редактирования пользователя!</v:String>
     <v:String x:Key="InvalidFileExtension">Неверное расширение файла!</v:String>
+    <v:String x:Key="ShowExamplesTip">Показать примеры карточки</v:String>
 
     <v:String x:Key="UserInsertError">Ошибка создания пользователя в базе данных!</v:String>
     <v:String x:Key="EmailSpaceError">Email-адрес не может содержать пробелы!</v:String>
     <v:String x:Key="TextBoxNotExist">Полученное текстовое поле не существует!</v:String>
-    <v:String x:Key="TextBoxError">Текстовые поля не могут содержать больше двух пробелов подряд!</v:String>
+    <v:String x:Key="TextBoxError">Текстовые поля не могут содержать больше одного пробела подряд!</v:String>
     <v:String x:Key="EmptyString">Все поля должны быть заполнены!</v:String>
     <v:String x:Key="PasswordError">Пароль не может содержать пробелы!</v:String>
     <v:String x:Key="ErrorPattern">Неверный формат текстового поля! Текстовое поле может содержать только буквенные символы!</v:String>

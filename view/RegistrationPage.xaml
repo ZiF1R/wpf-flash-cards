@@ -9,140 +9,142 @@
       d:DesignHeight="770" d:DesignWidth="1500"
       Background="{DynamicResource MainBg}">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500*" />
-            <ColumnDefinition Width="500" />
-            <ColumnDefinition Width="500*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100*" />
-            <RowDefinition Height="570" />
-            <RowDefinition Height="100*" />
-        </Grid.RowDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="500*" />
+                <ColumnDefinition Width="500" />
+                <ColumnDefinition Width="500*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100*" />
+                <RowDefinition Height="570" />
+                <RowDefinition Height="100*" />
+            </Grid.RowDefinitions>
 
-        <Rectangle
-            x:Name="LoginForm"
-            Grid.Column="1"
-            Grid.Row="1"
-            Fill="{DynamicResource CardBg}"
-            StrokeThickness="0"
-            MinHeight="300"
-            MinWidth="400"
-            VerticalAlignment="Stretch"
-            HorizontalAlignment="Stretch">
-            <Rectangle.Effect>
-                <DropShadowEffect Opacity="0.05" ShadowDepth="10" BlurRadius="10"/>
-            </Rectangle.Effect>
-        </Rectangle>
+            <Rectangle
+                x:Name="LoginForm"
+                Grid.Column="1"
+                Grid.Row="1"
+                Fill="{DynamicResource CardBg}"
+                StrokeThickness="0"
+                MinHeight="300"
+                MinWidth="400"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch">
+                <Rectangle.Effect>
+                    <DropShadowEffect Opacity="0.05" ShadowDepth="10" BlurRadius="10"/>
+                </Rectangle.Effect>
+            </Rectangle>
 
-        <TextBlock
-            x:Name="LoginHeader"
-            Grid.Column="1"
-            Grid.Row="1"
-            Foreground="{DynamicResource TextColor}"
-            Text="{DynamicResource Registration}"
-            FontSize="26"
-            FontFamily="Segoe UI"
-            Margin="30,30,30,30"
-            FontWeight="Normal"/>
+            <TextBlock
+                x:Name="LoginHeader"
+                Grid.Column="1"
+                Grid.Row="1"
+                Foreground="{DynamicResource TextColor}"
+                Text="{DynamicResource Registration}"
+                FontSize="26"
+                FontFamily="Segoe UI"
+                Margin="30,30,30,30"
+                FontWeight="Normal"/>
 
-        <!-- Nickname input -->
-        <control:CustomTextBox
-            x:Name="NicknameInput"
-            Placeholder="{DynamicResource Nickname}"
-            Grid.Column="1"
-            Grid.Row="1"
-            Margin="30,100,30,0"
-            Padding="0,5,0,5"
-            d:LayoutOverrides="HorizontalAlignment"
-            VerticalAlignment="Top"
-            HorizontalContentAlignment="Stretch"/>
+            <!-- Nickname input -->
+            <control:CustomTextBox
+                x:Name="NicknameInput"
+                Placeholder="{DynamicResource Nickname}"
+                Grid.Column="1"
+                Grid.Row="1"
+                Margin="30,100,30,0"
+                Padding="0,5,0,5"
+                d:LayoutOverrides="HorizontalAlignment"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Stretch"/>
 
-        <!-- Last name input -->
-        <control:CustomTextBox
-            x:Name="SurnameInput"
-            Placeholder="{DynamicResource LastName}"
-            Grid.Column="1"
-            Grid.Row="1"
-            Margin="30,155,30,0"
-            Padding="0,5,0,5"
-            d:LayoutOverrides="HorizontalAlignment"
-            VerticalAlignment="Top"
-            HorizontalContentAlignment="Stretch"/>
+            <!-- Last name input -->
+            <control:CustomTextBox
+                x:Name="SurnameInput"
+                Placeholder="{DynamicResource LastName}"
+                Grid.Column="1"
+                Grid.Row="1"
+                Margin="30,155,30,0"
+                Padding="0,5,0,5"
+                d:LayoutOverrides="HorizontalAlignment"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Stretch"/>
 
-        <!-- Name input -->
-        <control:CustomTextBox
-            x:Name="NameInput"
-            Placeholder="{DynamicResource Name}"
-            Grid.Column="1"
-            Grid.Row="1"
-            Margin="30,210,30,0"
-            Padding="0,5,0,5"
-            d:LayoutOverrides="HorizontalAlignment"
-            VerticalAlignment="Top"
-            HorizontalContentAlignment="Stretch"/>
+            <!-- Name input -->
+            <control:CustomTextBox
+                x:Name="NameInput"
+                Placeholder="{DynamicResource Name}"
+                Grid.Column="1"
+                Grid.Row="1"
+                Margin="30,210,30,0"
+                Padding="0,5,0,5"
+                d:LayoutOverrides="HorizontalAlignment"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Stretch"/>
 
-        <!-- Email input -->
-        <control:CustomTextBox
-            x:Name="EmailInput"
-            Placeholder="{DynamicResource Email}"
-            Grid.Column="1"
-            Grid.Row="1"
-            Margin="30,265,30,0"
-            Padding="0,5,0,5"
-            d:LayoutOverrides="HorizontalAlignment"
-            VerticalAlignment="Top"
-            HorizontalContentAlignment="Stretch"/>
+            <!-- Email input -->
+            <control:CustomTextBox
+                x:Name="EmailInput"
+                Placeholder="{DynamicResource Email}"
+                Grid.Column="1"
+                Grid.Row="1"
+                Margin="30,265,30,0"
+                Padding="0,5,0,5"
+                d:LayoutOverrides="HorizontalAlignment"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Stretch"/>
 
-        <!-- Password input -->
-        <control:CustomPasswordBox
-            x:Name="PasswordInput"
-            Placeholder="{DynamicResource Password}"
-            Grid.Column="1"
-            Grid.Row="1"
-            Margin="30,320,30,0"
-            Padding="0,5,0,5"
-            d:LayoutOverrides="HorizontalAlignment"
-            VerticalAlignment="Top"
-            HorizontalContentAlignment="Stretch"/>
+            <!-- Password input -->
+            <control:CustomPasswordBox
+                x:Name="PasswordInput"
+                Placeholder="{DynamicResource Password}"
+                Grid.Column="1"
+                Grid.Row="1"
+                Margin="30,320,30,0"
+                Padding="0,5,0,5"
+                d:LayoutOverrides="HorizontalAlignment"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Stretch"/>
 
-        <!-- Confirm password input -->
-        <control:CustomPasswordBox
-            x:Name="ConfirmPasswordInput"
-            Placeholder="{DynamicResource ConfirmPassword}"
-            Grid.Column="1"
-            Grid.Row="1"
-            Margin="30,375,30,0"
-            Padding="0,5,0,5"
-            d:LayoutOverrides="HorizontalAlignment"
-            VerticalAlignment="Top"
-            HorizontalContentAlignment="Stretch"/>
+            <!-- Confirm password input -->
+            <control:CustomPasswordBox
+                x:Name="ConfirmPasswordInput"
+                Placeholder="{DynamicResource ConfirmPassword}"
+                Grid.Column="1"
+                Grid.Row="1"
+                Margin="30,375,30,0"
+                Padding="0,5,0,5"
+                d:LayoutOverrides="HorizontalAlignment"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Stretch"/>
 
-        <TextBlock
-            x:Name="GoToLogin"
-            Grid.Column="1"
-            Grid.Row="1"
-            FontSize="16"
-            FontFamily="Segoe UI Light"
-            Cursor="Hand"
-            TextDecorations="Underline"
-            Margin="30,425,30,0"
-            Foreground="{DynamicResource TextColor}"
-            Text="{DynamicResource HaveAlreadyAccount}"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            MouseUp="GoToLogin_MouseUp"/>
+            <TextBlock
+                x:Name="GoToLogin"
+                Grid.Column="1"
+                Grid.Row="1"
+                FontSize="16"
+                FontFamily="Segoe UI Light"
+                Cursor="Hand"
+                TextDecorations="Underline"
+                Margin="30,425,30,0"
+                Foreground="{DynamicResource TextColor}"
+                Text="{DynamicResource HaveAlreadyAccount}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                MouseUp="GoToLogin_MouseUp"/>
 
-        <Button
-            Style="{StaticResource PrimaryButton}"
-            Grid.Column="1"
-            Grid.Row="1"
-            Margin="30,0,0,30"
-            Content="{DynamicResource Registrate}"
-            Foreground="White"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Click="Registrate_Click"/>
-    </Grid>
+            <Button
+                Style="{StaticResource PrimaryButton}"
+                Grid.Column="1"
+                Grid.Row="1"
+                Margin="30,0,0,30"
+                Content="{DynamicResource Registrate}"
+                Foreground="White"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="Registrate_Click"/>
+        </Grid>
+    </ScrollViewer>
 </Page>

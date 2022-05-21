@@ -7,108 +7,110 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid VerticalAlignment="Stretch"
-          HorizontalAlignment="Stretch">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150*"/>
-            <ColumnDefinition Width="450"/>
-            <ColumnDefinition Width="150*"/>
-        </Grid.ColumnDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <Grid VerticalAlignment="Stretch"
+              HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150*"/>
+                <ColumnDefinition Width="450"/>
+                <ColumnDefinition Width="150*"/>
+            </Grid.ColumnDefinitions>
 
-        <Rectangle
-            x:Name="Overlay"
-            Panel.ZIndex="1"
-            Fill="Black"
-            Opacity="0.6"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"/>
+            <Rectangle
+                x:Name="Overlay"
+                Panel.ZIndex="1"
+                Fill="Black"
+                Opacity="0.6"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"/>
 
-        <Grid VerticalAlignment="Center"
-                HorizontalAlignment="Stretch"
-                Background="{DynamicResource CardBg}"
-                Panel.ZIndex="2"
-                Grid.Column="1">
-            <StackPanel Name="ReviewResultsForm" Orientation="Vertical" Margin="25">
-                <TextBlock
-                    Foreground="{DynamicResource TextColor}"
-                    FontFamily="Segoe UI Light"
-                    FontSize="26"
-                    TextAlignment="Left"
-                    Margin="0,0,0,30"
-                    Text="{DynamicResource Results}"/>
+            <Grid VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    Background="{DynamicResource CardBg}"
+                    Panel.ZIndex="2"
+                    Grid.Column="1">
+                <StackPanel Name="ReviewResultsForm" Orientation="Vertical" Margin="25">
+                    <TextBlock
+                        Foreground="{DynamicResource TextColor}"
+                        FontFamily="Segoe UI Light"
+                        FontSize="26"
+                        TextAlignment="Left"
+                        Margin="0,0,0,30"
+                        Text="{DynamicResource Results}"/>
 
-                <Grid HorizontalAlignment="Stretch">
-                    <TextBlock
-                        Foreground="{DynamicResource TextColor}"
-                        FontFamily="Segoe UI Light"
-                        FontSize="18"
-                        Text="{DynamicResource TotalCards}"/>
-                    <TextBlock
-                        HorizontalAlignment="Right"
-                        Foreground="{DynamicResource TextColor}"
-                        FontFamily="Segoe UI Light"
-                        FontSize="18">
-                        <TextBlock Name="TotalCards"/>
-                    <TextBlock Text="{DynamicResource card_s}"/>
-                </TextBlock>
-                </Grid>
+                    <Grid HorizontalAlignment="Stretch">
+                        <TextBlock
+                            Foreground="{DynamicResource TextColor}"
+                            FontFamily="Segoe UI Light"
+                            FontSize="18"
+                            Text="{DynamicResource TotalCards}"/>
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            Foreground="{DynamicResource TextColor}"
+                            FontFamily="Segoe UI Light"
+                            FontSize="18">
+                            <TextBlock Name="TotalCards"/>
+                        <TextBlock Text="{DynamicResource card_s}"/>
+                    </TextBlock>
+                    </Grid>
 
-                <Grid HorizontalAlignment="Stretch" Margin="0,5,0,0">
-                    <TextBlock
-                        Foreground="{DynamicResource TextColor}"
-                        FontFamily="Segoe UI Light"
-                        FontSize="18"
-                        Text="{DynamicResource RightAnswers}"/>
-                    <TextBlock
-                        HorizontalAlignment="Right"
-                        Foreground="{DynamicResource TextColor}"
-                        FontFamily="Segoe UI Light"
-                        FontSize="18">
-                        <TextBlock Name="RightAnswers"/>
-                    <TextBlock Text="{DynamicResource card_s}"/>
-                </TextBlock>
-                </Grid>
+                    <Grid HorizontalAlignment="Stretch" Margin="0,5,0,0">
+                        <TextBlock
+                            Foreground="{DynamicResource TextColor}"
+                            FontFamily="Segoe UI Light"
+                            FontSize="18"
+                            Text="{DynamicResource RightAnswers}"/>
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            Foreground="{DynamicResource TextColor}"
+                            FontFamily="Segoe UI Light"
+                            FontSize="18">
+                            <TextBlock Name="RightAnswers"/>
+                        <TextBlock Text="{DynamicResource card_s}"/>
+                    </TextBlock>
+                    </Grid>
 
-                <Grid HorizontalAlignment="Stretch" Margin="0,5,0,0">
-                    <TextBlock
-                        Foreground="{DynamicResource TextColor}"
-                        FontFamily="Segoe UI Light"
-                        FontSize="18"
-                        Text="{DynamicResource WrongAnswers}"/>
-                    <TextBlock
-                        HorizontalAlignment="Right"
-                        Foreground="{DynamicResource TextColor}"
-                        FontFamily="Segoe UI Light"
-                        FontSize="18">
-                        <TextBlock Name="WrongAnswers"/>
-                    <TextBlock Text="{DynamicResource card_s}"/>
-                </TextBlock>
-                </Grid>
+                    <Grid HorizontalAlignment="Stretch" Margin="0,5,0,0">
+                        <TextBlock
+                            Foreground="{DynamicResource TextColor}"
+                            FontFamily="Segoe UI Light"
+                            FontSize="18"
+                            Text="{DynamicResource WrongAnswers}"/>
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            Foreground="{DynamicResource TextColor}"
+                            FontFamily="Segoe UI Light"
+                            FontSize="18">
+                            <TextBlock Name="WrongAnswers"/>
+                        <TextBlock Text="{DynamicResource card_s}"/>
+                    </TextBlock>
+                    </Grid>
 
-                <Grid HorizontalAlignment="Stretch" Margin="0,5,0,0">
-                    <TextBlock
-                        Foreground="{DynamicResource TextColor}"
-                        FontFamily="Segoe UI Light"
-                        FontSize="18"
-                        Text="{DynamicResource TimePassed}"/>
-                    <TextBlock
-                        Name="TimePassed"
-                        HorizontalAlignment="Right"
-                        Foreground="{DynamicResource TextColor}"
-                        FontFamily="Segoe UI Light"
-                        FontSize="18"/>
-                </Grid>
+                    <Grid HorizontalAlignment="Stretch" Margin="0,5,0,0">
+                        <TextBlock
+                            Foreground="{DynamicResource TextColor}"
+                            FontFamily="Segoe UI Light"
+                            FontSize="18"
+                            Text="{DynamicResource TimePassed}"/>
+                        <TextBlock
+                            Name="TimePassed"
+                            HorizontalAlignment="Right"
+                            Foreground="{DynamicResource TextColor}"
+                            FontFamily="Segoe UI Light"
+                            FontSize="18"/>
+                    </Grid>
 
-                <Grid HorizontalAlignment="Stretch" Margin="0,70,0,0">
-                    <Button
-                        Name="FinishReviewButton"
-                        Click="FinishReviewButton_Click"
-                        Style="{StaticResource PrimaryButton}"
-                        Content="{DynamicResource Finish}"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom"/>
-                </Grid>
-            </StackPanel>
+                    <Grid HorizontalAlignment="Stretch" Margin="0,70,0,0">
+                        <Button
+                            Name="FinishReviewButton"
+                            Click="FinishReviewButton_Click"
+                            Style="{StaticResource PrimaryButton}"
+                            Content="{DynamicResource Finish}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
         </Grid>
-    </Grid>
+    </ScrollViewer>
 </UserControl>

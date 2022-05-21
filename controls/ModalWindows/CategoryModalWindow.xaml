@@ -7,64 +7,66 @@
              mc:Ignorable="d"
              Name="CategoryModalWindowControl"
              d:DesignHeight="450" d:DesignWidth="800">
-    
-    <Grid VerticalAlignment="Stretch"
-          HorizontalAlignment="Stretch">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150*"/>
-            <ColumnDefinition Width="500"/>
-            <ColumnDefinition Width="150*"/>
-        </Grid.ColumnDefinitions>
 
-        <Rectangle
-            x:Name="Overlay"
-            Panel.ZIndex="1"
-            MouseUp="Overlay_MouseUp"
-            Fill="Black"
-            Opacity="0.6"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"/>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <Grid VerticalAlignment="Stretch"
+              HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150*"/>
+                <ColumnDefinition Width="500"/>
+                <ColumnDefinition Width="150*"/>
+            </Grid.ColumnDefinitions>
 
-        <Grid VerticalAlignment="Center"
-                HorizontalAlignment="Stretch"
-                Background="{DynamicResource CardBg}"
-                Panel.ZIndex="2"
-                Grid.Column="1">
-            <StackPanel Orientation="Vertical" Margin="25,25,25,20">
-                <TextBlock Foreground="{DynamicResource TextColor}"
-                       Text="{DynamicResource CreateCategory}"
-                       Padding="0,0,0,30"
-                       FontFamily="Segoe UI Light"
-                       FontSize="26"
-                       TextWrapping="Wrap"/>
+            <Rectangle
+                x:Name="Overlay"
+                Panel.ZIndex="1"
+                MouseUp="Overlay_MouseUp"
+                Fill="Black"
+                Opacity="0.6"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"/>
 
-                <control:CustomTextBox
-                    x:Name="CategoryNameTextBox"
-                    Padding="0,5,0,5"
-                    Placeholder="{DynamicResource CategoryName}"/>
+            <Grid VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    Background="{DynamicResource CardBg}"
+                    Panel.ZIndex="2"
+                    Grid.Column="1">
+                <StackPanel Orientation="Vertical" Margin="25,25,25,20">
+                    <TextBlock Foreground="{DynamicResource TextColor}"
+                           Text="{DynamicResource CreateCategory}"
+                           Padding="0,0,0,30"
+                           FontFamily="Segoe UI Light"
+                           FontSize="26"
+                           TextWrapping="Wrap"/>
 
-                <Label
-                    Name="CategoryAlreadyUsed"
-                    Content="{DynamicResource CategoryAlreadyUsed}"
-                    Foreground="Tomato"
-                    Visibility="Hidden"/>
+                    <control:CustomTextBox
+                        x:Name="CategoryNameTextBox"
+                        Padding="0,5,0,5"
+                        Placeholder="{DynamicResource CategoryName}"/>
 
-                <Grid HorizontalAlignment="Stretch" Margin="0,80,0,0">
-                    <Button
-                        Name="ActionButton"
-                        Click="ActionButton_Click"
-                        Style="{StaticResource PrimaryButton}"
-                        Content="{DynamicResource Create}"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom"/>
-                    <Button
-                        Click="Modal_Close"
-                        Style="{StaticResource DangerButton}"
-                        Content="{DynamicResource Cancel}"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Bottom"/>
-                </Grid>
-            </StackPanel>
+                    <Label
+                        Name="CategoryAlreadyUsed"
+                        Content="{DynamicResource CategoryAlreadyUsed}"
+                        Foreground="Tomato"
+                        Visibility="Hidden"/>
+
+                    <Grid HorizontalAlignment="Stretch" Margin="0,80,0,0">
+                        <Button
+                            Name="ActionButton"
+                            Click="ActionButton_Click"
+                            Style="{StaticResource PrimaryButton}"
+                            Content="{DynamicResource Create}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"/>
+                        <Button
+                            Click="Modal_Close"
+                            Style="{StaticResource DangerButton}"
+                            Content="{DynamicResource Cancel}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
         </Grid>
-    </Grid>
+    </ScrollViewer>
 </UserControl>

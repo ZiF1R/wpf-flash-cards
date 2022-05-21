@@ -85,11 +85,14 @@ namespace course_project1
         {
             SqlConnectionStringBuilder connectionStringBuilder = new SqlConnectionStringBuilder();
 
+            string bufData = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             connectionStringBuilder.DataSource = @"DESKTOP-LT1S3LJ\ZIF1R";
             connectionStringBuilder.InitialCatalog = "FlashCards";
             connectionStringBuilder.UserID = @"DESKTOP-LT1S3LJ\HP";
             connectionStringBuilder.IntegratedSecurity = true;
             connectionStringBuilder.Password = "";
+
+            //Connection = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={bufData}\KinoPad.mdf;Integrated Security=True;Pooling=false; Connect Timeout=30;";
 
             this.ConnectionString = connectionStringBuilder.ConnectionString;
 

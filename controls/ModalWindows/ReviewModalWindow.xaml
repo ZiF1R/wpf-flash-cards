@@ -7,96 +7,125 @@
              mc:Ignorable="d" 
              Name="ReviewModalWindowControl"
              d:DesignHeight="450" d:DesignWidth="800">
-    
-    <Grid VerticalAlignment="Stretch"
-          HorizontalAlignment="Stretch">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150*"/>
-            <ColumnDefinition Width="450"/>
-            <ColumnDefinition Width="150*"/>
-        </Grid.ColumnDefinitions>
 
-        <Rectangle
-            x:Name="Overlay"
-            Panel.ZIndex="1"
-            Fill="Black"
-            Opacity="0.6"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"/>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <Grid VerticalAlignment="Stretch"
+              HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150*"/>
+                <ColumnDefinition Width="450"/>
+                <ColumnDefinition Width="150*"/>
+            </Grid.ColumnDefinitions>
 
-        <Grid VerticalAlignment="Center"
-                HorizontalAlignment="Stretch"
-                Background="{DynamicResource CardBg}"
-                Panel.ZIndex="2"
-                Grid.Column="1">
-            <Image
-                Name="CloseReviewButton"
-                MouseUp="CloseReviewButton_MouseUp"
-                Source="{DynamicResource ExitIcon}"
-                Cursor="Hand"
-                Panel.ZIndex="2"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Margin="0,10,10,0"
-                Width="30"
-                Height="30"/>
-            <StackPanel Name="ReviewForm" Orientation="Vertical" Margin="25">
-                <TextBlock
-                    TextAlignment="Center"
-                    Foreground="{DynamicResource TextColorOpacity}"
-                    FontFamily="Segoe UI Light"
-                    FontSize="16">
-                    <TextBlock x:Name="CurrentCardNumber"/>
-                    <TextBlock Text="{DynamicResource of}"/>
-                    <TextBlock x:Name="AllCardsNumber"/>
-                    <TextBlock Text="{DynamicResource cards}"/>
-                </TextBlock>
+            <Rectangle
+                x:Name="Overlay"
+                Panel.ZIndex="1"
+                Fill="Black"
+                Opacity="0.6"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"/>
 
-                <TextBlock
-                    x:Name="CurrentCardTerm"
-                    TextAlignment="Center"
-                    VerticalAlignment="Center"
-                    Foreground="{DynamicResource TextColor}"
-                    Padding="0,0,0,35"
-                    FontFamily="Segoe UI"
-                    FontSize="20"
-                    TextWrapping="Wrap" Height="30"/>
+            <Grid VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    Background="{DynamicResource CardBg}"
+                    Panel.ZIndex="2"
+                    Grid.Column="1">
+            
+                <Image
+                    Name="CloseReviewButton"
+                    MouseUp="CloseReviewButton_MouseUp"
+                    Source="{DynamicResource ExitIcon}"
+                    Cursor="Hand"
+                    Panel.ZIndex="2"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="0,10,10,0"
+                    Width="30"
+                    Height="30"/>
 
-                <TextBlock
-                    x:Name="CurrentCardAnswer"
+                <Image
+                    Name="ShowExamplesButton"
+                    MouseUp="ShowExamplesButton_MouseUp"
+                    Source="/icons/review/eye.png"
+                    ToolTip="{DynamicResource ShowExamplesTip}"
+                    Cursor="Hand"
                     Visibility="Hidden"
-                    TextAlignment="Center"
-                    VerticalAlignment="Center"
-                    Foreground="{DynamicResource TextColor}"
-                    Padding="0,0,0,35"
-                    FontFamily="Segoe UI Light"
-                    FontSize="16"
-                    TextWrapping="Wrap" Height="25"/>
+                    Panel.ZIndex="2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="20,20,0,0"
+                    Width="20"
+                    Height="20"/>
 
-                <control:CustomTextBox
-                    x:Name="AnswerInput"
-                    Padding="0,5,0,5"
-                    Placeholder="{DynamicResource Answer}"/>
+                <StackPanel Name="ReviewForm" Orientation="Vertical" Margin="25">
+                    <TextBlock
+                        TextAlignment="Center"
+                        Foreground="{DynamicResource TextColorOpacity}"
+                        FontFamily="Segoe UI Light"
+                        FontSize="16">
+                        <TextBlock x:Name="CurrentCardNumber"/>
+                        <TextBlock Text="{DynamicResource of}"/>
+                        <TextBlock x:Name="AllCardsNumber"/>
+                        <TextBlock Text="{DynamicResource cards}"/>
+                    </TextBlock>
 
-                <Label Name="AnswerCompareResult"/>
+                    <TextBlock
+                        x:Name="CurrentCardTerm"
+                        TextAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="{DynamicResource TextColor}"
+                        FontFamily="Segoe UI"
+                        TextWrapping="Wrap"
+                        FontSize="20"/>
 
-                <Grid HorizontalAlignment="Stretch" Margin="0,100,0,0">
-                    <Button
-                        Name="ShowAnswer"
-                        Click="ShowAnswer_Click"
-                        Style="{StaticResource PrimaryButton}"
-                        Content="{DynamicResource ShowAnswer}"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom"/>
-                    <Button
-                        Name="SubmitButton"
-                        Click="SubmitButton_Click"
-                        Style="{StaticResource PrimaryButton}"
-                        Content="{DynamicResource Submit}"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Bottom"/>
-                </Grid>
-            </StackPanel>
+                    <TextBlock
+                        x:Name="CurrentCardAnswer"
+                        Visibility="Collapsed"
+                        TextAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="{DynamicResource TextColor}"
+                        FontFamily="Segoe UI Light"
+                        FontSize="16"
+                        TextWrapping="Wrap"/>
+
+                    <TextBlock
+                        x:Name="CurrentCardExamples"
+                        TextAlignment="Center"
+                        Margin="0,5,0,0"
+                        Visibility="Collapsed"
+                        VerticalAlignment="Center"
+                        Foreground="{DynamicResource TextColor}"
+                        FontFamily="Segoe UI Light"
+                        FontSize="14"
+                        FontStyle="Oblique"
+                        TextWrapping="Wrap"/>
+
+                    <control:CustomTextBox
+                        x:Name="AnswerInput"
+                        Margin="0,35,0,0"
+                        Padding="0,5,0,5"
+                        Placeholder="{DynamicResource Answer}"/>
+
+                    <Label Name="AnswerCompareResult"/>
+
+                    <Grid HorizontalAlignment="Stretch" Margin="0,100,0,0">
+                        <Button
+                            Name="ShowAnswer"
+                            Click="ShowAnswer_Click"
+                            Style="{StaticResource PrimaryButton}"
+                            Content="{DynamicResource ShowAnswer}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"/>
+                        <Button
+                            Name="SubmitButton"
+                            Click="SubmitButton_Click"
+                            Style="{StaticResource PrimaryButton}"
+                            Content="{DynamicResource Submit}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
         </Grid>
-    </Grid>
+    </ScrollViewer>
 </UserControl>

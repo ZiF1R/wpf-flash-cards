@@ -29,9 +29,9 @@ namespace course_project1.controls.ModalWindows
         private Review Review;
         private int RootFolderId;
         private bool isSubmitted = false;
+        string ConnectionString;
         private DispatcherTimer TimerToAnswer;
         private int CurrentTime = 0;
-        string ConnectionString;
 
         public (int totalCards, int rightAnswers, int wrongAnswers, string timePassed)? reviewResults = null;
 
@@ -89,7 +89,7 @@ namespace course_project1.controls.ModalWindows
             isSubmitted = false;
 
             AnswerCompareResult.Visibility = Visibility.Hidden;
-            CurrentCardAnswer.Visibility = Visibility.Hidden;
+            CurrentCardAnswer.Visibility = Visibility.Collapsed;
             ShowAnswer.Visibility = Visibility.Visible;
             ShowAnswer.SetResourceReference(Button.ContentProperty, "ShowAnswer");
             SubmitButton.SetResourceReference(Button.ContentProperty, "Submit");
@@ -107,15 +107,33 @@ namespace course_project1.controls.ModalWindows
                 CurrentCardTerm.Text = currentCard.Term;
                 CurrentCardAnswer.Text = currentCard.Translation;
             }
+
+            CurrentCardExamples.Text = currentCard.Examples;
+
             CurrentTime = 0;
             TimerToAnswer.Start();
+
+            if (currentCard.Examples == "")
+                ShowExamplesButton.Visibility = Visibility.Hidden;
+            else
+                ShowExamplesButton.Visibility = Visibility.Visible;
+
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            image.UriSource = new Uri("pack://application:,,,/icons/review/eye.png", UriKind.RelativeOrAbsolute);
+            image.EndInit();
+
+            CurrentCardExamples.Visibility = Visibility.Collapsed;
+            ShowExamplesButton.Source = image;
         }
 
         private void ShowAnswer_Click(object sender, RoutedEventArgs e)
         {
             if (CurrentCardAnswer.Visibility == Visibility.Visible)
             {
-                CurrentCardAnswer.Visibility = Visibility.Hidden;
+                CurrentCardAnswer.Visibility = Visibility.Collapsed;
                 ShowAnswer.SetResourceReference(Button.ContentProperty, "ShowAnswer");
             }
             else
@@ -194,6 +212,27 @@ namespace course_project1.controls.ModalWindows
                 MainPageGrid.Children.Remove(modal);
                 RaiseEvent(new RoutedEventArgs(CloseReviewEvent));
             };
+        }
+
+        private void ShowExamplesButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            if (CurrentCardExamples.Visibility == Visibility.Collapsed)
+            {
+                image.UriSource = new Uri("pack://application:,,,/icons/review/invisible.png", UriKind.RelativeOrAbsolute);
+                CurrentCardExamples.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                image.UriSource = new Uri("pack://application:,,,/icons/review/eye.png", UriKind.RelativeOrAbsolute);
+                CurrentCardExamples.Visibility = Visibility.Collapsed;
+            }
+
+            image.EndInit();
+            ShowExamplesButton.Source = image;
         }
     }
 }

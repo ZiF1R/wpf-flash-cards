@@ -136,8 +136,13 @@ namespace course_project1.controls.ModalWindows
             string[] answers = new string[] { };
 
             Card[] answersDeck = 
-                this.Deck.Where(card => card != currentCard).Where((card, index) => index < count - 1).ToArray();
-            answersDeck = ShuffleDeck(answersDeck.Append(CurrentCard).ToArray());
+                this.Deck
+                    .Where(card => card != currentCard)
+                    .Where((card, index) => index < count - 1)
+                    .Append(CurrentCard)
+                    .ToArray();
+
+            answersDeck = ShuffleDeck(answersDeck);
 
             foreach (Card card in answersDeck)
             {

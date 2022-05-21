@@ -16,7 +16,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
-            <RowDefinition MinHeight="500" Height="750*" />
+            <RowDefinition Height="750*" />
         </Grid.RowDefinitions>
 
         <Rectangle

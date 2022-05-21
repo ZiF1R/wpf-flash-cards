@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
     <v:String x:Key="WindowTitle">FlashCards - cards for memorizing</v:String>
+    <v:String x:Key="SignIn">Sign in</v:String>
     <v:String x:Key="Login">Login</v:String>
     <v:String x:Key="Registration">Registration</v:String>
     <v:String x:Key="Registrate">Registrate</v:String>
@@ -96,7 +97,7 @@
     <v:String x:Key="WrongAnswers">Wrong answers</v:String>
     <v:String x:Key="TimePassed">Time passed</v:String>
     <v:String x:Key="Finish">Finish</v:String>
-    <v:String x:Key="card_s">card(s)</v:String>
+    <v:String x:Key="card_s">card</v:String>
     <v:String x:Key="Search">Search</v:String>
     <v:String x:Key="FolderCreateError">Folder control creation error!</v:String>
     <v:String x:Key="FolderInsertError">Folder insert error!</v:String>
@@ -126,10 +127,11 @@
     <v:String x:Key="UserInsertError">User insert error!</v:String>
     <v:String x:Key="UserUpdateError">User update error!</v:String>
     <v:String x:Key="InvalidFileExtension">Invalid file extension!</v:String>
+    <v:String x:Key="ShowExamplesTip">Show card examples</v:String>
     
     <v:String x:Key="TextBoxNotExist">Received textbox not exist!</v:String>
     <v:String x:Key="EmailSpaceError">Email cannot contain spaces!</v:String>
-    <v:String x:Key="TextBoxError">Text fields cannot contain more than two spaces in a row!</v:String>
+    <v:String x:Key="TextBoxError">Text fields cannot contain more than one space in a row!</v:String>
     <v:String x:Key="EmptyString">All fields must be filled!</v:String>
     <v:String x:Key="PasswordError">Password cannot contain spaces!</v:String>
     <v:String x:Key="ErrorPattern">Invalid textbox format! The textbox can contain only alphabetic symbols!</v:String>

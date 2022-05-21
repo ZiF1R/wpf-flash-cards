@@ -29,6 +29,8 @@ namespace course_project1.controls.ModalWindows
         private int RootFolderId;
         private bool isSubmitted = false;
         string ConnectionString;
+        private DispatcherTimer TimerToAnswer;
+        private int CurrentTime = 0;
 
         public (int totalCards, int rightAnswers, int wrongAnswers, string timePassed)? reviewResults = null;
 
@@ -44,7 +46,25 @@ namespace course_project1.controls.ModalWindows
             Review = new Review(cards);
             Card[] deck = Review.Init(Storage.settings.ReviewCardsLimit);
             AllCardsNumber.Text = deck.Length.ToString();
+
+            TimerToAnswer = new DispatcherTimer();
+            TimerToAnswer.Interval = new TimeSpan(0, 0, 1);
+
+            if (Storage.settings.ReviewTimeLimit != 0)
+                TimerToAnswer.Tick += new EventHandler(Timer_tick);
+
             NextCard();
+        }
+
+        private void Timer_tick(object sender, EventArgs e)
+        {
+            CurrentTime++;
+
+            if (CurrentTime >= Storage.settings.ReviewTimeLimit)
+            {
+                TimerToAnswer.Stop();
+                SubmitAction();
+            }
         }
 
         private void NextCard()
@@ -75,6 +95,8 @@ namespace course_project1.controls.ModalWindows
                 CurrentCardTerm.Text = currentCard.Term;
             }
 
+            CurrentCardExamples.Text = currentCard.Examples;
+
             AnswerCompareResult.Visibility = Visibility.Hidden;
             SubmitButton.Style = (Style)SubmitButton.FindResource("PrimaryButton");
             SubmitButton.SetResourceReference(Button.ContentProperty, "Submit");
@@ -90,6 +112,24 @@ namespace course_project1.controls.ModalWindows
 
             AnswersListBox.SelectedIndex = 0;
             AnswersListBox.IsEnabled = true;
+
+            CurrentTime = 0;
+            TimerToAnswer.Start();
+
+            if (currentCard.Examples == "")
+                ShowExamplesButton.Visibility = Visibility.Hidden;
+            else
+                ShowExamplesButton.Visibility = Visibility.Visible;
+
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            image.UriSource = new Uri("pack://application:,,,/icons/review/eye.png", UriKind.RelativeOrAbsolute);
+            image.EndInit();
+
+            CurrentCardExamples.Visibility = Visibility.Collapsed;
+            ShowExamplesButton.Source = image;
         }
 
         public static readonly RoutedEvent CloseReviewEvent
@@ -103,6 +143,7 @@ namespace course_project1.controls.ModalWindows
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
+            TimerToAnswer.Stop();
             if (isSubmitted)
                 NextCard();
             else
@@ -153,18 +194,46 @@ namespace course_project1.controls.ModalWindows
 
         private void CloseReviewButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            TimerToAnswer.Stop();
+
             SimpleModalWindow modal = new SimpleModalWindow(true);
             modal.SetValue(Grid.RowSpanProperty, 2);
             modal.SetValue(Grid.ColumnSpanProperty, 3);
             modal.SetResourceReference(SimpleModalWindow.ModalContentProperty, "CloseReview");
 
             MainPageGrid.Children.Add(modal);
-            modal.CloseModal += (object se, RoutedEventArgs evn) => MainPageGrid.Children.Remove(modal);
+            modal.CloseModal += (object se, RoutedEventArgs evn) =>
+            {
+                MainPageGrid.Children.Remove(modal);
+                TimerToAnswer.Start();
+            };
             modal.NegativeButtonClick += (object se, RoutedEventArgs evn) =>
             {
+                TimerToAnswer.Stop();
                 MainPageGrid.Children.Remove(modal);
                 RaiseEvent(new RoutedEventArgs(CloseReviewEvent));
             };
+        }
+
+        private void ShowExamplesButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            if (CurrentCardExamples.Visibility == Visibility.Collapsed)
+            {
+                image.UriSource = new Uri("pack://application:,,,/icons/review/invisible.png", UriKind.RelativeOrAbsolute);
+                CurrentCardExamples.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                image.UriSource = new Uri("pack://application:,,,/icons/review/eye.png", UriKind.RelativeOrAbsolute);
+                CurrentCardExamples.Visibility = Visibility.Collapsed;
+            }
+
+            image.EndInit();
+            ShowExamplesButton.Source = image;
         }
     }
 }
