@@ -28,18 +28,17 @@ namespace course_project1.view
         string ConnectionString;
         Frame SecondFrame;
         Grid MainPageGrid;
-        bool IsForExportImport;
         Folder[] filteredFolders;
+        bool isModalOpened = false;
 
         FolderControl.Action action;
 
         public FoldersPage(
             Grid mainPageGrid, Frame secondFrame,
-            string connectionString, DataStorage storage, bool isForExportImport = false,
+            string connectionString, DataStorage storage,
             FolderControl.Action action = FolderControl.Action.None)
         {
             this.action = action;
-            IsForExportImport = isForExportImport;
             ConnectionString = connectionString;
             Storage = storage;
             MainPageGrid = mainPageGrid;
@@ -64,12 +63,14 @@ namespace course_project1.view
             FolderControl folderControl = null;
             try
             {
-                folderControl = new FolderControl(MainPageGrid, folder, Storage, ConnectionString, IsForExportImport, action);
+                folderControl = new FolderControl(MainPageGrid, folder, Storage, ConnectionString, action);
                 folderControl.Margin = new Thickness(0, 0, 40, 40);
                 folderControl.VerticalAlignment = VerticalAlignment.Top;
 
                 folderControl.EditFolder += (object s, RoutedEventArgs ev) =>
                 {
+                    if (isModalOpened) return;
+
                     FolderModalWindow modal = new FolderModalWindow(
                         MainPageGrid, ConnectionString, Storage, folderControl.FolderNameField.Text, folderControl.FolderCategoryField.Text);
                     modal.SetValue(Grid.RowSpanProperty, 2);
@@ -77,6 +78,7 @@ namespace course_project1.view
                     modal.SetResourceReference(FolderModalWindow.ModalHeaderProperty, "EditFolder");
                     modal.SetResourceReference(FolderModalWindow.ActionButtonContentProperty, "Edit");
                     MainPageGrid.Children.Add(modal);
+                    isModalOpened = true;
 
                     modal.FolderAction += (object se, RoutedEventArgs evn) =>
                     {
@@ -88,6 +90,7 @@ namespace course_project1.view
                     modal.CloseFolderModal += (object se, RoutedEventArgs evn) =>
                     {
                         MainPageGrid.Children.Remove(modal);
+                        isModalOpened = false;
 
                         if (Storage.categories.Length != CategorySearch.Items.Count - 1)
                         {
@@ -105,6 +108,8 @@ namespace course_project1.view
                 };
                 folderControl.RemoveFolder += (object s, RoutedEventArgs ev) =>
                 {
+                    if (isModalOpened) return;
+
                     bool isSuccessfully = folder.RemoveFolder(ConnectionString, Storage.user.Uid);
                     if (!isSuccessfully) return;
 
@@ -125,6 +130,8 @@ namespace course_project1.view
 
         private void AddFolderButton_AddFolder(object sender, RoutedEventArgs e)
         {
+            if (isModalOpened) return;
+
             FolderModalWindow modal = new FolderModalWindow(MainPageGrid, ConnectionString, Storage, "", "");
             modal.SetValue(Grid.RowSpanProperty, 2);
             modal.SetValue(Grid.ColumnSpanProperty, 3);
@@ -132,6 +139,8 @@ namespace course_project1.view
             modal.SetResourceReference(FolderModalWindow.ActionButtonContentProperty, "Create");
 
             MainPageGrid.Children.Add(modal);
+            isModalOpened = true;
+
             modal.FolderAction += (object s, RoutedEventArgs ev) =>
             {
                 string folderName = modal.FolderName;
@@ -157,6 +166,7 @@ namespace course_project1.view
             modal.CloseFolderModal += (object s, RoutedEventArgs ev) =>
             {
                 MainPageGrid.Children.Remove(modal);
+                isModalOpened = false;
 
                 if (Storage.categories.Length != CategorySearch.Items.Count - 1)
                 {

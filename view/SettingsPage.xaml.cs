@@ -101,13 +101,13 @@ namespace course_project1.view
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
             SecondFrame.Content = new FoldersPage(
-                MainPageGrid, SecondFrame, ConnectionString, Storage, true, controls.FolderControl.Action.Export);
+                MainPageGrid, SecondFrame, ConnectionString, Storage, controls.FolderControl.Action.Export);
         }
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
             SecondFrame.Content = new FoldersPage(
-                MainPageGrid, SecondFrame, ConnectionString, Storage, true, controls.FolderControl.Action.Import);
+                MainPageGrid, SecondFrame, ConnectionString, Storage, controls.FolderControl.Action.Import);
         }
     }
 }

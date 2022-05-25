@@ -30,6 +30,7 @@ namespace course_project1.controls
         Folder folder;
         DataStorage Storage;
         string ConnectionString;
+        bool isModalOpened = false;
 
         public enum Action
         {
@@ -41,7 +42,7 @@ namespace course_project1.controls
 
         public FolderControl(
             Grid mainPageGrid, Folder folder, DataStorage storage,
-            string connectionString, bool isForExportImport = false, Action action = Action.None)
+            string connectionString, Action action = Action.None)
         {
             this.action = action;
             Storage = storage;
@@ -182,6 +183,8 @@ namespace course_project1.controls
 
         private void RemoveFolderButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            if (isModalOpened) return;
+
             myPopup.IsOpen = false;
 
             SimpleModalWindow modal = new SimpleModalWindow();
@@ -190,7 +193,13 @@ namespace course_project1.controls
             modal.SetResourceReference(SimpleModalWindow.ModalContentProperty, "RemoveFolder");
 
             MainPageGrid.Children.Add(modal);
-            modal.CloseModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
+            isModalOpened = true;
+
+            modal.CloseModal += (object s, RoutedEventArgs ev) =>
+            {
+                MainPageGrid.Children.Remove(modal);
+                isModalOpened = false;
+            };
             modal.NegativeButtonClick += (object s, RoutedEventArgs ev) => RaiseEvent(new RoutedEventArgs(RemoveFolderEvent));
         }
 
@@ -351,6 +360,8 @@ namespace course_project1.controls
 
         private void WritingReviewButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            if (isModalOpened) return;
+
             try
             {
                 if (folder.Cards.Length == 0) return;
@@ -361,11 +372,13 @@ namespace course_project1.controls
                 modal.SetValue(Grid.RowSpanProperty, 2);
                 modal.SetValue(Grid.ColumnSpanProperty, 3);
                 MainPageGrid.Children.Add(modal);
+                isModalOpened = true;
 
                 modal.CloseReview += (object s, RoutedEventArgs ev) =>
                 {
                     FolderMemorizedCardsCount = folder.MemorizedCardsCount();
                     MainPageGrid.Children.Remove(modal);
+                    isModalOpened = false;
 
                     if (modal.reviewResults != null)
                     {
@@ -383,6 +396,8 @@ namespace course_project1.controls
 
         private void MultipleAnswersButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            if (isModalOpened) return;
+
             try
             {
                 if (folder.Cards.Length == 0) return;
@@ -393,11 +408,13 @@ namespace course_project1.controls
                 modal.SetValue(Grid.RowSpanProperty, 2);
                 modal.SetValue(Grid.ColumnSpanProperty, 3);
                 MainPageGrid.Children.Add(modal);
+                isModalOpened = true;
 
                 modal.CloseReview += (object s, RoutedEventArgs ev) =>
                 {
                     FolderMemorizedCardsCount = folder.MemorizedCardsCount();
                     MainPageGrid.Children.Remove(modal);
+                    isModalOpened = false;
 
                     if (modal.reviewResults != null)
                     {
@@ -415,6 +432,8 @@ namespace course_project1.controls
 
         private void MatchAnswersButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            if (isModalOpened) return;
+
             try
             {
                 if (folder.Cards.Length == 0) return;
@@ -425,11 +444,13 @@ namespace course_project1.controls
                 modal.SetValue(Grid.RowSpanProperty, 2);
                 modal.SetValue(Grid.ColumnSpanProperty, 3);
                 MainPageGrid.Children.Add(modal);
+                isModalOpened = true;
 
                 modal.CloseReview += (object s, RoutedEventArgs ev) =>
                 {
                     FolderMemorizedCardsCount = folder.MemorizedCardsCount();
                     MainPageGrid.Children.Remove(modal);
+                    isModalOpened = false;
 
                     if (modal.reviewResults != null)
                     {

@@ -31,6 +31,7 @@ namespace course_project1.view
         Folder RootFolder;
         Grid MainPageGrid;
         Card[] filteredCards;
+        bool isModalOpened = false;
 
         enum CardFilter
         {
@@ -58,6 +59,8 @@ namespace course_project1.view
 
         private void AddCardButton_AddCard(object sender, RoutedEventArgs e)
         {
+            if (isModalOpened) return;
+
             CardModalWindow modal = new CardModalWindow(ConnectionString, RootFolder.FolderId, "", "", "");
             modal.SetValue(Grid.RowSpanProperty, 2);
             modal.SetValue(Grid.ColumnSpanProperty, 3);
@@ -65,6 +68,8 @@ namespace course_project1.view
             modal.SetResourceReference(CardModalWindow.ActionButtonContentProperty, "Create");
 
             MainPageGrid.Children.Add(modal);
+            isModalOpened = true;
+
             modal.CardAction += (object s, RoutedEventArgs ev) =>
             {
                 string Term = modal.Term;
@@ -83,7 +88,11 @@ namespace course_project1.view
                 }
                 catch { }
             };
-            modal.CloseCardModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
+            modal.CloseCardModal += (object s, RoutedEventArgs ev) =>
+            {
+                MainPageGrid.Children.Remove(modal);
+                isModalOpened = false;
+            };
         }
 
         private CardControl CreateCardElement(Card card)
@@ -97,6 +106,8 @@ namespace course_project1.view
                 cardControl.Margin = new Thickness(0, 0, 40, 40);
                 cardControl.EditCard += (object s, RoutedEventArgs ev) =>
                 {
+                    if (isModalOpened) return;
+
                     CardModalWindow modal = new CardModalWindow(
                         ConnectionString, RootFolder.FolderId, card.Term, card.Translation, card.Examples);
                     modal.SetValue(Grid.RowSpanProperty, 2);
@@ -104,6 +115,7 @@ namespace course_project1.view
                     modal.SetResourceReference(CardModalWindow.ModalHeaderProperty, "EditCard");
                     modal.SetResourceReference(CardModalWindow.ActionButtonContentProperty, "Edit");
                     MainPageGrid.Children.Add(modal);
+                    isModalOpened = true;
 
                     modal.CardAction += (object se, RoutedEventArgs evn) =>
                     {
@@ -113,7 +125,11 @@ namespace course_project1.view
                         cardControl.Translation = modal.Translation;
                         cardControl.Examples = modal.Examples;
                     };
-                    modal.CloseCardModal += (object se, RoutedEventArgs evn) => MainPageGrid.Children.Remove(modal);
+                    modal.CloseCardModal += (object se, RoutedEventArgs evn) =>
+                    {
+                        MainPageGrid.Children.Remove(modal);
+                        isModalOpened = false;
+                    };
                 };
                 cardControl.RemoveCard += (object s, RoutedEventArgs ev) =>
                 {

@@ -28,6 +28,7 @@ namespace course_project1.controls.ModalWindows
         public string FolderName = "";
         public string FolderCategory = "";
         Grid MainPageGrid;
+        bool isModalOpened = false;
 
         public FolderModalWindow(Grid mainPageGrid, string connectionString, DataStorage storage, string folderName, string folderCategory)
         {
@@ -59,6 +60,7 @@ namespace course_project1.controls.ModalWindows
                 FolderCategorySelect.Items.Add(item);
                 item.MouseRightButtonUp += (sender, e) =>
                 {
+                    if (isModalOpened) return;
                     if (item.Content.ToString() == "none") return;
 
                     SimpleModalWindow modal = new SimpleModalWindow();
@@ -68,7 +70,13 @@ namespace course_project1.controls.ModalWindows
 
                     FolderCategorySelect.IsDropDownOpen = false;
                     MainPageGrid.Children.Add(modal);
-                    modal.CloseModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
+                    isModalOpened = true;
+
+                    modal.CloseModal += (object s, RoutedEventArgs ev) =>
+                    {
+                        MainPageGrid.Children.Remove(modal);
+                        isModalOpened = false;
+                    };
                     modal.NegativeButtonClick += (object s, RoutedEventArgs ev) =>
                     {
                         if (!Storage.IsUnusedCategory(category.Name))
@@ -189,6 +197,8 @@ namespace course_project1.controls.ModalWindows
 
         private void AddCategoryButton_Click(object sender, RoutedEventArgs e)
         {
+            if (isModalOpened) return;
+
             CategoryModalWindow modal = new CategoryModalWindow(ConnectionString, Storage);
             modal.SetValue(Grid.RowSpanProperty, 2);
             modal.SetValue(Grid.ColumnSpanProperty, 3);
@@ -196,6 +206,8 @@ namespace course_project1.controls.ModalWindows
             modal.SetResourceReference(ActionButtonContentProperty, "Create");
 
             MainPageGrid.Children.Add(modal);
+            isModalOpened = true;
+
             modal.AddCategory += (object s, RoutedEventArgs ev) =>
             {
                 Category category = new Category(modal.CategoryValue);
@@ -203,7 +215,11 @@ namespace course_project1.controls.ModalWindows
                 AddCategoryItem(category);
                 Storage.categories = Storage.categories.Append(category).ToArray();
             };
-            modal.CloseCategoryModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
+            modal.CloseCategoryModal += (object s, RoutedEventArgs ev) =>
+            {
+                MainPageGrid.Children.Remove(modal);
+                isModalOpened = false;
+            };
         }
     }
 }

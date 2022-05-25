@@ -23,6 +23,7 @@ namespace course_project1.controls
     public partial class CardControl : UserControl
     {
         Grid MainPageGrid;
+        bool isModalOpened = false;
 
         public CardControl(Grid mainPageGrid, Card card)
         {
@@ -136,6 +137,8 @@ namespace course_project1.controls
 
         private void RemoveCardButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            if (isModalOpened) return;
+
             myPopup.IsOpen = false;
 
             SimpleModalWindow modal = new SimpleModalWindow();
@@ -144,7 +147,13 @@ namespace course_project1.controls
             modal.SetResourceReference(SimpleModalWindow.ModalContentProperty, "RemoveCard");
 
             MainPageGrid.Children.Add(modal);
-            modal.CloseModal += (object s, RoutedEventArgs ev) => MainPageGrid.Children.Remove(modal);
+            isModalOpened = true;
+
+            modal.CloseModal += (object s, RoutedEventArgs ev) =>
+            {
+                MainPageGrid.Children.Remove(modal);
+                isModalOpened = false;
+            };
             modal.NegativeButtonClick += (object s, RoutedEventArgs ev) => RaiseEvent(new RoutedEventArgs(RemoveCardEvent));
         }
 
