@@ -121,19 +121,27 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    $"SELECT * " +
-                    $"FROM CARDS " +
-                    $"WHERE CARDS.FOLDER_ID = {folderId} AND CARDS.TERM = '{term}'";
-                SqlDataReader commandReader = command.ExecuteReader();
+                try
+                {
+                    connection.Open();
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText =
+                        $"SELECT * " +
+                        $"FROM CARDS " +
+                        $"WHERE CARDS.FOLDER_ID = {folderId} AND CARDS.TERM = '{term}'";
+                    SqlDataReader commandReader = command.ExecuteReader();
 
-                bool isUnique = !commandReader.HasRows;
-                commandReader.Close();
+                    bool isUnique = !commandReader.HasRows;
+                    commandReader.Close();
 
-                connection.Close();
-                return isUnique;
+                    connection.Close();
+                    return isUnique;
+                }
+                catch (Exception ex)
+                {
+                    CustomMessage.Show(ex.Message);
+                    return false;
+                }
             }
         }
 
@@ -141,13 +149,13 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    "DELETE CARDS WHERE " +
-                    $"CARDS.FOLDER_ID = {rootFolderId} AND CARDS.TERM = '{Term}'";
                 try
                 {
+                    connection.Open();
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText =
+                        "DELETE CARDS WHERE " +
+                        $"CARDS.FOLDER_ID = {rootFolderId} AND CARDS.TERM = '{Term}'";
                     SqlDataReader commandReader = command.ExecuteReader();
                     commandReader.Close();
                 }
@@ -166,9 +174,9 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
                 try
                 {
+                    connection.Open();
                     SqlCommand command = connection.CreateCommand();
                     command.CommandText =
                         $"UPDATE CARDS " +

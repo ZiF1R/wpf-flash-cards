@@ -102,25 +102,25 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                string encryptedPass = DataEncriptor.Encrypt(password);
-                SqlCommand loginCommand = connection.CreateCommand();
-                loginCommand.CommandText =
-                    $"SELECT * " +
-                    $"FROM USERS " +
-                    $"WHERE USERS.EMAIL = '{email}' AND USERS.PASS = '{encryptedPass}'";
-
-                SqlDataReader loginCommandReader = loginCommand.ExecuteReader();
-                if (!loginCommandReader.HasRows)
-                {
-                    loginCommandReader.Close();
-                    connection.Close();
-                    return false;
-                };
-
-                loginCommandReader.Read();
                 try
                 {
+                    connection.Open();
+                    string encryptedPass = DataEncriptor.Encrypt(password);
+                    SqlCommand loginCommand = connection.CreateCommand();
+                    loginCommand.CommandText =
+                        $"SELECT * " +
+                        $"FROM USERS " +
+                        $"WHERE USERS.EMAIL = '{email}' AND USERS.PASS = '{encryptedPass}'";
+
+                    SqlDataReader loginCommandReader = loginCommand.ExecuteReader();
+                    if (!loginCommandReader.HasRows)
+                    {
+                        loginCommandReader.Close();
+                        connection.Close();
+                        return false;
+                    };
+
+                    loginCommandReader.Read();
                     int id = loginCommandReader.GetInt32(0);
                     string nickname = loginCommandReader.GetString(1);
                     string surname = loginCommandReader.GetString(2);
@@ -139,7 +139,6 @@ namespace course_project1.storage
                 {
                     CustomMessage.Show((string)Application.Current.FindResource("UserLoadingError"));
                     connection.Close();
-                    loginCommandReader.Close();
                     return false;
                 }
 
@@ -151,19 +150,27 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    $"SELECT * " +
-                    $"FROM USERS " +
-                    $"WHERE USERS.EMAIL = '{email}'";
-                SqlDataReader commandReader = command.ExecuteReader();
+                try
+                {
+                    connection.Open();
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText =
+                        $"SELECT * " +
+                        $"FROM USERS " +
+                        $"WHERE USERS.EMAIL = '{email}'";
+                    SqlDataReader commandReader = command.ExecuteReader();
 
-                bool isUnique = !commandReader.HasRows;
-                commandReader.Close();
-                connection.Close();
+                    bool isUnique = !commandReader.HasRows;
+                    commandReader.Close();
+                    connection.Close();
 
-                return isUnique;
+                    return isUnique;
+                }
+                catch (Exception ex)
+                {
+                    CustomMessage.Show(ex.Message);
+                    return false;
+                }
             }
         }
 
@@ -171,13 +178,14 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    "INSERT INTO USERS VALUES" +
-                    $"('{nickname}', '{surname}', '{name}', '{email}', '{Password}')";
                 try
                 {
+                    connection.Open();
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText =
+                        "INSERT INTO USERS VALUES" +
+                        $"('{nickname}', '{surname}', '{name}', '{email}', '{Password}')";
+
                     SqlDataReader commandReader = command.ExecuteReader();
                     commandReader.Close();
                 }
@@ -197,23 +205,24 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                string encryptedPass = DataEncriptor.Encrypt(password);
-
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    $"UPDATE USERS " +
-                    $"SET NICKNAME = '{nickname}', SURNAME = '{surname}', NAME = '{name}', PASS = '{encryptedPass}' FROM USERS " +
-                    $"WHERE EMAIL = '{this.Email}'";
-                SqlDataReader commandReader = command.ExecuteReader();
                 try
                 {
+                    connection.Open();
+                    string encryptedPass = DataEncriptor.Encrypt(password);
+
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText =
+                        $"UPDATE USERS " +
+                        $"SET NICKNAME = '{nickname}', SURNAME = '{surname}', NAME = '{name}', PASS = '{encryptedPass}' FROM USERS " +
+                        $"WHERE EMAIL = '{this.Email}'";
+                    SqlDataReader commandReader = command.ExecuteReader();
                     commandReader.Close();
 
                     Nickname = nickname;
                     Surname = surname;
                     Name = name;
                     this.password = encryptedPass;
+                    commandReader.Close();
                 }
                 catch
                 {
@@ -221,7 +230,6 @@ namespace course_project1.storage
                 }
                 finally
                 {
-                    commandReader.Close();
                     connection.Close();
                 }
             }

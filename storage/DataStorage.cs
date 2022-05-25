@@ -29,22 +29,22 @@ namespace course_project1
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                SqlCommand comand = connection.CreateCommand();
-                comand.CommandText =
-                    $"SELECT * " +
-                    $"FROM FOLDERS " +
-                    $"WHERE FOLDERS.USER_UID = {this.user.Uid}";
-
-                SqlDataReader comandReader = comand.ExecuteReader();
-                if (!comandReader.HasRows)
-                {
-                    comandReader.Close();
-                    return;
-                }
-
                 try
                 {
+                    connection.Open();
+                    SqlCommand comand = connection.CreateCommand();
+                    comand.CommandText =
+                        $"SELECT * " +
+                        $"FROM FOLDERS " +
+                        $"WHERE FOLDERS.USER_UID = {this.user.Uid}";
+
+                    SqlDataReader comandReader = comand.ExecuteReader();
+                    if (!comandReader.HasRows)
+                    {
+                        comandReader.Close();
+                        return;
+                    }
+
                     while (comandReader.Read())
                     {
                         int folderId = comandReader.GetInt32(0);
@@ -63,7 +63,6 @@ namespace course_project1
                 catch
                 {
                     CustomMessage.Show((string)Application.Current.FindResource("FoldersLoadingError"));
-                    comandReader.Close();
                 }
                 finally
                 {
@@ -76,22 +75,22 @@ namespace course_project1
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                SqlCommand comand = connection.CreateCommand();
-                comand.CommandText =
-                    $"SELECT CATEGORY " +
-                    $"FROM CATEGORIES " +
-                    $"WHERE CATEGORIES.USER_UID = {this.user.Uid}";
-
-                SqlDataReader comandReader = comand.ExecuteReader();
-                if (!comandReader.HasRows)
-                {
-                    comandReader.Close();
-                    return;
-                }
-
                 try
                 {
+                    connection.Open();
+                    SqlCommand comand = connection.CreateCommand();
+                    comand.CommandText =
+                        $"SELECT CATEGORY " +
+                        $"FROM CATEGORIES " +
+                        $"WHERE CATEGORIES.USER_UID = {this.user.Uid}";
+
+                    SqlDataReader comandReader = comand.ExecuteReader();
+                    if (!comandReader.HasRows)
+                    {
+                        comandReader.Close();
+                        return;
+                    }
+
                     while (comandReader.Read())
                     {
                         string category = comandReader.GetString(0);
@@ -101,10 +100,6 @@ namespace course_project1
                 catch
                 {
                     CustomMessage.Show((string)Application.Current.FindResource("CategoriesLoadingError"));
-                }
-                finally
-                {
-                    comandReader.Close();
                 }
                 connection.Close();
             }

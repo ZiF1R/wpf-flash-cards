@@ -62,5 +62,10 @@ namespace course_project1
         {
             Process.Start("mailto:do-alex03@mail.ru");
         }
+
+        private void SecondFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            SecondFrame.NavigationService.RemoveBackEntry();
+        }
     }
 }

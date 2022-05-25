@@ -27,22 +27,22 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                var addCategoryCommand = string.Format("INSERT INTO CATEGORIES VALUES(@uid, @category)");
-                using (SqlCommand command = new SqlCommand(addCategoryCommand, connection))
+                try
                 {
-                    try
+                    connection.Open();
+                    var addCategoryCommand = string.Format("INSERT INTO CATEGORIES VALUES(@uid, @category)");
+                    using (SqlCommand command = new SqlCommand(addCategoryCommand, connection))
                     {
                         command.Parameters.AddWithValue("@uid", uid);
                         command.Parameters.AddWithValue("@category", category);
                         command.ExecuteNonQuery();
                     }
-                    catch
-                    {
-                        connection.Close();
-                        CustomMessage.Show((string)Application.Current.FindResource("CategoryInsertError"));
-                        return false;
-                    }
+                }
+                catch
+                {
+                    connection.Close();
+                    CustomMessage.Show((string)Application.Current.FindResource("CategoryInsertError"));
+                    return false;
                 }
                 connection.Close();
                 return true;
@@ -53,13 +53,13 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    "DELETE CATEGORIES WHERE " +
-                    $"CATEGORIES.USER_UID = {uid} AND CATEGORIES.CATEGORY = '{category}'";
                 try
                 {
+                    connection.Open();
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText =
+                        "DELETE CATEGORIES WHERE " +
+                        $"CATEGORIES.USER_UID = {uid} AND CATEGORIES.CATEGORY = '{category}'";
                     SqlDataReader commandReader = command.ExecuteReader();
                     commandReader.Close();
                 }
@@ -70,7 +70,6 @@ namespace course_project1.storage
                     return false;
                 }
                 connection.Close();
-
                 return true;
             }
         }
@@ -79,19 +78,27 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    $"SELECT * " +
-                    $"FROM CATEGORIES " +
-                    $"WHERE CATEGORIES.USER_UID = {uid} AND CATEGORIES.CATEGORY = '{category}'";
-                SqlDataReader commandReader = command.ExecuteReader();
+                try
+                {
+                    connection.Open();
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText =
+                        $"SELECT * " +
+                        $"FROM CATEGORIES " +
+                        $"WHERE CATEGORIES.USER_UID = {uid} AND CATEGORIES.CATEGORY = '{category}'";
+                    SqlDataReader commandReader = command.ExecuteReader();
 
-                bool isUnique = !commandReader.HasRows;
-                commandReader.Close();
+                    bool isUnique = !commandReader.HasRows;
+                    commandReader.Close();
 
-                connection.Close();
-                return isUnique;
+                    connection.Close();
+                    return isUnique;
+                }
+                catch (Exception ex)
+                {
+                    CustomMessage.Show(ex.Message);
+                    return false;
+                }
             }
         }
     }

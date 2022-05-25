@@ -71,13 +71,14 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    "INSERT INTO SETTINGS VALUES" +
-                    $"({uid}, {currentThemeId}, {currentLangId}, {reviewCardsLimit}, '{isReviewSwitched}', {reviewTimeLimit})";
                 try
                 {
+                    connection.Open();
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText =
+                        "INSERT INTO SETTINGS VALUES" +
+                        $"({uid}, {currentThemeId}, {currentLangId}, {reviewCardsLimit}, '{isReviewSwitched}', {reviewTimeLimit})";
+
                     SqlDataReader commandReader = command.ExecuteReader();
                     commandReader.Close();
                 }
@@ -96,25 +97,25 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    $"SELECT * " +
-                    $"FROM SETTINGS " +
-                    $"WHERE SETTINGS.USER_UID = {uid}";
-
-                SqlDataReader commandReader = command.ExecuteReader();
-                if (!commandReader.HasRows)
-                {
-                    commandReader.Close();
-                    CustomMessage.Show((string)Application.Current.FindResource("FindSettingsError"));
-                    connection.Close();
-                    return;
-                };
-
-                commandReader.Read();
                 try
                 {
+                    connection.Open();
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText =
+                        $"SELECT * " +
+                        $"FROM SETTINGS " +
+                        $"WHERE SETTINGS.USER_UID = {uid}";
+
+                    SqlDataReader commandReader = command.ExecuteReader();
+                    if (!commandReader.HasRows)
+                    {
+                        commandReader.Close();
+                        CustomMessage.Show((string)Application.Current.FindResource("FindSettingsError"));
+                        connection.Close();
+                        return;
+                    };
+
+                    commandReader.Read();
                     int themeId = commandReader.GetInt32(1);
                     int langId = commandReader.GetInt32(2);
                     int cardsLimit = commandReader.GetInt32(3);
@@ -155,40 +156,55 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    "SELECT THEME " +
-                    "FROM THEMES " +
-                    $"WHERE THEMES.THEME_ID = {id}";
-
-                SqlDataReader commandReader = command.ExecuteReader();
-                if (!commandReader.HasRows)
+                try
                 {
+                    connection.Open();
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText =
+                        "SELECT THEME " +
+                        "FROM THEMES " +
+                        $"WHERE THEMES.THEME_ID = {id}";
+
+                    SqlDataReader commandReader = command.ExecuteReader();
+                    if (!commandReader.HasRows)
+                    {
+                        commandReader.Close();
+                        CustomMessage.Show((string)Application.Current.FindResource("GetThemeError"));
+                        connection.Close();
+                        return null;
+                    };
+
+                    commandReader.Read();
+                    string theme = commandReader.GetString(0);
+                    theme = $"{theme[0]}{theme.ToLower().Remove(0, 1)}";
                     commandReader.Close();
-                    CustomMessage.Show((string)Application.Current.FindResource("GetThemeError"));
                     connection.Close();
-                    return null;
-                };
 
-                commandReader.Read();
-                string theme = commandReader.GetString(0);
-                theme = $"{theme[0]}{theme.ToLower().Remove(0, 1)}";
-                commandReader.Close();
-                connection.Close();
-
-                return theme;
+                    return theme;
+                }
+                catch (Exception ex)
+                {
+                    CustomMessage.Show(ex.Message);
+                    return "Light";
+                }
             }
         }
 
         public void SetAppTheme(string theme)
         {
-            Uri newSource = new Uri($"pack://application:,,,/theme/{theme}.xaml");
-            ResourceDictionary newResource = new ResourceDictionary();
-            newResource.Source = newSource;
-            Application.Current.Resources.MergedDictionaries.Remove(currentTheme);
-            Application.Current.Resources.MergedDictionaries.Add(newResource);
-            currentTheme.Source = newSource;
+            try
+            {
+                Uri newSource = new Uri($"pack://application:,,,/theme/{theme}.xaml");
+                ResourceDictionary newResource = new ResourceDictionary();
+                newResource.Source = newSource;
+                Application.Current.Resources.MergedDictionaries.Remove(currentTheme);
+                Application.Current.Resources.MergedDictionaries.Add(newResource);
+                currentTheme.Source = newSource;
+            }
+            catch (Exception ex)
+            {
+                CustomMessage.Show(ex.Message);
+            }
         }
 
         ///
@@ -204,39 +220,54 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    "SELECT LANG " +
-                    "FROM LANGS " +
-                    $"WHERE LANGS.LANG_ID = {id}";
-
-                SqlDataReader commandReader = command.ExecuteReader();
-                if (!commandReader.HasRows)
+                try
                 {
+                    connection.Open();
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText =
+                        "SELECT LANG " +
+                        "FROM LANGS " +
+                        $"WHERE LANGS.LANG_ID = {id}";
+
+                    SqlDataReader commandReader = command.ExecuteReader();
+                    if (!commandReader.HasRows)
+                    {
+                        commandReader.Close();
+                        CustomMessage.Show((string)Application.Current.FindResource("GetLangError"));
+                        connection.Close();
+                        return null;
+                    };
+
+                    commandReader.Read();
+                    string lang = commandReader.GetString(0).ToLower();
                     commandReader.Close();
-                    CustomMessage.Show((string)Application.Current.FindResource("GetLangError"));
                     connection.Close();
-                    return null;
-                };
 
-                commandReader.Read();
-                string lang = commandReader.GetString(0).ToLower();
-                commandReader.Close();
-                connection.Close();
-
-                return lang;
+                    return lang;
+                }
+                catch (Exception ex)
+                {
+                    CustomMessage.Show(ex.Message);
+                    return "EN";
+                }
             }
         }
 
         public void SetAppLang(string lang)
         {
-            Uri newSource = new Uri($"pack://application:,,,/lang/{lang}.xaml");
-            ResourceDictionary newResource = new ResourceDictionary();
-            newResource.Source = newSource;
-            Application.Current.Resources.MergedDictionaries.Remove(currentLang);
-            Application.Current.Resources.MergedDictionaries.Add(newResource);
-            currentLang.Source = newSource;
+            try
+            {
+                Uri newSource = new Uri($"pack://application:,,,/lang/{lang}.xaml");
+                ResourceDictionary newResource = new ResourceDictionary();
+                newResource.Source = newSource;
+                Application.Current.Resources.MergedDictionaries.Remove(currentLang);
+                Application.Current.Resources.MergedDictionaries.Add(newResource);
+                currentLang.Source = newSource;
+            }
+            catch (Exception ex)
+            {
+                CustomMessage.Show(ex.Message);
+            }
         }
 
         ///
@@ -265,33 +296,33 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    "UPDATE SETTINGS SET ";
-
-                switch (setting)
-                {
-                    case Setting.Lang:
-                        command.CommandText += $"ACTIVE_LANG = {currentLangId}";
-                        break;
-                    case Setting.Theme:
-                        command.CommandText += $"ACTIVE_THEME = {currentThemeId}";
-                        break;
-                    case Setting.CardsLimit:
-                        command.CommandText += $"CARDS_LIMIT = {ReviewCardsLimit}";
-                        break;
-                    case Setting.TimeLimit:
-                        command.CommandText += $"TIME_LIMIT = {ReviewTimeLimit}";
-                        break;
-                    case Setting.SwitchedReview:
-                        command.CommandText += $"SWITCHED_REVIEW = '{isReviewSwitched}'";
-                        break;
-                }
-                
-                command.CommandText += $" WHERE SETTINGS.USER_UID = {uid}";
                 try
                 {
+                    connection.Open();
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText =
+                        "UPDATE SETTINGS SET ";
+
+                    switch (setting)
+                    {
+                        case Setting.Lang:
+                            command.CommandText += $"ACTIVE_LANG = {currentLangId}";
+                            break;
+                        case Setting.Theme:
+                            command.CommandText += $"ACTIVE_THEME = {currentThemeId}";
+                            break;
+                        case Setting.CardsLimit:
+                            command.CommandText += $"CARDS_LIMIT = {ReviewCardsLimit}";
+                            break;
+                        case Setting.TimeLimit:
+                            command.CommandText += $"TIME_LIMIT = {ReviewTimeLimit}";
+                            break;
+                        case Setting.SwitchedReview:
+                            command.CommandText += $"SWITCHED_REVIEW = '{isReviewSwitched}'";
+                            break;
+                    }
+
+                    command.CommandText += $" WHERE SETTINGS.USER_UID = {uid}";
                     command.ExecuteNonQuery();
                 }
                 catch

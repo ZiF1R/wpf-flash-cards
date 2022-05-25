@@ -68,25 +68,25 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                SqlCommand comand = connection.CreateCommand();
-                comand.CommandText =
-                    $"SELECT * " +
-                    $"FROM FOLDERS " +
-                    $"WHERE FOLDERS.USER_UID = {uid} AND FOLDER_NAME = '{Name}'";
-
-                SqlDataReader comandReader = comand.ExecuteReader();
-                if (!comandReader.HasRows)
-                {
-                    comandReader.Close();
-                    return 0;
-                }
-
                 int folderId = 0;
                 try
                 {
+                    connection.Open();
+                    SqlCommand comand = connection.CreateCommand();
+                    comand.CommandText =
+                        $"SELECT * " +
+                        $"FROM FOLDERS " +
+                        $"WHERE FOLDERS.USER_UID = {uid} AND FOLDER_NAME = '{Name}'";
+
+                    SqlDataReader comandReader = comand.ExecuteReader();
+                    if (!comandReader.HasRows)
+                    {
+                        comandReader.Close();
+                        return 0;
+                    }
                     comandReader.Read();
                     folderId = comandReader.GetInt32(0);
+                    comandReader.Close();
                 }
                 catch
                 {
@@ -94,7 +94,6 @@ namespace course_project1.storage
                 }
                 finally
                 {
-                    comandReader.Close();
                     connection.Close();
                 }
 
@@ -106,17 +105,17 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    $"SELECT * " +
-                    $"FROM CARDS " +
-                    $"WHERE CARDS.FOLDER_ID = {FolderId}";
-
-                SqlDataReader comandReader = command.ExecuteReader();
-                if (comandReader.HasRows)
+                try
                 {
-                    try
+                    connection.Open();
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText =
+                        $"SELECT * " +
+                        $"FROM CARDS " +
+                        $"WHERE CARDS.FOLDER_ID = {FolderId}";
+
+                    SqlDataReader comandReader = command.ExecuteReader();
+                    if (comandReader.HasRows)
                     {
                         while (comandReader.Read())
                         {
@@ -132,15 +131,15 @@ namespace course_project1.storage
                             Cards = Cards.Append(card).ToArray();
                         }
                     }
-                    catch
-                    {
-                        connection?.Close();
-                        CustomMessage.Show((string)Application.Current.FindResource("CardsLoadingError"));
-                        return;
-                    }
+                    comandReader.Close();
+                    connection?.Close();
                 }
-                comandReader.Close();
-                connection?.Close();
+                catch
+                {
+                    connection?.Close();
+                    CustomMessage.Show((string)Application.Current.FindResource("CardsLoadingError"));
+                    return;
+                }
             }
         }
 
@@ -153,11 +152,11 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                var addFolderCommand = string.Format("INSERT INTO FOLDERS VALUES(@id, @name, @created, @category)");
-                using (SqlCommand command = new SqlCommand(addFolderCommand, connection))
+                try
                 {
-                    try
+                    connection.Open();
+                    var addFolderCommand = string.Format("INSERT INTO FOLDERS VALUES(@id, @name, @created, @category)");
+                    using (SqlCommand command = new SqlCommand(addFolderCommand, connection))
                     {
                         command.Parameters.AddWithValue("@id", uid);
                         command.Parameters.AddWithValue("@name", Name);
@@ -165,15 +164,15 @@ namespace course_project1.storage
                         command.Parameters.AddWithValue("@category", Category);
                         command.ExecuteNonQuery();
                     }
-                    catch
-                    {
-                        connection.Close();
-                        CustomMessage.Show((string)Application.Current.FindResource("FolderInsertError"));
-                        return false;
-                    }
+                    connection.Close();
+                    return true;
                 }
-                connection.Close();
-                return true;
+                catch
+                {
+                    connection.Close();
+                    CustomMessage.Show((string)Application.Current.FindResource("FolderInsertError"));
+                    return false;
+                }
             }
         }
 
@@ -181,16 +180,17 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection?.Open();
-                foreach (Card card in Cards)
-                    card.RemoveCard(connectionString, FolderId);
-
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    "DELETE FOLDERS WHERE " +
-                    $"FOLDERS.USER_UID = {uid} AND FOLDERS.FOLDER_NAME = '{Name}'";
                 try
                 {
+                    connection?.Open();
+                    foreach (Card card in Cards)
+                        card.RemoveCard(connectionString, FolderId);
+
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText =
+                        "DELETE FOLDERS WHERE " +
+                        $"FOLDERS.USER_UID = {uid} AND FOLDERS.FOLDER_NAME = '{Name}'";
+
                     SqlDataReader commandReader = command.ExecuteReader();
                     commandReader.Close();
                     connection.Close();
@@ -209,9 +209,9 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
                 try
                 {
+                    connection.Open();
                     SqlCommand command = connection.CreateCommand();
                     command.CommandText =
                         $"UPDATE FOLDERS " +
@@ -238,19 +238,27 @@ namespace course_project1.storage
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText =
-                    $"SELECT * " +
-                    $"FROM FOLDERS " +
-                    $"WHERE FOLDERS.USER_UID = {uid} AND FOLDERS.FOLDER_NAME = '{folderName}'";
-                SqlDataReader commandReader = command.ExecuteReader();
+                try
+                {
+                    connection.Open();
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText =
+                        $"SELECT * " +
+                        $"FROM FOLDERS " +
+                        $"WHERE FOLDERS.USER_UID = {uid} AND FOLDERS.FOLDER_NAME = '{folderName}'";
+                    SqlDataReader commandReader = command.ExecuteReader();
 
-                bool isUnique = !commandReader.HasRows;
-                commandReader.Close();
+                    bool isUnique = !commandReader.HasRows;
+                    commandReader.Close();
 
-                connection?.Close();
-                return isUnique;
+                    connection?.Close();
+                    return isUnique;
+                }
+                catch (Exception ex)
+                {
+                    CustomMessage.Show(ex.Message);
+                    return false;
+                }
             }
         }
 

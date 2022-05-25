@@ -139,6 +139,7 @@
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="2"
+            Navigated="SecondFrame_Navigated"
             NavigationUIVisibility="Hidden"
             TabIndex="-1" />
     </Grid>

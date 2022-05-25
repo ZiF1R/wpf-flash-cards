@@ -86,13 +86,7 @@ namespace course_project1
             SqlConnectionStringBuilder connectionStringBuilder = new SqlConnectionStringBuilder();
 
             string bufData = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            connectionStringBuilder.DataSource = @"DESKTOP-LT1S3LJ\ZIF1R";
-            connectionStringBuilder.InitialCatalog = "FlashCards";
-            connectionStringBuilder.UserID = @"DESKTOP-LT1S3LJ\HP";
-            connectionStringBuilder.IntegratedSecurity = true;
-            connectionStringBuilder.Password = "";
-
-            //Connection = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={bufData}\KinoPad.mdf;Integrated Security=True;Pooling=false; Connect Timeout=30;";
+            connectionStringBuilder.ConnectionString = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={bufData}\FlashCards.mdf;Integrated Security=True;Pooling=false; Connect Timeout=30;";
 
             this.ConnectionString = connectionStringBuilder.ConnectionString;
 
@@ -106,8 +100,6 @@ namespace course_project1
                 catch
                 {
                     connection.Close();
-
-                    /// try to create db with code
                     throw new Exception("Database connection error!");
                 }
             }
@@ -140,19 +132,6 @@ namespace course_project1
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)
         {
             MainFrame.NavigationService.RemoveBackEntry();
-            //if (MainFrame.Content.GetType() == typeof(LoginPage))
-            //{
-            //    Storage.settings.SetAppTheme(Storage.settings.GetThemeName(1, ConnectionString));
-            //    Storage.settings.SetAppLang(Storage.settings.GetLangName(1, ConnectionString));
-            //    Storage.Clear();
-            //    AppLanguage.SelectedIndex = 0;
-            //}
-            //else if (MainFrame.Content.GetType() == typeof(MainPage) && Storage.user?.Email == "")
-            //{
-            //    MainFrame.IsEnabled = false;
-            //    MainFrame.Navigate(new LoginPage(MainWindowGrid, ConnectionString, Storage));
-            //    MainFrame.IsEnabled = true;
-            //}
         }
     }
 }
