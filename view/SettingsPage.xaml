@@ -9,7 +9,7 @@
       d:DesignHeight="1050" d:DesignWidth="1200">
     
     <ScrollViewer
-        VerticalScrollBarVisibility="Hidden">
+        VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="45" />

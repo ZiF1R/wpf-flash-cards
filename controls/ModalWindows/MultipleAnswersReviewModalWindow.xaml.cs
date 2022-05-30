@@ -60,7 +60,7 @@ namespace course_project1.controls.ModalWindows
         {
             CurrentTime++;
 
-            if (CurrentTime >= Storage.settings.ReviewTimeLimit)
+            if (CurrentTime == Storage.settings.ReviewTimeLimit)
             {
                 TimerToAnswer.Stop();
                 SubmitAction();
@@ -114,7 +114,6 @@ namespace course_project1.controls.ModalWindows
             AnswersListBox.IsEnabled = true;
 
             CurrentTime = 0;
-            TimerToAnswer.Start();
 
             if (currentCard.Examples == "")
                 ShowExamplesButton.Visibility = Visibility.Hidden;
@@ -122,14 +121,19 @@ namespace course_project1.controls.ModalWindows
                 ShowExamplesButton.Visibility = Visibility.Visible;
 
             BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-            image.CacheOption = BitmapCacheOption.OnLoad;
-            image.UriSource = new Uri("pack://application:,,,/icons/review/eye.png", UriKind.RelativeOrAbsolute);
-            image.EndInit();
+            try
+            {
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = new Uri("pack://application:,,,/icons/review/eye.png", UriKind.RelativeOrAbsolute);
+                image.EndInit();
+                ShowExamplesButton.Source = image;
+            }
+            catch { }
 
             CurrentCardExamples.Visibility = Visibility.Collapsed;
-            ShowExamplesButton.Source = image;
+            TimerToAnswer.Start();
         }
 
         public static readonly RoutedEvent CloseReviewEvent
@@ -152,10 +156,23 @@ namespace course_project1.controls.ModalWindows
 
         private void SubmitAction()
         {
-            AnswerCompareResult.Visibility = Visibility.Visible;
+            if (AnswersListBox == null) return;
 
-            string answer = Storage.settings.isReviewSwitched ? Review.CurrentCard.Term : Review.CurrentCard.Translation;
-            string selectedItem = (string)((ListBoxItem)AnswersListBox.SelectedItem).Content;
+            AnswerCompareResult.Visibility = Visibility.Visible;
+            string answer = null;
+            string selectedItem = null;
+
+            try
+            {
+                if (AnswersListBox.SelectedItem == null) return;
+                answer = Storage.settings.isReviewSwitched ? Review.CurrentCard.Term : Review.CurrentCard.Translation;
+                selectedItem = (string)((ListBoxItem)AnswersListBox.SelectedItem).Content;
+            }
+            catch
+            {
+                return;
+            }
+
             if (selectedItem == answer)
             {
                 Review.RightAnswers++;
@@ -189,7 +206,15 @@ namespace course_project1.controls.ModalWindows
             }
 
             isSubmitted = true;
-            ((ListBoxItem)AnswersListBox.SelectedItem).IsSelected = false;
+            try
+            {
+                if (AnswersListBox.SelectedItem == null) return;
+                ((ListBoxItem)AnswersListBox.SelectedItem).IsSelected = false;
+            }
+            catch
+            {
+                return;
+            }
         }
 
         private void CloseReviewButton_MouseUp(object sender, MouseButtonEventArgs e)

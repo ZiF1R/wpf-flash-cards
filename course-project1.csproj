@@ -462,10 +462,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="db queries\create db.sql" />
-    <Content Include="db queries\create tables.sql" />
-    <Content Include="db queries\fill tables.sql" />
-    <Content Include="db queries\select queries.sql" />
+    <Content Include="db queries\recreate_bd.sql" />
     <Resource Include="icons\review\eye.png" />
     <Resource Include="icons\review\invisible.png" />
     <Resource Include="icons\review\match.png" />

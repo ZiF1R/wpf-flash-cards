@@ -42,6 +42,7 @@
                     <control:CustomTextBox
                         x:Name="CategoryNameTextBox"
                         Padding="0,5,0,5"
+                        MaxLength="100"
                         Placeholder="{DynamicResource CategoryName}"/>
 
                     <Label
